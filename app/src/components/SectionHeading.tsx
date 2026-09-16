@@ -45,7 +45,7 @@ const SectionHeading = ({
             "text-text-muted",
             layout === "row"
               ? "max-w-36 text-right text-sm leading-5 sm:max-w-none"
-              : "text-md",
+              : "text-base",
           )}
         >
           {description}
