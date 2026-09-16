@@ -1,0 +1,182 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* =====================================================
+   DARK THEME
+   ===================================================== */
+
+/* DARK DEFAULT */
+:root {
+  --c-background: 4 5 5;
+  --c-background-deep: 2 3 3;
+  --c-background-hero: 4 5 5;
+  --c-background-mobile: 3 4 4;
+
+  --c-surface: 12 13 13;
+  --c-surface-elevated: 16 17 17;
+  --c-surface-hover: 20 21 21;
+  --c-surface-active: 24 25 25;
+
+  --c-border: 255 255 255;
+
+  --c-text-primary: 245 245 245;
+  --c-text-secondary: 167 169 169;
+  --c-text-muted: 115 118 118;
+  --c-text-disabled: 80 82 82;
+
+  --c-grid: 114 114 114;
+  --c-grid-subtle: 90 90 90;
+
+  /* BLUE NEVER CHANGES */
+  --c-accent: 36 107 254;
+  --c-accent-hover: 59 124 255;
+  --c-accent-light: 68 142 255;
+  --c-accent-active: 24 89 232;
+  --c-accent-soft: 29 78 216;
+}
+
+/* LIGHT */
+:root.light {
+  --c-background: 248 249 250;
+  --c-background-deep: 243 244 246;
+  --c-background-hero: 240 241 243;
+  --c-background-mobile: 235 235 240;
+
+  --c-surface: 252 252 253;
+  --c-surface-elevated: 252 252 253;
+  --c-surface-hover: 244 245 247;
+  --c-surface-active: 238 239 241;
+
+  --c-border: 0 0 0;
+
+  --c-text-primary: 26 26 26;
+  --c-text-secondary: 102 102 102;
+  --c-text-muted: 153 153 153;
+  --c-text-disabled: 176 176 176;
+
+  --c-grid: 178 178 178;
+  --c-grid-subtle: 200 200 200;
+
+  --c-accent: 36 107 254;
+  --c-accent-hover: 59 124 255;
+  --c-accent-light: 68 142 255;
+  --c-accent-active: 24 89 232;
+  --c-accent-soft: 29 78 216;
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+
+html {
+  background: rgb(var(--c-background));
+  transition: background-color 300ms ease;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+
+  background: rgb(var(--c-background));
+  color: rgb(var(--c-text-primary));
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Chat response indicator: quiet motion that remains legible in both themes. */
+@keyframes ai-thinking-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0) scale(0.82);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1);
+  }
+}
+
+@keyframes ai-thinking-orb {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--c-accent) / 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px rgb(var(--c-accent) / 0.08);
+  }
+}
+
+.ai-thinking-dot {
+  animation: ai-thinking-dot 1.25s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.ai-thinking-dot:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.ai-thinking-dot:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.ai-thinking-orb {
+  animation: ai-thinking-orb 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-thinking-dot,
+  .ai-thinking-orb {
+    animation: none;
+  }
+
+  .ai-thinking-dot {
+    opacity: 0.55;
+    transform: none;
+  }
+
+  .ai-thinking-dot:nth-child(2) {
+    opacity: 0.75;
+  }
+
+  .ai-thinking-dot:nth-child(3) {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   LIGHT MODE SOFTENED SHADOWS
+   Kart gölgelerini white temada daha sade yapar
+   (still visible, site ile uyumlu).
+   ===================================================== */
+
+html.light .shadow-card {
+  box-shadow: 0 1px 0 rgba(15, 17, 19, 0.03),
+    0 3px 14px rgba(15, 17, 19, 0.06);
+}
+
+html.light .hover\:shadow-card-hover:hover {
+  box-shadow: 0 2px 0 rgba(15, 17, 19, 0.04),
+    0 8px 22px rgba(15, 17, 19, 0.09);
+}
+
+html.light .shadow-panel {
+  box-shadow: 0 0 0 1px rgba(15, 17, 19, 0.03),
+    0 6px 18px rgba(15, 17, 19, 0.05);
+}
+
+html.light .shadow-panel-lg {
+  box-shadow: 0 0 0 1px rgba(15, 17, 19, 0.04),
+    0 12px 34px rgba(15, 17, 19, 0.08);
+}
