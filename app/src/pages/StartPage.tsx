@@ -76,23 +76,25 @@ const StartPage = () => {
 
       </section>
 
-      <section className="relative z-content mx-auto w-full max-w-content px-6 py-14 sm:px-hero-mobile-x sm:py-16 lg:px-hero-x">
+      <main className="relative z-content mx-auto w-full max-w-content px-6 py-16 sm:px-hero-mobile-x sm:py-20 lg:px-hero-x lg:py-24">
+        <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+          <section>
+            <Skills />
+          </section>
 
-        <Skills />
+          <section>
+            <Projects />
+          </section>
 
-        <div className="mt-12">
-          <Projects />
+          <section>
+            <About />
+          </section>
+
+          <section>
+            <Workflow />
+          </section>
         </div>
-
-        <section className="mt-12">
-          <About />
-        </section>
-
-        <section className="mt-12">
-          <Workflow />
-        </section>
-
-      </section>
+      </main>
     </>
   );
 };

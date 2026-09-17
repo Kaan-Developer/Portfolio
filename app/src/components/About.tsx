@@ -13,10 +13,9 @@ const About = () => {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative w-full overflow-hidden px-5 py-16 sm:px-6 sm:py-20 md:px-10 md:py-24 lg:px-12 lg:py-section-mobile-y xl:px-hero-x xl:py-section-y"
+      className="relative w-full overflow-hidden"
     >
-      <div className="mx-auto w-full max-w-content">
-
+      <div className="w-full">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start xl:gap-16">
           <div className="min-w-0 animate-fade-up">
             <h2

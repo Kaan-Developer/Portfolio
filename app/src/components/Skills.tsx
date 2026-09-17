@@ -89,7 +89,7 @@ const SkillGroup = ({
 
 const Skills = () => {
   return (
-    <section className="mt-5" aria-labelledby="skills-heading">
+    <section aria-labelledby="skills-heading">
       <SectionHeading
         id="skills-heading"
         title="Skills & Learning"

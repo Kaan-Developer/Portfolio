@@ -85,6 +85,15 @@ const AIBot = () => {
             Ask Kaan
           </h2>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setIsLarge((value) => !value)}
+          aria-label={isLarge ? "Reduce chat size" : "Expand chat size"}
+          className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors duration-150 hover:bg-surface-hover hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30"
+        >
+          {isLarge ? <Minimize2 size={16} strokeWidth={1.8} /> : <Maximize2 size={16} strokeWidth={1.8} />}
+        </button>
       </header>
 
       <div className="min-h-0 flex-1">

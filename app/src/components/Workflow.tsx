@@ -107,7 +107,7 @@ const Workflow = () => {
 
     return (
         <>
-    <div className="mx-auto grid w-full max-w-[75rem] gap-16 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.75fr)] lg:items-center lg:gap-20 lg:px-12 lg:py-28">
+    <div className="grid w-full gap-12 sm:gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.75fr)] lg:items-center lg:gap-20">
       <AboutPanel />
       <WorkflowPanel />
     </div></>
