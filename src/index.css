@@ -25,14 +25,12 @@
   --c-text-disabled: 80 82 82;
 
   --c-grid: 114 114 114;
-  --c-grid-subtle: 90 90 90;
 
   /* BLUE NEVER CHANGES */
   --c-accent: 36 107 254;
   --c-accent-hover: 59 124 255;
   --c-accent-light: 68 142 255;
   --c-accent-active: 24 89 232;
-  --c-accent-soft: 29 78 216;
 }
 
 /* LIGHT */
@@ -55,13 +53,11 @@
   --c-text-disabled: 176 176 176;
 
   --c-grid: 178 178 178;
-  --c-grid-subtle: 200 200 200;
 
   --c-accent: 36 107 254;
   --c-accent-hover: 59 124 255;
   --c-accent-light: 68 142 255;
   --c-accent-active: 24 89 232;
-  --c-accent-soft: 29 78 216;
 }
 
 /* =====================================================

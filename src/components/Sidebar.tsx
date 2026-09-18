@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 
 import Typing from "./Typing";
 import Ul from "./Ul";
-import Availeble from "./Available";
+import Available from "./Available";
 import ThemeToggle from "./ThemeToggle";
 import { useSidebarStore } from "../store/sidebarStore";
 
@@ -52,7 +52,7 @@ const Sidebar = () => {
       </div>
 
       <div className="mt-auto flex w-full flex-col items-center justify-between gap-4">
-        <Availeble />
+        <Available />
 
         <div className="flex items-center gap-2">
           <ThemeToggle />

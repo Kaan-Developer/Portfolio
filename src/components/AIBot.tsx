@@ -18,10 +18,6 @@ const AIBot = () => {
       "h-[760px] w-[560px] max-h-[calc(100dvh-80px)] max-w-[calc(100vw-24px)]",
   } satisfies Record<ChatbotSize, string>;
 
-  const handleSend = (message: string): Promise<string> => {
-    return sendChatMessage(message);
-  };
-
   const [isLarge, setIsLarge] = useState(true);
 
   return (
@@ -102,7 +98,7 @@ const AIBot = () => {
       </header>
 
       <div className="min-h-0 flex-1">
-        <AIMessage onSend={handleSend} isLarge={isLarge} />
+        <AIMessage onSend={sendChatMessage} isLarge={isLarge} />
       </div>
     </aside>
   );

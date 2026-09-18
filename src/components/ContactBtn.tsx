@@ -1,23 +1,19 @@
-import type { MouseEventHandler } from "react";
+import { Link } from "react-router-dom";
+
 import { ArrowUpRight } from "lucide-react";
 
-type ContactBtnProps = {
-  name: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+interface ContactBtnProps {
+  to: string;
+  title: string;
+}
 
-import { useToggleStore } from "../store/contactStore";
-
-const ContactBtn = ({ name }: ContactBtnProps) => {
-      const toggleContactModal = useToggleStore((state) => state.toggle);
-
+const ContactBtn = ({ title, to }: ContactBtnProps) => {
   return (
     <>
-      <button
+      <Link
+      to={to}
         type="button"
-        onClick={toggleContactModal}
-        className="
-                          inline-flex
+        className="inline-flex
                           h-12
                           w-full
                           items-center
@@ -37,12 +33,11 @@ const ContactBtn = ({ name }: ContactBtnProps) => {
                           hover:shadow-accent
                           active:bg-accent-active
                           active:scale-[0.98]
-                          sm:w-auto
-                        "
+                          sm:w-auto"
       >
-        <span className="text-text-primary">{name}</span>
+        <span>{title}</span>
         <ArrowUpRight size={15} strokeWidth={1.7} />
-      </button>
+      </Link>
     </>
   );
 };

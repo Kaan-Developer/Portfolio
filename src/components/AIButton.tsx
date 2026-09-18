@@ -13,7 +13,7 @@ const AIButton = () => {
         className={`${isOpen ? "hidden" : "flex"}
     group
     fixed bottom-7 right-7 z-chatbot
-    flex h-16 w-16 items-center justify-center
+    h-16 w-16 items-center justify-center
     rounded-full
     bg-accent
     text-white

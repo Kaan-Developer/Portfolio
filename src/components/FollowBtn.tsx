@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
-type ProjectBtnProps = {
-  to: string;
+import { useToggleStore } from "../store/contactStore";
+
+type FollowBtnProps = {
   name: string;
 };
 
-const ProjectBtn = ({ name, to }: ProjectBtnProps) => {
+const FollowBtn = ({ name }: FollowBtnProps) => {
+      const toggleContactModal = useToggleStore((state) => state.toggle);
+
   return (
     <>
-      <Link
-        to={to}
+      <button
+        type="button"
+        onClick={toggleContactModal}
         className="
                           inline-flex
                           h-12
@@ -37,9 +40,9 @@ const ProjectBtn = ({ name, to }: ProjectBtnProps) => {
       >
         <span className="text-text-primary">{name}</span>
         <ArrowUpRight size={15} strokeWidth={1.7} />
-      </Link>
+      </button>
     </>
   );
 };
 
-export default ProjectBtn;
+export default FollowBtn;

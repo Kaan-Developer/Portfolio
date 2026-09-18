@@ -23,12 +23,14 @@ pnpm dev
 
 ```
 src/
-├── stores/     # Zustand: theme, sidebar, AI panel
-├── data/       # typed project data
-└── pages/      # /, /skills, /projects, /about
+  components/  # presentational components
+  pages/       # /, /skills, /projects, /about, /contact
+  store/       # Zustand: theme, sidebar, contact modal, AI chat
+  data/        # typed project data
+  features/    # ai/ chat client, contact/ + admin/ (planned)
+  lib/         # supabase client (planned)
 api/
-├── health.get.ts
-└── chat.post.ts
+  chat.post.ts # Groq-backed chat endpoint
 ```
 
 ## Env
@@ -36,9 +38,8 @@ api/
 ```bash
 cp .env.example .env
 ```
-```
-GROQ_API_KEY=
-```
+Required: `GROQ_API_KEY` (used by `api/chat.post.ts`).
+Planned: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`.
 
 ## Status
 

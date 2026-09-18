@@ -1,4 +1,4 @@
-import ContactBtn from "./ContactBtn";
+import ContactBtn from "./FollowBtn";
 
 const profileCode = [
   "const kaan = {",

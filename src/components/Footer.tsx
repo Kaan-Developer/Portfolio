@@ -1,6 +1,6 @@
-import Availeble from "./Available"
+import Available from "./Available"
 
-import ContactBtn from "./ContactBtn";
+import ContactBtn from "./FollowBtn";
 
 const Footer = () => {
 
@@ -45,7 +45,7 @@ const Footer = () => {
       </button>
 
       <div className="sm:justify-self-end">
-        <Availeble />
+        <Available />
       </div>
     </div>
 

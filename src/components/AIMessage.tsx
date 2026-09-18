@@ -5,20 +5,14 @@ import { ArrowUp } from "lucide-react";
 
 import AIThinkingIndicator from "./AIThinkingIndicator";
 
-import { useMessagesData } from "../store/aiMessagesStore";
-
-type Message = {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-};
+import { useMessagesData, type Message } from "../store/aiMessagesStore";
 
 interface AIMessageProps {
   onSend: (message: string) => Promise<string>;
   isLarge: boolean;
 }
 
-export const AIMessage = ({ onSend, isLarge }: AIMessageProps) => {
+const AIMessage = ({ onSend, isLarge }: AIMessageProps) => {
   const [input, setInput] = useState("");
   const { messages, addMessage } = useMessagesData();
 

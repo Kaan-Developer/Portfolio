@@ -10,11 +10,6 @@ const config: Config = {
 
   theme: {
     extend: {
-      backgroundSize: {
-        grid: "55px 55px",
-        "grid-mobile": "42px 42px",
-      },
-
       colors: {
         background: {
           DEFAULT: "rgb(var(--c-background) / <alpha-value>)",
@@ -50,8 +45,6 @@ const config: Config = {
           hover: "rgb(var(--c-accent-hover) / <alpha-value>)",
           light: "rgb(var(--c-accent-light) / <alpha-value>)",
           active: "rgb(var(--c-accent-active) / <alpha-value>)",
-          soft: "rgb(var(--c-accent-soft) / <alpha-value>)",
-          glow: "rgb(var(--c-accent) / 0.22)",
         },
 
         status: {
@@ -60,13 +53,7 @@ const config: Config = {
           error: "#F87171",
         },
 
-        grid: {
-          DEFAULT: "rgb(var(--c-grid) / <alpha-value>)",
-          subtle: "rgb(var(--c-grid-subtle) / <alpha-value>)",
-        },
-
         white: "#FFFFFF",
-        black: "#000000",
       },
 
       fontFamily: {
@@ -109,37 +96,11 @@ const config: Config = {
           },
         ],
 
-        "hero-mobile": [
-          "2.65rem",
-          {
-            lineHeight: "1.02",
-            letterSpacing: "-0.045em",
-            fontWeight: "700",
-          },
-        ],
-
         "hero-label": [
           "0.625rem",
           {
             lineHeight: "1",
             letterSpacing: "0.22em",
-            fontWeight: "500",
-          },
-        ],
-
-        "hero-body": [
-          "0.9375rem",
-          {
-            lineHeight: "1.75rem",
-            fontWeight: "400",
-          },
-        ],
-
-        "hero-meta": [
-          "0.5625rem",
-          {
-            lineHeight: "1rem",
-            letterSpacing: "0.16em",
             fontWeight: "500",
           },
         ],
@@ -179,14 +140,12 @@ const config: Config = {
           },
         ],
 
-        "ui-xs": ["0.6875rem", { lineHeight: "1rem" }],
         "ui-sm": ["0.75rem", { lineHeight: "1rem" }],
         "ui-md": ["0.8125rem", { lineHeight: "1.125rem" }],
         "ui-lg": ["0.875rem", { lineHeight: "1.25rem" }],
       },
 
       borderRadius: {
-        none: "0",
         xs: "3px",
         sm: "4px",
         DEFAULT: "6px",
@@ -211,13 +170,10 @@ const config: Config = {
         "card-hover": "0 14px 40px rgba(0,0,0,0.24)",
         button: "0 4px 16px rgba(0,0,0,0.18)",
         accent: "0 0 24px rgba(36,107,254,0.18)",
-        accentStrong: "0 0 32px rgba(36,107,254,0.28)",
         inner: "inset 0 1px 0 rgba(255,255,255,0.025)",
       },
 
       spacing: {
-        "nav-x": "40px",
-        "nav-y": "18px",
         "hero-x": "100px",
         "hero-mobile-x": "24px",
         "section-y": "140px",
@@ -226,7 +182,6 @@ const config: Config = {
 
       maxWidth: {
         content: "1180px",
-        hero: "1120px",
         text: "680px",
         "hero-copy": "42rem",
         "hero-body": "32rem",
@@ -237,19 +192,14 @@ const config: Config = {
         150: "150ms",
         200: "200ms",
         250: "250ms",
-        350: "350ms",
         500: "500ms",
-        700: "700ms",
       },
 
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
-        enter: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
 
       zIndex: {
-        page: "0",
-        grid: "0",
         content: "0",
         nav: "20",
         chatbot: "30",
@@ -275,21 +225,6 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
 
-        gridPulse: {
-          "0%, 100%": { opacity: "0.55" },
-          "50%": { opacity: "0.75" },
-        },
-
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-4px)" },
-        },
-
-        blink: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.35" },
-        },
-
         scaleIn: {
           "0%": {
             opacity: "0",
@@ -305,12 +240,7 @@ const config: Config = {
       animation: {
         "fade-up":
           "fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both",
-        "fade-up-slow":
-          "fadeUp 900ms cubic-bezier(0.22, 1, 0.36, 1) both",
         "fade-in": "fadeIn 500ms ease-out both",
-        "grid-pulse": "gridPulse 5s ease-in-out infinite",
-        float: "float 4s ease-in-out infinite",
-        blink: "blink 2s ease-in-out infinite",
         "scale-in":
           "scaleIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both",
       },

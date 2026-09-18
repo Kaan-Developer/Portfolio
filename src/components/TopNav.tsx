@@ -1,7 +1,7 @@
 import { useSidebarStore } from "../store/sidebarStore";
 import Typing from "./Typing";
 import Ul from "./Ul";
-import Availeble from "./Available";
+import Available from "./Available";
 import ThemeToggle from "./ThemeToggle";
 import Sidebar from "./Sidebar";
 import { Menu } from "lucide-react";
@@ -60,7 +60,7 @@ const TopNav = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
-          <Availeble />
+          <Available />
         </div>
 
         <button

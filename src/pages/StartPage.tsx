@@ -2,9 +2,9 @@ import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import About from "../components/About";
 import LinkBtn from "../components/ProjectBtn";
-import Workflow from "../components/Workflow";
+import ContactBtn from "../components/ContactBtn";
 
-import { ArrowUpRight } from "lucide-react";
+import Workflow from "../components/Workflow";
 
 const StartPage = () => {
   return (
@@ -67,33 +67,7 @@ const StartPage = () => {
               "
               >
                 <LinkBtn name="View projects" to="/projects" />
-                <button
-                  type="button"
-                  className="                          inline-flex
-                          h-12
-                          w-full
-                          items-center
-                          justify-center
-                          gap-3.5
-                          rounded-button
-                          bg-accent
-                           px-6 
-                          text-sm
-                          font-medium
-                          text-primary
-                          shadow-button
-                          transition-all
-                          duration-200
-                          ease-smooth
-                          hover:bg-accent-hover
-                          hover:shadow-accent
-                          active:bg-accent-active
-                          active:scale-[0.98]
-                          sm:w-auto"
-                >
-                  <span>Contact me</span>
-                  <ArrowUpRight size={15} strokeWidth={1.7} />
-                </button>
+                <ContactBtn to="/contact" title="Contact me" />
               </div>
             </div>
           </div>
