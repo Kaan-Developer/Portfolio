@@ -1,4 +1,5 @@
-import { Bot, X } from "lucide-react";
+import { useState } from "react";
+import { Bot, Maximize2, Minimize2, X } from "lucide-react";
 
 import AIMessage from "./AIMessage";
 
@@ -12,16 +13,16 @@ const AIBot = () => {
 
   const sizeClass = {
     medium:
-      "h-[560px] w-[390px] max-h-[calc(100dvh-112px)] max-w-[calc(100vw-24px)]",
+      "h-[600px] w-[420px] max-h-[calc(100dvh-112px)] max-w-[calc(100vw-24px)]",
     large:
-      "h-[720px] w-[520px] max-h-[calc(100dvh-80px)] max-w-[calc(100vw-24px)]",
+      "h-[760px] w-[560px] max-h-[calc(100dvh-80px)] max-w-[calc(100vw-24px)]",
   } satisfies Record<ChatbotSize, string>;
 
   const handleSend = (message: string): Promise<string> => {
     return sendChatMessage(message);
   };
 
-  const isLarge = false;
+  const [isLarge, setIsLarge] = useState(true);
 
   return (
     <aside
@@ -70,6 +71,19 @@ const AIBot = () => {
             >
               <X size={17} strokeWidth={1.8} />
             </button>
+
+            <button
+              type="button"
+              onClick={() => setIsLarge((value) => !value)}
+              aria-label={isLarge ? "Küçült" : "Büyüt"}
+              className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors duration-150 hover:bg-surface-hover hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30"
+            >
+              {isLarge ? (
+                <Minimize2 size={16} strokeWidth={1.8} />
+              ) : (
+                <Maximize2 size={16} strokeWidth={1.8} />
+              )}
+            </button>
         </div>
 
         <div className="flex min-w-0 items-center gap-2">
@@ -88,7 +102,7 @@ const AIBot = () => {
       </header>
 
       <div className="min-h-0 flex-1">
-        <AIMessage onSend={handleSend} />
+        <AIMessage onSend={handleSend} isLarge={isLarge} />
       </div>
     </aside>
   );

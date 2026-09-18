@@ -8,6 +8,7 @@ import StartPage from "./pages/StartPage";
 import SkillsPage from "./pages/SkillsPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 import AIBot from "./components/AIBot";
 import AIButton from "./components/AIButton";
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
 
       <Footer />

@@ -95,7 +95,7 @@ const ContactModal = () => {
             id="contact-modal-title"
             className="text-xl font-semibold tracking-[-0.03em] text-text-primary sm:text-2xl"
           >
-            Connect with me
+            Follow Me
           </h2>
           <p
             id="contact-modal-description"

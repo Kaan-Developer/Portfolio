@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "kaan-portfolio",
   "private": true,
   "version": "0.0.0",
   "packageManager": "pnpm@11.19.0",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
+    "@supabase/supabase-js": "^2.116.0",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.101.4",
     "clsx": "^2.1.1",

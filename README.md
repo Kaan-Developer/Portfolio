@@ -4,11 +4,11 @@ Personal developer portfolio built with React, TypeScript, and Tailwind CSS.
 
 **Live:** [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
 
-<img src="https://skillicons.dev/icons?i=react,ts,tailwind,vite,docker&theme=dark" height="32" alt="React, TypeScript, Tailwind CSS, Vite, Docker" />
+<img src="https://skillicons.dev/icons?i=react,ts,tailwind,vite&theme=dark" height="32" alt="React, TypeScript, Tailwind CSS, Vite" />
 
 ## Stack
 
-React 19 · TypeScript · Tailwind CSS 4 · Zustand · React Router · Nitro · Docker
+React 19 · TypeScript · Tailwind CSS 4 · Zustand · React Router · Nitro
 
 ## Run locally
 

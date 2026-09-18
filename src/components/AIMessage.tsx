@@ -5,7 +5,7 @@ import { ArrowUp } from "lucide-react";
 
 import AIThinkingIndicator from "./AIThinkingIndicator";
 
-import { useMessagesData } from "../store/aiMessages";
+import { useMessagesData } from "../store/aiMessagesStore";
 
 type Message = {
   id: string;
@@ -15,9 +15,10 @@ type Message = {
 
 interface AIMessageProps {
   onSend: (message: string) => Promise<string>;
+  isLarge: boolean;
 }
 
-export const AIMessage = ({ onSend }: AIMessageProps) => {
+export const AIMessage = ({ onSend, isLarge }: AIMessageProps) => {
   const [input, setInput] = useState("");
   const { messages, addMessage } = useMessagesData();
 
@@ -171,24 +172,14 @@ useEffect(() => {
 
       <form
         onSubmit={handleSubmit}
-        className="
-          shrink-0
-          border-t border-border-subtle
-          bg-surface-elevated
-          p-3
-        "
+        className={`shrink-0 border-t border-border-subtle bg-surface-elevated ${
+          isLarge ? "p-4" : "p-3"
+        }`}
       >
         <div
-          className="
-            flex items-end gap-2
-            rounded-lg
-            border border-border-strong
-            bg-surface
-            p-1.5 pl-3
-            shadow-inner
-            transition-colors duration-150
-            focus-within:border-border-hover
-          "
+          className={`flex items-end gap-2 rounded-lg border border-border-strong bg-surface shadow-inner transition-colors duration-150 focus-within:border-border-hover ${
+            isLarge ? "p-2 pl-4" : "p-1.5 pl-3"
+          }`}
         >
           <textarea
             value={input}
@@ -208,18 +199,18 @@ useEffect(() => {
             maxLength={1_000}
             disabled={isLoading}
             placeholder="Bir mesaj yaz..."
-            className="
-              max-h-32 min-h-[36px]
+            className={`
+              ${isLarge ? "max-h-40 min-h-[52px] text-ui-lg" : "max-h-32 min-h-[36px] text-ui-md"}
               min-w-0 flex-1 resize-none
               border-0 bg-transparent
               py-2
-              font-sans text-ui-md
+              font-sans
               leading-5 text-text-primary
               outline-none
               placeholder:text-text-disabled
               disabled:cursor-not-allowed
               disabled:opacity-60
-            "
+            `}
           />
 
           <button
@@ -228,8 +219,9 @@ useEffect(() => {
               isLoading || !input.trim()
             }
             aria-label="Mesajı gönder"
-            className="
-              inline-flex h-9 w-9 shrink-0
+            className={`
+              inline-flex shrink-0
+              ${isLarge ? "h-12 w-12" : "h-9 w-9"}
               items-center justify-center
               rounded-md
               bg-accent
@@ -242,10 +234,10 @@ useEffect(() => {
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-accent/30
-            "
+            `}
           >
             <ArrowUp
-              size={17}
+              size={isLarge ? 20 : 17}
               strokeWidth={2}
             />
           </button>

@@ -5,6 +5,7 @@ const Links = [
   { text: "Skills", link: "/skills" },
   { text: "Projects", link: "/projects" },
   { text: "About", link: "/about" },
+  { text: "Contact", link: "/contact" },
 ];
 
 interface UlProps {

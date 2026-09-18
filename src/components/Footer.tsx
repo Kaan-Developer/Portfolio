@@ -17,9 +17,9 @@ const Footer = () => {
 
 
   return (
-  <footer className="relative z-content w-full px-2">
+  <footer className="relative mt-8 w-full px-2 sm:mt-12 lg:mt-16">
 
-    <div className="mx-auto grid w-full max-w-[75rem] grid-cols-1 gap-8 px-4 py-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:py-10 lg:py-12">
+    <div className="mx-auto grid w-full max-w-[75rem] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:py-12">
       <div>
         <span className="block text-3xl font-semibold tracking-[-0.035em] text-text-primary sm:text-[2rem]">
           <strong className="text-accent font-medium">Let&apos;s</strong> connect.
@@ -30,7 +30,7 @@ const Footer = () => {
       </div>
 
       <div className="w-full sm:w-auto sm:justify-self-end [&_button]:h-12 [&_button]:rounded-sm [&_button]:border [&_button]:border-border-hover [&_button]:bg-transparent [&_button]:px-8 [&_button]:shadow-none">
-        <ContactBtn name="Contact Me" />
+        <ContactBtn name="Follow Me" />
       </div>
     </div>
 

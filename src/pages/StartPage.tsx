@@ -2,15 +2,14 @@ import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import About from "../components/About";
 import LinkBtn from "../components/ProjectBtn";
-import ContactBtn from "../components/ContactBtn";
 import Workflow from "../components/Workflow";
 
-const StartPage = () => {
+import { ArrowUpRight } from "lucide-react";
 
+const StartPage = () => {
   return (
     <>
       <section className="relative min-h-[100dvh] w-full overflow-hidden bg-transparent">
-
         <div className="relative z-content mx-auto flex min-h-[100dvh] w-full max-w-content flex-col px-6 pb-12 pt-28 sm:px-hero-mobile-x lg:px-hero-x lg:pt-36">
           <div className="flex flex-1 items-start pt-10 sm:items-center sm:pt-0">
             <div className="w-full max-w-hero-copy">
@@ -67,13 +66,38 @@ const StartPage = () => {
                 [animation-delay:300ms]
               "
               >
-              <LinkBtn name="View projects" to="/projects" />
-              <ContactBtn name="Contact me" />
+                <LinkBtn name="View projects" to="/projects" />
+                <button
+                  type="button"
+                  className="                          inline-flex
+                          h-12
+                          w-full
+                          items-center
+                          justify-center
+                          gap-3.5
+                          rounded-button
+                          bg-accent
+                           px-6 
+                          text-sm
+                          font-medium
+                          text-primary
+                          shadow-button
+                          transition-all
+                          duration-200
+                          ease-smooth
+                          hover:bg-accent-hover
+                          hover:shadow-accent
+                          active:bg-accent-active
+                          active:scale-[0.98]
+                          sm:w-auto"
+                >
+                  <span>Contact me</span>
+                  <ArrowUpRight size={15} strokeWidth={1.7} />
+                </button>
               </div>
             </div>
           </div>
         </div>
-
       </section>
 
       <main className="relative z-content mx-auto w-full max-w-content px-6 py-16 sm:px-hero-mobile-x sm:py-20 lg:px-hero-x lg:py-24">
