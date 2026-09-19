@@ -9,7 +9,7 @@ echo   Claude AI Baglam Paketi olusturuluyor...
 echo  ==================================================
 echo.
 
-powershell -NoProfile -ExecutionPolicy Bypass -File "tools\export-ai-bundle.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "tools\export-ai-bundle.ps1" %*
 
 if errorlevel 1 goto :failed
 
