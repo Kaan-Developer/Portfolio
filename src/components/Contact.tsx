@@ -4,8 +4,26 @@ import { Send, Copy, ShieldCheck, Check } from "lucide-react";
 
 const MY_EMAIL: string = "khamitler@gmail.com"
 
+interface State {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  loading: boolean;
+}
+
 const Contact = () => {
   const [copied, setCopied] = useState(false);
+
+  const [state, setState] = useState<State>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    loading: false,
+  })
+
+
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");
   const [otherSubject, setOtherSubject] = useState("");
