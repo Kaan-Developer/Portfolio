@@ -21,6 +21,25 @@ Bu dosya, tek başına Claude'a verilebilecek şekilde yazılmıştır.
 Paketi elle yeniden üretmek için: `pnpm share` veya
 `powershell -ExecutionPolicy Bypass -File tools/export-ai-bundle.ps1`
 
+### 0.1 Bağlam önceliği ve güncellik (önemli)
+
+Aynı projeyi anlatan birden fazla kaynak olabilir. Çelişki durumunda geçerli sıralama:
+
+1. **Bu paketin Bölüm B'sindeki kaynak kod** — üretim anındaki çalışma ağacı; gerçeğin kaynağı budur.
+2. **GitHub bağlamı / depodaki dosyalar** — varsayılan dal (`main`) geride kalabilir; gördüğün kod senin
+   bulunduğun daldan farklı olabilir.
+3. **Bu prompt'un 8. bölümü (mevcut durum)** — zamanla eskiyebilir; bilgi amaçlıdır.
+
+Kurallar:
+
+- Bir dosya, bileşen veya özellik hakkında karar verirken **paketteki kodu** esas al.
+- Pakete dahil olmayan şeyler (`.env` içeriği, `node_modules`, ikili dosyalar, kilit dosyası) hakkında hüküm verme;
+  gerçekten gerekiyorsa kullanıcıdan iste.
+- Paketin yaşını başlıktaki üretim zamanı ve commit bilgisinden kontrol et. Kod, paketteki bilgiyle çelişiyorsa
+  çelişkiyi açıkça bildir ve kullanıcıya `pnpm share` ile paketi tazelemesini öner.
+- Paket, commit edilmemiş değişiklikleri de içerir; bu yüzden paketteki kod depodaki son commit'ten ileri olabilir.
+  Bunu "tutarsızlık" değil, normal durum olarak kabul et.
+
 ---
 
 ## 1. ROL VE ÇALIŞMA TARZI
@@ -218,13 +237,17 @@ Bilinen durum:
   Mesaj geçmişi Zustand'da tutulur ve oturum kapanınca kaybolur (bilinçli karar).
 - `src/lib/supabase.ts` **boş** bir yer tutucudur; Supabase istemcisi henüz yazılmadı.
 - `src/features/contact` ve `src/features/admin` yalnızca `.gitkeep` içerir (rezerve edilmiş klasörler).
-- **Devam eden iş — iletişim formu:** `src/components/Contact.tsx` yeni eklendi ve tamamlanmadı. `Full Name` ile
-  `Email Address` alanları kontrolsüz (state / `name` / `value` / `onChange` yok), `select` içinde geçersiz bir `<div>`
-  sarmalayıcı var, "Send Message" ve "Copy Email" butonları işlevsiz, `handleSubmit` yok, form `action=""` ile
-  bırakılmış. Görev verilirse beklenen yol: alanları `react-hook-form` + `zod` ile bağlamak, gönderimi
-  `src/features/contact` katmanına taşımak ve gelecekteki `api/contact.post.ts` endpoint'ine hazırlamak.
-- Kullanılmayan dosya adayı: `src/components/FollowBtn.tsx` (About artık `ContactBtn` kullanıyor). Silmeden önce
-  kullanım olmadığını doğrula ve öner.
+- **Devam eden iş — iletişim formu:** `src/components/Contact.tsx` (commit edilmemiş olabilir) hâlâ WIP. Tespit edilen
+  sorunlar: ad ve e-posta alanları kontrolsüz (`value` / `onChange` / `name` yok); state ikiye bölünmüş (hem `state`
+  nesnesi hem ayrı `message` / `subject` / `otherSubject`); `text-md` gibi **tanımsız** sınıflar kullanılmış;
+  `<label htmlFor="">` boş ve input'lara bağlı değil (a11y); `<option>` üzerinde `selected` var (React kontrollü
+  bileşen uyarısı üretir); `ShieldCheck` import edilmiş ama kullanılmamış; `console.error("Kopyalama başarısızİ:")`
+  yazım hatası ve eksik noktalı virgüller; formda `onSubmit` / `handleSubmit` yok, "Send Message" işlevsiz.
+  Beklenen yol: `react-hook-form` + `zod` şeması, gönderim `src/features/contact` katmanına, hedef `api/contact.post.ts`.
+- `src/components/FollowBtn.tsx` **ölü kod değildir**: `Footer.tsx` onu `import ContactBtn from "./FollowBtn"` ile
+  kullanır ve iletişim modalını açar. Asıl sorun isimlendirmedir: aynı amaç için iki bileşen var — `ContactBtn.tsx`
+  (rota linki, `to` / `title`) ve `FollowBtn.tsx` (modal butonu, `name`); ayrıca `FollowBtn.tsx` sınıf listesinde
+  tanımsız `text-primary` var. Yeniden adlandırmayı öner, ama onay olmadan uygulama.
 - Geçmişte `text-md` / `text-primary` gibi tanımsız token'lar ve a11y/kontrast sorunları düzeltildi; aynı hatalara dönme.
 - Bağımlılık temizliği: kurulu olup kullanılmayan paketler var (Bölüm 3). Bunları öneri olarak sunabilirsin, ancak
   kullanıcı onayı olmadan `package.json` / `pnpm-lock.yaml` değiştirme.

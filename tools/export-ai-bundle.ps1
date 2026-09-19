@@ -290,6 +290,9 @@ $out.Add('# Kaan Hamitler Portfolio — Claude AI Bağlam Paketi')
 $out.Add('')
 $out.Add('> Bu dosya `tools/export-ai-bundle.ps1` (kısayol: `pnpm share`) ile otomatik üretildi.')
 $out.Add('> Tek dosyada hem Claude prompt''unu hem de projenin güncel kaynak kodunu içerir.')
+$out.Add('>')
+$out.Add('> **Bağlam önceliği:** En güncel kod bu dosyadadır. GitHub bağlamı veya depo dalı geride olabilir;')
+$out.Add('> iki kaynak çelişirse bu dosyayı esas al ve çelişkiyi kullanıcıya bildir.')
 $out.Add('')
 $out.Add('---')
 $out.Add('')
@@ -517,6 +520,7 @@ $noteText = @"
    Rollerini ve proje kurallarını paketin başındaki "BÖLÜM A" bölümünden alıyorsun.
    Görev: Bölüm 9.0 — Varsayılan görev.
    Çıktı: Teknik Durum Raporu + Riskli Noktalar (öncelik sıralı) + Sonraki 5 Adım (S/M/L eforlu).
+   Bağlam önceliği: En güncel kod bu pakettedir; GitHub/depo bağlamı geride olabilir, çelişkide paketi esas al.
 
 5. Belirli bir iş için görev numarasını değiştir (örnek: `Bölüm 9.1 — #2 İletişim formunu tamamla`).
 
