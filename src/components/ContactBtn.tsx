@@ -13,27 +13,30 @@ const ContactBtn = ({ title, to }: ContactBtnProps) => {
       <Link
       to={to}
         type="button"
-        className="inline-flex
-                          h-12
-                          w-full
-                          items-center
-                          justify-center
-                          gap-3.5
-                          rounded-button
-                          bg-accent
-                           px-6 
-                          text-sm
-                          font-medium
-                          text-primary
-                          shadow-button
-                          transition-all
-                          duration-200
-                          ease-smooth
-                          hover:bg-accent-hover
-                          hover:shadow-accent
-                          active:bg-accent-active
-                          active:scale-[0.98]
-                          sm:w-auto"
+        className="        inline-flex
+        h-12
+        w-full
+        items-center
+        justify-center
+        gap-3.5
+        rounded-button
+        border
+        border-border-hover
+        bg-transparent
+        px-8
+        text-sm
+        font-medium
+        text-primary
+        shadow-none
+        transition-all
+        duration-200
+        ease-smooth
+        hover:bg-accent
+        hover:border-accent
+        hover:shadow-button
+        active:bg-accent-active
+        active:scale-[0.98]
+        sm:w-auto"
       >
         <span>{title}</span>
         <ArrowUpRight size={15} strokeWidth={1.7} />

@@ -1,4 +1,4 @@
-import ContactBtn from "./FollowBtn";
+import ContactBtn from "./ContactBtn";
 
 const profileCode = [
   "const kaan = {",
@@ -57,7 +57,7 @@ const About = () => {
             </div>
 
             <div className="mt-6">
-              <ContactBtn name="Contact me" />
+              <ContactBtn to="/contact" title="Contact me" />
             </div>
 
             <div className="mt-10 w-full overflow-hidden rounded-panel border border-border-strong bg-surface-elevated shadow-panel sm:mt-12">
@@ -77,6 +77,9 @@ const About = () => {
             </div>
           </div>
         </div>
+
+        <div className="min-w-0"></div>
+
       </div>
     </section>
   );

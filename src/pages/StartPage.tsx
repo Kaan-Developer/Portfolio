@@ -88,7 +88,7 @@ const StartPage = () => {
             <About />
           </section>
 
-          <section>
+          <section className="">
             <Workflow />
           </section>
         </div>
