@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ExternalLink, X as CloseIcon } from "lucide-react";
 import type { IconType } from "react-icons";
-import { FaGithub, FaTelegram, FaXTwitter } from "react-icons/fa6";
-import { useToggleStore } from "../store/contactStore";
+import { FaGithub, FaTelegram, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import { useToggleStore } from "../store/followStore";
 
-interface ContactItem {
+interface FollowItem {
   icon: IconType;
   title: string;
   p: string;
@@ -13,33 +13,39 @@ interface ContactItem {
   href?: string;
 }
 
-const contactCardClassName =
-  "group flex min-h-[72px] w-full items-center gap-4 rounded-xl border border-border-strong bg-surface/45 px-4 py-3.5 transition-all duration-200 hover:border-accent/70 hover:bg-accent/5 hover:shadow-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40";
+const followCardClassName =
+  "group flex min-h-[72px] w-full cursor-pointer items-center gap-4 rounded-xl border border-border-strong bg-surface/45 px-4 py-3.5 transition-all duration-200 hover:border-accent/70 hover:bg-accent/5 hover:shadow-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40";
 
-const contacts: ContactItem[] = [
+const followLinks: FollowItem[] = [
   {
     icon: FaGithub,
     title: "GitHub",
-    p: "Explore my repositories",
+    p: "Explore my repositories and open-source projects",
     connectIcon: ExternalLink,
     href: "https://github.com/Kaan-Developer",
   },
   {
+    icon: FaWhatsapp,
+    title: "WhatsApp",
+    p: "Reach out to me directly via WhatsApp",
+    connectIcon: ExternalLink,
+  },
+  {
     icon: FaTelegram,
     title: "Telegram",
-    p: "Send me a message",
+    p: "Get in touch with me on Telegram",
     connectIcon: ExternalLink,
   },
   {
     icon: FaXTwitter,
     title: "X",
-    p: "Follow my updates",
+    p: "Follow me and stay updated with my posts",
     connectIcon: ExternalLink,
   },
 ];
 
-const ContactModal = () => {
-  const toggleContactModal = useToggleStore((state) => state.toggle);
+const FollowModal = () => {
+  const toggleFollowModal = useToggleStore((state) => state.toggle);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -50,7 +56,7 @@ const ContactModal = () => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        toggleContactModal();
+        toggleFollowModal();
       }
     };
 
@@ -60,14 +66,14 @@ const ContactModal = () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [toggleContactModal]);
+  }, [toggleFollowModal]);
 
   return (
     <div
       className="fixed inset-0 z-modal grid place-items-center overflow-y-auto bg-background-deep/75 px-4 py-6 backdrop-blur-sm animate-fade-in sm:px-6"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
-          toggleContactModal();
+          toggleFollowModal();
         }
       }}
       role="presentation"
@@ -75,16 +81,16 @@ const ContactModal = () => {
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="contact-modal-title"
-        aria-describedby="contact-modal-description"
+        aria-labelledby="follow-modal-title"
+        aria-describedby="follow-modal-description"
         className="relative w-full max-w-md overflow-hidden rounded-panel-lg border border-border-strong bg-surface-elevated p-5 text-text-primary shadow-panel-lg animate-scale-in sm:p-7"
       >
         <button
           ref={closeButtonRef}
           type="button"
-          onClick={toggleContactModal}
-          aria-label="Close contact dialog"
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-muted transition-colors duration-200 hover:bg-surface-hover hover:text-text-primary
+          onClick={toggleFollowModal}
+          aria-label="Close follow dialog"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-text-muted transition-colors duration-200 hover:bg-surface-hover hover:text-text-primary
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:right-5 sm:top-5"
         >
           <CloseIcon size={20} strokeWidth={1.6} aria-hidden="true" />
@@ -92,13 +98,13 @@ const ContactModal = () => {
 
         <div className="px-8 text-center">
           <h2
-            id="contact-modal-title"
+            id="follow-modal-title"
             className="text-xl font-semibold tracking-[-0.03em] text-text-primary sm:text-2xl"
           >
-            Follow Me
+            Stay Updated
           </h2>
           <p
-            id="contact-modal-description"
+            id="follow-modal-description"
             className="mt-1.5 text-sm leading-6 text-text-muted"
           >
             Choose where you'd like to connect.
@@ -106,9 +112,9 @@ const ContactModal = () => {
         </div>
 
         <div className="mt-6 space-y-2.5 sm:mt-7 sm:space-y-3">
-          {contacts.map((contact) => {
-            const Icon = contact.icon;
-            const ConnectIcon = contact.connectIcon;
+          {followLinks.map((item) => {
+            const Icon = item.icon;
+            const ConnectIcon = item.connectIcon;
             const content = (
               <>
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border bg-background-deep text-text-primary transition-colors duration-200 group-hover:border-accent/30 group-hover:bg-accent group-hover:text-white">
@@ -117,9 +123,9 @@ const ContactModal = () => {
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-sm font-medium text-text-primary">
-                    {contact.title}
+                    {item.title}
                   </h3>
-                  <p className="mt-1 text-xs text-text-muted">{contact.p}</p>
+                  <p className="mt-1 text-xs text-text-muted">{item.p}</p>
                 </div>
 
                 <ConnectIcon
@@ -130,15 +136,15 @@ const ContactModal = () => {
               </>
             );
 
-            if (contact.href) {
+            if (item.href) {
               return (
                 <a
-                  key={contact.title}
-                  href={contact.href}
+                  key={item.title}
+                  href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`Open ${contact.title} in a new tab`}
-                  className={contactCardClassName}
+                  aria-label={`Open ${item.title} in a new tab`}
+                  className={followCardClassName}
                 >
                   {content}
                 </a>
@@ -147,8 +153,8 @@ const ContactModal = () => {
 
             return (
               <div
-                key={contact.title}
-                className={contactCardClassName}
+                key={item.title}
+                className={followCardClassName}
               >
                 {content}
               </div>
@@ -160,4 +166,4 @@ const ContactModal = () => {
   );
 };
 
-export default ContactModal;
+export default FollowModal;

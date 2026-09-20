@@ -13,7 +13,9 @@ const ContactBtn = ({ title, to }: ContactBtnProps) => {
       <Link
       to={to}
         type="button"
-        className="        inline-flex
+        className=" 
+               inline-flex
+               cursor-pointer
         h-12
         w-full
         items-center

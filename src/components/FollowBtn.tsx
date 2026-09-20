@@ -1,21 +1,22 @@
 import { ArrowUpRight } from "lucide-react";
 
-import { useToggleStore } from "../store/contactStore";
+import { useToggleStore } from "../store/followStore";
 
 type FollowBtnProps = {
   name: string;
 };
 
 const FollowBtn = ({ name }: FollowBtnProps) => {
-      const toggleContactModal = useToggleStore((state) => state.toggle);
+      const toggleFollowModal = useToggleStore((state) => state.toggle);
 
   return (
     <>
       <button
         type="button"
-        onClick={toggleContactModal}
+        onClick={toggleFollowModal}
         className="
                           inline-flex
+                          cursor-pointer
                           h-12
                           w-full
                           items-center

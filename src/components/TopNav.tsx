@@ -70,7 +70,7 @@ const TopNav = () => {
           aria-label="Open navigation menu"
           aria-expanded={isOpen}
         >
-          <Menu className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
+          <Menu className="h-6 w-6 " strokeWidth={1.5} aria-hidden="true" />
         </button>
       </nav>
 

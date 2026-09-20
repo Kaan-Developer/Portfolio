@@ -20,7 +20,13 @@ const Available = () => {
             href="https://github.com/Kaan-Developer"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-elevated text-text-secondary transition duration-200 hover:border-border-hover hover:bg-surface-hover hover:text-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent/30"
+            className="
+            inline-flex h-10 w-10 items-center
+             justify-center rounded-lg border border-border
+              bg-surface-elevated text-text-secondary transition
+               duration-200 hover:border-border-hover hover:bg-surface-hover
+                hover:text-text-primary focus-visible:outline
+                 focus-visible:outline-2 focus-visible:outline-accent/30"
             aria-label="Open Kaan's GitHub profile in a new tab"
           >
             <FaGithub className="h-5 w-5" />

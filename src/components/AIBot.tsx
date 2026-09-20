@@ -63,6 +63,7 @@ const AIBot = () => {
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-accent/30
+              cursor-pointer
             "
             >
               <X size={17} strokeWidth={1.8} />
@@ -72,7 +73,7 @@ const AIBot = () => {
               type="button"
               onClick={() => setIsLarge((value) => !value)}
               aria-label={isLarge ? "Küçült" : "Büyüt"}
-              className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors duration-150 hover:bg-surface-hover hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30"
+              className="cursor-pointer inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors duration-150 hover:bg-surface-hover hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30"
             >
               {isLarge ? (
                 <Minimize2 size={16} strokeWidth={1.8} />

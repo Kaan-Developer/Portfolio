@@ -13,17 +13,17 @@ import ContactPage from "./pages/ContactPage";
 import AIBot from "./components/AIBot";
 import AIButton from "./components/AIButton";
 import Pattern from "./components/Pattern";
-import ContactModal from "./components/ContactModal";
+import FollowModal from "./components/FollowModal";
 import Footer from "./components/Footer";
 
 import { useThemeStore } from "./store/themeStore";
 import { useAIStore } from "./store/aiToggleStore";
-import { useToggleStore } from "./store/contactStore";
+import { useToggleStore } from "./store/followStore";
 
 const App = () => {
   const { isDark } = useThemeStore();
   const { isOpen } = useAIStore();
-  const { contactOpen } = useToggleStore();
+  const { followOpen } = useToggleStore();
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", !isDark);
@@ -54,8 +54,8 @@ const App = () => {
         <AIBot />
       )}
 
-      {contactOpen && (
-        <ContactModal />
+      {followOpen && (
+        <FollowModal />
       )}
     </div>
   );

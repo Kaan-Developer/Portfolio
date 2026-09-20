@@ -3,7 +3,6 @@ title: Claude Proje Prompt'u — Kaan Hamitler Portfolio
 version: 1.0.0
 date: 2026-09-19
 repository: https://github.com/Kaan-Developer/Portfolio
-bundle: share/Portfolio-AI-Bundle.md
 ---
 
 # CLAUDE PROJE PROMPT'U — Kaan Hamitler Portfolio
@@ -14,12 +13,8 @@ Bu dosya, tek başına Claude'a verilebilecek şekilde yazılmıştır.
 
 | Kullanım modu | Ne yapmanız gerekir |
 | --- | --- |
-| **Tek dosya (önerilen)** | `tools/Send-To-Claude.cmd` dosyasına çift tıklayın. Üretilen `share/Portfolio-AI-Bundle.md` dosyasını Claude'a ekleyin. Bu dosya **hem bu prompt'u hem de projenin tüm kaynak kodunu** içerir; başka bir şey göndermeniz gerekmez. |
 | **Claude Code / MCP (depo açık)** | Depoyu Claude'a açın, `@docs/ai/claude-prompt.md` dosyasını referans verin ve Bölüm 9'daki görevi seçin. |
-| **Sadece kod incelemesi** | Bu dosyayı yapıştırın, ekine `share/Portfolio-AI-Bundle.md` dosyasını ekleyin, "Bölüm 9.3" görevini isteyin. |
-
-Paketi elle yeniden üretmek için: `pnpm share` veya
-`powershell -ExecutionPolicy Bypass -File tools/export-ai-bundle.ps1`
+| **Sadece kod incelemesi** | Bu dosyayı yapıştırın, kaynak kodu ekleyin, "Bölüm 9.3" görevini isteyin. |
 
 ### 0.1 Bağlam önceliği ve güncellik (önemli)
 
@@ -36,7 +31,7 @@ Kurallar:
 - Pakete dahil olmayan şeyler (`.env` içeriği, `node_modules`, ikili dosyalar, kilit dosyası) hakkında hüküm verme;
   gerçekten gerekiyorsa kullanıcıdan iste.
 - Paketin yaşını başlıktaki üretim zamanı ve commit bilgisinden kontrol et. Kod, paketteki bilgiyle çelişiyorsa
-  çelişkiyi açıkça bildir ve kullanıcıya `pnpm share` ile paketi tazelemesini öner.
+  çelişkiyi açıkça bildir.
 - Paket, commit edilmemiş değişiklikleri de içerir; bu yüzden paketteki kod depodaki son commit'ten ileri olabilir.
   Bunu "tutarsızlık" değil, normal durum olarak kabul et.
 
@@ -108,7 +103,6 @@ pnpm dev            # dev sunucu (0.0.0.0:5173, strictPort, HMR polling açık)
 pnpm build          # tsc -b && vite build
 pnpm preview        # üretim önizleme (5173)
 pnpm lint           # oxlint
-pnpm share          # Claude için AI bağlam paketini üret (share/)
 ```
 
 Ortam değişkenleri (`.env.example` temel alınır):
@@ -357,7 +351,7 @@ Bir teslim ancak şunların tamamı sağlandığında bitmiş sayılır:
 
 ## 13. HAZIR BAŞLANGIÇ MESAJI (kopyala-yapıştır)
 
-Aşağıdaki metni, `share/Portfolio-AI-Bundle.md` dosyasıyla birlikte Claude'a gönder:
+Aşağıdaki metni Claude'a gönder:
 
 ```text
 Rollerini ve proje kurallarını docs/ai/claude-prompt.md dosyasından alıyorsun.

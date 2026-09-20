@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 import { Send, Copy, ShieldCheck, Check } from "lucide-react";
 
@@ -8,25 +8,84 @@ interface State {
   name: string;
   email: string;
   subject: string;
+  otherSubject: string;
   message: string;
   loading: boolean;
 }
 
+const INITIAL_STATE: State = {
+  name: "",
+  email: "",
+  subject: "",
+  otherSubject: "",
+  message: "",
+  loading: false,
+}
+
 const Contact = () => {
   const [copied, setCopied] = useState(false);
+  const [state, setState] = useState<State>(INITIAL_STATE);
 
-  const [state, setState] = useState<State>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    loading: false,
-  })
+  const handleFieldChange =
+  (field: keyof Omit<State, "loading">) =>
+  (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ): void => {
+    setState((previous) => ({
+      ...previous,
+      [field]: event.target.value,
+    }));
+  };
 
+const handleSubmit = async (
+  event: React.FormEvent<HTMLFormElement>
+): Promise<void> => {
+  event.preventDefault();
 
-  const [message, setMessage] = useState("");
-  const [subject, setSubject] = useState("");
-  const [otherSubject, setOtherSubject] = useState("");
+  setState((previous) => ({
+    ...previous,
+    loading: true,
+  }));
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: state.name.trim(),
+        email: state.email.trim(),
+        subject:
+          state.subject === "other"
+            ? state.otherSubject.trim()
+            : state.subject,
+        message: state.message.trim(),
+      }),
+    });
+
+    
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Message could not be sent.")
+    }
+
+    console.log("Message sent:", data);
+
+    setState(INITIAL_STATE);
+
+  }catch (error) {
+    console.error("Contact form error:", error);
+  } finally {
+    setState((previous) => ({
+      ...previous,
+      loading: false,
+    }))
+  }
+};
 
   const handleCopyEmail = async () => {
     try {
@@ -57,7 +116,7 @@ const Contact = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
         <div className="bg-surface border border-border rounded-panel-lg shadow-panel p-8 md:p-10">
-          <form action="" className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <label className="text-text-secondary text-ui-sm font-medium">
                 Full Name
@@ -65,6 +124,8 @@ const Contact = () => {
               <input
                 type="text"
                 placeholder="Your Name..."
+                value={state.name}
+                onChange={handleFieldChange("name")}
                 className="bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
               />
             </div>
@@ -76,6 +137,8 @@ const Contact = () => {
               <input
                 type="email"
                 placeholder="you@example.com"
+                value={state.email}
+                onChange={handleFieldChange("email")}
                 className="bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
               />
             </div>
@@ -84,11 +147,11 @@ const Contact = () => {
               <label className="text-text-secondary text-ui-sm font-medium">
                 Subject
               </label>
-              <select value={subject} onChange={(e) => setSubject(e.target.value)}
+              <select value={state.subject} onChange={handleFieldChange("subject")}
                className="cursor-pointer bg-background border border-border
                 rounded-lg px-4 py-3 text-text-muted text-ui-lg outline-none 
               focus:border-accent transition-colors duration-200 appearance-none">
-                <option value="" disabled selected hidden>
+                <option value="" disabled hidden>
                   What is this about?
                 </option>
                                     <option value="freelance">Freelance Project</option>
@@ -101,10 +164,10 @@ const Contact = () => {
                 <option value="other">Other</option>
               </select>
 
-              {subject === "other" && (
+              {state.subject === "other" && (
                 <input type="text"
-                value={otherSubject}
-                onChange={(e) => setOtherSubject(e.target.value)}
+                value={state.otherSubject}
+                onChange={handleFieldChange("otherSubject")}
                 placeholder="Please specify..."
                 className="mt-2 bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200" />
               )}
@@ -118,8 +181,8 @@ const Contact = () => {
                 Message
               </label>
               <textarea 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={state.message}
+                onChange={handleFieldChange("message")}
                 name="message"
                 id="message"
                 maxLength={600}
@@ -128,7 +191,7 @@ const Contact = () => {
                 className="bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200 resize-none"
               />
               <span className="text-text-muted text-ui-sm text-right">
-                {message.length}/600
+                {state.message.length}/600
               </span>
             </div>
 
@@ -165,6 +228,11 @@ const Contact = () => {
                   </>
                 )}
               </button>
+            </div>
+
+            <div className="flex items-center justify-start mt-2 gap-3 text-text-secondary">
+              <ShieldCheck size={18} />
+              <span className="text-text-muted text-xs">Usually respond within 1-2 business days.</span>
             </div>
           </form>
         </div>

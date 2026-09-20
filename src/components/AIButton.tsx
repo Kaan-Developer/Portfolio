@@ -17,6 +17,7 @@ const AIButton = () => {
     rounded-full
     bg-accent
     text-white
+    cursor-pointer
         `}
       >
         {/* AI outer pulse */}

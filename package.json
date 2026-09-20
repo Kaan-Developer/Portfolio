@@ -8,8 +8,7 @@
     "dev": "vite --configLoader native",
     "build": "tsc -b && vite build --configLoader native",
     "lint": "oxlint",
-    "preview": "vite preview --configLoader native",
-    "share": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/export-ai-bundle.ps1"
+    "preview": "vite preview --configLoader native"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
