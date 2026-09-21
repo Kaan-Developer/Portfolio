@@ -25,67 +25,74 @@ const INITIAL_STATE: State = {
 const Contact = () => {
   const [copied, setCopied] = useState(false);
   const [state, setState] = useState<State>(INITIAL_STATE);
+  const [successMsg, setSuccessMsg] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleFieldChange =
-  (field: keyof Omit<State, "loading">) =>
-  (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ): void => {
+    (field: keyof Omit<State, "loading">) =>
+    (
+      event: ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ): void => {
+      setState((previous) => ({
+        ...previous,
+        [field]: event.target.value,
+      }));
+    };
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    event.preventDefault();
+
+    if (state.loading) return;
+
     setState((previous) => ({
       ...previous,
-      [field]: event.target.value,
+      loading: true,
     }));
-  };
+    setErrorMsg("");
+    setSuccessMsg(false);
 
-const handleSubmit = async (
-  event: React.FormEvent<HTMLFormElement>
-): Promise<void> => {
-  event.preventDefault();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: state.name.trim(),
+          email: state.email.trim(),
+          subject:
+            state.subject === "other"
+              ? state.otherSubject.trim()
+              : state.subject,
+          message: state.message.trim(),
+        }),
+      });
 
-  setState((previous) => ({
-    ...previous,
-    loading: true,
-  }));
+      const data = await response.json();
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: state.name.trim(),
-        email: state.email.trim(),
-        subject:
-          state.subject === "other"
-            ? state.otherSubject.trim()
-            : state.subject,
-        message: state.message.trim(),
-      }),
-    });
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Message could not be sent.");
+      }
 
-    
-    const data = await response.json();
+      console.log("Message sent:", data);
 
-    if (!response.ok) {
-      throw new Error(data.error || "Message could not be sent.")
+      setState(INITIAL_STATE);
+      setSuccessMsg(true);
+      setTimeout(() => setSuccessMsg(false), 5000);
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setErrorMsg(error instanceof Error ? error.message : "An error occurred.");
+    } finally {
+      setState((previous) => ({
+        ...previous,
+        loading: false,
+      }));
     }
-
-    console.log("Message sent:", data);
-
-    setState(INITIAL_STATE);
-
-  }catch (error) {
-    console.error("Contact form error:", error);
-  } finally {
-    setState((previous) => ({
-      ...previous,
-      loading: false,
-    }))
-  }
-};
+  };
 
   const handleCopyEmail = async () => {
     try {
@@ -94,9 +101,9 @@ const handleSubmit = async (
 
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Kopyalama başarısızİ:", err)
+      console.error("Email copy failed:", err);
     }
-  }
+  };
 
   return (
     <div>
@@ -118,43 +125,53 @@ const handleSubmit = async (
         <div className="bg-surface border border-border rounded-panel-lg shadow-panel p-8 md:p-10">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
-              <label className="text-text-secondary text-ui-sm font-medium">
+              <label htmlFor="name" className="text-text-secondary text-ui-sm font-medium">
                 Full Name
               </label>
               <input
+                id="name"
+                name="name"
                 type="text"
                 placeholder="Your Name..."
                 value={state.name}
                 onChange={handleFieldChange("name")}
+                required
                 className="bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-text-secondary text-ui-sm font-medium">
+              <label htmlFor="email" className="text-text-secondary text-ui-sm font-medium">
                 Email Address
               </label>
               <input
+                id="email"
+                name="email"
                 type="email"
                 placeholder="you@example.com"
                 value={state.email}
                 onChange={handleFieldChange("email")}
+                required
                 className="bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-text-secondary text-ui-sm font-medium">
+              <label htmlFor="subject" className="text-text-secondary text-ui-sm font-medium">
                 Subject
               </label>
-              <select value={state.subject} onChange={handleFieldChange("subject")}
-               className="cursor-pointer bg-background border border-border
-                rounded-lg px-4 py-3 text-text-muted text-ui-lg outline-none 
-              focus:border-accent transition-colors duration-200 appearance-none">
+              <select
+                id="subject"
+                name="subject"
+                value={state.subject}
+                onChange={handleFieldChange("subject")}
+                required
+                className="cursor-pointer bg-background border border-border rounded-lg px-4 py-3 text-text-muted text-ui-lg outline-none focus:border-accent transition-colors duration-200 appearance-none"
+              >
                 <option value="" disabled hidden>
                   What is this about?
                 </option>
-                                    <option value="freelance">Freelance Project</option>
+                <option value="freelance">Freelance Project</option>
                 <option value="job">Job Opportunity</option>
                 <option value="collaboration">
                   Collaboration / Open Source
@@ -165,26 +182,31 @@ const handleSubmit = async (
               </select>
 
               {state.subject === "other" && (
-                <input type="text"
-                value={state.otherSubject}
-                onChange={handleFieldChange("otherSubject")}
-                placeholder="Please specify..."
-                className="mt-2 bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200" />
+                <input
+                  type="text"
+                  name="otherSubject"
+                  value={state.otherSubject}
+                  onChange={handleFieldChange("otherSubject")}
+                  placeholder="Please specify..."
+                  required
+                  className="mt-2 bg-background border border-border rounded-lg px-4 py-3 text-text-primary text-ui-lg placeholder:text-text-muted outline-none focus:border-accent transition-colors duration-200"
+                />
               )}
             </div>
 
             <div className="flex flex-col gap-2">
               <label
-                htmlFor=""
+                htmlFor="message"
                 className="text-text-secondary text-ui-sm font-medium"
               >
                 Message
               </label>
-              <textarea 
+              <textarea
+                id="message"
+                name="message"
                 value={state.message}
                 onChange={handleFieldChange("message")}
-                name="message"
-                id="message"
+                required
                 maxLength={600}
                 rows={5}
                 placeholder="Tell me about your project, idea or how I can help..."
@@ -195,36 +217,42 @@ const handleSubmit = async (
               </span>
             </div>
 
+            {errorMsg && (
+              <div role="alert" className="text-status-error text-sm font-medium">
+                {errorMsg}
+              </div>
+            )}
+
+            {successMsg && (
+              <div role="alert" className="text-status-available text-sm font-medium">
+                Message sent successfully! I'll get back to you soon.
+              </div>
+            )}
+
             <div className="flex gap-3 pt-2">
               <button
-                type="button"
-                className="w-[55%] shrink-0 inline-flex h-12 items-center
-                 justify-center gap-3.5 rounded-button bg-accent px-6 text-sm
-                  font-medium text-primary shadow-button transition-all duration-200
-                   ease-smooth hover:bg-accent-hover hover:shadow-accent active:bg-accent-active
-                    active:scale-[0.98] cursor-pointer"
+                type="submit"
+                disabled={state.loading}
+                className="w-[55%] shrink-0 inline-flex h-12 items-center justify-center gap-3.5 rounded-button bg-accent px-6 text-sm font-medium text-primary shadow-button transition-all duration-200 ease-smooth hover:bg-accent-hover hover:shadow-accent active:bg-accent-active active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send size={16} />
-                <span>Send Message</span>
+                <span>{state.loading ? "Sending..." : "Send Message"}</span>
               </button>
 
               <button
-              onClick={handleCopyEmail}
+                onClick={handleCopyEmail}
                 type="button"
-                className="w-[35%] shrink-0 inline-flex h-12 items-center
-                 justify-center gap-2 rounded-button border border-border bg-surface-elevated
-                  px-6 text-sm font-medium text-text-primary transition-colors duration-200
-                   hover:bg-surface-hover cursor-pointer"
+                className="w-[35%] shrink-0 inline-flex h-12 items-center justify-center gap-2 rounded-button border border-border bg-surface-elevated px-6 text-sm font-medium text-text-primary transition-colors duration-200 hover:bg-surface-hover cursor-pointer"
               >
                 {copied ? (
                   <div className="flex items-center gap-2 text-status-available">
-                  <Check size={16} />
-                  <span>Copied!</span>
+                    <Check size={16} />
+                    <span>Copied!</span>
                   </div>
                 ) : (
                   <>
-                                  <Copy size={16} />
-                <span>Copy Email</span>
+                    <Copy size={16} />
+                    <span>Copy Email</span>
                   </>
                 )}
               </button>

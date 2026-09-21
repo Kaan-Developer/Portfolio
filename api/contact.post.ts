@@ -101,6 +101,17 @@ export default defineHandler(async (event) => {
     );
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return createJsonResponse(
+      {
+        success: false,
+        error: "Geçersiz email adresi.",
+      },
+      400,
+    );
+  }
+
   if (subject.length > MAX_SUBJECT_LENGTH) {
     return createJsonResponse(
       {
