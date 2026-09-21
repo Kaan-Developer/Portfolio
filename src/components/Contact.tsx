@@ -1,6 +1,8 @@
 import { useState, type ChangeEvent } from "react";
 
 import { Send, Copy, ShieldCheck, Check } from "lucide-react";
+import SocialMedias from "./SocialMedias";
+
 
 const MY_EMAIL: string = "khamitler@gmail.com"
 
@@ -265,7 +267,9 @@ const Contact = () => {
           </form>
         </div>
 
-        <div className="grid-cols-1"></div>
+        <div className="grid-cols-1 space-y-2.5">
+          <SocialMedias />
+        </div>
       </div>
     </div>
   );
