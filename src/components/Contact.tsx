@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 
-import { Send, Copy, ShieldCheck, Check } from "lucide-react";
+import { Send, Copy, ShieldCheck, Check, MapPin, Clock } from "lucide-react";
 import SocialMedias from "./SocialMedias";
 
 
@@ -267,8 +267,52 @@ const Contact = () => {
           </form>
         </div>
 
-        <div className="grid-cols-1 space-y-2.5">
-          <SocialMedias />
+        <div className="bg-surface border border-border rounded-panel-lg shadow-panel p-8 md:p-10 flex flex-col justify-between gap-6">
+          <div>
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-text-muted text-xs font-semibold tracking-wider uppercase">
+                DIRECT CHANNELS
+              </span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated px-3 py-1 text-xs text-text-secondary">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-status-available opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-status-available" />
+                </span>
+                <span>Open for opportunities</span>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-text-primary mt-4">
+              Connect & Follow
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+              Prefer quick messaging or following my work? Feel free to reach out directly through any of these platforms.
+            </p>
+
+            <div className="mt-6 space-y-3">
+              <SocialMedias />
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-border grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div className="rounded-xl border border-border bg-surface-elevated/70 p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-2 text-text-muted text-xs">
+                <MapPin size={14} className="text-accent" />
+                <span>Location</span>
+              </div>
+              <span className="text-sm font-semibold text-text-primary">Türkiye</span>
+              <span className="text-xs text-text-muted">Remote Worldwide (GMT+3)</span>
+            </div>
+
+            <div className="rounded-xl border border-border bg-surface-elevated/70 p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-2 text-text-muted text-xs">
+                <Clock size={14} className="text-status-available" />
+                <span>Response Time</span>
+              </div>
+              <span className="text-sm font-semibold text-text-primary">&lt; 24 Hours</span>
+              <span className="text-xs text-text-muted">Fast & direct replies</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
