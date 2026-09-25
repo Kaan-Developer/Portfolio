@@ -7,6 +7,7 @@ type ContactRequest = {
   name?: unknown;
   email?: unknown;
   subject?: unknown;
+  time?: unknown;
   message?: unknown;
 };
 
@@ -167,12 +168,29 @@ export default defineHandler(async (event) => {
     },
   );
 
+  const now = new Date();
+
+  // Türkiye saatine göre okunabilir tam tarih (örn: 25 Eylül 2026 Cuma 14:35:10)
+  const turkishHistory = new Intl.DateTimeFormat("tr-TR", {
+    dateStyle: "full",
+    timeStyle: "medium",
+    timeZone: "Europe/Istanbul",
+  }).format(now);
+
+    const englishHistory = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC",
+  }).format(now); 
+
+
   const { error: dbError } = await supabase
     .from("contact_messages")
     .insert({
       name,
       email,
       subject,
+      created_at: now.toISOString(),
       message,
     });
   if (dbError) {
@@ -188,17 +206,37 @@ export default defineHandler(async (event) => {
         to: notificationEmail,
         replyTo: email,
         subject: `Yeni Mesaj: ${subject} - ${name}`,
-        html: `
-        <div style="font-family: sans-serif; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
-            <h2 style="color: #333;">Web Sitenizden Yeni İletişim Formu</h2>
-            <p><strong>Gönderen:</strong> ${name}</p>
-            <p><strong>E-posta:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Konu:</strong> ${subject}</p>
-            <div style="background: #f8fafc; padding: 15px; border-left: 4px solid #3b82f6; margin-top: 20px; border-radius: 4px;">
-              <p style="white-space: pre-wrap; margin: 0; color: #1e293b;">${message}</p>
-            </div>
+                html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
+          <h2 style="color: #0f172a; margin-top: 0; font-size: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+            📬 Web Sitenizden Yeni İletişim Mesajı
+          </h2>
+
+          <!-- Zaman Bilgi Kartı: Üstte Durum, Altında Tam Tarih -->
+<!-- Mail içindeki Zaman Kutusu -->
+<div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin: 16px 0;">
+  <p style="margin: 0 0 6px 0; font-size: 13px; color: #1e293b;">
+    🇹🇷 <strong>Türkiye Saati:</strong> ${turkishHistory} (GMT+3)
+  </p>
+  <p style="margin: 0; font-size: 13px; color: #475569;">
+    🌍 <strong>Global / UTC:</strong> ${englishHistory} (London/GMT)
+  </p>
+</div>
+
+
+          <div style="margin-bottom: 16px; font-size: 14px; line-height: 1.6; color: #334155;">
+            <p style="margin: 6px 0;"><strong>👤 Gönderen:</strong> ${name}</p>
+            <p style="margin: 6px 0;"><strong>✉️ E-posta:</strong> <a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a></p>
+            <p style="margin: 6px 0;"><strong>📌 Konu:</strong> ${subject}</p>
           </div>
-          `,
+
+          <div style="background: #ffffff; padding: 16px; border-left: 4px solid #3b82f6; border-radius: 4px; border-top: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9;">
+            <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: bold; color: #64748b; text-transform: uppercase;">Mesaj İçeriği:</p>
+            <p style="white-space: pre-wrap; margin: 0; color: #0f172a; font-size: 14px; line-height: 1.6;">${message}</p>
+          </div>
+        </div>
+        `,
+
       });
 
       if (emailResult.error) {

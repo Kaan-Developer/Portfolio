@@ -1,4 +1,5 @@
 import { defineHandler } from "nitro";
+import { checkRateLimit } from "../utils/rateLimit.ts";
 
 const GROQ_API_URL =
   "https://api.groq.com/openai/v1/chat/completions";
@@ -50,6 +51,7 @@ type ApiResponse =
 function createJsonResponse(
   data: ApiResponse,
   status = 200,
+  extraHeaders: Record<string, string> = {},
 ): Response {
   return new Response(JSON.stringify(data), {
     status,
@@ -59,11 +61,31 @@ function createJsonResponse(
         "application/json; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
+      ...extraHeaders,
     },
   });
 }
 
 export default defineHandler(async (event) => {
+  const rateLimitResult = checkRateLimit(event, {
+    maxRequests: 5,
+    windowMs: 60 * 1000,
+    cooldownMs: 2500,
+  });
+
+  if (!rateLimitResult.success) {
+    return createJsonResponse(
+      {
+        success: false,
+        error: rateLimitResult.error || "Çok fazla istek gönderildi.",
+      },
+      429,
+      rateLimitResult.retryAfterSeconds
+        ? { "Retry-After": String(rateLimitResult.retryAfterSeconds) }
+        : {},
+    );
+  }
+
   let body: ChatRequest;
 
   /*
