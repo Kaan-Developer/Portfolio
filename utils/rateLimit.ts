@@ -1,80 +1,120 @@
-import type { H3Event } from "nitro";
-
 interface ClientRecord {
-  lastRequestTime: number;
-  requestCount: number;
-  resetTime: number;
+  lastRequestTime: number; // En son istek attığı zaman
+  requestCount: number;    // Mevcut penceredeki istek sayısı
+  resetTime: number;       // Mevcut engelin veya pencerenin biteceği zaman
+  strikes: number;         // Kaç defa ceza yediği (1. ihlal, 2. ihlal, 3. ihlal...)
+  strikeResetTime: number; // 24 saat uslu durursa sicilinin temizleneceği zaman
 }
 
-const ipStore = new Map<string, ClientRecord>();
+// Dosyayı kaydettiğinde (Vite HMR) hafıza sıfırlanmasın diye globalThis kullanıyoruz
+const ipStore: Map<string, ClientRecord> =
+  (globalThis as any).__rateLimitStore ||
+  ((globalThis as any).__rateLimitStore = new Map());
 
 interface RateLimitConfig {
-  maxRequests: number; // Belirtilen penceredeki izin verilen istek sayısı
-  windowMs: number;    // Pencere süresi (ms)
-  cooldownMs?: number; // İki istek arasında zorunlu bekleme süresi (ms)
+  routeKey?: string;   // "contact" veya "chat" ayrımı
+  maxRequests: number; // İzin verilen mesaj sayısı (Örn: 3)
+  windowMs: number;    // Temel ceza süresi (Örn: 1 saat = 3600000 ms)
+  cooldownMs?: number; // İki istek arası bekleme (Örn: 15 sn)
+  message?: string;    // Özel mesaj
 }
 
 export function checkRateLimit(
-  event: H3Event,
+  event: any,
   config: RateLimitConfig
 ): { success: boolean; error?: string; retryAfterSeconds?: number } {
-  // IP tespit et
-  const forwardedFor = event.req.headers.get("x-forwarded-for");
+  // 1. IP Adresini Doğru Tespit Et
+  const forwardedFor = event.req?.headers?.get?.("x-forwarded-for");
   const forwardedIp = forwardedFor ? forwardedFor.split(",")[0].trim() : "";
-  const realIp = event.req.headers.get("x-real-ip");
-  const ip =
-    event.req.ip ||
-    forwardedIp ||
-    realIp ||
-    event.runtime?.node?.req.socket?.remoteAddress ||
-    "unknown_ip";
+  const realIp = event.req?.headers?.get?.("x-real-ip");
+  const nodeIp = event.node?.req?.socket?.remoteAddress;
+
+  const ip = forwardedIp || realIp || nodeIp || "127.0.0.1";
+  const route = config.routeKey || "default";
+  const key = `${ip}:${route}`;
 
   const now = Date.now();
   const cooldown = config.cooldownMs ?? 2500;
-  const client = ipStore.get(ip);
+  const client = ipStore.get(key);
 
-  // 1. İlk defa gelen veya süresi dolmuş IP
-  if (!client || now > client.resetTime) {
-    ipStore.set(ip, {
+  // 2. İlk defa gelen ziyaretçi
+  if (!client) {
+    ipStore.set(key, {
       lastRequestTime: now,
       requestCount: 1,
       resetTime: now + config.windowMs,
+      strikes: 0,
+      strikeResetTime: now + (24 * 60 * 60 * 1000), // 24 saatlik sicil süresi
     });
     return { success: true };
   }
 
-  // 2. Cooldown kontrolü (Çok hızlı art arda istek)
+  // 3. Kullanıcı 24 saat boyunca ceza yememişse ceza puanını (strikes) sıfırla
+  if (now > client.strikeResetTime) {
+    client.strikes = 0;
+  }
+
+  // 4. Ceza süresi bitmiş mi? Bittiyse yeni bir sayfa aç ama sicilindeki (strikes) ceza sayısını koru
+  if (now > client.resetTime) {
+    client.requestCount = 1;
+    client.lastRequestTime = now;
+    client.resetTime = now + config.windowMs;
+    return { success: true };
+  }
+
+  // 5. Cooldown Kontrolü (15 saniye nefes alma süresi)
   if (now - client.lastRequestTime < cooldown) {
     const waitSec = Math.ceil((cooldown - (now - client.lastRequestTime)) / 1000);
     return {
       success: false,
-      error: `Çok hızlı mesaj gönderiyorsun. Lütfen ${waitSec} saniye bekle.`,
+      error: `Çok hızlı işlem yapıyorsun. Lütfen ${waitSec} saniye bekle.`,
       retryAfterSeconds: waitSec,
     };
   }
 
-  // 3. Pencere içi limit aşımı
+  // 6. KADEMELİ CEZA SİSTEMİ (1 Saat -> 2 Saat -> 3 Saat...)
   if (client.requestCount >= config.maxRequests) {
-    const retryAfter = Math.ceil((client.resetTime - now) / 1000);
+    // Eğer bu periyotta henüz ceza katlanmadıysa katla:
+    if (client.requestCount === config.maxRequests) {
+      client.strikes += 1; // Ceza sayısını artır (1, 2, 3...)
+      client.strikeResetTime = now + (24 * 60 * 60 * 1000); // Sicil süresini 24 saat ileri at
+      
+      // Ceza Süresi = Temel Süre (1 Saat) x Ceza Sayısı (1, 2, 3...)
+      const penaltyDuration = config.windowMs * client.strikes;
+      client.resetTime = now + penaltyDuration;
+      client.requestCount += 1; // Tekrar tekrar katlamasın diye sayacı 1 artır
+    }
+
+    const remainingMs = client.resetTime - now;
+    const remainingHours = Math.ceil(remainingMs / (60 * 60 * 1000));
+    const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
+
+    const timeText =
+      remainingHours > 1
+        ? `${remainingHours} saat`
+        : `${remainingMinutes} dakika`;
+
     return {
       success: false,
-      error: `Kısa sürede çok fazla soru sordun. Lütfen ${retryAfter} saniye sonra tekrar dene.`,
-      retryAfterSeconds: retryAfter,
+      error: `Çok fazla form gönderdin. (${client.strikes}. İhlal). Lütfen ${timeText} sonra tekrar dene.`,
+      retryAfterSeconds: Math.ceil(remainingMs / 1000),
     };
   }
 
-  // İstek geçerli, sayaçları güncelle
+  // 7. Sorun yoksa isteği kabul et
   client.requestCount += 1;
   client.lastRequestTime = now;
   return { success: true };
 }
 
-// 2 dakikada bir süresi dolmuş kayıtları temizle (Memory leak önleme)
-setInterval(() => {
-  const now = Date.now();
-  for (const [ip, data] of ipStore.entries()) {
-    if (now > data.resetTime) {
-      ipStore.delete(ip);
+// 2 dakikada bir eski süresi dolmuş çöp kayıtları RAM'den temizle
+if (!(globalThis as any).__rateLimitInterval) {
+  (globalThis as any).__rateLimitInterval = setInterval(() => {
+    const now = Date.now();
+    for (const [key, data] of ipStore.entries()) {
+      if (now > data.resetTime && now > data.strikeResetTime) {
+        ipStore.delete(key);
+      }
     }
-  }
-}, 120_000);
+  }, 120_000);
+}

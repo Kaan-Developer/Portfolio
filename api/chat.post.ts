@@ -68,6 +68,7 @@ function createJsonResponse(
 
 export default defineHandler(async (event) => {
   const rateLimitResult = checkRateLimit(event, {
+    routeKey: "chat",
     maxRequests: 5,
     windowMs: 60 * 1000,
     cooldownMs: 2500,

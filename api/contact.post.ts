@@ -1,5 +1,7 @@
 import { defineHandler } from "nitro";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js"
+
+import { checkRateLimit } from "../utils/rateLimit.ts";
 
 import { Resend } from "resend";
 
@@ -40,6 +42,23 @@ const MAX_SUBJECT_LENGTH = 150;
 const MAX_MESSAGE_LENGTH = 600;
 
 export default defineHandler(async (event) => {
+  const rateLimitResult = checkRateLimit(event, {
+    routeKey: "contact",
+    maxRequests: 3,
+    windowMs: 60 * 60 *1000,
+    cooldownMs: 15000,
+  });
+
+  if (!rateLimitResult.success) {
+    return createJsonResponse(
+      {
+        success: false,
+        error: rateLimitResult.error || "Çok fazla form gönderdiniz.Lütfen daha sonra tekrar deneyin."
+      },
+      429
+    )
+  }
+
   let body: ContactRequest;
 
   try {
@@ -52,6 +71,44 @@ export default defineHandler(async (event) => {
       },
       400,
     );
+  }
+
+  if ((body as any).honeypot) {
+    return createJsonResponse(
+      {
+        success: false, error: "Bot tespit edildi."
+      },
+      403);
+  }
+
+  const turnstileToken = (body as any).turnstileToken;
+  const secretKey =
+    process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY?.trim() || "";
+
+  if (!turnstileToken) {
+    return createJsonResponse(
+      {
+        success: false,
+        error: "Güvenlik doğrulaması eksik (Bot tespit edildi)."
+      }, 403);
+  }
+
+  const verifyFormData = new FormData();
+  verifyFormData.append("secret", secretKey);
+  verifyFormData.append("response", turnstileToken);
+
+  const cfResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body: verifyFormData,
+  });
+
+  const cfData = (await cfResponse.json()) as { success: boolean };
+  if (!cfData.success) {
+    return createJsonResponse(
+      {
+        success: false,
+        error: "Güvenlik doğrulaması başarısız (Bot tespit edildi)."
+      }, 403);
   }
 
   if (

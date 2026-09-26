@@ -1,8 +1,13 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 
 import { Send, Copy, ShieldCheck, Check, MapPin, Clock } from "lucide-react";
 import SocialMedias from "./SocialMedias";
 
+declare global {
+  interface Window {
+    onTurnstileSuccess: (token: string) => void;
+  }
+}
 
 const MY_EMAIL: string = "khamitler@gmail.com"
 
@@ -29,6 +34,15 @@ const Contact = () => {
   const [state, setState] = useState<State>(INITIAL_STATE);
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const [honeypot, setHoneypot] = useState<string>("");
+
+  useEffect(() => {
+    window.onTurnstileSuccess = (token: string) => {
+      setTurnstileToken(token);
+    };
+  }, []);
+
 
   const handleFieldChange =
     (field: keyof Omit<State, "loading">) =>
@@ -71,6 +85,8 @@ const Contact = () => {
               ? state.otherSubject.trim()
               : state.subject,
           message: state.message.trim(),
+          turnstileToken: turnstileToken,
+          honeypot: honeypot,
         }),
       });
 
@@ -218,6 +234,16 @@ const Contact = () => {
                 {state.message.length}/600
               </span>
             </div>
+
+            <div style={{display: 'none'}}>
+              <input type="text" name="honeypot" value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1}
+              autoComplete="off" />
+            </div>
+
+            <div className="cf-turnstile" data-sitekey={import.meta.env.VITE_CLOUDFLARE_TURNSTILE_SITE_KEY} data-callback="onTurnstileSuccess" data-theme="dark"></div>
+
+            
 
             {errorMsg && (
               <div role="alert" className="text-status-error text-sm font-medium">
