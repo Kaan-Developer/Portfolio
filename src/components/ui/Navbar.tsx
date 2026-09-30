@@ -84,7 +84,7 @@ export const Navbar = () => {
     className="shrink-0 rounded-full bg-white p-2 shadow-soft"
   >
     <img
-      src="/kaan-k-logo.svg"
+      src={`${import.meta.env.BASE_URL}kaan-k-logo.svg`}
       alt="Kaan"
       className="h-9 w-9"
     />
