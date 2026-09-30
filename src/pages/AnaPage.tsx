@@ -13,9 +13,6 @@ const AnaPage = () => {
         <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl flex-col items-center justify-between text-center">
           {/* Header */}
           <div className="relative z-20 flex flex-col items-center pt-4 md:pt-8">
-            <span className="mb-3 inline-block rounded-full border border-primary/20 bg-primary-light px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
-              {site.role}
-            </span>
 
             <h1 className="max-w-6xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.05em] text-black sm:text-7xl md:text-8xl lg:text-9xl">
               {site.name}

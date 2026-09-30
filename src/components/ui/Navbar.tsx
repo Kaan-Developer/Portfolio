@@ -38,8 +38,9 @@ export const Navbar = () => {
 
   // Active section
   useEffect(() => {
-    const sections = site.bubbles
-      .map((bubble) => document.getElementById(bubble.target))
+    const sectionIds = ["home", ...site.bubbles.map((b) => b.target)];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
 
     if (!sections.length) return;
@@ -90,49 +91,32 @@ export const Navbar = () => {
   </a>
 
   {/* Sadece linkler */}
-  <nav className="absolute left-1/2 flex -translate-x-1/2 items-center gap-7 rounded-full border border-black/5 bg-white/80 px-6 py-3 shadow-soft backdrop-blur-md">
-    {site.bubbles.map((bubble) => {
-      const isActive = activeSection === bubble.target;
+  <nav className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md">
+  {site.bubbles.map((bubble) => {
+    const isActive = activeSection === bubble.target;
 
-      return (
-        <a
-          key={bubble.target}
-          href={`#${bubble.target}`}
-          onClick={() => setActiveSection(bubble.target)}
-          className={`
-            relative py-1
-            text-sm font-medium
-            transition-all duration-200
-            hover:-translate-y-0.5
-            ${
-              isActive
-                ? "text-primary"
-                : "text-muted hover:text-black"
-            }
-          `}
-        >
-          {bubble.label}
-
-          <span
-            className={`
-              absolute
-              -bottom-1 left-1/2
-              h-0.5
-              -translate-x-1/2
-              rounded-full
-              bg-primary
-              transition-all duration-200
-              ${
-                isActive
-                  ? "w-4 opacity-100"
-                  : "w-0 opacity-0"
-              }
-            `}
-          />
-        </a>
-      );
-    })}
-  </nav>
+    return (
+      <a
+        key={bubble.target}
+        href={`#${bubble.target}`}
+        onClick={() => setActiveSection(bubble.target)}
+        aria-current={isActive ? "location" : undefined}
+        className={`
+          rounded-full px-4 py-2
+          text-sm font-medium
+          transition-colors duration-200
+          ${
+            isActive
+              ? "bg-primary-light text-black"
+              : "text-muted hover:bg-black/5 hover:text-black"
+          }
+        `}
+      >
+        {bubble.label}
+      </a>
+    );
+  })}
+</nav>
 
   {/* GitHub */}
   <StarOnGithub />
