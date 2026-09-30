@@ -1,6 +1,8 @@
 export const site = {
   name: "Kaan Hamitler",
   role: "Frontend Developer",
+  role1: "Frontend",
+  role2: "Developer",
   status: "Building",
 
   intro:
@@ -32,6 +34,16 @@ export const site = {
       label: "İletişim",
       target: "contact",
       position: "bottom-right",
+    },
+  ],
+
+     about: [
+    {
+      title: "Portfolio",
+      description: "I’m a frontend developer focused on building clean, responsive, and interactive web experiences. I enjoy turning ideas into real products, exploring modern technologies, and constantly improving my skills. I care about writing maintainable code, creating thoughtful interfaces, and understanding how the things I build actually work",
+      tech: ["React", "TypeScript", "Tailwind"],
+      github: "https://github.com/Kaan-Developer/Portfolio",
+      live: "",
     },
   ],
 
