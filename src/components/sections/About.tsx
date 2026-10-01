@@ -24,7 +24,7 @@ const About = () => {
     </div>
     </div>
 
-    <Button name="" option=""></Button>
+    <Button name="" option="github"></Button>
         </div>
 
         <div className="min-h-[500px] w-full">
