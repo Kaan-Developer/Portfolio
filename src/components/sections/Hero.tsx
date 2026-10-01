@@ -1,5 +1,3 @@
-import React from 'react';
-
 import RobotCanvas from "../Robot/RobotCanvas";
 import { site } from "../../data/site";
 

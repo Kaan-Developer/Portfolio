@@ -1,10 +1,12 @@
+import kaanLogo from "../../assets/images/kaan-k-logo.svg";
+
 const Loading = () => {
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-background">
       <div className="flex flex-col items-center gap-6">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border">
           <img
-            src="/images/kaan-k-logo.svg"
+            src={kaanLogo}
             alt="Kaan"
             className="h-8 w-8"
           />

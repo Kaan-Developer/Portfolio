@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { site } from "../../data/site";
+import kaanLogo from "../../assets/images/kaan-k-logo.svg";
 
 import StarOnGithub from "./StarOnGithub";
 
@@ -84,7 +85,7 @@ export const Navbar = () => {
     className="shrink-0 rounded-full bg-white p-2 shadow-soft"
   >
     <img
-      src={`${import.meta.env.BASE_URL}kaan-k-logo.svg`}
+      src={kaanLogo}
       alt="Kaan"
       className="h-9 w-9"
     />

@@ -34,15 +34,17 @@ const hasMouse = () =>
 const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   const splineRef = useRef<Application | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isDesktop] = useState(hasMouse);
 
+  const [isDesktop] = useState(hasMouse);
   const [isLoading, setIsLoading] = useState(true);
 
   const selectedScene = scenes.find((scene) => scene.id === sceneId);
 
   const updateZoom = () => {
     const splineApp = splineRef.current;
+
     if (!splineApp) return;
+
     splineApp.setZoom(window.innerWidth < 768 ? 1.3 : 1.55);
   };
 
@@ -54,14 +56,10 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
 
   useEffect(() => {
     const container = containerRef.current;
+
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // Spline'ın wheel hareketini almasını engelle.
-      // Spline canvas üzerinde wheel'i dinleyip zoom yapıyor ve sahne
-      // ayarına göre preventDefault ile sayfa kaydırmasını kesiyor.
-      // Olayı burada (capture fazında) kesiyoruz; preventDefault
-      // çağırmadığımız için kaydırmayı tarayıcının native scroll'u yapar.
       e.stopPropagation();
     };
 
@@ -94,7 +92,10 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   if (!isDesktop) return poster;
 
   return (
-    <div ref={containerRef} className="h-full w-full touch-pan-y">
+    <div
+      ref={containerRef}
+      className="relative h-full w-full touch-pan-y"
+    >
       {isLoading && (
         <div className="absolute inset-0 z-10">
           <Loading />
@@ -102,7 +103,10 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
       )}
 
       <Suspense fallback={null}>
-        <Spline scene={selectedScene.sceneUrl} onLoad={handleLoad} />
+        <Spline
+          scene={selectedScene.sceneUrl}
+          onLoad={handleLoad}
+        />
       </Suspense>
     </div>
   );

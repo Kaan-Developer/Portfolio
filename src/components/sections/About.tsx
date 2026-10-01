@@ -1,7 +1,7 @@
-import React from 'react';
-
 import RobotCanvas from "../Robot/RobotCanvas";
 import { site } from "../../data/site";
+
+import Button from "../ui/Button";
 
 const About = () => {
 
@@ -23,6 +23,8 @@ const About = () => {
       <p className="leading-relaxed text-muted">{site.about[0].description}</p>
     </div>
     </div>
+
+    <Button name="" option=""></Button>
         </div>
 
         <div className="min-h-[500px] w-full">
