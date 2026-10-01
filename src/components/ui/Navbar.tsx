@@ -91,7 +91,7 @@ export const Navbar = () => {
   </a>
 
   {/* Sadece linkler */}
-  <nav className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md">
+  <nav className="hidden lg:flex absolute left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md">
   {site.bubbles.map((bubble) => {
     const isActive = activeSection === bubble.target;
 
