@@ -20,11 +20,6 @@ const Hero = () => {
                   {site.intro}
                 </p>
               </div>
-    
-              {/* 3D Robot */}
-              <div className="absolute inset-x-0 bottom-[14vh] z-10 h-[42vh] md:bottom-[-4vh] md:h-[48vh]">
-                <RobotCanvas sceneId={1} />
-              </div>
             </div>
           </section>
     );

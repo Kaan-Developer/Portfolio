@@ -10,65 +10,69 @@ import {
 import type { IconType } from "react-icons";
 
 const techIcons: Record<string, IconType> = {
-    React: SiReact,
+  React: SiReact,
   TypeScript: SiTypescript,
   Tailwind: SiTailwindcss,
-}
+};
 
 const About = () => {
   const about = site.about[0];
 
-    return (
-        <section
-        id="about"
-        className="grid min-h-screen w-full grid-cols-1 md:grid-cols-2"
-      >
-        <div className="flex flex-col justify-center gap-3 px-6 py-16 md:px-12">
-          <span className="text-primary font-medium text-md tracking-[0.16em]">{site.about[0].title}</span>
+  return (
+    <section
+      id="about"
+      className="grid min-h-screen w-full grid-cols-1 md:grid-cols-2"
+    >
+      <div className="flex flex-col justify-center gap-3 px-6 py-16 md:px-12">
+        <h2 className="mt-4 text-3xl text-balance font-black leading-[0.95] tracking-[-0.05em] font-semibold tracking-tight md:text-5xl">
+          {about.hi}
+        </h2>
 
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111111] md:text-5xl">
-            {site.about[0].hi}
-          </h2>
+        <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-lg md:leading-8">
+          {about.description}
+        </p>
 
-          <p className="mt-5 max-w-xl text-base leading-7 text-[#71717a] md:text-lg md:leading-8">
-            {site.about[0].description}
-          </p>
+<div className="mt-8">
+  <span className="text-xs font-medium uppercase tracking-[0.16em] text-subtle">
+    Currently
+  </span>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            {about.tech.map((tech) => {
-              const Icon = techIcons[tech];
+  <div className="mt-4 space-y-3">
+    <div className="flex items-center gap-3">
+      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+      <span className="text-sm text-muted">
+        Building my portfolio
+      </span>
+    </div>
 
-              return (
-                 <div
-                key={tech}
-                className="flex items-center gap-2 rounded-full border border-[#e7e5eb] bg-[#f1edff] px-4 py-2 text-sm font-medium text-[#18181b]"
-              >
-                {Icon && (
-                  <Icon
-                    size={18}
-                    className="text-primary"
-                  />
-                )}
+    <div className="flex items-center gap-3">
+      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+      <span className="text-sm text-muted">
+        Learning React deeper
+      </span>
+    </div>
 
-                <span>{tech}</span>
-              </div>
-              )
-            })}
-          </div>
+    <div className="flex items-center gap-3">
+      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+      <span className="text-sm text-muted">
+        Exploring 3D web experiences
+      </span>
+    </div>
+  </div>
+</div>
 
-           <div className="mt-8">
-          <Button
-            children="GitHub"
-          />
+        <div className="mt-8">
+          <Button arrow>
+            Projects
+          </Button>
         </div>
+      </div>
 
-        </div>
-
-        <div className="min-h-[500px] w-full">
-          <RobotCanvas sceneId={2} />
-        </div>
-        </section>
-    )
-}
+      <div className="min-h-[500px] w-full">
+        <RobotCanvas sceneId={2} />
+      </div>
+    </section>
+  );
+};
 
 export default About;
