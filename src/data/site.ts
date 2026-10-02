@@ -39,7 +39,8 @@ export const site = {
 
      about: [
     {
-      title: "Portfolio",
+      title: "ABOUT ME",
+      hi: "Merhaba, ben Kaan",
       description: "I’m a frontend developer focused on building clean, responsive, and interactive web experiences. I enjoy turning ideas into real products, exploring modern technologies, and constantly improving my skills. I care about writing maintainable code, creating thoughtful interfaces, and understanding how the things I build actually work",
       tech: ["React", "TypeScript", "Tailwind"],
       github: "https://github.com/Kaan-Developer/Portfolio",

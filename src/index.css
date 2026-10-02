@@ -5,35 +5,39 @@
      COLORS
      ========================= */
 
-  /* Main backgrounds */
   --color-bg: #fbfbfc;
   --color-white: #ffffff;
 
-  /* Main text */
   --color-black: #111111;
   --color-ink: #18181b;
 
-  /* Secondary text */
   --color-muted: #71717a;
   --color-subtle: #a1a1aa;
 
   /* Purple accent */
-  --color-primary: #2563eb;
---color-primary-soft: #3b82f6;
---color-primary-light: #eff6ff;
+  --color-primary: #8b5cf6;
+  --color-primary-soft: #a78bfa;
+  --color-primary-light: #f1edff;
 
   /* Borders */
   --color-border: #e7e5eb;
   --color-border-strong: #d4d4d8;
 
-
   /* =========================
      TYPOGRAPHY
      ========================= */
 
-     --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
---font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    "Instrument Sans Variable",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
 
+  --font-display:
+    "Bricolage Grotesque Variable",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
 
   /* =========================
      RADIUS
@@ -44,7 +48,6 @@
   --radius-lg: 1rem;
   --radius-xl: 1.25rem;
   --radius-2xl: 1.5rem;
-
 
   /* =========================
      SHADOWS
@@ -77,6 +80,8 @@
     min-width: 320px;
     min-height: 100vh;
 
+    margin: 0;
+
     background-color: var(--color-bg);
     color: var(--color-ink);
 
@@ -85,6 +90,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -112,11 +119,77 @@
     display: block;
   }
 
+  img {
+    max-width: 100%;
+  }
+
+  canvas {
+    max-width: 100%;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 3px;
   }
 }
+
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-family: var(--font-display);
+    color: var(--color-black);
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+}
+
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+
+@layer base {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted);
+  }
+}
+
+
+/* =========================
+   LOADING
+   ========================= */
 
 @keyframes loading {
   0% {
@@ -130,6 +203,27 @@
 
 .animate-loading {
   animation: loading 1.2s ease-in-out infinite;
+}
+
+
+/* =========================
+   SUBTLE MOTION
+   ========================= */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
 }
 
 
