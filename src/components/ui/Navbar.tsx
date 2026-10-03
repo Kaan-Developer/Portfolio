@@ -71,7 +71,7 @@ const { isOpen, toggle } = useMenuStore();
   </a>
 
   {/* Sadece linkler */}
-  <div className="hidden lg:flex">
+  <div className="hidden lg:flex items-center">
   <Ul />
   </div>
 

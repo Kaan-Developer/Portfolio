@@ -2,30 +2,23 @@ import Navbar from "../components/ui/Navbar";
 
 import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
+import Stats from "../components/ui/Stats";
 
 const AnaPage = () => {
   return (
     <main>
       <Navbar />
+      <Hero />
+      <Stats />
+      <About />
 
-      <main>
-        <Hero />
-
-        <About />
-      </main>
-
-      {/* PROJECTS */}
-      <section id="projects" className="min-h-screen">
+      <section id="projects" className="py-20 md:py-28">
         {/* Projects */}
       </section>
-
-      {/* SKILLS */}
-      <section id="skills" className="min-h-screen">
+      <section id="skills" className="py-20 md:py-28">
         {/* Skills */}
       </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="min-h-screen">
+      <section id="contact" className="py-20 md:py-28">
         {/* Contact */}
       </section>
     </main>
