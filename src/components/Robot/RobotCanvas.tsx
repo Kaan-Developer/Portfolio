@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { Application } from "@splinetool/runtime";
 
 import Loading from "../feedback/Loading";
+import aboutRobotPoster from "../../assets/images/AboutRobot.png";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -24,27 +25,30 @@ const scenes: Scene[] = [
   {
     id: 2,
     sceneUrl: import.meta.env.VITE_ROBOT_2_URL,
-    poster: "",
+    poster: aboutRobotPoster,
   },
 ];
 
-const hasMouse = () =>
-  window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const checkIsMobile = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    window.innerWidth < 768 ||
+    !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  );
+};
 
 const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   const splineRef = useRef<Application | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const [isDesktop] = useState(hasMouse);
+  const [isMobile, setIsMobile] = useState(checkIsMobile);
   const [isLoading, setIsLoading] = useState(true);
 
   const selectedScene = scenes.find((scene) => scene.id === sceneId);
 
   const updateZoom = () => {
     const splineApp = splineRef.current;
-
     if (!splineApp) return;
-
     splineApp.setZoom(window.innerWidth < 768 ? 1.3 : 1.55);
   };
 
@@ -55,9 +59,17 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   };
 
   useEffect(() => {
-    const container = containerRef.current;
+    const handleResize = () => {
+      setIsMobile(checkIsMobile());
+      updateZoom();
+    };
 
-    if (!container) return;
+    window.addEventListener("resize", handleResize);
+
+    const container = containerRef.current;
+    if (!container) {
+      return () => window.removeEventListener("resize", handleResize);
+    }
 
     const handleWheel = (e: WheelEvent) => {
       e.stopPropagation();
@@ -68,28 +80,27 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
       passive: true,
     });
 
-    window.addEventListener("resize", updateZoom);
-
     return () => {
       container.removeEventListener("wheel", handleWheel, {
         capture: true,
       });
-
-      window.removeEventListener("resize", updateZoom);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   if (!selectedScene) return null;
 
-  const poster = (
-    <img
-      src={selectedScene.poster}
-      alt=""
-      className="h-full w-full object-contain object-bottom"
-    />
-  );
-
-  if (!isDesktop) return poster;
+  if (isMobile && selectedScene.poster) {
+    return (
+      <div className="relative h-full w-full flex items-end justify-center">
+        <img
+          src={selectedScene.poster}
+          alt="Robot"
+          className="h-full w-full object-contain object-bottom select-none pointer-events-none"
+        />
+      </div>
+    );
+  }
 
   return (
     <div

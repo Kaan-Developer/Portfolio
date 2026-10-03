@@ -15,7 +15,9 @@ const Hero = () => {
               </span>
               <p className="text-md md:text-lg text-muted max-w-md">{site.littleDesc}</p>
 
-                          <Button arrow link="#contact" target="">Contact me</Button>
+              <div>
+                                          <Button arrow link="#contact" target="">Contact me</Button>
+              </div>
 
             </div>
           </section>
