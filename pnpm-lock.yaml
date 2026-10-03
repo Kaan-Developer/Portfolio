@@ -56,6 +56,9 @@ importers:
       three:
         specifier: ^0.186.1
         version: 0.186.1
+      zustand:
+        specifier: ^5.0.15
+        version: 5.0.15(@types/react@19.3.0)(react@19.3.0)(use-sync-external-store@1.7.0(react@19.3.0))
     devDependencies:
       '@types/node':
         specifier: ^24.13.3

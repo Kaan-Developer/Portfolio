@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import { site } from "../../data/site";
 import kaanLogo from "../../assets/images/kaan-k-logo.svg";
-
 import StarOnGithub from "./StarOnGithub";
+import Ul from "./Ul";
+
+import { useMenuStore } from "../../store/menu";
+
+import {
+  Menu,
+  X,
+} from "lucide-react";
 
 export const Navbar = () => {
-  const [isHidden, setIsHidden] = useState(false);
-  const [activeSection, setActiveSection] = useState(site.bubbles[0]?.target);
 
-  // Navbar hide/show
+const { isOpen, toggle } = useMenuStore();
+
+  const [isHidden, setIsHidden] = useState(false);
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -38,34 +45,6 @@ export const Navbar = () => {
   }, []);
 
   // Active section
-  useEffect(() => {
-    const sectionIds = ["home", ...site.bubbles.map((b) => b.target)];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
-
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSection = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: [0.1, 0.25, 0.5],
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <header
@@ -92,35 +71,57 @@ export const Navbar = () => {
   </a>
 
   {/* Sadece linkler */}
-  <nav className="hidden lg:flex absolute left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md">
-  {site.bubbles.map((bubble) => {
-    const isActive = activeSection === bubble.target;
+  <div className="hidden lg:flex">
+  <Ul />
+  </div>
 
-    return (
-      <a
-        key={bubble.target}
-        href={`#${bubble.target}`}
-        onClick={() => setActiveSection(bubble.target)}
-        aria-current={isActive ? "location" : undefined}
-        className={`
-          rounded-full px-4 py-2
-          text-sm font-medium
-          transition-colors duration-200
-          ${
-            isActive
-              ? "bg-primary-light text-black"
-              : "text-muted hover:bg-black/5 hover:text-black"
-          }
-        `}
-      >
-        {bubble.label}
-      </a>
-    );
-  })}
-</nav>
+
+<div className="flex lg:hidden">
+  {!isOpen && (
+    <button
+      type="button"
+      aria-label="Menüyü aç"
+      onClick={toggle}
+      className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white p-2 shadow-soft"
+    >
+      <Menu
+        size={21}
+        strokeWidth={1.8}
+        className="text-black"
+      />
+    </button>
+  )}
+</div>
+
+{isOpen && (
+  <div className="absolute top-16 right-8 flex w-[calc(100%-4rem)] flex-col gap-4 rounded-2xl bg-white p-5 shadow-medium lg:hidden">
+        <Ul mobile />
+
+        <div className="max-w-50">
+                      <StarOnGithub />
+        </div>
+    
+    {/* Kapat */}
+    <button
+      type="button"
+      aria-label="Menüyü kapat"
+      onClick={toggle}
+      className="ml-auto flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white shadow-soft"
+    >
+      <X
+        size={21}
+        strokeWidth={1.8}
+        className="text-black"
+      />
+    </button>
+  </div>
+)}
 
   {/* GitHub */}
+  <div className="hidden lg:flex">
   <StarOnGithub />
+
+  </div>
 </header>
   );
 };
