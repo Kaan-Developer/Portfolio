@@ -3,6 +3,7 @@ import Navbar from "../components/ui/Navbar";
 import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
 import Stats from "../components/ui/Stats";
+import Projects from "../components/sections/Projects";
 
 const AnaPage = () => {
   return (
@@ -11,6 +12,7 @@ const AnaPage = () => {
       <Hero />
       <Stats />
       <About />
+      <Projects />
 
       <section id="projects" className="py-20 md:py-28">
         {/* Projects */}
