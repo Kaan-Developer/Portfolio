@@ -18,17 +18,19 @@ const techIcons: Record<string, IconType> = {
 const About = () => {
   const about = site.about[0];
 
+  const currently = [about.currently1, about.currently2, about.currently3];
+
   return (
     <section
       id="about"
       className="grid min-h-screen w-full grid-cols-1 md:grid-cols-2"
     >
       <div className="flex flex-col justify-center gap-3 px-6 py-16 md:px-12">
-        <h2 className="mt-4 text-3xl text-balance font-black leading-[0.95] tracking-[-0.05em] font-semibold tracking-tight md:text-5xl">
+        <h2 className="mt-4 text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] font-semibold tracking-tight md:text-6xl">
           {about.hi}
         </h2>
 
-        <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-lg md:leading-8">
+        <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-xl md:leading-8">
           {about.description}
         </p>
 
@@ -37,34 +39,26 @@ const About = () => {
     Currently
   </span>
 
-  <div className="mt-4 space-y-3">
+  {currently.map((current) => (
+      <div className="mt-4 space-y-3">
     <div className="flex items-center gap-3">
       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-      <span className="text-sm text-muted">
-        Building my portfolio
-      </span>
-    </div>
-
-    <div className="flex items-center gap-3">
-      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-      <span className="text-sm text-muted">
-        Learning React deeper
-      </span>
-    </div>
-
-    <div className="flex items-center gap-3">
-      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-      <span className="text-sm text-muted">
-        Exploring 3D web experiences
+      <span className="text-md text-muted">
+        {current}
       </span>
     </div>
   </div>
-</div>
+  ))}
+  </div>
 
-        <div className="mt-8">
-          <Button arrow>
+        <div className="mt-8 flex gap-3">
+          <Button arrow link="#projects" target="">
             Projects
           </Button>
+
+          <div className="flex lg:hidden">
+            <Button arrow link="https://github.com/settings/profile" target="_blank">Github</Button>
+          </div>
         </div>
       </div>
 

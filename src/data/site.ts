@@ -1,5 +1,6 @@
 export const site = {
   name: "Kaan Hamitler",
+  littleDesc: "I build clean, useful interfaces with React, TypeScript and Tailwind CSS.",
   role: "Frontend Developer",
   role1: "Frontend",
   role2: "Developer",
@@ -41,6 +42,9 @@ export const site = {
     {
       title: "ABOUT ME",
       hi: "Hello, I'm Kaan",
+      currently1: "Building my portfolio",
+      currently2: "Learning React deeper",
+      currently3: "Exploring 3D web experiences",
       description:
         "I’m a frontend developer focused on building clean, responsive, and interactive web experiences. I enjoy turning ideas into real products, exploring modern technologies, and constantly improving my skills. I care about writing maintainable code, creating thoughtful interfaces, and understanding how the things I build actually work.",
       tech: ["React", "TypeScript", "Tailwind"],

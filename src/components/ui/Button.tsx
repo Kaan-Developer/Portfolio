@@ -6,6 +6,8 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "secondary";
   arrow?: boolean;
   children: ReactNode;
+  link: string;
+  target: string;
 }
 
 const Button = ({
@@ -13,12 +15,16 @@ const Button = ({
   arrow = false,
   className,
   children,
+  link,
+  target,
   ...props
 }: Props) => {
   return (
     <a
+    href={link}
+    target={target}
       className={clsx(
-        "group inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 cursor-pointer whitespace-nowrap",
+        "group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap",
         "text-sm font-medium tracking-tight",
         "transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out",
         "active:scale-[0.98]",
