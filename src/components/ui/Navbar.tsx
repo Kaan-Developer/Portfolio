@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import kaanLogo from "../../assets/images/kaan-k-logo.svg";
+import kaanLogo from "../../assets/images/Logo.svg";
 import StarOnGithub from "./StarOnGithub";
 import Ul from "./Ul";
 

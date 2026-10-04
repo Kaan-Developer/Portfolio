@@ -1,4 +1,4 @@
-import kaanLogo from "../../assets/images/kaan-k-logo.svg";
+import kaanLogo from "../../assets/images/Logo.svg";
 
 const Loading = () => {
   return (
