@@ -34,6 +34,34 @@ const About = () => {
           {about.description}
         </p>
 
+       <div className="mt-6 max-w-md">
+  <h3 className="text-2xl text-balance leading-[0.95] tracking-[-0.05em] font-semibold md:text-3xl">
+    My Stacks
+  </h3>
+
+  <ul className="mt-4 flex flex-wrap gap-2">
+    {about.tech.map((tech) => {
+      const Icon = techIcons[tech];
+
+      return (
+        <li
+          key={tech}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1.5 text-sm font-medium text-ink"
+        >
+          {Icon && (
+            <Icon
+              size={16}
+              className="shrink-0"
+              aria-hidden="true"
+            />
+          )}
+          {tech}
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
 <div className="mt-8">
   <span className="text-xs font-medium uppercase tracking-[0.16em] text-subtle">
     Currently
