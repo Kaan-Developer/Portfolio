@@ -12,7 +12,7 @@ const icons: Record<string, LucideIcon> = {
 const Stats = () => {
   return (
     <section className="mx-auto mb-1 max-w-7xl px-6 md:px-10">
-      <div className="grid grid-cols-2 gap-x-4 gap-y-5 rounded-3xl border border-border bg-white p-5 shadow-soft md:flex md:gap-0 md:divide-x md:divide-border md:rounded-full md:px-4 md:py-4">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-5 rounded-3xl border border-border bg-white p-5 shadow-soft md:flex md:gap-0 md:divide-x md:divide-border md:rounded-full md:px-4 md:py-8">
         {site.stats.map((stat) => {
           const Icon = icons[stat.icon];
 

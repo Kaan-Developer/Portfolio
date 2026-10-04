@@ -49,30 +49,30 @@ const { isOpen, toggle } = useMenuStore();
   return (
     <header
   className={`
-    fixed top-4 left-1/2 z-50
+    fixed top-5 md:top-6 left-1/2 z-50
     flex w-full max-w-[1400px] -translate-x-1/2 items-center justify-between
-    px-8 lg:px-12
+    px-6 sm:px-8 lg:px-12
     transition-transform duration-300 ease-in-out
     motion-reduce:transition-none
-    ${isHidden ? "-translate-y-[calc(100%+1rem)]" : "translate-y-0"}
+    ${isHidden ? "-translate-y-[calc(100%+1.5rem)]" : "translate-y-0"}
   `}
 >
   {/* Logo */}
   <a
     href="#home"
     aria-label="Kaan - Home"
-    className="shrink-0 rounded-full bg-white p-2 shadow-soft"
+    className="shrink-0 rounded-full bg-white p-2.5 shadow-soft transition-transform duration-200 hover:scale-105"
   >
     <img
       src={kaanLogo}
       alt="Kaan"
-      className="h-9 w-9"
+      className="h-11 w-11 md:h-12 md:w-12"
     />
   </a>
 
   {/* Sadece linkler */}
   <div className="hidden lg:flex items-center">
-  <Ul />
+    <Ul />
   </div>
 
 
@@ -82,11 +82,11 @@ const { isOpen, toggle } = useMenuStore();
       type="button"
       aria-label="Menüyü aç"
       onClick={toggle}
-      className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white p-2 shadow-soft"
+      className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white p-2 shadow-soft transition-transform duration-200 active:scale-95"
     >
       <Menu
-        size={21}
-        strokeWidth={1.8}
+        size={24}
+        strokeWidth={2}
         className="text-black"
       />
     </button>
@@ -94,11 +94,11 @@ const { isOpen, toggle } = useMenuStore();
 </div>
 
 {isOpen && (
-  <div className="absolute top-16 right-8 flex w-[calc(100%-4rem)] flex-col gap-4 rounded-2xl bg-white p-5 shadow-medium lg:hidden">
+  <div className="absolute top-20 right-6 left-6 flex flex-col gap-4 rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5">
         <Ul mobile />
 
-        <div className="max-w-50">
-                      <StarOnGithub />
+        <div className="pt-2">
+          <StarOnGithub />
         </div>
     
     {/* Kapat */}
@@ -106,11 +106,11 @@ const { isOpen, toggle } = useMenuStore();
       type="button"
       aria-label="Menüyü kapat"
       onClick={toggle}
-      className="ml-auto flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white shadow-soft"
+      className="ml-auto flex h-[52px] w-[52px] items-center justify-center rounded-full bg-black/5 shadow-soft hover:bg-black/10 transition-colors"
     >
       <X
-        size={21}
-        strokeWidth={1.8}
+        size={24}
+        strokeWidth={2}
         className="text-black"
       />
     </button>
@@ -119,8 +119,7 @@ const { isOpen, toggle } = useMenuStore();
 
   {/* GitHub */}
   <div className="hidden lg:flex">
-  <StarOnGithub />
-
+    <StarOnGithub />
   </div>
 </header>
   );

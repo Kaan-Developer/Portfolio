@@ -21,7 +21,7 @@ const Projects = () => {
         </p>
       </div>
 
-      <div className="grid items-start gap-10 lg:grid-cols-[1fr_320px]">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div className="grid gap-6">
           {projects.map((project) => (
             <article
