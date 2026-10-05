@@ -13,13 +13,6 @@ const AnaPage = () => {
       <Stats />
       <About />
       <Projects />
-
-      <section className="py-20 md:py-28">
-        {/* Projects */}
-      </section>
-      <section className="py-20 md:py-28">
-        {/* Contact */}
-      </section>
     </main>
   );
 };

@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { Application } from "@splinetool/runtime";
 
+import ErrorBoundary from "../feedback/ErrorBoundary";
+
 import Loading from "../feedback/Loading";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
@@ -80,10 +82,11 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
           <Loading />
         </div>
       )}
-
+      <ErrorBoundary onError={() => setIsLoading(false)}>
       <Suspense fallback={null}>
         <Spline scene={selectedScene.sceneUrl} onLoad={handleLoad} />
       </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

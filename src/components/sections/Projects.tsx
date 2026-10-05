@@ -21,15 +21,14 @@ const Projects = () => {
         </p>
       </div>
 
-      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-        <div className="grid gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {projects.map((project) => (
             <article
               key={project.title}
-              className="grid rounded-3xl border border-border bg-white p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none md:grid-cols-2 md:gap-4"
+              className="grid lg:grid-cols-2 rounded-3xl border border-border bg-white p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
             >
               <img
-                src={ProjectJpg}
+                src={project.image}
                 alt={`${project.title} preview`}
                 className="aspect-[16/10] w-full rounded-2xl bg-primary-light object-contain p-6 md:aspect-auto md:h-full"
               />
@@ -83,14 +82,7 @@ const Projects = () => {
               </div>
             </article>
           ))}
-        </div>
 
-        <img
-          src={ProjectSvg}
-          alt=""
-          aria-hidden="true"
-          className="hidden w-full self-end lg:block"
-        />
       </div>
     </section>
   );
