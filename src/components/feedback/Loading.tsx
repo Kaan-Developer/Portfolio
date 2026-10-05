@@ -2,7 +2,7 @@ import kaanLogo from "../../assets/images/Logo.svg";
 
 const Loading = () => {
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-background">
+    <div className="absolute inset-0 z-100 flex items-center justify-center bg-bg">
       <div className="flex flex-col items-center gap-6">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border">
           <img

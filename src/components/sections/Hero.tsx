@@ -9,10 +9,10 @@ const Hero = () => {
       className="grid min-h-screen grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_0.8fr] relative min-h-screen overflow-hidden px-6 py-14 md:px-10"
     >
       <div className="flex flex-col gap-4">
-        <span className="text-balance text-5xl lg:text-8xl font-black leading-[0.95] tracking-[-0.05em] tracking-tight">
+        <h1 className="text-balance text-5xl lg:text-8xl font-black leading-[0.95] tracking-[-0.05em] tracking-tight">
           Hi, I'm
-          <p>{site.name}</p>
-        </span>
+          <span>{site.name}</span>
+        </h1>
         <p className="text-md md:text-lg text-muted max-w-md">
           {site.littleDesc}
         </p>

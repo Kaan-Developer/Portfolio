@@ -14,7 +14,6 @@ export const site = {
   bubbles: [
     { label: "About", target: "about" },
     { label: "Projects", target: "projects" },
-    { label: "Skills", target: "skills" },
     { label: "Contact", target: "contact" },
   ],
 

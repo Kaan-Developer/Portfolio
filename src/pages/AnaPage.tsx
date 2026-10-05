@@ -14,13 +14,10 @@ const AnaPage = () => {
       <About />
       <Projects />
 
-      <section id="projects" className="py-20 md:py-28">
+      <section className="py-20 md:py-28">
         {/* Projects */}
       </section>
-      <section id="skills" className="py-20 md:py-28">
-        {/* Skills */}
-      </section>
-      <section id="contact" className="py-20 md:py-28">
+      <section className="py-20 md:py-28">
         {/* Contact */}
       </section>
     </main>

@@ -3,7 +3,7 @@ import { Star, ArrowUpRight } from "lucide-react";
 const StarOnGitHub = () => {
   return (
     <a
-      href="https://github.com/Kaan-Developer/REPO-ADI"
+      href="https://github.com/Kaan-Developer/Portfolio"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Star this repository on GitHub"

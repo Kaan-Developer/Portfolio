@@ -68,7 +68,7 @@ const About = () => {
   </span>
 
   {currently.map((current) => (
-      <div className="mt-4 space-y-3">
+      <div className="mt-4 space-y-3" key={current}>
     <div className="flex items-center gap-3">
       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
       <span className="text-md text-muted">
@@ -85,7 +85,7 @@ const About = () => {
           </Button>
 
           <div className="flex lg:hidden">
-            <Button arrow link="https://github.com/settings/profile" target="_blank">Github</Button>
+            <Button arrow link={site.links.github} target="_blank">Github</Button>
           </div>
         </div>
       </div>

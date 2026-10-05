@@ -3,7 +3,7 @@ import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
 import ProjectSvg from "../../assets/images/Project.svg";
-/* import kaanLogo from "../../assets/images/Logo.svg"; */
+import ProjectJpg from "../../assets/images/Project.jpg"
 
 import Button from "../ui/Button";
 
@@ -29,7 +29,7 @@ const Projects = () => {
               className="grid rounded-3xl border border-border bg-white p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none md:grid-cols-2 md:gap-4"
             >
               <img
-                src=""
+                src={ProjectJpg}
                 alt={`${project.title} preview`}
                 className="aspect-[16/10] w-full rounded-2xl bg-primary-light object-contain p-6 md:aspect-auto md:h-full"
               />

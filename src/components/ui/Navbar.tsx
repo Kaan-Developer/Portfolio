@@ -121,6 +121,10 @@ const { isOpen, toggle } = useMenuStore();
   <div className="hidden lg:flex">
     <StarOnGithub />
   </div>
+
+  {isOpen && (
+    <div className="w-full h-full min-h-screen" onClick={toggle}></div>
+  )}
 </header>
   );
 };
