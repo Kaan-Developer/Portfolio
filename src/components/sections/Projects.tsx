@@ -2,8 +2,6 @@ import { site } from "../../data/site";
 import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
-import ProjectSvg from "../../assets/images/Project.svg";
-import ProjectJpg from "../../assets/images/Project.jpg"
 
 import Button from "../ui/Button";
 

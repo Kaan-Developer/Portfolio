@@ -20,8 +20,16 @@ export const site = {
   // Stats strip under the hero (icon keys match the icons object in Stats.tsx)
   stats: [
     { icon: "status", label: "Status", value: "Building", pulse: true },
-    { icon: "stack", label: "Stack", value: "React · TypeScript · Tailwind" },
-    { icon: "tools", label: "Tools", value: "Vite · Git" },
+    {
+      icon: "stack",
+      label: "Stack",
+      items: ["React", "TypeScript", "Tailwind"],
+    },
+    {
+      icon: "tools",
+      label: "Tools",
+      items: ["Figma", "Vite", "GitHub", "Git"],
+    },
     { icon: "location", label: "Location", value: "Turkey" },
   ],
 

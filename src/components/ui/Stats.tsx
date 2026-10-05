@@ -1,6 +1,7 @@
 import { Activity, Layers, MapPin, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { site } from "../../data/site";
+import { techIcons } from "../../data/techIcons";
 
 const icons: Record<string, LucideIcon> = {
   status: Activity,
@@ -8,6 +9,7 @@ const icons: Record<string, LucideIcon> = {
   tools: Wrench,
   location: MapPin,
 };
+
 
 const Stats = () => {
   return (
@@ -36,9 +38,30 @@ const Stats = () => {
                 <p className="text-[11px] font-medium uppercase tracking-widest text-subtle">
                   {stat.label}
                 </p>
-                <p className="text-sm font-semibold leading-snug text-black">
-                  {stat.value}
-                </p>
+
+                {stat.items && stat.items.length > 0 ? (
+                  <div className="mt-1 flex items-center gap-1.5">
+                    {stat.items.map((item) => {
+                      const TechIcon = techIcons[item];
+                      if (!TechIcon) return null;
+
+                      return (
+                        <span
+                          key={item}
+                          title={item}
+                          className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white"
+                        >
+                          <TechIcon size={14} aria-hidden="true" />
+                          <span className="sr-only">{item}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-sm font-semibold leading-snug text-black">
+                    {stat.value}
+                  </p>
+                )}
               </div>
             </div>
           );
