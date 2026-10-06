@@ -1,6 +1,8 @@
 // src/components/sections/Contact.tsx
 import { useContactForm } from "../../hooks/useContactForm";
 
+import { site } from "../../data/site";
+
 const inputClass =
   "w-full rounded-2xl border border-border bg-white px-4 py-3 text-base text-ink " +
   "placeholder:text-subtle focus:border-primary focus:outline-none";

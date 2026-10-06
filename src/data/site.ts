@@ -55,4 +55,53 @@ export const site = {
       live: "",
     },
   ],
+
+  
+  // Contact section content and links
+  contact: {
+    availability: "Available for new projects",
+    title: "Let's build something together.",
+    description:
+      "Have a project in mind, a role to fill, or just want to say hi? Send a message and I'll get back to you.",
+
+    form: {
+      title: "Send a message",
+      description:
+        "I read everything. Tell me a little about what you need.",
+      nameLabel: "Name",
+      namePlaceholder: "Your name",
+      emailLabel: "Email",
+      emailPlaceholder: "you@example.com",
+      messageLabel: "Message",
+      messagePlaceholder: "What are you working on?",
+      submitLabel: "Send message",
+      submittingLabel: "Sending...",
+      successMessage: "Your message has been sent.",
+      errorMessage: "Something went wrong. Please try again.",
+    },
+
+    links: [
+      {
+        label: "Email",
+        value: "your@email.com",
+        href: "mailto:your@email.com",
+      },
+      {
+        label: "GitHub",
+        value: "github.com/Kaan-Developer",
+        href: "https://github.com/Kaan-Developer",
+      },
+      {
+        label: "LinkedIn",
+        value: "linkedin.com/in/your-handle",
+        href: "https://www.linkedin.com/",
+      },
+    ],
+
+    footer: {
+      copyright: "© 2026 Kaan Hamitler.",
+      builtWith: "Built with React, TypeScript and Tailwind CSS.",
+      backToTop: "Back to top",
+    },
+  },
 };
