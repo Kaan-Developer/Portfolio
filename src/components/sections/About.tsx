@@ -90,7 +90,7 @@ const About = () => {
         </div>
       </div>
 
-<div className="hidden min-h-[500px] w-full md:block">
+<div className="hidden min-h-[100vh] w-full md:block">
   <RobotCanvas sceneId={2} />
 </div>
     </section>

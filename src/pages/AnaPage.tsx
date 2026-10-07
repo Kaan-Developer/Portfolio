@@ -8,7 +8,7 @@ import Contact from "../components/sections/Contact";
 
 const AnaPage = () => {
   return (
-    <main>
+    <main className="bg-bg">
       <Navbar />
       <Hero />
       <Stats />

@@ -1,3 +1,38 @@
+import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
+import type { IconType } from "react-icons";
+
+export interface SocialLink {
+  name: string;        // Platform adı (Örn: "GitHub")
+  username: string;    // Oradaki hesap adın (Örn: "@Kaan-Developer")
+  href: string;        // Profil linkin
+  icon: IconType;      // İkon bileşeni
+  color?: string;      // İsteğe bağlı özel renk/hover efekti
+}
+
+export const socialLinks: SocialLink[] = [
+  {
+    name: "GitHub",
+    username: "@Kaan-Developer",
+    href: "https://github.com/Kaan-Developer",
+    icon: FaGithub,
+    color: "#18181b",
+  },  
+  {
+    name: "LinkedIn",
+    username: "in/kaan-hamitler",
+    href: "https://www.linkedin.com/",
+    icon: FaLinkedin,
+    color: "#0a66c2",
+  },
+  {
+    name: "X (Twitter)",
+    username: "@kaan_dev",
+    href: "https://x.com/",
+    icon: FaXTwitter,
+    color: "#000000",
+  },
+];
+
 export const site = {
   name: "Kaan Hamitler",
   role: "Frontend Developer",

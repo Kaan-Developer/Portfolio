@@ -28,7 +28,7 @@ const Hero = () => {
       </div>
 
       <div>
-        <RobotCanvas sceneId={2} />
+        <RobotCanvas sceneId={1} />
       </div>
     </section>
   );
