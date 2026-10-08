@@ -1,8 +1,11 @@
-import { ArrowUpRight, Copy, Mail, Check, ChevronDown } from "lucide-react";
+import { ArrowUpRight, Copy, Mail, Check } from "lucide-react";
 
 import { site, socialLinks } from "../../data/site";
 
 import { useState } from "react";
+
+import Button from "../ui/Button";
+import Select from "../ui/Select";
 
 const Contact = () => {
   const { contact } = site;
@@ -105,14 +108,15 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex flex-col bg-white gap-4 shadow-soft border border-border p-6 h-full w-full">
+      <div className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full">
+        <h2 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">{contact.hi}</h2>
         <div className="flex flex-col gap-2">
           <span className="text-balance font-semibold text-md">{form.nameLabel}</span>
           <input
             type="text"
             name="name"
             placeholder={form.namePlaceholder}
-            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+            className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
         </div>
 
@@ -122,42 +126,28 @@ const Contact = () => {
             type="email"
             name="email"
             placeholder={form.emailPlaceholder}
-            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+            className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
         </div>
 
         <div className="flex flex-col gap-2">
           <span className="text-balance font-semibold text-md">{form.subjectLabel}</span>
-          <div className="relative">
-            <select
-              name="subject"
-              defaultValue=""
-              className="w-full h-12 rounded-[5px] outline-none px-4 border border-border bg-white cursor-pointer appearance-none text-ink"
-              id="subject"
-            >
-              <option value="" disabled>{form.subjectPlaceholder}</option>
-              {form.subjectOptions.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              size={18}
-              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">{form.messageLabel}</span>
-          <input
-            type="text"
-            name="message"
-            placeholder={form.messagePlaceholder}
-            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+          <Select
+            name="subject"
+            placeholder={form.subjectPlaceholder}
+            options={form.subjectOptions}
           />
         </div>
+
+        <div className="flex flex-1 flex-col gap-2 min-h-0">
+          <span className="text-balance font-semibold text-md">{form.messageLabel}</span>
+          <textarea
+            name="message"
+            placeholder={contact.form.messagePlaceholder}
+            className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+          ></textarea>
+        </div>
+                  <Button link="">Send</Button>
       </div>
     </section>
   );

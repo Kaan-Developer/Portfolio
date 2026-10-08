@@ -95,6 +95,7 @@ export const site = {
   // Contact section content and form
   contact: {
     title: "Let's build something together.",
+    hi: "Send Message",
     description:
       "Have a project in mind, a role to fill, or just want to say hi? Send a message and I'll get back to you.",
 

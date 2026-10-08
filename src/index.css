@@ -228,6 +228,23 @@
   animation: fade-up 0.7s ease-out both;
 }
 
+@keyframes select-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-select-pop {
+  transform-origin: top center;
+  animation: select-pop 0.18s ease-out both;
+}
+
 
 /* =========================
    REDUCED MOTION
