@@ -1,4 +1,4 @@
-import { ArrowUpRight, Copy, Mail, Check } from "lucide-react";
+import { ArrowUpRight, Copy, Mail, Check, Lock } from "lucide-react";
 
 import { site, socialLinks } from "../../data/site";
 
@@ -147,7 +147,15 @@ const Contact = () => {
             className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
         </div>
-                  <Button link="">Send</Button>
+        <div className="flex flex-col gap-3">
+          <Button link="">Send</Button>
+
+          {/* Privacy note under the send button */}
+          <p className="flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
+            <Lock size={13} strokeWidth={2} aria-hidden="true" className="shrink-0" />
+            {form.privacyNote}
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -121,6 +121,7 @@ export const site = {
       submittingLabel: "Sending...",
       successMessage: "Your message has been sent.",
       errorMessage: "Something went wrong. Please try again.",
+      privacyNote: "Your details stay private — never shared or spam.",
     },
   },
 };
