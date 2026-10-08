@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram, FaDiscord } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 
 export interface SocialLink {
@@ -92,9 +92,8 @@ export const site = {
   ],
 
   
-  // Contact section content and links
+  // Contact section content and form
   contact: {
-    availability: "Available for new projects",
     title: "Let's build something together.",
     description:
       "Have a project in mind, a role to fill, or just want to say hi? Send a message and I'll get back to you.",
@@ -107,36 +106,20 @@ export const site = {
       namePlaceholder: "Your name",
       emailLabel: "Email",
       emailPlaceholder: "you@example.com",
+      subjectLabel: "Subject",
+      subjectPlaceholder: "Select a subject",
+      subjectOptions: [
+        { label: "Project Inquiry", value: "project" },
+        { label: "Job Opportunity", value: "job" },
+        { label: "Collaboration", value: "collaboration" },
+        { label: "Other", value: "other" },
+      ],
       messageLabel: "Message",
       messagePlaceholder: "What are you working on?",
       submitLabel: "Send message",
       submittingLabel: "Sending...",
       successMessage: "Your message has been sent.",
       errorMessage: "Something went wrong. Please try again.",
-    },
-
-    links: [
-      {
-        label: "Email",
-        value: "your@email.com",
-        href: "mailto:your@email.com",
-      },
-      {
-        label: "GitHub",
-        value: "github.com/Kaan-Developer",
-        href: "https://github.com/Kaan-Developer",
-      },
-      {
-        label: "LinkedIn",
-        value: "linkedin.com/in/your-handle",
-        href: "https://www.linkedin.com/",
-      },
-    ],
-
-    footer: {
-      copyright: "© 2026 Kaan Hamitler.",
-      builtWith: "Built with React, TypeScript and Tailwind CSS.",
-      backToTop: "Back to top",
     },
   },
 };

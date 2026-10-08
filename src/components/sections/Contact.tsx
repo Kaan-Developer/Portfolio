@@ -1,9 +1,7 @@
-import { ArrowUpRight, Copy, Mail, Check } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { ArrowUpRight, Copy, Mail, Check, ChevronDown } from "lucide-react";
 
 import { site, socialLinks } from "../../data/site";
 
-import Button from "../ui/Button";
 import { useState } from "react";
 
 const Contact = () => {
@@ -18,6 +16,8 @@ const Contact = () => {
 
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const { form } = contact;
 
   return (
     <section
@@ -58,7 +58,10 @@ const Contact = () => {
                   <span>Copied</span>
                 </div>
               ) : (
-                <div onClick={handleCopy} className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none">
+                <div
+                  onClick={handleCopy}
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none"
+                >
                   <Copy size={13} strokeWidth={2.2} />
                   <span>Copy Email</span>
                 </div>
@@ -102,7 +105,60 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex flex-col"></div>
+      <div className="flex flex-col bg-white gap-4 shadow-soft border border-border p-6 h-full w-full">
+        <div className="flex flex-col gap-2">
+          <span className="text-balance font-semibold text-md">{form.nameLabel}</span>
+          <input
+            type="text"
+            name="name"
+            placeholder={form.namePlaceholder}
+            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <span className="text-balance font-semibold text-md">{form.emailLabel}</span>
+          <input
+            type="email"
+            name="email"
+            placeholder={form.emailPlaceholder}
+            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <span className="text-balance font-semibold text-md">{form.subjectLabel}</span>
+          <div className="relative">
+            <select
+              name="subject"
+              defaultValue=""
+              className="w-full h-12 rounded-[5px] outline-none px-4 border border-border bg-white cursor-pointer appearance-none text-ink"
+              id="subject"
+            >
+              <option value="" disabled>{form.subjectPlaceholder}</option>
+              {form.subjectOptions.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={18}
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <span className="text-balance font-semibold text-md">{form.messageLabel}</span>
+          <input
+            type="text"
+            name="message"
+            placeholder={form.messagePlaceholder}
+            className="w-full h-12 rounded-[5px] outline-none p-4 border border-border"
+          />
+        </div>
+      </div>
     </section>
   );
 };
