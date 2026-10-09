@@ -12,7 +12,7 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
 
 const variants = {
   primary: "bg-black text-white hover:bg-ink",
-  blue: "bg-primary-soft text-black hover:bg-primary-soft-hover hover:text-black",
+  blue: "bg-primary-soft text-white hover:bg-primary-soft-hover hover:text-white",
   secondary:
     "border border-primary/20 bg-primary-light text-primary-strong shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
   outline:
