@@ -13,9 +13,17 @@ interface Props {
   options: SelectOption[];
   defaultValue?: string;
   className?: string;
+  onChange?: (value: string) => void;
 }
 
-const Select = ({ name, placeholder, options, defaultValue = "", className }: Props) => {
+const Select = ({
+  name,
+  placeholder,
+  options,
+  defaultValue = "",
+  className,
+  onChange,
+}: Props) => {
   const [value, setValue] = useState(defaultValue);
   const [open, setOpen] = useState(false);
 
@@ -59,6 +67,7 @@ const Select = ({ name, placeholder, options, defaultValue = "", className }: Pr
 
   const handleSelect = (optionValue: string) => {
     setValue(optionValue);
+    onChange?.(optionValue);
     setOpen(false);
   };
 

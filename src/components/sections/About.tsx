@@ -80,7 +80,7 @@ const About = () => {
   </div>
 
         <div className="mt-8 flex gap-3">
-          <Button arrow link="#projects" target="">
+          <Button arrow link="#projects" target="" variant="blue">
             Projects
           </Button>
 

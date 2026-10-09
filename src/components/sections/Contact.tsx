@@ -9,9 +9,11 @@ import Select from "../ui/Select";
 
 const Contact = () => {
   const { contact } = site;
+  const { form } = contact;
 
   const [copied, setCopied] = useState(false);
   const [message, setMessage] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
@@ -54,21 +56,6 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const selectedSubjectValue = formData.get("subject") as string;
-    const selectedSubjectLabel = form.subjectOptions.find(
-      (opt) => opt.value === selectedSubjectValue
-    )?.label;
-
-    console.log("Seçilen Subject Value:", selectedSubjectValue);
-    console.log("Seçilen Subject Label (Yazı):", selectedSubjectLabel);
-  };
-
-  const { form } = contact;
-
   return (
     <section
       id="contact"
@@ -103,8 +90,8 @@ const Contact = () => {
               </div>
 
               {copied ? (
-                <div className="flex items-center gap-2 font-semibold">
-                  <Check size={13} strokeWidth={4} />
+                <div className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none">
+                  <Check size={13} strokeWidth={2.2} />
                   <span>Copied</span>
                 </div>
               ) : (
@@ -156,9 +143,13 @@ const Contact = () => {
       </div>
 
       <div className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full">
-        <h2 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">{contact.hi}</h2>
+        <h2 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
+          {contact.hi}
+        </h2>
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">{form.nameLabel}</span>
+          <span className="text-balance font-semibold text-md">
+            {form.nameLabel}
+          </span>
           <input
             type="text"
             name="name"
@@ -168,7 +159,9 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">{form.emailLabel}</span>
+          <span className="text-balance font-semibold text-md">
+            {form.emailLabel}
+          </span>
           <input
             type="email"
             name="email"
@@ -178,16 +171,29 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">{form.subjectLabel}</span>
+          <span className="text-balance font-semibold text-md">
+            {form.subjectLabel}
+          </span>
           <Select
             name="subject"
             placeholder={form.subjectPlaceholder}
             options={form.subjectOptions}
+            onChange={setSelectedSubject}
           />
+          {selectedSubject === "other" && (
+            <input
+              type="text"
+              name="otherSubject"
+              placeholder="Please specify"
+              className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+            />
+          )}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 min-h-0">
-          <span className="text-balance font-semibold text-md">{form.messageLabel}</span>
+          <span className="text-balance font-semibold text-md">
+            {form.messageLabel}
+          </span>
           <textarea
             name="message"
             value={message}
@@ -201,7 +207,12 @@ const Contact = () => {
 
           {/* Privacy note under the send button */}
           <p className="flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
-            <Lock size={13} strokeWidth={2} aria-hidden="true" className="shrink-0" />
+            <Lock
+              size={13}
+              strokeWidth={2}
+              aria-hidden="true"
+              className="shrink-0"
+            />
             {form.privacyNote}
           </p>
         </div>

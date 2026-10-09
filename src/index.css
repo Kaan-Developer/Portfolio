@@ -5,25 +5,24 @@
      COLORS
      ========================= */
 
-  --color-bg: #fbfbfc;
+  --color-bg: #f8fafc;
   --color-white: #ffffff;
 
-  --color-black: #111111;
-  --color-ink: #18181b;
+  --color-black: #0f172a;
+  --color-ink: #1e293b;
 
-  --color-muted: #71717a;
-  --color-subtle: #a1a1aa;
+  --color-muted: #64748b;
+  --color-subtle: #94a3b8;
 
-  /* Purple accent */
-  --color-primary: #8b5cf6;
-  --color-primary-soft: #a78bfa;
-  --color-primary-light: #f1edff;
-  --color-primary-strong: #7c3aed;
---color-primary-deep: #6d28d9;
+  /* Clean blue accent */
+  --color-primary: #2563eb;
+  --color-primary-soft: #60a5fa;
+  --color-primary-soft-hover: #7db8fb;
+  --color-primary-light: #eff6ff;
 
   /* Borders */
-  --color-border: #e7e5eb;
-  --color-border-strong: #d4d4d8;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
 
   /* =========================
      TYPOGRAPHY
@@ -96,6 +95,11 @@
     overflow-x: hidden;
   }
 
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
   ::selection {
     background-color: var(--color-primary-light);
     color: var(--color-primary);
@@ -133,6 +137,37 @@
     outline: 2px solid var(--color-primary);
     outline-offset: 3px;
   }
+}
+
+/* Keep the monogram inside the hero only. */
+#home {
+  isolation: isolate;
+}
+
+#home::before {
+  content: "K";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(37, 99, 235, 0.055);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 52vw, 54rem);
+  font-weight: 800;
+  line-height: 0.78;
+  letter-spacing: -0.12em;
+  pointer-events: none;
+  text-align: center;
+  user-select: none;
+}
+
+#home > * {
+  position: relative;
+  z-index: 1;
 }
 
 

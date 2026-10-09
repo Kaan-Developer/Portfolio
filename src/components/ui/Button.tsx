@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ArrowUpRight } from "lucide-react";
 
 interface Props extends ComponentPropsWithoutRef<"a"> {
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "blue" | "secondary" | "outline";
   arrow?: boolean;
   children: ReactNode;
   link: string;
@@ -12,6 +12,7 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
 
 const variants = {
   primary: "bg-black text-white hover:bg-ink",
+  blue: "bg-primary-soft text-black hover:bg-primary-soft-hover hover:text-black",
   secondary:
     "border border-primary/20 bg-primary-light text-primary-strong shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
   outline:
