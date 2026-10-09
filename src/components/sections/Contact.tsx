@@ -11,6 +11,40 @@ const Contact = () => {
   const { contact } = site;
 
   const [copied, setCopied] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.target.value;
+    const words = text.trim().split(/\s+/).filter(Boolean);
+
+    // Kullanıcı metni siliyorsa her zaman izin ver
+    if (text.length < message.length) {
+      setMessage(text);
+      return;
+    }
+
+    // Kelime sayısı 250'den azsa izin ver
+    if (words.length < 250) {
+      setMessage(text);
+      return;
+    }
+
+    // Tam 250 kelimedeyken: son kelimenin sonuna yeni bir boşluk (yeni kelime başlangıcı) eklenemez
+    if (words.length === 250) {
+      // Eğer metin zaten 250 kelimeyse ve kullanıcı en sona yeni boşluk eklemeye çalışıyorsa engelle
+      if (text.endsWith(" ") || text.endsWith("\n")) {
+        // En sondaki boşluğu ekletme
+        setMessage(text.trimEnd());
+        return;
+      }
+      setMessage(text);
+      return;
+    }
+
+    // 250'den fazla kelime yapıştırıldıysa: tam 250 kelimede kes
+    const first250Words = words.slice(0, 250).join(" ");
+    setMessage(first250Words);
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText("kaandeveloperr07@gmail.com");
@@ -18,6 +52,19 @@ const Contact = () => {
     setCopied(true);
 
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const selectedSubjectValue = formData.get("subject") as string;
+    const selectedSubjectLabel = form.subjectOptions.find(
+      (opt) => opt.value === selectedSubjectValue
+    )?.label;
+
+    console.log("Seçilen Subject Value:", selectedSubjectValue);
+    console.log("Seçilen Subject Label (Yazı):", selectedSubjectLabel);
   };
 
   const { form } = contact;
@@ -143,6 +190,8 @@ const Contact = () => {
           <span className="text-balance font-semibold text-md">{form.messageLabel}</span>
           <textarea
             name="message"
+            value={message}
+            onChange={handleMessageChange}
             placeholder={contact.form.messagePlaceholder}
             className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
