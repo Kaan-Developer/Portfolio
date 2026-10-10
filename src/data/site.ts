@@ -1,12 +1,13 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import type { IconType } from "react-icons";
+import type { ProfileSummaryItem } from "../types/site";
 
 export interface SocialLink {
-  name: string;        // Platform adı (Örn: "GitHub")
-  username: string;    // Oradaki hesap adın (Örn: "@Kaan-Developer")
-  href: string;        // Profil linkin
-  icon: IconType;      // İkon bileşeni
-  color?: string;      // İsteğe bağlı özel renk/hover efekti
+  name: string; // Platform adı (Örn: "GitHub")
+  username: string; // Oradaki hesap adın (Örn: "@Kaan-Developer")
+  href: string; // Profil linkin
+  icon: IconType; // İkon bileşeni
+  color?: string; // İsteğe bağlı özel renk/hover efekti
 }
 
 export const socialLinks: SocialLink[] = [
@@ -16,7 +17,7 @@ export const socialLinks: SocialLink[] = [
     href: "https://github.com/Kaan-Developer",
     icon: FaGithub,
     color: "#18181b",
-  },  
+  },
   {
     name: "LinkedIn",
     username: "in/kaan-hamitler",
@@ -52,21 +53,15 @@ export const site = {
     { label: "Contact", target: "contact" },
   ],
 
-  // Stats strip under the hero (icon keys match the icons object in Stats.tsx)
-  stats: [
+  profileSummary: [
+    {
+      icon: "focus",
+      label: "Focus",
+      value: "Frontend Development",
+    },
+    { icon: "location", label: "Location", value: "Türkiye · UTC+3" },
     { icon: "status", label: "Status", value: "Building", pulse: true },
-    {
-      icon: "stack",
-      label: "Stack",
-      items: ["React", "TypeScript", "Tailwind"],
-    },
-    {
-      icon: "tools",
-      label: "Tools",
-      items: ["Figma", "Vite", "GitHub", "Git"],
-    },
-    { icon: "location", label: "Location", value: "Turkey" },
-  ],
+  ] satisfies ProfileSummaryItem[],
 
   // Projects section heading and intro text
   projectsSection: {
@@ -91,7 +86,6 @@ export const site = {
     },
   ],
 
-  
   // Contact section content and form
   contact: {
     title: "Let's build something together.",
@@ -101,8 +95,7 @@ export const site = {
 
     form: {
       title: "Send a message",
-      description:
-        "I read everything. Tell me a little about what you need.",
+      description: "I read everything. Tell me a little about what you need.",
       nameLabel: "Name",
       namePlaceholder: "Your name",
       emailLabel: "Email",
