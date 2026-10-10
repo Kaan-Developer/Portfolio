@@ -6,8 +6,9 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "blue" | "secondary" | "outline";
   arrow?: boolean;
   children: ReactNode;
-  link: string;
+  link?: string;
   target?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 const variants = {
@@ -26,10 +27,12 @@ const Button = ({
   children,
   link,
   target,
+  onClick,
   ...props
 }: Props) => {
   return (
     <a
+      onClick={onClick}
       href={link}
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}

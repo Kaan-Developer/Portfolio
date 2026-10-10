@@ -4,8 +4,9 @@ import { site, socialLinks } from "../../data/site";
 
 import { useState } from "react";
 
-import Button from "../ui/Button";
 import Select from "../ui/Select";
+
+import { supabase } from "../../lib/supabase";
 
 const Contact = () => {
   const { contact } = site;
@@ -14,6 +15,7 @@ const Contact = () => {
   const [copied, setCopied] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
@@ -54,6 +56,44 @@ const Contact = () => {
     setCopied(true);
 
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const otherSubject = String(formData.get("otherSubject") ?? "").trim();
+    const messageText = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !subject || !messageText || (subject === "other" && !otherSubject)) {
+      setSubmitState("error");
+      return;
+    }
+
+    setSubmitState("sending");
+    try {
+      const { error } = await supabase.functions.invoke("contact", {
+        body: { name, email, subject, otherSubject, message: messageText },
+      });
+
+      if (error) {
+        console.error("Contact form submission failed:", error);
+        setSubmitState("error");
+        return;
+      }
+
+      formElement.reset();
+      setMessage("");
+      setSelectedSubject("");
+      setSubmitState("success");
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+      setSubmitState("error");
+    }
   };
 
   return (
@@ -142,7 +182,10 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full"
+      >
         <h2 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
           {contact.hi}
         </h2>
@@ -153,6 +196,8 @@ const Contact = () => {
           <input
             type="text"
             name="name"
+            required
+            maxLength={100}
             placeholder={form.namePlaceholder}
             className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
@@ -165,6 +210,8 @@ const Contact = () => {
           <input
             type="email"
             name="email"
+            required
+            maxLength={254}
             placeholder={form.emailPlaceholder}
             className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
@@ -184,6 +231,8 @@ const Contact = () => {
             <input
               type="text"
               name="otherSubject"
+              required
+              maxLength={120}
               placeholder="Please specify"
               className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
             />
@@ -197,14 +246,34 @@ const Contact = () => {
           <textarea
             name="message"
             value={message}
+            required
+            maxLength={5000}
             onChange={handleMessageChange}
             placeholder={contact.form.messagePlaceholder}
             className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
         </div>
         <div className="flex flex-col gap-3">
-          <Button link="">Send</Button>
+          <button
+            type="submit"
+            disabled={submitState === "sending"}
+            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100"
+          >
+            {submitState === "sending" ? "Sending..." : "Send"}
+          </button>
 
+          {submitState !== "idle" && (
+            <p
+              role={submitState === "error" ? "alert" : "status"}
+              className={`text-center text-sm ${submitState === "error" ? "text-red-600" : "text-subtle"}`}
+            >
+              {submitState === "success"
+                ? "Message saved. Thank you."
+                : submitState === "error"
+                  ? "Message could not be sent. Check the fields and try again."
+                  : "Sending your message..."}
+            </p>
+          )}
           {/* Privacy note under the send button */}
           <p className="flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
             <Lock
@@ -216,7 +285,7 @@ const Contact = () => {
             {form.privacyNote}
           </p>
         </div>
-      </div>
+      </form>
     </section>
   );
 };

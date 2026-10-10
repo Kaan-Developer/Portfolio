@@ -16,6 +16,7 @@
     "@react-three/fiber": "^9.8.1",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^2.0.59",
+    "@supabase/supabase-js": "^2.117.3",
     "@tailwindcss/vite": "^4.3.3",
     "@types/three": "^0.186.0",
     "clsx": "^2.1.1",

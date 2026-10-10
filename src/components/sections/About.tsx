@@ -34,10 +34,7 @@ const About = () => {
           {about.description}
         </p>
 
-       <div className="mt-6 max-w-md">
-  <h3 className="text-2xl text-balance leading-[0.95] tracking-[-0.05em] font-semibold md:text-3xl">
-    My Stacks
-  </h3>
+       <div className="max-w-md">
 
   <ul className="mt-4 flex flex-wrap gap-2">
     {about.tech.map((tech) => {

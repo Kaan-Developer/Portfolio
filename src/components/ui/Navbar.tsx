@@ -61,7 +61,7 @@ const { isOpen, toggle } = useMenuStore();
   <a
     href="#home"
     aria-label="Kaan - Home"
-    className="shrink-0 rounded-full bg-white p-2.5 shadow-soft transition-transform duration-200 hover:scale-105"
+    className="select-none shrink-0 rounded-full bg-white p-2.5 shadow-soft"
   >
     <img
       src={kaanLogo}
