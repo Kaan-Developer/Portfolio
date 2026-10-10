@@ -1,19 +1,7 @@
 import RobotCanvas from "../Robot/RobotCanvas";
 import { site } from "../../data/site";
+import { techIcons } from "../../data/techIcons";
 import Button from "../ui/Button";
-
-import {
-  SiReact,
-  SiTypescript,
-  SiTailwindcss,
-} from "react-icons/si";
-import type { IconType } from "react-icons";
-
-const techIcons: Record<string, IconType> = {
-  React: SiReact,
-  TypeScript: SiTypescript,
-  Tailwind: SiTailwindcss,
-};
 
 const About = () => {
   const about = site.about[0];
@@ -34,30 +22,34 @@ const About = () => {
           {about.description}
         </p>
 
-       <div className="max-w-md">
+        <div className="mt-5 max-w-xl border-t border-border pt-4">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-subtle">
+            What I use
+          </p>
+          <ul className="mt-2 flex flex-wrap items-center gap-x-2 text-sm text-ink">
+            {about.tech.map((tech, index) => {
+              const Icon = techIcons[tech];
 
-  <ul className="mt-4 flex flex-wrap gap-2">
-    {about.tech.map((tech) => {
-      const Icon = techIcons[tech];
-
-      return (
-        <li
-          key={tech}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1.5 text-sm font-medium text-ink"
-        >
-          {Icon && (
-            <Icon
-              size={16}
-              className="shrink-0"
-              aria-hidden="true"
-            />
-          )}
-          {tech}
-        </li>
-      );
-    })}
-  </ul>
-</div>
+              return (
+                <li key={tech} className="inline-flex items-center gap-2">
+                  {index > 0 && (
+                    <span className="text-subtle" aria-hidden="true">
+                      ·
+                    </span>
+                  )}
+                  {Icon && (
+                    <Icon
+                      size={15}
+                      className="text-subtle"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span>{tech}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
 <div className="mt-8">
   <span className="text-xs font-medium uppercase tracking-[0.16em] text-subtle">
