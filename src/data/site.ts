@@ -78,8 +78,7 @@ export const site = {
       currently1: "Building my portfolio",
       currently2: "Learning React deeper",
       currently3: "Exploring 3D web experiences",
-      description:
-        "I'm a frontend developer focused on building clean, responsive, and interactive web experiences. I enjoy turning ideas into real products, exploring modern technologies, and constantly improving my skills. I care about writing maintainable code, creating thoughtful interfaces, and understanding how the things I build actually work.",
+      description: "I’ve been learning web development for the past year and a half. I started with HTML and CSS, then moved on to JavaScript, learning through practice and building projects. Today, I build interfaces with React and Tailwind CSS, and I’m learning TypeScript to use in my React projects.I use Git and GitHub for version control, Figma for interface design, and Vite for development and builds. My current focus is strengthening my JavaScript and React foundations while gaining more experience with TypeScript.",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       github: "https://github.com/Kaan-Developer/Portfolio",
       live: "",

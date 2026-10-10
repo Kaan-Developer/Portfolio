@@ -78,6 +78,41 @@ const Projects = () => {
                   )}
                 </div>
               </div>
+
+{/*                             <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                className="aspect-[16/10] w-full rounded-2xl bg-primary-light object-contain p-6 md:aspect-auto md:h-full"
+              />
+
+              <div className="flex flex-col justify-center gap-3 px-3 pb-3 pt-5 md:p-8">
+                <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
+                  {project.title}
+                </h3>
+
+                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
+                  {project.description}
+                </p>
+
+                <ul className="flex flex-wrap gap-2">
+                </ul>
+
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <Button arrow link={project.github} target="_blank">
+                    GitHub
+                  </Button>
+                  {project.live && (
+                    <Button
+                      arrow
+                      link={project.live}
+                      target="_blank"
+                      variant="outline"
+                    >
+                      Live demo
+                    </Button>
+                  )}
+                </div>
+              </div> */}
             </article>
           ))}
 
