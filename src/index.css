@@ -281,11 +281,41 @@
 }
 
 
+.skill-orbit__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  offset-path: ellipse(calc(50% - 44px) calc(50% - 44px) at 50% 50%);
+  offset-anchor: center;
+  offset-rotate: 0deg;
+  animation: skill-orbit linear infinite;
+}
+
+.skills-orbits[data-paused="true"] .skill-orbit__item {
+  animation-play-state: paused;
+}
+
+@keyframes skill-orbit {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
 /* =========================
    REDUCED MOTION
    ========================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .skill-orbit__item {
+    animation: none;
+  }
+
   html {
     scroll-behavior: auto;
   }
