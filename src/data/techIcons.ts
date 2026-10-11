@@ -1,5 +1,15 @@
 import type { ComponentType } from "react";
 import { Box } from "lucide-react";
+import reactLogo from "../assets/tech/react.svg";
+import typescriptLogo from "../assets/tech/typescript.svg";
+import javascriptLogo from "../assets/tech/javascript.svg";
+import tailwindLogo from "../assets/tech/tailwind.svg";
+import htmlLogo from "../assets/tech/html.svg";
+import cssLogo from "../assets/tech/css.svg";
+import gitLogo from "../assets/tech/git.svg";
+import githubLogo from "../assets/tech/github.svg";
+import figmaLogo from "../assets/tech/figma.svg";
+import viteLogo from "../assets/tech/vite.svg";
 import {
   SiReact,
   SiTypescript,
@@ -87,4 +97,17 @@ export const techIcons: Record<string, TechIcon> = {
   npm: SiNpm,
   ESLint: SiEslint,
   Vitest: SiVitest,
+};
+
+export const techLogos: Record<string, string> = {
+  React: reactLogo,
+  TypeScript: typescriptLogo,
+  JavaScript: javascriptLogo,
+  Tailwind: tailwindLogo,
+  HTML: htmlLogo,
+  CSS: cssLogo,
+  Git: gitLogo,
+  GitHub: githubLogo,
+  Figma: figmaLogo,
+  Vite: viteLogo,
 };
