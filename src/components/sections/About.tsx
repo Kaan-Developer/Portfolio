@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 import RobotCanvas from "../Robot/RobotCanvas";
 import { site } from "../../data/site";
-import { techIcons, techLogos } from "../../data/techIcons";
+import { techIcons } from "../../data/techIcons";
 import Button from "../ui/Button";
 import clsx from "clsx";
 
@@ -35,7 +35,10 @@ const About = () => {
           <Button arrow link="#projects" target="" variant="blue">
             Projects
           </Button>
-          <Button variant="primary" onClick={() => setShowStacks((previous) => !previous)}>
+          <Button
+            variant="primary"
+            onClick={() => setShowStacks((previous) => !previous)}
+          >
             Stacks
             <ChevronRight
               size={18}
@@ -48,11 +51,7 @@ const About = () => {
           </Button>
 
           <div className="flex lg:hidden">
-            <Button
-              arrow
-              link={site.links.github}
-              target="_blank"
-            >
+            <Button arrow link={site.links.github} target="_blank">
               Github
             </Button>
           </div>
@@ -62,9 +61,12 @@ const About = () => {
       <div className="hidden min-h-screen w-full items-center md:flex">
         <div className="grid w-full">
           <div
-            className={clsx("col-start-1 row-start-1 h-[70vh] w-full self-center", {
-              "invisible pointer-events-none": showStacks,
-            })}
+            className={clsx(
+              "col-start-1 row-start-1 h-[70vh] w-full self-center",
+              {
+                "invisible pointer-events-none": showStacks,
+              },
+            )}
             aria-hidden={showStacks}
             inert={showStacks}
           >
@@ -72,14 +74,17 @@ const About = () => {
           </div>
 
           <div
-            className={clsx("col-start-1 row-start-1 flex items-center justify-center px-6 py-8 lg:px-10", {
-              "invisible pointer-events-none": !showStacks,
-            })}
+            className={clsx(
+              "col-start-1 row-start-1 flex items-center justify-center px-6 py-8 lg:px-10",
+              {
+                "invisible pointer-events-none": !showStacks,
+              },
+            )}
             aria-hidden={!showStacks}
             inert={!showStacks}
           >
             <div className="w-full max-w-xl">
-              <h2 className="mb-3 text-2xl font-semibold leading-[0.95] tracking-tight text-primary-soft md:text-4xl">
+              <h2 className="mb-3 text-3xl font-semibold leading-[0.95] tracking-tight text-balance md:text-5xl">
                 What I work with
               </h2>
 
@@ -95,22 +100,19 @@ const About = () => {
                   <ul className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-3">
                     {group.items.map((name) => {
                       const Icon = techIcons[name];
-                      const logo = techLogos[name];
 
                       return (
                         <li key={name} className="flex items-center gap-3">
-                          {logo ? (
-                            <img
-                              src={logo}
-                              alt=""
-                              width={40}
-                              height={40}
-                              className="pointer-events-none select-none h-10 w-10 shrink-0 object-contain"
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black p-2 text-white">
+                            <Icon
+                              size={24}
+                              className="shrink-0"
+                              aria-hidden="true"
                             />
-                          ) : (
-                            <Icon size={40} className="shrink-0" aria-hidden="true" />
-                          )}
-                          <span className="text-sm font-medium text-ink">{name}</span>
+                          </div>
+                          <span className="text-sm font-medium text-ink">
+                            {name}
+                          </span>
                         </li>
                       );
                     })}
