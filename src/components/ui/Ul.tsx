@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 
 interface UlProps {
     mobile?: boolean;
+    inline?: boolean;
 }
 
 
-const Ul = ({ mobile = false }:UlProps) => {
+const Ul = ({ mobile = false, inline = false }:UlProps) => {
       const [activeSection, setActiveSection] = useState(site.bubbles[0]?.target);
 
     useEffect(() => {
@@ -37,13 +38,13 @@ const Ul = ({ mobile = false }:UlProps) => {
 
     return () => observer.disconnect();
   }, []);
-    
+
     return (
         <nav
   className={
     mobile
       ? "flex flex-col items-start gap-2"
-      : "absolute left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md"
+      : `${inline ? "flex flex-wrap justify-center" : "absolute left-1/2 flex -translate-x-1/2"} items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md`
   }
 >
   {site.bubbles.map((bubble) => {
