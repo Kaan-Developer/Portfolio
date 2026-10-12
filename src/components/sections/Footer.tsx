@@ -1,89 +1,77 @@
 import Logo from "../../assets/images/Logo.svg";
-import { site, socialLinks } from "../../data/site";
+import { site } from "../../data/site";
 import { splineCredit } from "../../data/splineCredit";
-import Ul from "../ui/Ul";
 
 const Footer = () => {
-  const footer = site;
-
   return (
-    <section className="flex flex-col w-full shadow-soft bg-white p-8">
-      <div className="flex w-full flex-col items-start justify-between gap-6 xl:flex-row xl:items-center">
+    <footer className="w-full border-t border-border bg-white px-6 py-6 md:px-10 md:py-8">
+      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-x-8">
         <div className="flex items-center gap-3">
-          <div className="shrink-0 shadow-soft rounded-full bg-white">
-            <img src={Logo} alt="Logo" />
-          </div>
-
-          <div className="flex flex-col items-start gap-1">
-            <h2 className="text-balance text-3xl lg:text-5xl font-semibold leading-[0.95] tracking-[0.01em]">
-              {footer.name}
-            </h2>
-            <span className="text-muted text-xl lg:text-2xl font-semibold">
-              {footer.role}
-            </span>
+          <img src={Logo} alt="" width={32} height={32} className="shrink-0" />
+          <div className="min-w-0">
+            <p className="font-display text-lg font-semibold text-black">
+              {site.name}
+            </p>
+            <p className="text-sm text-muted">{site.role}</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-4">
-          {socialLinks.map((item) => {
-            const Icon = item.icon;
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-4">
+          {site.bubbles.map((item) => (
+            <a
+              key={item.target}
+              href={`#${item.target}`}
+              className="inline-flex min-h-11 items-center text-sm text-ink underline-offset-4 transition-colors hover:text-primary hover:underline"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-            return (
-              <a
-                key={item.href}
-                href={item.href}
-                className="relative flex shrink-0 items-center justify-center gap-2 rounded-full bg-black px-4 py-3 text-white"
-              >
-                <Icon size={28} />
-                <span>{item.name}</span>
-              </a>
-            );
-          })}
-        </div>
+        <a
+          href={site.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 w-fit items-center text-sm text-ink underline-offset-4 transition-colors hover:text-primary hover:underline"
+        >
+          GitHub
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
       </div>
 
-      <div className="mt-8 flex justify-center border-y border-border py-4">
-        <Ul inline />
-      </div>
-
-      <section
-        aria-labelledby="model-credit-heading"
-        className="flex flex-col items-start justify-between gap-6 pt-6 text-sm leading-6 sm:flex-row"
-      >
-        <div className="min-w-0">
-          <h2 id="model-credit-heading" className="font-semibold">
-            3D model credit
-          </h2>
-          <p className="mt-2">
+      <div className="mt-4 flex flex-col items-start justify-between gap-4 text-sm leading-6 text-muted md:flex-row md:gap-8">
+        <div className="min-w-0 max-w-3xl">
+          <p>
+            3D model:{" "}
             <a
               href={splineCredit.sourceUrl}
-              className="underline underline-offset-4 hover:text-primary"
+              className="inline-flex min-h-11 items-center align-middle underline underline-offset-4 transition-colors hover:text-primary"
             >
               {splineCredit.title}
             </a>{" "}
             by{" "}
             <a
               href={splineCredit.creatorUrl}
-              className="underline underline-offset-4 hover:text-primary"
+              className="inline-flex min-h-11 items-center align-middle underline underline-offset-4 transition-colors hover:text-primary"
             >
               {splineCredit.creator} ({splineCredit.creatorHandle})
             </a>
             . Licensed under{" "}
             <a
               href={splineCredit.licenseUrl}
-              className="underline underline-offset-4 hover:text-primary"
+              className="inline-flex min-h-11 items-center align-middle underline underline-offset-4 transition-colors hover:text-primary"
             >
               {splineCredit.license}
             </a>
             .
           </p>
-          <p className="mt-1">{splineCredit.modifications}</p>
+          <p>{splineCredit.modifications}</p>
         </div>
-        <p className="shrink-0 self-end text-right text-muted sm:self-start">
-          © {new Date().getFullYear()} {footer.name}
+        <p className="shrink-0 md:pt-2.5">
+          © {new Date().getFullYear()} {site.name}
         </p>
-      </section>
-    </section>
+      </div>
+    </footer>
   );
 };
 

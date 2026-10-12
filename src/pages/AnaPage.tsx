@@ -9,15 +9,17 @@ import Footer from "../components/sections/Footer";
 
 const AnaPage = () => {
   return (
-    <main className="bg-bg">
-      <Navbar />
-      <Hero />
-      <ProfileSummary />
-      <Projects />
-      <About />
-      <Contact />
+    <>
+      <main className="bg-bg">
+        <Navbar />
+        <Hero />
+        <ProfileSummary />
+        <Projects />
+        <About />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 
