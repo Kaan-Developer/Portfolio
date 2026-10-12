@@ -17,6 +17,7 @@ const Contact = () => {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
 
+
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
     const words = text.trim().split(/\s+/).filter(Boolean);
@@ -286,6 +287,8 @@ const Contact = () => {
           </p>
         </div>
       </form>
+
+
     </section>
   );
 };

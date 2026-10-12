@@ -6,6 +6,7 @@ import ProfileSummary from "../components/ui/ProfileSummary";
 import Projects from "../components/sections/Projects";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
+import ScrollToTop from "../components/ui/ScrollToTop";
 
 const AnaPage = () => {
   return (
@@ -19,6 +20,7 @@ const AnaPage = () => {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };
