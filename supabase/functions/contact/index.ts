@@ -10,7 +10,6 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
-
 export default {
   fetch: withSupabase({ auth: "publishable" }, async (req, { supabase }) => {
     const { name, email, subject, otherSubject, message } = await req.json();
@@ -21,9 +20,47 @@ export default {
     const cleanSubject = String(finalSubject ?? "").trim();
     const cleanMessage = String(message ?? "").trim();
 
-    if (!name || name.length > 15 || !email || email.length > 15 ||
-       !subject || subject.length > 30 ||
-       !otherSubject || otherSubject.length > 50 || !message || message.length > 250)
+    if (!cleanName || cleanName.length > 50) {
+      return Response.json(
+        { error: "Name is required and must be 50 characters or less." },
+        { status: 400 },
+      );
+    }
+
+    if (!cleanEmail || cleanEmail.length > 100 || !cleanEmail.includes("@")) {
+      return Response.json(
+        { error: "A valid email address is required." },
+        { status: 400 },
+      );
+    }
+
+    if (!cleanSubject || cleanSubject.length > 100) {
+      return Response.json(
+        { error: "Subject is required and must be 100 characters or less." },
+        { status: 400 },
+      );
+    }
+
+    if (subject === "other" && (!otherSubject || String(otherSubject).trim().length > 100)) {
+      return Response.json(
+        { error: "Please specify the subject (100 characters or less)." },
+        { status: 400 },
+      );
+    }
+
+    if (!cleanMessage) {
+      return Response.json(
+        { error: "Message cannot be empty." },
+        { status: 400 },
+      );
+    }
+
+    if (cleanMessage.length > 250) {
+      return Response.json(
+        { error: "Message cannot exceed 250 characters." },
+        { status: 400 },
+      );
+    }
 
     const { error } = await supabase.from("contact_messages").insert({
       name: cleanName,
@@ -31,10 +68,13 @@ export default {
       subject: cleanSubject,
       message: cleanMessage,
     });
-    
+
     if (error) {
       console.error("Contact insert failed:", error.code);
-      return Response.json({ error: "Message could not be saved" }, { status: 500 });
+      return Response.json(
+        { error: "Message could not be saved" },
+        { status: 500 },
+      );
     }
 
     let emailSent = false;
@@ -45,8 +85,13 @@ export default {
         const escapedName = escapeHtml(cleanName);
         const escapedEmail = escapeHtml(cleanEmail);
         const escapedSubject = escapeHtml(cleanSubject);
-        const formattedMessage = escapeHtml(cleanMessage).replace(/\r?\n/g, "<br />");
-        const replySubject = encodeURIComponent(`Re: ${cleanSubject || "Portfolio Message"}`);
+        const formattedMessage = escapeHtml(cleanMessage).replace(
+          /\r?\n/g,
+          "<br />",
+        );
+        const replySubject = encodeURIComponent(
+          `Re: ${cleanSubject || "Portfolio Message"}`,
+        );
 
         const htmlContent = `<!DOCTYPE html>
 <html lang="en">

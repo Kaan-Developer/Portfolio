@@ -20,35 +20,11 @@ const Contact = () => {
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
-    const words = text.trim().split(/\s+/).filter(Boolean);
-
-    // Kullanıcı metni siliyorsa her zaman izin ver
-    if (text.length < message.length) {
+    if (text.length <= 250) {
       setMessage(text);
-      return;
+    } else {
+      setMessage(text.slice(0, 250));
     }
-
-    // Kelime sayısı 250'den azsa izin ver
-    if (words.length < 250) {
-      setMessage(text);
-      return;
-    }
-
-    // Tam 250 kelimedeyken: son kelimenin sonuna yeni bir boşluk (yeni kelime başlangıcı) eklenemez
-    if (words.length === 250) {
-      // Eğer metin zaten 250 kelimeyse ve kullanıcı en sona yeni boşluk eklemeye çalışıyorsa engelle
-      if (text.endsWith(" ") || text.endsWith("\n")) {
-        // En sondaki boşluğu ekletme
-        setMessage(text.trimEnd());
-        return;
-      }
-      setMessage(text);
-      return;
-    }
-
-    // 250'den fazla kelime yapıştırıldıysa: tam 250 kelimede kes
-    const first250Words = words.slice(0, 250).join(" ");
-    setMessage(first250Words);
   };
 
   const handleCopy = () => {
@@ -70,7 +46,13 @@ const Contact = () => {
     const otherSubject = String(formData.get("otherSubject") ?? "").trim();
     const messageText = String(formData.get("message") ?? "").trim();
 
-    if (!name || !email || !subject || !messageText || (subject === "other" && !otherSubject)) {
+    if (
+      !name || name.length > 50 ||
+      !email || email.length > 100 ||
+      !subject || subject.length > 100 ||
+      (subject === "other" && (!otherSubject || otherSubject.length > 100)) ||
+      !messageText || messageText.length > 250
+    ) {
       setSubmitState("error");
       return;
     }
@@ -193,7 +175,7 @@ const Contact = () => {
             id="contact-name"
             name="name"
             required
-            maxLength={100}
+            maxLength={50}
             placeholder={form.namePlaceholder}
             className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
@@ -208,7 +190,7 @@ const Contact = () => {
             id="contact-email"
             name="email"
             required
-            maxLength={254}
+            maxLength={100}
             placeholder={form.emailPlaceholder}
             className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           />
@@ -233,7 +215,7 @@ const Contact = () => {
               id="contact-other-subject"
               name="otherSubject"
               required
-              maxLength={120}
+              maxLength={100}
               placeholder="Please specify"
               className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
             />
@@ -242,15 +224,26 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-1 flex-col gap-2 min-h-0">
-          <label htmlFor="contact-message" className="text-balance font-semibold text-md">
-            {form.messageLabel}
-          </label>
+          <div className="flex items-center justify-between">
+            <label htmlFor="contact-message" className="text-balance font-semibold text-md">
+              {form.messageLabel}
+            </label>
+            <span
+              className={`text-xs ${
+                message.length >= 250
+                  ? "font-semibold text-red-600"
+                  : "text-subtle"
+              }`}
+            >
+              {message.length} / 250 karakter
+            </span>
+          </div>
           <textarea
             id="contact-message"
             name="message"
             value={message}
             required
-            maxLength={5000}
+            maxLength={250}
             onChange={handleMessageChange}
             placeholder={contact.form.messagePlaceholder}
             className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
