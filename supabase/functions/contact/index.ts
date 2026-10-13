@@ -10,6 +10,7 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
+
 export default {
   fetch: withSupabase({ auth: "publishable" }, async (req, { supabase }) => {
     const { name, email, subject, otherSubject, message } = await req.json();
@@ -19,6 +20,10 @@ export default {
     const cleanEmail = String(email ?? "").trim();
     const cleanSubject = String(finalSubject ?? "").trim();
     const cleanMessage = String(message ?? "").trim();
+
+    if (!name || name.length > 15 || !email || email.length > 15 ||
+       !subject || subject.length > 30 ||
+       !otherSubject || otherSubject.length > 50 || !message || message.length > 250)
 
     const { error } = await supabase.from("contact_messages").insert({
       name: cleanName,
