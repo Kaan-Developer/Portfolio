@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import Select from "../ui/Select";
 
-import { supabase } from "../../lib/supabase";
+import { getSupabase } from "../../lib/supabase";
 
 const Contact = () => {
   const { contact } = site;
@@ -77,7 +77,7 @@ const Contact = () => {
 
     setSubmitState("sending");
     try {
-      const { error } = await supabase.functions.invoke("contact", {
+      const { error } = await getSupabase().functions.invoke("contact", {
         body: { name, email, subject, otherSubject, message: messageText },
       });
 
@@ -105,9 +105,9 @@ const Contact = () => {
        px-6 py-20 md:px-10 md:py-28"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="mt-3 max-w-xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
+        <h2 className="mt-3 max-w-xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
           {contact.title}
-        </h1>
+        </h2>
 
         <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-xl md:leading-8">
           {contact.description}
@@ -130,20 +130,14 @@ const Contact = () => {
                 </div>
               </div>
 
-              {copied ? (
-                <div className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none">
-                  <Check size={13} strokeWidth={2.2} />
-                  <span>Copied</span>
-                </div>
-              ) : (
-                <div
-                  onClick={handleCopy}
-                  className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none"
-                >
-                  <Copy size={13} strokeWidth={2.2} />
-                  <span>Copy Email</span>
-                </div>
-              )}
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none"
+              >
+                {copied ? <Check size={13} strokeWidth={2.2} aria-hidden="true" /> : <Copy size={13} strokeWidth={2.2} aria-hidden="true" />}
+                <span>{copied ? "Copied" : "Copy Email"}</span>
+              </button>
             </div>
           </div>
           {socialLinks.map((item) => {
@@ -187,15 +181,16 @@ const Contact = () => {
         onSubmit={handleSubmit}
         className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full"
       >
-        <h2 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
+        <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
           {contact.hi}
-        </h2>
+        </h3>
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">
+          <label htmlFor="contact-name" className="text-balance font-semibold text-md">
             {form.nameLabel}
-          </span>
+          </label>
           <input
             type="text"
+            id="contact-name"
             name="name"
             required
             maxLength={100}
@@ -205,11 +200,12 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">
+          <label htmlFor="contact-email" className="text-balance font-semibold text-md">
             {form.emailLabel}
-          </span>
+          </label>
           <input
             type="email"
+            id="contact-email"
             name="email"
             required
             maxLength={254}
@@ -219,32 +215,38 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-balance font-semibold text-md">
+          <label htmlFor="contact-subject" className="text-balance font-semibold text-md">
             {form.subjectLabel}
-          </span>
+          </label>
           <Select
+            id="contact-subject"
             name="subject"
             placeholder={form.subjectPlaceholder}
             options={form.subjectOptions}
             onChange={setSelectedSubject}
           />
           {selectedSubject === "other" && (
+            <>
+            <label htmlFor="contact-other-subject" className="sr-only">Other subject</label>
             <input
               type="text"
+              id="contact-other-subject"
               name="otherSubject"
               required
               maxLength={120}
               placeholder="Please specify"
               className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
             />
+            </>
           )}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 min-h-0">
-          <span className="text-balance font-semibold text-md">
+          <label htmlFor="contact-message" className="text-balance font-semibold text-md">
             {form.messageLabel}
-          </span>
+          </label>
           <textarea
+            id="contact-message"
             name="message"
             value={message}
             required

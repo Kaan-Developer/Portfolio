@@ -8,6 +8,7 @@ export interface SelectOption {
 }
 
 interface Props {
+  id: string;
   name: string;
   placeholder: string;
   options: SelectOption[];
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const Select = ({
+  id,
   name,
   placeholder,
   options,
@@ -28,6 +30,7 @@ const Select = ({
   const [open, setOpen] = useState(false);
 
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   const selected = options.find((item) => item.value === value);
 
@@ -48,7 +51,10 @@ const Select = ({
     if (!open) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -69,6 +75,7 @@ const Select = ({
     setValue(optionValue);
     onChange?.(optionValue);
     setOpen(false);
+    triggerRef.current?.focus();
   };
 
   return (
@@ -76,9 +83,11 @@ const Select = ({
       <input type="hidden" name={name} value={value} readOnly />
 
       <button
+        ref={triggerRef}
+        id={id}
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        aria-haspopup="listbox"
+        aria-controls={open ? `${id}-options` : undefined}
         aria-expanded={open}
         className={clsx(
           "flex h-12 w-full items-center justify-between gap-3 rounded-md border bg-white px-4 text-left outline-none transition duration-200",
@@ -99,20 +108,18 @@ const Select = ({
       </button>
 
       {open && (
-        <div
-          role="listbox"
-          aria-label={placeholder}
+        <ul
+          id={`${id}-options`}
           className="animate-select-pop absolute inset-x-0 top-[calc(100%+8px)] z-50 max-h-64 overflow-y-auto rounded-xl border border-border bg-white p-1.5 shadow-medium"
         >
           {options.map((item) => {
             const isSelected = item.value === value;
 
             return (
+              <li key={item.value}>
               <button
-                key={item.value}
                 type="button"
-                role="option"
-                aria-selected={isSelected}
+                aria-pressed={isSelected}
                 onClick={() => handleSelect(item.value)}
                 className={clsx(
                   "flex w-full items-center justify-between gap-3 rounded-lg px-3.5 py-3 text-left text-sm font-medium transition-colors duration-150",
@@ -126,9 +133,10 @@ const Select = ({
                   <Check size={16} strokeWidth={2.5} aria-hidden="true" className="shrink-0" />
                 )}
               </button>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </div>
   );

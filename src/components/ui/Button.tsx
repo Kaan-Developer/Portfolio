@@ -6,7 +6,7 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "blue" | "secondary" | "outline";
   arrow?: boolean;
   children: ReactNode;
-  link?: string;
+  link: string;
   target?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }

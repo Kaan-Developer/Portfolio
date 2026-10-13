@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import type { IconType } from "react-icons";
 import type { ProfileSummaryItem } from "../types/site";
 
@@ -19,16 +19,9 @@ export const socialLinks: SocialLink[] = [
     color: "#18181b",
   },
   {
-    name: "LinkedIn",
-    username: "in/kaan-hamitler",
-    href: "https://www.linkedin.com/",
-    icon: FaLinkedin,
-    color: "#0a66c2",
-  },
-  {
     name: "X (Twitter)",
-    username: "@kaan_dev",
-    href: "https://x.com/",
+    username: "@KHamitler78641",
+    href: "https://x.com/KHamitler78641",
     icon: FaXTwitter,
     color: "#000000",
   },

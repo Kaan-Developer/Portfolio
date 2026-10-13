@@ -35,8 +35,11 @@ const About = () => {
           <Button arrow link="#projects" target="" variant="blue">
             Projects
           </Button>
-          <Button
-            variant="primary"
+          <button
+            type="button"
+            aria-expanded={showStacks}
+            aria-controls="about-stacks"
+            className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap text-sm font-medium tracking-tight transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 bg-black text-white hover:bg-ink"
             onClick={() => setShowStacks((previous) => !previous)}
           >
             Stacks
@@ -48,7 +51,7 @@ const About = () => {
                 { "rotate-90": showStacks },
               )}
             />
-          </Button>
+          </button>
 
           <div className="flex lg:hidden">
             <Button arrow link={site.links.github} target="_blank">
@@ -62,7 +65,7 @@ const About = () => {
         <div className="grid w-full">
           <div
             className={clsx(
-              "col-start-1 row-start-1 h-[70vh] w-full self-center",
+              "col-start-1 row-start-1 h-[70vh] w-full self-center bg-[#F8FAFC]",
               {
                 "invisible pointer-events-none": showStacks,
               },
@@ -74,6 +77,7 @@ const About = () => {
           </div>
 
           <div
+            id="about-stacks"
             className={clsx(
               "col-start-1 row-start-1 flex items-center justify-center px-6 py-8 lg:px-10",
               {
@@ -84,18 +88,18 @@ const About = () => {
             inert={!showStacks}
           >
             <div className="w-full max-w-xl">
-              <h2 className="mb-3 text-3xl font-semibold leading-[0.95] tracking-tight text-balance md:text-5xl">
+              <h3 className="mb-3 text-3xl font-semibold leading-[0.95] tracking-tight text-balance md:text-5xl">
                 What I work with
-              </h2>
+              </h3>
 
               {groups.map((group) => (
                 <section
                   key={group.title}
                   className="py-7 first:border-b first:border-border first:pt-0 last:pb-0"
                 >
-                  <h3 className="mb-6 text-2xl font-bold tracking-tight">
+                  <h4 className="mb-6 text-2xl font-bold tracking-tight">
                     {group.title}
-                  </h3>
+                  </h4>
 
                   <ul className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-3">
                     {group.items.map((name) => {

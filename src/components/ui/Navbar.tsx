@@ -65,7 +65,7 @@ const { isOpen, toggle } = useMenuStore();
   >
     <img
       src={kaanLogo}
-      alt="Kaan"
+      alt=""
       className="h-11 w-11 md:h-12 md:w-12"
     />
   </a>
@@ -80,7 +80,9 @@ const { isOpen, toggle } = useMenuStore();
   {!isOpen && (
     <button
       type="button"
-      aria-label="Menüyü aç"
+      aria-label="Open menu"
+      aria-expanded={isOpen}
+      aria-controls="mobile-menu"
       onClick={toggle}
       className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white p-2 shadow-soft transition-transform duration-200 active:scale-95"
     >
@@ -94,7 +96,7 @@ const { isOpen, toggle } = useMenuStore();
 </div>
 
 {isOpen && (
-  <div className="absolute top-20 right-6 left-6 flex flex-col gap-4 rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5">
+  <div id="mobile-menu" className="absolute top-20 right-6 left-6 flex flex-col gap-4 rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5">
         <Ul mobile />
 
         <div className="pt-2">
@@ -104,7 +106,7 @@ const { isOpen, toggle } = useMenuStore();
     {/* Kapat */}
     <button
       type="button"
-      aria-label="Menüyü kapat"
+      aria-label="Close menu"
       onClick={toggle}
       className="ml-auto flex h-[52px] w-[52px] items-center justify-center rounded-full bg-black/5 shadow-soft hover:bg-black/10 transition-colors"
     >
@@ -122,9 +124,6 @@ const { isOpen, toggle } = useMenuStore();
     <StarOnGithub />
   </div>
 
-  {isOpen && (
-    <div className="w-full h-full min-h-screen" onClick={toggle}></div>
-  )}
 </header>
   );
 };

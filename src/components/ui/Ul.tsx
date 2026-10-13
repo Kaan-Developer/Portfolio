@@ -41,6 +41,7 @@ const Ul = ({ mobile = false, inline = false }:UlProps) => {
 
     return (
         <nav
+  aria-label={mobile ? "Mobile navigation" : "Primary navigation"}
   className={
     mobile
       ? "flex flex-col items-start gap-2"
