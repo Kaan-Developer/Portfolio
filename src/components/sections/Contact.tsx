@@ -1,4 +1,5 @@
 import { ArrowUpRight, Copy, Mail, Check, Lock } from "lucide-react";
+import clsx from "clsx";
 
 import { site, socialLinks } from "../../data/site";
 
@@ -12,11 +13,13 @@ const Contact = () => {
   const { contact } = site;
   const { form } = contact;
 
+
   const [copied, setCopied] = useState(false);
   const [message, setMessage] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
-  const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
-
+  const [submitState, setSubmitState] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
@@ -47,11 +50,15 @@ const Contact = () => {
     const messageText = String(formData.get("message") ?? "").trim();
 
     if (
-      !name || name.length > 50 ||
-      !email || email.length > 100 ||
-      !subject || subject.length > 100 ||
+      !name ||
+      name.length > 50 ||
+      !email ||
+      email.length > 100 ||
+      !subject ||
+      subject.length > 100 ||
       (subject === "other" && (!otherSubject || otherSubject.length > 100)) ||
-      !messageText || messageText.length > 250
+      !messageText ||
+      messageText.length > 250
     ) {
       setSubmitState("error");
       return;
@@ -117,7 +124,11 @@ const Contact = () => {
                 onClick={handleCopy}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none"
               >
-                {copied ? <Check size={13} strokeWidth={2.2} aria-hidden="true" /> : <Copy size={13} strokeWidth={2.2} aria-hidden="true" />}
+                {copied ? (
+                  <Check size={13} strokeWidth={2.2} aria-hidden="true" />
+                ) : (
+                  <Copy size={13} strokeWidth={2.2} aria-hidden="true" />
+                )}
                 <span>{copied ? "Copied" : "Copy Email"}</span>
               </button>
             </div>
@@ -167,7 +178,10 @@ const Contact = () => {
           {contact.hi}
         </h3>
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-name" className="text-balance font-semibold text-md">
+          <label
+            htmlFor="contact-name"
+            className="text-balance font-semibold text-md"
+          >
             {form.nameLabel}
           </label>
           <input
@@ -182,7 +196,10 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-email" className="text-balance font-semibold text-md">
+          <label
+            htmlFor="contact-email"
+            className="text-balance font-semibold text-md"
+          >
             {form.emailLabel}
           </label>
           <input
@@ -197,7 +214,10 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-subject" className="text-balance font-semibold text-md">
+          <label
+            htmlFor="contact-subject"
+            className="text-balance font-semibold text-md"
+          >
             {form.subjectLabel}
           </label>
           <Select
@@ -209,31 +229,35 @@ const Contact = () => {
           />
           {selectedSubject === "other" && (
             <>
-            <label htmlFor="contact-other-subject" className="sr-only">Other subject</label>
-            <input
-              type="text"
-              id="contact-other-subject"
-              name="otherSubject"
-              required
-              maxLength={100}
-              placeholder="Please specify"
-              className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
-            />
+              <label htmlFor="contact-other-subject" className="sr-only">
+                Other subject
+              </label>
+              <input
+                type="text"
+                id="contact-other-subject"
+                name="otherSubject"
+                required
+                maxLength={100}
+                placeholder="Please specify"
+                className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+              />
             </>
           )}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 min-h-0">
           <div className="flex items-center justify-between">
-            <label htmlFor="contact-message" className="text-balance font-semibold text-md">
+            <label
+              htmlFor="contact-message"
+              className="text-balance font-semibold text-md"
+            >
               {form.messageLabel}
             </label>
             <span
-              className={`text-xs ${
-                message.length >= 250
-                  ? "font-semibold text-red-600"
-                  : "text-subtle"
-              }`}
+              className={clsx("text-xs", {
+                "font-semibold text-red-600": message.length >= 250,
+                "text-subtle": message.length < 250,
+              })}
             >
               {message.length} / 250 karakter
             </span>
@@ -282,8 +306,6 @@ const Contact = () => {
           </p>
         </div>
       </form>
-
-
     </section>
   );
 };

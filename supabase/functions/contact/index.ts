@@ -11,7 +11,13 @@ function escapeHtml(str: string): string {
 }
 
 export default {
-  fetch: withSupabase({ auth: "publishable" }, async (req, { supabase }) => {
+  fetch: withSupabase({ auth: "publishable" }, async (req, { supabaseAdmin }) => {
+    if (req.method !== "POST") {
+      return Response.json(
+        { error: "Method not allowed." },
+        { status: 405, headers: { Allow: "POST" } },
+      );
+    }
     const { name, email, subject, otherSubject, message } = await req.json();
 
     const finalSubject = subject === "other" ? otherSubject : subject;
@@ -62,7 +68,35 @@ export default {
       );
     }
 
-    const { error } = await supabase.from("contact_messages").insert({
+    const { data: rateLimit, error: rateLimitError } =
+      await supabaseAdmin
+        .rpc("consume_contact_request", {
+          p_email: cleanEmail,
+        })
+        .single<{ allowed: boolean; retry_after: number }>();
+
+    if (rateLimitError || !rateLimit) {
+      console.error("Contact rate limit failed:", rateLimitError?.code);
+
+      return Response.json(
+        { error: "Contact service is temporarily unavailable." },
+        { status: 503 },
+      );
+    }
+
+    if (!rateLimit.allowed) {
+      return Response.json(
+        { error: "Too many requests. Please try again later." },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimit.retry_after),
+          },
+        },
+      );
+    }
+
+    const { error } = await supabaseAdmin.from("contact_messages").insert({
       name: cleanName,
       email: cleanEmail,
       subject: cleanSubject,
