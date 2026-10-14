@@ -12,14 +12,14 @@ const icons: Record<ProfileSummaryItem["icon"], LucideIcon> = {
 const ProfileSummary = () => {
   return (
     <section className="mx-auto mb-1 max-w-7xl px-6 md:px-10">
-      <div className="grid grid-cols-2 gap-x-4 gap-y-5 rounded-3xl border border-border bg-white p-5 shadow-soft md:flex md:gap-0 md:divide-x md:divide-border md:rounded-full md:px-4 md:py-8">
+      <div className="flex flex-col divide-y divide-border rounded-2xl border border-border bg-white px-4 py-1 shadow-soft md:flex-row md:divide-x md:divide-y-0 md:rounded-full md:px-4 md:py-8">
         {site.profileSummary.map((item) => {
           const Icon = icons[item.icon];
 
           return (
             <div
               key={item.label}
-              className="flex min-w-0 items-center gap-3 md:flex-1 md:justify-center md:px-4"
+              className="flex min-w-0 items-center gap-3 py-4 md:flex-1 md:justify-center md:px-4 md:py-0"
             >
               <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-white">
                 <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
@@ -37,7 +37,7 @@ const ProfileSummary = () => {
                   {item.label}
                 </p>
 
-                <p className="text-sm font-semibold leading-snug text-black">
+                <p className="mt-1 break-words text-sm font-semibold leading-snug text-black md:mt-0">
                   {item.value}
                 </p>
               </div>

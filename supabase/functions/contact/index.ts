@@ -69,32 +69,30 @@ export default {
     }
 
     const { data: rateLimit, error: rateLimitError } =
-      await supabaseAdmin
-        .rpc("consume_contact_request", {
-          p_email: cleanEmail,
-        })
-        .single<{ allowed: boolean; retry_after: number }>();
+    await supabaseAdmin.rpc("consume_contact_request", {
+      p_email: cleanEmail,
+    }).single();
 
     if (rateLimitError || !rateLimit) {
-      console.error("Contact rate limit failed:", rateLimitError?.code);
+  console.error("Contact rate limit failed:", rateLimitError?.code);
 
-      return Response.json(
-        { error: "Contact service is temporarily unavailable." },
-        { status: 503 },
-      );
-    }
+  return Response.json(
+    { error: "Contact service is temporarily unavailable." },
+    { status: 503 },
+  );
+}
 
-    if (!rateLimit.allowed) {
-      return Response.json(
-        { error: "Too many requests. Please try again later." },
-        {
-          status: 429,
-          headers: {
-            "Retry-After": String(rateLimit.retry_after),
-          },
-        },
-      );
-    }
+if (!rateLimit.allowed) {
+  return Response.json(
+    { error: "Too many requests. Please try again later." },
+    {
+      status: 429,
+      headers: {
+        "Retry-After": String(rateLimit.retry_after),
+      },
+    },
+  );
+}
 
     const { error } = await supabaseAdmin.from("contact_messages").insert({
       name: cleanName,

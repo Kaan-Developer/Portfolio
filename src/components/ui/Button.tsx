@@ -15,7 +15,7 @@ const variants = {
   primary: "bg-black text-white hover:bg-ink",
   blue: "bg-primary-soft text-white hover:bg-primary-soft-hover hover:text-white",
   secondary:
-    "border border-primary/20 bg-primary-light text-primary-strong shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
+    "border border-primary/20 bg-primary-light shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
   outline:
     "border border-black/20 bg-transparent text-black hover:border-black hover:bg-black hover:text-white",
 };

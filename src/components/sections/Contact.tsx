@@ -91,7 +91,7 @@ const Contact = () => {
       id="contact"
       className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 relative
        overflow-hidden
-       px-6 py-20 md:px-10 md:py-28"
+       px-6 py-10 md:px-10 md:py-14"
     >
       <div className="flex flex-col justify-center">
         <h2 className="mt-3 max-w-xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
@@ -172,7 +172,8 @@ const Contact = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col rounded-xl bg-white gap-4 shadow-soft border border-border p-10 h-full w-full"
+        className="flex flex-col rounded-xl bg-white gap-4 shadow-soft
+         border border-border p-10 h-full w-full"
       >
         <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
           {contact.hi}
