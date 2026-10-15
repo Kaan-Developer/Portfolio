@@ -16,10 +16,11 @@ const About = () => {
   return (
     <section
       id="about"
-      className="grid w-full grid-cols-1 md:grid-cols-2"
+      className="grid w-full grid-cols-1 md:grid-cols-2 gap-10
+      px-6 py-10 md:px-12 md:py-14 lg:gap-16"
     >
-      <div className="flex flex-col justify-center gap-3 px-6 py-10 md:px-12 md:py-14">
-        <h2 className="mt-4 text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] tracking-tight md:text-6xl">
+      <div className="flex min-w-0 flex-col gap-3">
+        <h2 className="text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] tracking-tight md:text-6xl">
           {about.hi}
         </h2>
 
@@ -60,7 +61,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="hidden w-full items-center md:flex">
+      <div className="hidden w-full min-w-0 items-start md:flex">
         <div className="grid w-full">
           <div
             className={clsx(
@@ -77,7 +78,7 @@ const About = () => {
           <div
             id="about-stacks"
             className={clsx(
-              "col-start-1 row-start-1 flex items-center justify-center px-6 py-8 lg:px-10",
+              "col-start-1 row-start-1 flex min-w-0 items-start gap-3",
               { "invisible pointer-events-none": !showStacks },
             )}
             aria-hidden={!showStacks}

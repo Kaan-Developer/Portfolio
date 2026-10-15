@@ -23,13 +23,13 @@ const Stacks = () => {
             {group.title}
           </h4>
 
-          <ul className="grid grid-cols-2 gap-x-3 gap-y-7 md:gap-x-6 lg:grid-cols-3">
+          <ul className="grid grid-cols-2 gap-5 lg:grid-cols-3">
             {group.items.map((name) => {
               const Icon = techIcons[name];
 
               return (
                 <li key={name} className="flex min-w-0 items-center gap-2 md:gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black p-2 text-white">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center p-2 text-balance">
                     <Icon size={24} className="shrink-0" aria-hidden="true" />
                   </div>
                   <span className="min-w-0 break-words text-sm font-medium text-ink">
@@ -41,6 +41,8 @@ const Stacks = () => {
           </ul>
         </section>
       ))}
+
+      <p className="text-subtle text-lg lg:text-xl">{about.currently}</p>
     </div>
   );
 };

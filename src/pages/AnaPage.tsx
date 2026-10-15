@@ -4,7 +4,6 @@ import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
 import ProfileSummary from "../components/ui/ProfileSummary";
 import Projects from "../components/sections/Projects";
-import Stacks from "../components/sections/Stacks";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
 import ScrollToTop from "../components/ui/ScrollToTop";
@@ -18,11 +17,6 @@ const AnaPage = () => {
         <ProfileSummary />
         <Projects />
         <About />
-
-        <div className="flex lg:hidden">
-          <Stacks />
-        </div>
-        
         <Contact />
       </main>
       <Footer />
