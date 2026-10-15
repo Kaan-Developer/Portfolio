@@ -1,190 +1,117 @@
-<div align="center">
-
 # Kaan Hamitler — Portfolio
 
-**A fast, responsive personal portfolio with an interactive 3D robot.**
-Built with React, TypeScript, Tailwind CSS and Spline.
+My personal portfolio, built with React, TypeScript and Tailwind CSS. It brings together my introduction, projects, background and contact form.
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+## What's included
 
-<!-- Add your deployed site here, for example: -->
-<!-- [**Live Demo →**](https://your-domain.com) -->
+- A single page: Hero → Profile Summary → Projects → About → Contact, followed by the footer.
+- A floating navbar, section links, a mobile menu and a scroll-to-top button.
+- Technology and tool lists in About, with a desktop Stacks toggle.
+- A Spline robot in About, loaded separately near the viewport. The scene is skipped below 768px and on devices without a hover-capable fine pointer.
+- A contact form that calls a Supabase Edge Function, stores messages and optionally sends a notification through Resend.
+- Self-hosted Instrument Sans and Bricolage Grotesque fonts.
+- A light theme, visible focus outlines and CSS animations that respect reduced-motion preferences. Spline playback is managed separately by an IntersectionObserver.
+- Page metadata, an SVG favicon, an ICO fallback and an Apple touch icon based on the existing K logo.
 
-</div>
+## Stack
 
----
+| Area | Tools |
+| --- | --- |
+| Interface | React 19, TypeScript 6 |
+| Styling | Tailwind CSS 4, Fontsource |
+| Development | Vite 8, pnpm, Oxlint |
+| 3D | Spline React and runtime |
+| State and icons | Zustand, Lucide, React Icons, clsx |
+| Contact | Supabase, Supabase Edge Functions, Resend |
 
-## Overview
+## Run locally
 
-This is my personal portfolio website. It introduces who I am, what I'm currently working on and the projects I've built. The page is a single-page layout (Hero → Stats → About → Projects) with a floating navbar, smooth anchor scrolling and an interactive 3D robot rendered with [Spline](https://spline.design).
-
-All of the text content lives in plain data files, so updating the site rarely means touching the components.
-
-## Features
-
-- **Interactive 3D robot** — a Spline scene that is lazy-loaded with `React.lazy`, so it never blocks the first paint.
-- **Device-aware loading** — the 3D scene is skipped on small screens and touch-only devices (width under 768px or no hover/fine pointer) to save bandwidth and battery.
-- **Scroll-friendly 3D** — scrolling the mouse wheel over the robot scrolls the page instead of getting trapped inside the scene.
-- **Smart navbar** — hides while scrolling down, reappears while scrolling up, and highlights the active section using `IntersectionObserver`.
-- **Mobile menu** — a compact dropdown menu with its open/close state managed by Zustand.
-- **Data-driven content** — name, bio, stats, navigation and projects are all defined in `src/data/`.
-- **Tech icon system** — project tags are mapped to brand icons through a single lookup table.
-- **Design tokens** — colors, fonts, radii and shadows are defined once with Tailwind CSS v4's `@theme`.
-- **Self-hosted fonts** — Bricolage Grotesque and Instrument Sans are served through Fontsource, so there are no third-party font requests.
-- **Accessibility-minded** — visible focus rings, descriptive `aria-label`s, decorative icons hidden from screen readers and full `prefers-reduced-motion` support.
-
-## Tech Stack
-
-| Area          | Tools                                                              |
-| ------------- | ------------------------------------------------------------------ |
-| Framework     | [React 19](https://react.dev)                                      |
-| Language      | [TypeScript](https://www.typescriptlang.org)                       |
-| Build tool    | [Vite](https://vite.dev)                                           |
-| Styling       | [Tailwind CSS v4](https://tailwindcss.com) (`@tailwindcss/vite`)   |
-| 3D            | [Spline](https://spline.design) (`@splinetool/react-spline`)       |
-| State         | [Zustand](https://zustand-demo.pmnd.rs)                            |
-| Icons         | [Lucide](https://lucide.dev) and [React Icons](https://react-icons.github.io/react-icons/) |
-| Class helpers | [clsx](https://github.com/lukeed/clsx)                             |
-| Linting       | [Oxlint](https://oxc.rs/docs/guide/usage/linter)                   |
-| Package manager | [pnpm](https://pnpm.io)                                          |
-
-## Getting Started
-
-### Prerequisites
-
-- **Node.js** `20.19+` or `22.12+` (required by Vite 8)
-- **pnpm** `10+` — install it with `npm install -g pnpm` if you don't have it
-
-### Installation
+Use **Node.js 22.12+** and **pnpm**. This satisfies the Node requirements of the current Vite and Supabase dependencies.
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Kaan-Developer/Portfolio.git
 cd Portfolio
+pnpm install --frozen-lockfile
+```
 
-# 2. Install dependencies
-pnpm install
+Create `.env.local` in the project root and fill in the values:
 
-# 3. Create your environment file
-cp .env.example .env
+```dotenv
+VITE_ROBOT_2_URL=
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
+```
 
-# 4. Start the dev server
+Then start the development server:
+
+```bash
 pnpm dev
 ```
 
-Open the URL printed in the terminal (usually `http://localhost:5173`).
+Open the URL printed by Vite.
 
-## Available Scripts
+| Variable | Purpose |
+| --- | --- |
+| `VITE_ROBOT_2_URL` | Public `.splinecode` URL for the scene used in About. |
+| `VITE_SUPABASE_URL` | Supabase project URL used by the contact client. |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Public Supabase publishable key used to invoke the contact function. |
+| `VITE_ROBOT_1_URL` | Optional alternative scene; the current page does not select it. |
 
-| Command        | Description                                              |
-| -------------- | -------------------------------------------------------- |
-| `pnpm dev`     | Start the Vite dev server with hot module replacement.   |
-| `pnpm build`   | Type-check with `tsc -b`, then create a production build in `dist/`. |
-| `pnpm preview` | Serve the production build locally to test it.           |
-| `pnpm lint`    | Lint the project with Oxlint.                            |
+Vite embeds `VITE_*` values in the browser bundle. Keep private credentials, including `EMAIL_API_KEY` and Supabase administrative keys, in the server environment. Missing Supabase values cause contact submission to fail; the client is created when the form is submitted.
 
-## Environment Variables
+## Commands
 
-Create a `.env` file in the project root (see [`.env.example`](./.env.example)):
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Start the development server. |
+| `pnpm lint` | Run Oxlint. |
+| `pnpm build` | Run `tsc -b` and create the production build in `dist/`. |
+| `pnpm preview` | Serve the production build locally. |
+| `node --test` | Run the existing About/Stacks and navbar regression tests. |
 
-| Variable           | Description                                          |
-| ------------------ | ---------------------------------------------------- |
-| `VITE_ROBOT_1_URL` | Public `.splinecode` scene URL for robot scene 1.    |
-| `VITE_ROBOT_2_URL` | Public `.splinecode` scene URL for robot scene 2.    |
+There is no `pnpm test` script. The current tests use mocked hooks and JSX; they do not replace browser interaction tests or verify the backend.
 
-> **Note:** Vite embeds every `VITE_*` variable into the final JavaScript bundle at build time. They are public by design, so never store secrets such as API keys here. If you deploy the site, add these variables in your hosting dashboard **before** building.
+## Contact backend
 
-## Project Structure
+The browser invokes the `contact` function in `supabase/functions/contact/index.ts`. The function checks inputs, calls the `consume_contact_request` RPC and inserts the message into `contact_messages`.
 
-```text
-.
-├── index.html
-├── vite.config.ts
-├── tsconfig.json
-├── .oxlintrc.json
-├── .env.example
-└── src
-    ├── main.tsx                 # App entry point, fonts and global CSS
-    ├── App.tsx
-    ├── index.css                # Tailwind v4 theme tokens and base styles
-    ├── assets
-    │   └── images               # Logo and illustrations
-    ├── components
-    │   ├── Robot
-    │   │   └── RobotCanvas.tsx  # Lazy-loaded Spline scene
-    │   ├── feedback
-    │   │   └── Loading.tsx      # Loading state for the 3D scene
-    │   ├── sections
-    │   │   ├── Hero.tsx
-    │   │   ├── About.tsx
-    │   │   └── Projects.tsx
-    │   └── ui
-    │       ├── Navbar.tsx
-    │       ├── Ul.tsx           # Navigation links and active-section tracking
-    │       ├── Button.tsx
-    │       ├── Stats.tsx
-    │       └── StarOnGithub.tsx
-    ├── data
-    │   ├── site.ts              # Name, bio, navigation, stats
-    │   ├── projects.ts          # Project list
-    │   └── techIcons.ts         # Tech name → icon lookup
-    ├── pages
-    │   └── AnaPage.tsx          # Page composition
-    ├── store
-    │   └── menu.ts              # Mobile menu state (Zustand)
-    └── types
-        └── project.ts
-```
+After saving the message, it attempts a Resend notification when the server-side `EMAIL_API_KEY` is set. A successful save does not guarantee notification delivery; the function returns `emailSent` separately. The current sender is `onboarding@resend.dev`, and the recipient is configured in the function.
 
-## Customization
+The Supabase project must provide the table, RPC and appropriate database access policies. Their creation migrations are not included in this repository. `supabase/tests/contact_rate_limit.sql` contains database checks, but it is not run by `node --test`. The frontend build also does not type-check the Edge Function.
 
-**Personal info, navigation and stats** — edit `src/data/site.ts`.
+## Where to edit
 
-**Adding a project** — add an object to the array in `src/data/projects.ts`:
+| File | Purpose |
+| --- | --- |
+| `src/data/site.ts` | Personal text, profile summary, navigation, social links and some form copy. |
+| `src/data/projects.ts` | Project entries and case-study data. |
+| `src/types/project.ts` | Required project and case-study fields. |
+| `src/data/techIcons.ts` | Technology names and their icon components. |
+| `src/pages/AnaPage.tsx` | Page section order. |
+| `src/components/sections/Contact.tsx` | Form behavior, email address and additional form copy. |
+| `src/index.css` | Theme tokens, global styles and CSS animations. |
+| `index.html` | Document language, title, metadata and icon links. |
+| `src/assets/images/Logo.svg` | K logo used by the interface and SVG favicon. |
+| `public/` | ICO fallback and Apple touch icon derived from the K logo. |
 
-```ts
-{
-  title: "My New Project",
-  description: "A short sentence about what it does.",
-  tech: ["React", "TypeScript", "Tailwind"],
-  github: "https://github.com/Kaan-Developer/my-new-project",
-  live: "https://my-new-project.com", // optional
-}
-```
-
-Each name in `tech` must match a key in `src/data/techIcons.ts` exactly (for example `"Node.js"`, not `"NodeJS"`). To support a new technology, import its icon and add one line to that file.
-
-**Theme** — colors, fonts, radii and shadows are CSS variables inside the `@theme` block of `src/index.css`.
+New projects must satisfy the `Project` type, including its required `caseStudy`. Technology names must match `techIcons` keys. The current project card does not display the case-study fields.
 
 ## Deployment
 
-The project builds to a plain static site, so it works on any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages, ...).
+| Setting | Value |
+| --- | --- |
+| Install command | `pnpm install --frozen-lockfile` |
+| Build command | `pnpm build` |
+| Output directory | `dist` |
 
-| Setting          | Value        |
-| ---------------- | ------------ |
-| Build command    | `pnpm build` |
-| Output directory | `dist`       |
-| Install command  | `pnpm install` |
+Set the frontend environment variables on the host before building. Configure and deploy the Supabase backend separately from the static frontend.
 
-Remember to add `VITE_ROBOT_1_URL` and `VITE_ROBOT_2_URL` in the host's environment variable settings before the first build.
+When the production domain and a social preview image are available, add the real canonical URL, `og:url`, and absolute image URLs to `index.html`. No production address is currently configured in the repository. The current social metadata provides a text summary. If the K logo changes, regenerate the ICO and Apple touch icon to match it.
 
-## Roadmap
+The production build currently reports large Spline-related chunks. Browser behavior, performance, database policies and end-to-end contact delivery need their own checks; a passing frontend build does not verify them.
 
-- [x] Hero, About and Projects sections
-- [x] Responsive layout and mobile navigation
-- [x] Interactive 3D robot
-- [ ] Contact section
-- [ ] Skills section
-- [ ] Real screenshots for each project
-- [ ] SEO metadata, favicon and social preview image
+## Credits
 
-## Author
+The About robot uses a third-party model. Attribution and license details are in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md), with visible credit in the footer.
 
-**Kaan Hamitler** — Frontend Developer based in Turkey
-
-- GitHub: [@Kaan-Developer](https://github.com/Kaan-Developer)
-
-If you like this project, consider giving it a ⭐ on [GitHub](https://github.com/Kaan-Developer/Portfolio).
+[Kaan Hamitler on GitHub](https://github.com/Kaan-Developer)

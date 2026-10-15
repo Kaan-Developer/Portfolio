@@ -12,12 +12,13 @@
   --color-ink: #1e293b;
 
   --color-muted: #64748b;
-  --color-subtle: #94a3b8;
+  --color-subtle: #64748b;
 
   /* Clean blue accent */
   --color-primary: #2563eb;
-  --color-primary-soft: #60a5fa;
-  --color-primary-soft-hover: #7db8fb;
+  --color-primary-strong: #1d4ed8;
+  --color-primary-soft: #2563eb;
+  --color-primary-soft-hover: #1d4ed8;
   --color-primary-light: #eff6ff;
 
   /* Borders */
@@ -73,6 +74,7 @@
 
 @layer base {
   html {
+    color-scheme: light;
     scroll-behavior: smooth;
     scroll-padding-top: 2rem;
   }
