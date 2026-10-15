@@ -41,8 +41,8 @@ export const site = {
 
   // Navbar links
   bubbles: [
-    { label: "About", target: "about" },
     { label: "Projects", target: "projects" },
+    { label: "About", target: "about" },
     { label: "Contact", target: "contact" },
   ],
 
@@ -79,6 +79,7 @@ export const site = {
 
   // Contact section content and form
   contact: {
+    email: "kaandeveloperr07@gmail.com",
     title: "Get in touch",
     hi: "Send Message",
     description:

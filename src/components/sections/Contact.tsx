@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { site, socialLinks } from "../../data/site";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Select from "../ui/Select";
 
@@ -14,7 +14,9 @@ const Contact = () => {
   const { form } = contact;
 
 
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<
+    "idle" | "copying" | "copied" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [submitState, setSubmitState] = useState<
@@ -30,12 +32,22 @@ const Contact = () => {
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("kaandeveloperr07@gmail.com");
+  useEffect(() => {
+    if (copyState !== "copied") return;
 
-    setCopied(true);
+    const timeout = setTimeout(() => setCopyState("idle"), 2000);
+    return () => clearTimeout(timeout);
+  }, [copyState]);
 
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    setCopyState("copying");
+
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setCopyState("copied");
+    } catch {
+      setCopyState("error");
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -122,16 +134,29 @@ const Contact = () => {
               <button
                 type="button"
                 onClick={handleCopy}
+                disabled={copyState === "copying"}
+                aria-busy={copyState === "copying"}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full py-3 bg-black text-white rounded-full px-4 py-2 text-xs font-semibold select-none"
               >
-                {copied ? (
+                {copyState === "copied" ? (
                   <Check size={13} strokeWidth={2.2} aria-hidden="true" />
                 ) : (
                   <Copy size={13} strokeWidth={2.2} aria-hidden="true" />
                 )}
-                <span>{copied ? "Copied" : "Copy Email"}</span>
+                <span role="status" lang={copyState === "copied" ? "tr" : undefined}>
+                  {copyState === "copied"
+                    ? "Kopyalandı"
+                    : copyState === "copying"
+                      ? "Copying..."
+                      : "Copy Email"}
+                </span>
               </button>
             </div>
+            {copyState === "error" && (
+              <p role="alert" className="mt-2 text-sm text-red-600">
+                Could not copy. Select the email address above or open it in your email app.
+              </p>
+            )}
           </div>
           {socialLinks.map((item) => {
             const Icon = item.icon;

@@ -61,11 +61,11 @@ const About = () => {
         </div>
       </div>
 
-      <div className="hidden w-full min-w-0 items-start md:flex">
-        <div className="grid w-full">
+      <div className="hidden w-full min-w-0 md:grid">
+        <div className="relative grid w-full">
           <div
             className={clsx(
-              "col-start-1 row-start-1 h-[70vh] w-full self-center bg-[#F8FAFC]",
+              "absolute inset-0 w-full bg-[#F8FAFC]",
               {
                 "invisible pointer-events-none": showStacks,
               },
@@ -79,7 +79,7 @@ const About = () => {
             id="about-stacks"
             className={clsx(
               "col-start-1 row-start-1 flex min-w-0 items-start gap-3",
-              { "invisible pointer-events-none": !showStacks },
+              { "invisible pointer-events-none absolute inset-0": !showStacks },
             )}
             aria-hidden={!showStacks}
             inert={!showStacks}

@@ -61,7 +61,7 @@ const Ul = ({ mobile = false, inline = false }:UlProps) => {
   mobile
     ? `w-full rounded-xl px-3 py-2.5 text-base font-medium transition-colors duration-200 ${
         isActive
-          ? "bg-primary-light text-black"
+          ? "bg-primary-soft text-white"
           : "text-muted hover:bg-black/5 hover:text-black"
       }`
     : `rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 ${

@@ -1,117 +1,143 @@
-# Kaan Hamitler — Portfolio
+# Kaan Hamitler | Frontend Developer
 
-My personal portfolio, built with React, TypeScript and Tailwind CSS. It brings together my introduction, projects, background and contact form.
+Personal portfolio built with React, TypeScript, Vite and Tailwind CSS. It uses Spline for 3D scenes, Zustand for the mobile menu, and a Supabase Edge Function for contact messages. Resend provides optional email notifications.
 
-## What's included
+## Page structure
 
-- A single page: Hero → Profile Summary → Projects → About → Contact, followed by the footer.
-- A floating navbar, section links, a mobile menu and a scroll-to-top button.
-- Technology and tool lists in About, with a desktop Stacks toggle.
-- A Spline robot in About, loaded separately near the viewport. The scene is skipped below 768px and on devices without a hover-capable fine pointer.
-- A contact form that calls a Supabase Edge Function, stores messages and optionally sends a notification through Resend.
-- Self-hosted Instrument Sans and Bricolage Grotesque fonts.
-- A light theme, visible focus outlines and CSS animations that respect reduced-motion preferences. Spline playback is managed separately by an IntersectionObserver.
-- Page metadata, an SVG favicon, an ICO fallback and an Apple touch icon based on the existing K logo.
+`src/pages/AnaPage.tsx` renders the floating Navbar, then Hero → ProfileSummary → Projects → About → Contact, followed by Footer and ScrollToTop. Stacks is a panel inside About, not a separate page section. Navigation links target About, Projects and Contact.
 
-## Stack
+Site text and profile links are in `src/data/site.ts`; project entries are in `src/data/projects.ts`. Some form labels and status messages are also written directly in `Contact.tsx`.
 
-| Area | Tools |
-| --- | --- |
-| Interface | React 19, TypeScript 6 |
-| Styling | Tailwind CSS 4, Fontsource |
-| Development | Vite 8, pnpm, Oxlint |
-| 3D | Spline React and runtime |
-| State and icons | Zustand, Lucide, React Icons, clsx |
-| Contact | Supabase, Supabase Edge Functions, Resend |
+## Local setup
 
-## Run locally
+Requirements: Node.js 22.12+ and pnpm. Vite also supports Node.js 20.19+. The checks below were run with Node.js 24.18.0 and pnpm 11.19.0.
 
-Use **Node.js 22.12+** and **pnpm**. This satisfies the Node requirements of the current Vite and Supabase dependencies.
-
-```bash
+```sh
 git clone https://github.com/Kaan-Developer/Portfolio.git
 cd Portfolio
 pnpm install --frozen-lockfile
 ```
 
-Create `.env.local` in the project root and fill in the values:
+Copy [`.env.example`](./.env.example) to `.env.local` and fill in the values. On PowerShell:
 
-```dotenv
-VITE_ROBOT_2_URL=
-VITE_SUPABASE_URL=
-VITE_SUPABASE_PUBLISHABLE_KEY=
-```
-
-Then start the development server:
-
-```bash
+```powershell
+Copy-Item .env.example .env.local
 pnpm dev
 ```
 
-Open the URL printed by Vite.
-
-| Variable | Purpose |
-| --- | --- |
-| `VITE_ROBOT_2_URL` | Public `.splinecode` URL for the scene used in About. |
-| `VITE_SUPABASE_URL` | Supabase project URL used by the contact client. |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Public Supabase publishable key used to invoke the contact function. |
-| `VITE_ROBOT_1_URL` | Optional alternative scene; the current page does not select it. |
-
-Vite embeds `VITE_*` values in the browser bundle. Keep private credentials, including `EMAIL_API_KEY` and Supabase administrative keys, in the server environment. Missing Supabase values cause contact submission to fail; the client is created when the form is submitted.
+On macOS/Linux, use `cp .env.example .env.local` before `pnpm dev`. Open the address printed by Vite, normally `http://localhost:5173`. Restart the development server after changing environment values.
 
 ## Commands
 
 | Command | Purpose |
 | --- | --- |
-| `pnpm dev` | Start the development server. |
+| `pnpm dev` | Start the Vite development server. |
+| `node --test` | Run the Node test suite in `tests/`; no `pnpm test` script is configured. |
 | `pnpm lint` | Run Oxlint. |
-| `pnpm build` | Run `tsc -b` and create the production build in `dist/`. |
-| `pnpm preview` | Serve the production build locally. |
-| `node --test` | Run the existing About/Stacks and navbar regression tests. |
+| `pnpm exec tsc -b --force` | Check the frontend and Vite configuration with TypeScript. |
+| `pnpm build` | Run `tsc -b`, then build the static frontend into `dist/`. |
+| `pnpm preview` | Serve the existing `dist/` build locally. |
 
-There is no `pnpm test` script. The current tests use mocked hooks and JSX; they do not replace browser interaction tests or verify the backend.
+The frontend build does not deploy or type-check the Supabase Edge Function.
 
-## Contact backend
+## Environment variables
 
-The browser invokes the `contact` function in `supabase/functions/contact/index.ts`. The function checks inputs, calls the `consume_contact_request` RPC and inserts the message into `contact_messages`.
+Vite reads the following values from `.env.local` during development and from the hosting environment during production builds:
 
-After saving the message, it attempts a Resend notification when the server-side `EMAIL_API_KEY` is set. A successful save does not guarantee notification delivery; the function returns `emailSent` separately. The current sender is `onboarding@resend.dev`, and the recipient is configured in the function.
+| Variable | Used by | Requirement |
+| --- | --- | --- |
+| `VITE_ROBOT_1_URL` | `src/components/Robot/RobotCanvas.tsx` | Optional public `.splinecode` URL for scene 1. This scene is defined but is not mounted by the current page. |
+| `VITE_ROBOT_2_URL` | `src/components/Robot/RobotCanvas.tsx` | Public `.splinecode` URL for the About section's scene 2 on supported desktop devices. Needed to render that scene. |
+| `VITE_SUPABASE_URL` | `src/lib/supabase.ts` | Supabase project URL. Required when submitting the contact form. |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `src/lib/supabase.ts` | Public project publishable key. Required when submitting the contact form. |
 
-The Supabase project must provide the table, RPC and appropriate database access policies. Their creation migrations are not included in this repository. `supabase/tests/contact_rate_limit.sql` contains database checks, but it is not run by `node --test`. The frontend build also does not type-check the Edge Function.
+Every `VITE_*` value is included in browser code. Keep the Resend key and Supabase server credentials out of these variables. `getSupabase()` creates and reuses the browser client on first use; missing contact configuration causes a form submission error.
 
-## Where to edit
+The contact function reads `EMAIL_API_KEY` from Supabase function secrets. It is a Resend API key, despite the generic variable name. It is optional for saving a message and required for attempting an email notification. Do not put it in the frontend environment template.
 
-| File | Purpose |
-| --- | --- |
-| `src/data/site.ts` | Personal text, profile summary, navigation, social links and some form copy. |
-| `src/data/projects.ts` | Project entries and case-study data. |
-| `src/types/project.ts` | Required project and case-study fields. |
-| `src/data/techIcons.ts` | Technology names and their icon components. |
-| `src/pages/AnaPage.tsx` | Page section order. |
-| `src/components/sections/Contact.tsx` | Form behavior, email address and additional form copy. |
-| `src/index.css` | Theme tokens, global styles and CSS animations. |
-| `index.html` | Document language, title, metadata and icon links. |
-| `src/assets/images/Logo.svg` | K logo used by the interface and SVG favicon. |
-| `public/` | ICO fallback and Apple touch icon derived from the K logo. |
+## Contact flow: Supabase and Resend
 
-New projects must satisfy the `Project` type, including its required `caseStudy`. Technology names must match `techIcons` keys. The current project card does not display the case-study fields.
+1. `Contact.tsx` trims and validates the form, then calls `getSupabase().functions.invoke("contact", { body })`. Limits are 50 characters for the name, 100 for email/subject, and 250 for the message. Selecting Other requires a separate subject.
+2. `supabase/functions/contact/index.ts` accepts POST requests using `withSupabase({ auth: "publishable" })`. `supabase/config.toml` disables the gateway's legacy JWT check; the function wrapper handles publishable-key authentication.
+3. The function validates the input and calls `consume_contact_request` using the server-side admin client. Rate-limit service errors return 503; rejected requests return 429 with `Retry-After`.
+4. Allowed messages are inserted into `contact_messages`. A database insert failure returns 500.
+5. If `EMAIL_API_KEY` is set, the function sends a notification through Resend. The current sender is `Portfolio <onboarding@resend.dev>`, the recipient is `kaandeveloperr07@gmail.com`, and replies go to the visitor's email. These addresses are set in the function source. Resend's test sender has account restrictions; configure a verified sender for production as described in the [Resend guide](https://resend.com/docs/send-with-supabase-edge-functions).
+6. The response is `{ success: true, emailSent }` after a successful database insert. Missing email configuration or a failed Resend request leaves `emailSent` false while keeping the saved message. The frontend reports “Message saved. Thank you.” and does not inspect `emailSent`; it does not confirm email delivery.
 
-## Deployment
+### Database prerequisites
 
-| Setting | Value |
-| --- | --- |
-| Install command | `pnpm install --frozen-lockfile` |
-| Build command | `pnpm build` |
-| Output directory | `dist` |
+This repository does not contain database migrations. A new Supabase project needs these existing database resources before the contact function can work:
 
-Set the frontend environment variables on the host before building. Configure and deploy the Supabase backend separately from the static frontend.
+- `public.contact_messages`, accepting `name`, `email`, `subject` and `message` inserts from the admin client.
+- `public.consume_contact_request(text)`, accepting `p_email` and returning one row with `allowed` and `retry_after`.
+- `public.contact_rate_limits`, used by the rate-limit function and the SQL check.
 
-When the production domain and a social preview image are available, add the real canonical URL, `og:url`, and absolute image URLs to `index.html`. No production address is currently configured in the repository. The current social metadata provides a text summary. If the K logo changes, regenerate the ICO and Apple touch icon to match it.
+[`supabase/tests/contact_rate_limit.sql`](./supabase/tests/contact_rate_limit.sql) checks an expected limit of 3 requests per email and 30 globally per 10-minute window, and checks that browser roles cannot insert messages or call the limiter directly. It runs inside a transaction and rolls its fixtures back. It is separate from `node --test` and requires a prepared test database:
 
-The production build currently reports large Spline-related chunks. Browser behavior, performance, database policies and end-to-end contact delivery need their own checks; a passing frontend build does not verify them.
+```sh
+psql "TEST_DATABASE_CONNECTION_STRING" -v ON_ERROR_STOP=1 -f supabase/tests/contact_rate_limit.sql
+```
 
-## Credits
+Replace the quoted placeholder with the test database connection string. This file tests an existing schema; it does not create one. Local frontend checks do not verify the deployed schema, rate limits or email delivery.
 
-The About robot uses a third-party model. Attribution and license details are in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md), with visible credit in the footer.
+### Function deployment
 
-[Kaan Hamitler on GitHub](https://github.com/Kaan-Developer)
+With the [Supabase CLI](https://supabase.com/docs/guides/functions/deploy) installed, a prepared database, and your own project reference:
+
+```sh
+supabase login
+supabase link --project-ref YOUR_PROJECT_REF
+supabase secrets set EMAIL_API_KEY=YOUR_RESEND_API_KEY
+supabase functions deploy contact
+```
+
+The secrets command is needed only for email notifications. These commands change the selected Supabase project; they are setup instructions, not actions performed by the frontend build.
+
+## Files
+
+```text
+index.html                           Browser title, metadata and icon links
+.env.example                         Public frontend environment template
+.oxlintrc.json                        Oxlint rules
+vite.config.ts                       React and Tailwind Vite plugins
+tsconfig*.json                       TypeScript project configuration
+public/
+  favicon.svg                        Copy of the existing K logo
+  favicon.ico                        16, 32 and 48 px versions in one ICO
+  apple-touch-icon.png                180 × 180 icon with a white background
+src/
+  main.tsx                           React entry, fonts and global styles
+  App.tsx                            Renders AnaPage
+  index.css                          Theme variables and global styles
+  pages/AnaPage.tsx                   Page composition and section order
+  assets/images/Logo.svg             Source K logo
+  components/sections/               Hero, Projects, About, Stacks, Contact, Footer
+  components/ui/                     Navigation, buttons, summary and form controls
+  components/Robot/RobotCanvas.tsx    Spline scene loading and visibility handling
+  components/feedback/               Loading, Skeleton, ErrorBoundary, NotFound
+  data/                              Site/project content, tech icons, Spline credit
+  lib/supabase.ts                    Browser Supabase client
+  store/menu.ts                      Zustand mobile-menu state
+  types/                             Project and profile-summary types
+tests/                               About, Navbar and contact-copy tests
+supabase/
+  config.toml                        Contact function configuration
+  functions/contact/index.ts         Validation, rate limit, database and email flow
+  functions/contact/deno.json         Edge Function dependency mappings
+  tests/contact_rate_limit.sql        Database permissions and rate-limit check
+THIRD_PARTY_NOTICES.md                Spline attribution and license information
+```
+
+## Icons and metadata
+
+The icons use the geometry and colors from `src/assets/images/Logo.svg`. Vite copies `public/` into `dist/`; the HTML links to `/favicon.svg`, `/favicon.ico` and `/apple-touch-icon.png`. Keep those generated assets in sync when changing the source logo.
+
+The page language is English. The requested “Kopyalandı” feedback has its own `lang="tr"` marker. Open Graph and X metadata describe Kaan Hamitler and his frontend work. No live domain is configured, so metadata does not invent an `og:url` or absolute social-image URL. Add the real production URLs when publishing.
+
+## Frontend deployment and verification
+
+Set the four applicable `VITE_*` values on the static host, run `pnpm build`, and publish `dist/` at the domain root. The current icon URLs are root-relative. Deploy the Supabase function separately if the contact form is needed.
+
+After building, use `pnpm preview` to inspect the output and open the three icon URLs. Run `node --test`, `pnpm lint` and `pnpm build` before publishing. The Node tests cover selected component behavior; they are not browser end-to-end tests.
+
+No Lighthouse score, performance improvement or full accessibility conformance is claimed. Build output currently warns about JavaScript chunks larger than 500 kB. Color contrast checks cover the updated text/button combinations and do not replace a full accessibility review.

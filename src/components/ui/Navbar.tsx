@@ -50,6 +50,7 @@ const { isOpen, toggle } = useMenuStore();
   }, [isOpen]);
 
   return (
+    <>
     <header
   className={`
     fixed top-5 md:top-6 left-1/2 z-50
@@ -133,8 +134,18 @@ const { isOpen, toggle } = useMenuStore();
   <div className="hidden lg:flex">
     <StarOnGithub />
   </div>
-
 </header>
+
+  {isOpen && (
+    <button
+      type="button"
+      aria-label="Close navigation menu"
+      tabIndex={-1}
+      className="fixed inset-0 z-40 lg:hidden"
+      onClick={handleMenuToggle}
+    />
+  )}
+</>
   );
 };
 

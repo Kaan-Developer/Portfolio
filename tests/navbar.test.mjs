@@ -53,12 +53,15 @@ function mountNavbar() {
     return children.map((child) => findElement(child, predicate)).find(Boolean);
   }
   render();
+  const backdrop = () => [render().props.children].flat().find((node) => node?.props?.onClick);
   return {
     scroll(y) { window.scrollY = y; onScroll(); render(); },
     openMenu() { findElement(render(), (node) => node.props?.["aria-label"] === "Open menu").props.onClick(); render(); },
     closeMenu() { findElement(render(), (node) => node.props?.["aria-label"] === "Close menu").props.onClick(); render(); },
     mobileMenu() { return findElement(render(), (node) => node.props?.id === "mobile-menu"); },
-    isHidden() { return render().props.className.includes("-translate-y-["); },
+    backdrop,
+    clickOutsideMenu() { backdrop().props.onClick(); render(); },
+    isHidden() { return findElement(render(), (node) => node.type === "header").props.className.includes("-translate-y-["); },
     unmount() { cleanup(); return onScroll; },
   };
 }
@@ -95,4 +98,14 @@ test("an open mobile menu remains visible while scrolling", () => {
   assert.equal(navbar.isHidden(), false);
   navbar.scroll(200);
   assert.equal(navbar.isHidden(), false);
+});
+
+test("the backdrop only intercepts clicks while the mobile menu is open", () => {
+  const navbar = mountNavbar();
+  assert.equal(navbar.backdrop(), undefined);
+  navbar.openMenu();
+  assert.ok(navbar.backdrop());
+  navbar.clickOutsideMenu();
+  assert.equal(navbar.mobileMenu().props["aria-hidden"], true);
+  assert.equal(navbar.backdrop(), undefined);
 });
