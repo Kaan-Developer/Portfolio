@@ -118,7 +118,7 @@ const Contact = () => {
         <div className="mt-8 flex flex-col gap-4 max-w-xl">
           {/* Email Box */}
           <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-6 shadow-soft">
-            <div className="relative flex items-center justify-between gap-4">
+            <div className="relative flex flex-col md:flex-row items-start justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white">
                   <Mail size={22} strokeWidth={1.9} />

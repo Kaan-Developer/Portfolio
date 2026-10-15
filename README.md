@@ -114,7 +114,7 @@ src/
   components/sections/               Hero, Projects, About, Stacks, Contact, Footer
   components/ui/                     Navigation, buttons, summary and form controls
   components/Robot/RobotCanvas.tsx    Spline scene loading and visibility handling
-  components/feedback/               Loading, Skeleton, ErrorBoundary, NotFound
+  components/feedback/               Loading, ErrorBoundary, NotFound
   data/                              Site/project content, tech icons, Spline credit
   lib/supabase.ts                    Browser Supabase client
   store/menu.ts                      Zustand mobile-menu state
