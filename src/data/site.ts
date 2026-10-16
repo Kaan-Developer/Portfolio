@@ -33,7 +33,7 @@ export const site = {
   status: "Building",
 
   littleDesc:
-    "I build clean, useful interfaces with React, TypeScript and Tailwind CSS.",
+    "I build responsive web interfaces with React and TypeScript",
 
   links: {
     github: "https://github.com/Kaan-Developer",

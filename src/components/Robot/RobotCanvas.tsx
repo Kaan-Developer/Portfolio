@@ -47,7 +47,6 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   const selectedScene = scenes.find((scene) => scene.id === sceneId);
 
   const handleLoad = (splineApp: Application) => {
-    splineApp.setZoom(1.55);
     appRef.current = splineApp;
 
     if (!inViewRef.current) splineApp.stop();
@@ -58,6 +57,9 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   useEffect(() => {
     const handleResize = () => {
       const mobile = checkIsMobile();
+      if (mobile === isMobile) return;
+
+      appRef.current = null;
       setIsMobile(mobile);
 
       if (!mobile) setIsLoading(true);
@@ -65,7 +67,7 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const container = containerRef.current;

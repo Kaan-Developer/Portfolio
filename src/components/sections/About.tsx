@@ -16,7 +16,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="grid w-full grid-cols-1 md:grid-cols-2 gap-10
+      className="grid w-full grid-cols-1 lg:grid-cols-2 gap-10
       px-6 py-10 md:px-12 md:py-14 lg:gap-16"
     >
       <div className="flex min-w-0 flex-col gap-3">
@@ -36,7 +36,7 @@ const About = () => {
             type="button"
             aria-expanded={showStacks}
             aria-controls="about-stacks"
-            className="hidden md:flex group h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap text-sm font-medium tracking-tight transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 bg-black text-white hover:bg-ink"
+            className="hidden lg:flex group h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap text-sm font-medium tracking-tight transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 bg-black text-white hover:bg-ink"
             onClick={() => setShowStacks((previous) => !previous)}
           >
             Stacks
@@ -56,13 +56,13 @@ const About = () => {
             </Button>
           </div>
         </div>
-        <div className="mt-8 border-t border-border pt-8 md:hidden">
+        <div className="mt-8 border-t border-border pt-8 lg:hidden">
           <Stacks />
         </div>
       </div>
 
-      <div className="hidden w-full min-w-0 md:grid">
-        <div className="relative grid w-full">
+      <div className="hidden w-full min-w-0 lg:grid">
+        <div className="relative grid min-h-[520px] w-full">
           <div
             className={clsx(
               "absolute inset-0 w-full bg-[#F8FAFC]",
