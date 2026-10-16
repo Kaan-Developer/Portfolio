@@ -9,6 +9,8 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 interface Scene {
   id: number;
   sceneUrl: string;
+  frame?: { width: number; height: number };
+  backgroundObjectId?: string;
 }
 
 interface RobotCanvasProps {
@@ -17,16 +19,34 @@ interface RobotCanvasProps {
 
 const scenes: Scene[] = [
   { id: 1, sceneUrl: import.meta.env.VITE_ROBOT_1_URL },
-  { id: 2, sceneUrl: import.meta.env.VITE_ROBOT_2_URL },
+  {
+    id: 2,
+    sceneUrl: import.meta.env.VITE_ROBOT_2_URL,
+    backgroundObjectId: "9e0f8cf5-5312-4321-bf8b-da4b800916aa",
+    // Covers this scene's camera offset, robot movement and Spline badge clearance.
+    frame: { width: 400, height: 480 },
+  },
 ];
+
+const fitScene = (app: Application, container: HTMLDivElement, scene: Scene) => {
+  if (!scene.frame) return;
+
+  const { clientWidth: width, clientHeight: height } = container;
+  const padding = 32;
+  if (width <= padding * 2 || height <= padding * 2) return;
+
+  app.setZoom(
+    Math.min(
+      (width - padding * 2) / scene.frame.width,
+      (height - padding * 2) / scene.frame.height,
+    ),
+  );
+};
 
 const checkIsMobile = () => {
   if (typeof window === "undefined") return false;
 
-  return (
-    window.innerWidth < 768 ||
-    !window.matchMedia("(hover: hover) and (pointer: fine)").matches
-  );
+  return window.innerWidth < 1024;
 };
 
 const supportsIntersectionObserver = () =>
@@ -43,11 +63,34 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
   const [hasEntered, setHasEntered] = useState(
     () => !supportsIntersectionObserver(),
   );
+  const [attempt, setAttempt] = useState(0);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const selectedScene = scenes.find((scene) => scene.id === sceneId);
 
+  const handleSceneError = (error: Error) => {
+    appRef.current = null;
+    setLoadError(error.message);
+    setIsLoading(false);
+  };
+
+  const handleRetry = () => {
+    appRef.current = null;
+    setLoadError(null);
+    setIsLoading(true);
+    setAttempt((previous) => previous + 1);
+  };
+
   const handleLoad = (splineApp: Application) => {
     appRef.current = splineApp;
+
+    if (selectedScene?.backgroundObjectId) {
+      splineApp.findObjectById(selectedScene.backgroundObjectId)?.hide();
+    }
+
+    if (containerRef.current && selectedScene) {
+      fitScene(splineApp, containerRef.current, selectedScene);
+    }
 
     if (!inViewRef.current) splineApp.stop();
 
@@ -68,6 +111,19 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobile]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (isMobile || !container || !selectedScene?.frame) return;
+    if (typeof ResizeObserver === "undefined") return;
+
+    const observer = new ResizeObserver(() => {
+      if (appRef.current) fitScene(appRef.current, container, selectedScene);
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [isMobile, selectedScene]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -123,7 +179,25 @@ const RobotCanvas = ({ sceneId }: RobotCanvasProps) => {
           <Loading />
         </div>
       )}
-      <ErrorBoundary onError={() => setIsLoading(false)}>
+      <ErrorBoundary
+        key={`${sceneId}:${attempt}`}
+        onError={handleSceneError}
+        fallback={
+          <div role="alert" className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center text-sm text-muted">
+            <p>The robot could not load.</p>
+            {import.meta.env.DEV && loadError && (
+              <p className="max-w-full break-words text-xs">{loadError}</p>
+            )}
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="cursor-pointer rounded-full border border-border px-4 py-2 text-ink"
+            >
+              Try again
+            </button>
+          </div>
+        }
+      >
         <Suspense fallback={null}>
           {hasEntered && (
             <Spline scene={selectedScene.sceneUrl} onLoad={handleLoad} />

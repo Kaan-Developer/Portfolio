@@ -61,13 +61,13 @@ const About = () => {
         </div>
       </div>
 
-      <div className="hidden w-full min-w-0 lg:grid">
-        <div className="relative grid min-h-[520px] w-full">
+      <div className="hidden w-full min-w-0 self-start lg:grid">
+        <div className="relative grid w-full">
           <div
             className={clsx(
-              "absolute inset-0 w-full bg-[#F8FAFC]",
+              "col-start-1 row-start-1 aspect-square max-h-[480px] w-full bg-bg",
               {
-                "invisible pointer-events-none": showStacks,
+                "invisible pointer-events-none absolute inset-0": showStacks,
               },
             )}
             aria-hidden={showStacks}
