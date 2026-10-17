@@ -112,7 +112,7 @@ const { isOpen, toggle } = useMenuStore();
         <Ul mobile />
 
         <div className="pt-2">
-          <StarOnGithub />
+          <StarOnGithub mobile />
         </div>
 
     {/* Kapat */}

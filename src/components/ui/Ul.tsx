@@ -4,14 +4,26 @@ import { useEffect, useState } from "react";
 interface UlProps {
     mobile?: boolean;
     inline?: boolean;
+    links?: { label: string; target: string }[];
+    ariaLabel?: string;
 }
 
 
-const Ul = ({ mobile = false, inline = false }:UlProps) => {
+const Ul = ({
+  mobile = false,
+  inline = false,
+  links = site.bubbles,
+  ariaLabel,
+}: UlProps) => {
       const [activeSection, setActiveSection] = useState(site.bubbles[0]?.target);
 
     useEffect(() => {
-    const sectionIds = ["home", ...site.bubbles.map((b) => b.target)];
+    const sectionIds = [...new Set([
+      "home",
+      "contact",
+      ...site.bubbles.map((b) => b.target),
+      ...links.map((link) => link.target),
+    ])];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
@@ -37,18 +49,18 @@ const Ul = ({ mobile = false, inline = false }:UlProps) => {
     sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
-  }, []);
+  }, [links]);
 
     return (
         <nav
-  aria-label={mobile ? "Mobile navigation" : "Primary navigation"}
+  aria-label={ariaLabel ?? (mobile ? "Mobile navigation" : "Primary navigation")}
   className={
     mobile
       ? "flex flex-col items-start gap-2"
       : `${inline ? "flex flex-wrap justify-center" : "absolute left-1/2 flex -translate-x-1/2"} items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md`
   }
 >
-  {site.bubbles.map((bubble) => {
+  {links.map((bubble) => {
     const isActive = activeSection === bubble.target;
 
     return (
