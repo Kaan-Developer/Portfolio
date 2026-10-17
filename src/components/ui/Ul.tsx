@@ -1,10 +1,11 @@
 import { site } from "../../data/site";
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
 interface UlProps {
     mobile?: boolean;
     inline?: boolean;
-    links?: { label: string; target: string }[];
+    links?: { label: ReactNode; target: string }[];
     ariaLabel?: string;
 }
 

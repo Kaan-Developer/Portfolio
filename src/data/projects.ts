@@ -1,8 +1,10 @@
 import type { Project } from "../types/project";
+import portfolioHero from "../assets/images/portfolio-hero.png";
 
 export const projects: Project[] = [
   {
     title: "Portfolio",
+    image: portfolioHero,
     description:
       "A personal portfolio that brings my projects, background and contact details together, with a Spline scene loaded separately from the main content.",
     tech: ["React", "TypeScript", "Tailwind", "Spline", "Supabase"],
@@ -26,12 +28,12 @@ export const projects: Project[] = [
       outcome:
         "The site combines my introduction, project links and contact form in one page. The profile summary data mismatch is resolved, and lint, TypeScript and production build checks pass. I have not measured visitor outcomes or a performance improvement.",
       evidence: {
-        screenshots: [],
+        screenshots: [portfolioHero],
         checks: ["pnpm lint", "pnpm exec tsc -b", "pnpm build"],
         checkedOn: "2026-10-10",
         automatedTests: "No automated test suite is configured.",
         limitations: [
-          "Project screenshots and a live demo URL have not been added to this entry.",
+          "A live demo URL has not been added to this entry.",
           "Desktop and mobile behavior, keyboard access, and end-to-end contact delivery have not been verified in a browser.",
           "No user, business or before-and-after performance metrics have been collected.",
           "The production build still reports JavaScript chunks larger than 500 kB.",

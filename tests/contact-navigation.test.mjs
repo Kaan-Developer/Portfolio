@@ -4,6 +4,13 @@ import test from "node:test";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
 
+function visibleText(node) {
+  if (typeof node === "string") return node;
+  if (Array.isArray(node)) return node.map(visibleText).join("");
+  if (!node || node.props?.["aria-hidden"] === "true") return "";
+  return visibleText(node.props?.children);
+}
+
 function mountContactNavigation(mobile = false) {
   let activeSection;
   let onIntersect;
@@ -38,6 +45,7 @@ function mountContactNavigation(mobile = false) {
         if (dependency === "react/jsx-runtime") return { jsx, jsxs: jsx };
         if (dependency === "../../data/site") return { site: { bubbles } };
         if (dependency === "./Ul") return load("Ul");
+        if (dependency === "lucide-react") return { ArrowUpRight: "svg" };
         return {};
       },
     });
@@ -64,7 +72,7 @@ test("Contact navigates in the same tab with its visible accessible name", () =>
   assert.equal(props.href, "#contact");
   assert.equal(props.target, undefined);
   assert.equal(props["aria-label"], undefined);
-  assert.equal(props.children, "Contact");
+  assert.equal(visibleText(props.children), "Contact");
 });
 
 for (const mobile of [false, true]) {
