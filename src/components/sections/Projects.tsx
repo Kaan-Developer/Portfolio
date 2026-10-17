@@ -1,6 +1,7 @@
 import { site } from "../../data/site";
 import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
+import { ArrowUpRight } from "lucide-react";
 
 
 import Button from "../ui/Button";
@@ -20,25 +21,22 @@ const Projects = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="grid lg:grid-cols-2 rounded-3xl border border-border bg-white p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
-            >
-              <img
-                src={project.image}
-                alt={`${project.title} preview`}
-                className="aspect-[16/10] w-full rounded-2xl bg-primary-light object-contain p-6 md:aspect-auto md:h-full"
-              />
+        {projects.map((project) => (
+          <article
+            key={project.title}
+            className="grid grid-cols-1 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
+          >
+            <img
+              src={project.image }
+              alt={`${project.title} preview`}
+              className="aspect-[16/10] md:h-full object-contain w-full rounded-2xl bg-primary-light object-contain p-6 md:p-0 md:aspect-auto"
+            />
 
-              <div className="flex flex-col justify-center gap-3 px-3 pb-3 pt-5 md:p-8">
+            <div className="flex flex-col justify-center gap-3 pt-5 md:p-8">
+              <div className="flex flex-wrap gap-2 items-center justify-between">
                 <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
                   {project.title}
                 </h3>
-
-                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
-                  {project.description}
-                </p>
 
                 <ul className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => {
@@ -61,61 +59,39 @@ const Projects = () => {
                     );
                   })}
                 </ul>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button arrow link={project.github} target="_blank">
-                    GitHub
-                  </Button>
-                  {project.live && (
-                    <Button
-                      arrow
-                      link={project.live}
-                      target="_blank"
-                      variant="outline"
-                    >
-                      Live demo
-                    </Button>
-                  )}
-                </div>
               </div>
 
-{/*                             <img
-                src={project.image}
-                alt={`${project.title} preview`}
-                className="aspect-[16/10] w-full rounded-2xl bg-primary-light object-contain p-6 md:aspect-auto md:h-full"
-              />
+              <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
+                {project.description}
+              </p>
 
-              <div className="flex flex-col justify-center gap-3 px-3 pb-3 pt-5 md:p-8">
-                <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
-                  {project.title}
-                </h3>
-
-                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
-                  {project.description}
-                </p>
-
-                <ul className="flex flex-wrap gap-2">
-                </ul>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button arrow link={project.github} target="_blank">
-                    GitHub
+              <div className="flex items-center flex-wrap gap-3 pt-2">
+                <Button arrow link={project.github} target="_blank">
+                  GitHub
+                </Button>
+                {project.live && (
+                  <Button
+                    arrow
+                    link={project.live}
+                    target="_blank"
+                    variant="outline"
+                  >
+                    Live demo
                   </Button>
-                  {project.live && (
-                    <Button
-                      arrow
-                      link={project.live}
-                      target="_blank"
-                      variant="outline"
-                    >
-                      Live demo
-                    </Button>
-                  )}
-                </div>
-              </div> */}
-            </article>
-          ))}
+                )}
 
+                <span className="text-subtle md:text-lg underline flex items-center gap-2 group cursor-pointer">
+                  View Details
+                                    <ArrowUpRight
+                    size={16}
+                    strokeWidth={2}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

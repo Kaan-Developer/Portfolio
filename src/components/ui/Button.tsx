@@ -1,10 +1,11 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import clsx from "clsx";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 interface Props extends ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "blue" | "secondary" | "outline";
   arrow?: boolean;
+  arrowDirection?: "up-right" | "right";
   children: ReactNode;
   link: string;
   target?: string;
@@ -17,12 +18,13 @@ const variants = {
   secondary:
     "border border-primary/20 bg-primary-light shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
   outline:
-    "border border-black/20 bg-transparent text-black hover:border-black hover:bg-black hover:text-white",
+    "border border-black/15 bg-transparent text-black hover:border-black/30 hover:bg-black hover:text-white",
 };
 
 const Button = ({
   variant = "primary",
   arrow = false,
+  arrowDirection = "up-right",
   className,
   children,
   link,
@@ -49,14 +51,22 @@ const Button = ({
     >
       {children}
 
-      {arrow && (
-        <ArrowUpRight
-          size={16}
-          strokeWidth={2}
-          aria-hidden="true"
-          className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-        />
-      )}
+      {arrow &&
+        (arrowDirection === "right" ? (
+          <ArrowRight
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover:translate-x-1"
+          />
+        ) : (
+          <ArrowUpRight
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        ))}
     </a>
   );
 };

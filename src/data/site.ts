@@ -41,9 +41,9 @@ export const site = {
 
   // Navbar links
   bubbles: [
+    {label: "Home", target: "home"},
     { label: "Projects", target: "projects" },
     { label: "About", target: "about" },
-    { label: "Contact", target: "contact" },
   ],
 
   profileSummary: [

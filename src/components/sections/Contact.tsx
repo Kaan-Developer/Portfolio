@@ -123,9 +123,9 @@ const Contact = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
-                    Direct Contact
+                    Email Address
                   </span>
-                  <p className="text-sm font-medium text-ink">Email Address</p>
+                  <p className="text-sm font-medium text-ink">{contact.email}</p>
                 </div>
               </div>
 
@@ -195,7 +195,7 @@ const Contact = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="flex min-w-0 w-full flex-col gap-6 rounded-xl border border-border bg-white p-5 shadow-soft sm:gap-8 sm:p-6 lg:p-8"
+        className="flex min-w-0 w-full flex-col gap-2 rounded-xl border border-border p-5 sm:gap-8 sm:p-6 lg:p-8"
       >
         <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
           {contact.hi}

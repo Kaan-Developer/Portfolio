@@ -1,12 +1,12 @@
 import type { Project } from "../types/project";
-import portfolioHero from "../assets/images/portfolio-hero.png";
+import portfolioHero from "../assets/images/portfolioHero.png";
 
 export const projects: Project[] = [
   {
     title: "Portfolio",
     image: portfolioHero,
     description:
-      "A personal portfolio that brings my projects, background and contact details together, with a Spline scene loaded separately from the main content.",
+      "My personal website showcasing my projects, technical skills, and development journey.",
     tech: ["React", "TypeScript", "Tailwind", "Spline", "Supabase"],
     github: "https://github.com/Kaan-Developer/Portfolio",
     caseStudy: {
