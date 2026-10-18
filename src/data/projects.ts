@@ -5,6 +5,7 @@ export const projects: Project[] = [
   {
     title: "Portfolio",
     image: portfolioHero,
+    slug: "portfolio",
     description:
       "My personal website showcasing my projects, technical skills, and development journey.",
     tech: ["React", "TypeScript", "Tailwind", "Spline", "Supabase"],

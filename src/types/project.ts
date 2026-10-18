@@ -22,4 +22,5 @@ export interface Project {
   github: string;
   live?: string;
   caseStudy: ProjectCaseStudy;
+  slug: string;
 }

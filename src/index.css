@@ -141,7 +141,8 @@
   }
 }
 
-/* Keep the monogram inside the hero only. */
+/* Geçici olarak kaldırıldı (sonra tekrar getirilecek): Hero arkaplan "K" monogram efekti */
+/*
 #home {
   isolation: isolate;
 }
@@ -171,6 +172,7 @@
   position: relative;
   z-index: 1;
 }
+*/
 
 
 /* =========================

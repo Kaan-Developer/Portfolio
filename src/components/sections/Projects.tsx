@@ -1,8 +1,9 @@
 import { site } from "../../data/site";
 import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
-import { ArrowUpRight } from "lucide-react";
 
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 import Button from "../ui/Button";
 
@@ -27,7 +28,7 @@ const Projects = () => {
             className="grid grid-cols-1 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
           >
             <img
-              src={project.image }
+              src={project.image}
               alt={`${project.title} preview`}
               className="aspect-[16/10] md:h-full object-contain w-full rounded-2xl bg-primary-light object-contain p-6 md:p-0 md:aspect-auto"
             />
@@ -80,14 +81,16 @@ const Projects = () => {
                   </Button>
                 )}
 
-                <span className="text-subtle md:text-lg underline flex items-center gap-2 group cursor-pointer">
+                <Link to={`/projects/${project.slug}`}>
+                                <span className="text-subtle md:text-lg underline flex items-center gap-2 group cursor-pointer">
                   View Details
-                                    <ArrowUpRight
+                  <ArrowUpRight
                     size={16}
                     strokeWidth={2}
                     className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
                 </span>
+                </Link>
               </div>
             </div>
           </article>

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
-
-import RobotCanvas from "../Robot/RobotCanvas";
 import { site } from "../../data/site";
 import Button from "../ui/Button";
 import clsx from "clsx";
@@ -73,7 +71,6 @@ const About = () => {
             aria-hidden={showStacks}
             inert={showStacks}
           >
-            <RobotCanvas sceneId={2} />
           </div>
           <div
             id="about-stacks"

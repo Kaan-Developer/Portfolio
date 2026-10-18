@@ -51,7 +51,7 @@ function mountContactNavigation(mobile = false) {
     });
     return modules[name] = exports;
   }
-  const Component = load("StarOnGithub").default;
+  const Component = load("ContactButton").default;
   const render = () => Component({ mobile });
   const link = () => {
     function find(node) {

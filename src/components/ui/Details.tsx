@@ -1,0 +1,62 @@
+import { ArrowLeft } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { projects } from "../../data/projects";
+import NotFound from "../feedback/NotFound";
+import { techIcons } from "../../data/techIcons";
+
+const Details = () => {
+  const { slug } = useParams();
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return <NotFound />;
+  }
+
+  return (
+    <main className="min-h-screen bg-bg px-6 py-8 md:px-10">
+      <Link
+        to="/#projects"
+        aria-label="Projelere dön."
+        className="inline-flex size-12 items-center justify-center rounded-full bg-white  text-black shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+      >
+        <ArrowLeft size={24} strokeWidth={1.75} aria-hidden="true" />
+      </Link>
+
+      <article className="mx-auto mt-10 max-w-4xl">
+        <h1 className="text-4xl font-bold">{project.title}</h1>
+
+        {project.image && (
+          <img
+            src={project.image}
+            alt={`${project.title} proje görünümü.`}
+            className="mt-8 w-full rounded-2xl"
+          />
+        )}
+
+        <div className="mt-2">
+          {project.tech.map((tech) => {
+            const Icon = techIcons[tech];
+
+            return (
+              <li
+                key={tech}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-bg px-3 py-1 text-xs font-medium text-ink"
+              >
+                {Icon && (
+                  <Icon size={14} className="shrink-0" aria-hidden="true" />
+                )}
+                {tech}
+              </li>
+            );
+          })}
+        </div>
+
+        <section className="mt-10">
+            <h2 className="text-2xl font-semibold">Çözülen Problem</h2>
+        </section>
+      </article>
+    </main>
+  );
+};
+
+export default Details;

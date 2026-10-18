@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import kaanLogo from "../../assets/images/Logo.svg";
-import StarOnGithub from "./StarOnGithub";
+import ContactButton from "./ContactButton";
 import Ul from "./Ul";
 
 import { useMenuStore } from "../../store/menu";
@@ -112,7 +112,7 @@ const { isOpen, toggle } = useMenuStore();
         <Ul mobile />
 
         <div className="pt-2">
-          <StarOnGithub mobile />
+          <ContactButton mobile />
         </div>
 
     {/* Kapat */}
@@ -130,9 +130,8 @@ const { isOpen, toggle } = useMenuStore();
     </button>
   </div>
 
-  {/* GitHub */}
   <div className="hidden lg:flex">
-    <StarOnGithub />
+    <ContactButton />
   </div>
 </header>
 

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AnaPage from "./pages/AnaPage";
 import NotFound from "./components/feedback/NotFound";
+import Details from "./components/ui/Details";
 
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<AnaPage />}></Route>
       <Route path="*" element={<NotFound />}></Route>
+      <Route path="/projects/:slug" element={<Details />}></Route>
     </Routes>
     </BrowserRouter>
   );
