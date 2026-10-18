@@ -53,6 +53,9 @@ const Details = () => {
 
         <section className="mt-10">
             <h2 className="text-2xl font-semibold">Çözülen Problem</h2>
+            <p className="mt-3 leading-7">
+                {project.caseStudy.problem}
+            </p>
         </section>
       </article>
     </main>
