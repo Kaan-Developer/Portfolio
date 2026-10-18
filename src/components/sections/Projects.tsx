@@ -3,7 +3,7 @@ import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import Button from "../ui/Button";
 
@@ -81,15 +81,18 @@ const Projects = () => {
                   </Button>
                 )}
 
-                <Link to={`/projects/${project.slug}`}>
-                                <span className="text-subtle md:text-lg underline flex items-center gap-2 group cursor-pointer">
-                  View Details
-                  <ArrowUpRight
-                    size={16}
-                    strokeWidth={2}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                <Link
+                  to={`/projects/${project.slug}`}
+                  aria-label={`View details for ${project.title}`}
+                  className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-full border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
+                >
+                  View details
+                  <ArrowRight
+                    size={18}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none"
                   />
-                </span>
                 </Link>
               </div>
             </div>
