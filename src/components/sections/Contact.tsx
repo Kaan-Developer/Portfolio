@@ -165,28 +165,11 @@ const Contact = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-between overflow-hidden rounded-3xl border border-border bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-medium hover:border-black/30"
+                className="group relative justify-between rounded-3xl border border-border bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-medium"
               >
-                <div className="flex items-center gap-3.5 min-w-0">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-black text-white transition-transform duration-300 group-hover:scale-105">
                     <Icon size={22} />
                   </div>
-                  <div className="min-w-0">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
-                      {item.name}
-                    </span>
-                    <p className="truncate text-base font-bold tracking-tight text-ink">
-                      {item.username}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-bg text-ink transition-all duration-200 group-hover:border-black group-hover:bg-black group-hover:text-white">
-                  <ArrowUpRight
-                    size={16}
-                    strokeWidth={2}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </div>
               </a>
             );
           })}

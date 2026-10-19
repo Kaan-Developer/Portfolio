@@ -1,17 +1,8 @@
 export interface ProjectCaseStudy {
-  context: string;
   problem: string;
   contribution: string;
   decisions: string[];
-  challenges: string[];
   outcome: string;
-  evidence: {
-    screenshots: string[];
-    checks: string[];
-    checkedOn: string;
-    automatedTests: string;
-    limitations: string[];
-  };
 }
 
 export interface Project {
@@ -22,5 +13,6 @@ export interface Project {
   github: string;
   live?: string;
   caseStudy: ProjectCaseStudy;
+  blogs?: { title: string; content: string }[];
   slug: string;
 }

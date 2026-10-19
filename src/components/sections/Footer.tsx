@@ -1,6 +1,5 @@
 import Logo from "../../assets/images/Logo.svg";
 import { site } from "../../data/site";
-import { splineCredit } from "../../data/splineCredit";
 
 const Footer = () => {
   return (

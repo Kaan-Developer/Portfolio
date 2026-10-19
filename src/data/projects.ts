@@ -7,46 +7,29 @@ export const projects: Project[] = [
     image: portfolioHero,
     slug: "portfolio",
     description:
-      "My personal website showcasing my projects, technical skills, and development journey.",
-    tech: ["React", "TypeScript", "Tailwind", "Spline", "Supabase"],
+      "My personal portfolio, which I designed and built as the sole developer to present my work and provide a way to contact me.",
+    tech: ["React", "TypeScript", "Tailwind", "Supabase"],
     github: "https://github.com/Kaan-Developer/Portfolio",
     caseStudy: {
-      context: "Independent learning project",
       problem:
-        "I needed one place to introduce my work and give visitors a way to contact me, rather than relying on separate profile and repository pages.",
+        "I needed a personal website where visitors could learn about me, see my projects and skills, and get in touch.",
       contribution:
-        "My work covers the React page sections, project data, navigation and contact form integration. Spline provides the 3D rendering, while Supabase provides the database and server function infrastructure.",
+        "I designed and developed this website myself. As the sole developer, I built the responsive React interface, navigation, project detail pages, and contact form, including the Supabase server function for saving messages and sending email notifications through Resend when configured.",
       decisions: [
-        "I keep site and project content in typed data files instead of repeating it inside components. This separates content updates from layout changes without introducing a content management service for a small personal site.",
-        "I use a single page with section links instead of separate routes for each introduction section. The current content fits one page; detailed project pages can be added when they need their own space.",
-        "The Spline component is loaded separately and enabled near its section. Rendering is skipped on small screens and devices without a fine pointer, and paused when the section is out of view. Always loading and running the scene would do unnecessary work on devices that do not use it.",
-        "The contact form calls a Supabase server function instead of sending email directly from the browser. Database writes and the email provider credential are handled on the server.",
-      ],
-      challenges: [
-        "Changing the profile summary from technology lists to text values exposed a data mismatch: the component called .map() on a string. I replaced the mixed structure with typed label/value entries and updated the component to render text directly.",
-        "The 3D scene needs different behavior on desktop and touch devices. The integration checks screen size and pointer support, loads near the visible section, and starts or stops the scene based on visibility. Its behavior still needs browser testing.",
+        "I keep site and project content in TypeScript data files so I can update the text without editing page components.",
+        "I use section links for the main page and React Router for project detail pages, giving each project a direct URL.",
+        "I use Tailwind CSS for responsive layouts and shared styles across the site.",
+        "I send contact form submissions to a Supabase server function, which validates requests and saves messages. Email notifications use Resend when its API key is configured, keeping that key out of browser code.",
       ],
       outcome:
-        "The site combines my introduction, project links and contact form in one page. The profile summary data mismatch is resolved, and lint, TypeScript and production build checks pass. I have not measured visitor outcomes or a performance improvement.",
-      evidence: {
-        screenshots: [portfolioHero],
-        checks: ["pnpm lint", "pnpm exec tsc -b", "pnpm build"],
-        checkedOn: "2026-10-10",
-        automatedTests: "No automated test suite is configured.",
-        limitations: [
-          "A live demo URL has not been added to this entry.",
-          "Desktop and mobile behavior, keyboard access, and end-to-end contact delivery have not been verified in a browser.",
-          "No user, business or before-and-after performance metrics have been collected.",
-          "The production build still reports JavaScript chunks larger than 500 kB.",
-        ],
-      },
+        "The site brings together my introduction, skills, and project links, with a dedicated detail page for each project. The contact form is implemented with validation and a Supabase integration for saving messages.",
     },
-  },
-];
-
-export const projectDrafts: Pick<Project, "title" | "tech">[] = [
-  {
-    title: "K AI",
-    tech: ["React", "TypeScript", "Tailwind"],
+    blogs: [
+      {
+        title: "Building my portfolio",
+        content:
+          "I designed and built this portfolio myself using React, TypeScript, Vite, and Tailwind CSS. The main page introduces me, presents my projects and skills, and includes a contact form.\n\nProject content lives in a TypeScript data file. The project cards and detail pages read from the same data, so I can update a project's description, technologies, and development notes in one place. React Router uses each project's slug to open its detail page.\n\nThe contact form sends submissions to a Supabase server function. The function validates the input, checks rate limits, and saves accepted messages to the database. It also attempts an email notification through Resend when an API key is configured.",
+      },
+    ],
   },
 ];

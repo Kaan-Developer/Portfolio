@@ -58,7 +58,7 @@ const Ul = ({
   className={
     mobile
       ? "flex flex-col items-start gap-2"
-      : `${inline ? "flex flex-wrap justify-center" : "absolute left-1/2 flex -translate-x-1/2"} items-center gap-1 rounded-full border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md`
+      : `${inline ? "flex flex-wrap justify-center rounded-md" : "absolute left-1/2 flex -translate-x-1/2 rounded-full"} items-center gap-1 border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md`
   }
 >
   {links.map((bubble) => {
@@ -77,7 +77,7 @@ const Ul = ({
           ? "bg-primary-soft text-white"
           : "text-muted hover:bg-black/5 hover:text-black"
       }`
-    : `rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+    : `${inline ? "rounded-md" : "rounded-full"} px-4 py-2 text-sm font-medium transition-colors duration-200 ${
         isActive
           ? "bg-primary-light text-black"
           : "text-muted hover:bg-black/5 hover:text-black"
