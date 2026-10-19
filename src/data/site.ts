@@ -74,7 +74,7 @@ export const site = {
     title: "Get in touch",
     hi: "Send Message",
     description:
-      "Have a project in mind, a role to fill, or just want to say hi? Send a message and I'll get back to you.",
+      "Send a message about a project, a role, or another enquiry. I aim to reply within 24 hours.",
 
     form: {
       nameLabel: "Name",
@@ -95,7 +95,7 @@ export const site = {
       submittingLabel: "Sending...",
       successMessage: "Your message has been sent.",
       errorMessage: "Something went wrong. Please try again.",
-      privacyNote: "Your details stay private — never shared or spam.",
+      privacyNote: "I use Supabase to store your message and Resend to send me an email notification.",
     },
   },
 };

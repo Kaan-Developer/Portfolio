@@ -1,4 +1,4 @@
-import { ArrowUpRight, Copy, Mail, Check, Lock } from "lucide-react";
+import { Copy, Mail, Check } from "lucide-react";
 import clsx from "clsx";
 
 import { site, socialLinks } from "../../data/site";
@@ -156,70 +156,72 @@ const Contact = () => {
               </p>
             )}
           </div>
-          {socialLinks.map((item) => {
-            const Icon = item.icon;
+          <div className="flex flex-wrap gap-3">
+            {socialLinks.map((item) => {
+              const Icon = item.icon;
 
-            return (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative justify-between rounded-3xl border border-border bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-medium"
-              >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-black text-white transition-transform duration-300 group-hover:scale-105">
-                    <Icon size={22} />
-                  </div>
-              </a>
-            );
-          })}
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.name}
+                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-black text-white transition-colors hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  <Icon size={22} aria-hidden="true" />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="flex min-w-0 w-full flex-col gap-2 rounded-xl border border-border p-5 sm:gap-8 sm:p-6 lg:p-8"
+        className="flex w-full min-w-0 flex-col gap-5 self-start rounded-2xl border border-border bg-white p-5 sm:p-6 lg:p-8"
       >
-        <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
-          {contact.hi}
-        </h3>
-        <div className="flex flex-col gap-3">
-          <label
-            htmlFor="contact-name"
-            className="text-balance font-semibold text-md"
-          >
-            {form.nameLabel}
-          </label>
-          <input
-            type="text"
-            id="contact-name"
-            name="name"
-            required
-            maxLength={50}
-            placeholder={form.namePlaceholder}
-            className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
-          />
+        <div className="grid w-full min-w-0 grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="flex min-w-0 flex-col gap-2">
+            <label
+              htmlFor="contact-name"
+              className="text-balance font-semibold text-md"
+            >
+              {form.nameLabel}
+            </label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              autoComplete="name"
+              required
+              maxLength={50}
+              placeholder={form.namePlaceholder}
+              className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+            />
+          </div>
+
+          <div className="flex min-w-0 flex-col gap-2">
+            <label
+              htmlFor="contact-email"
+              className="text-balance font-semibold text-md"
+            >
+              {form.emailLabel}
+            </label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              autoComplete="email"
+              required
+              maxLength={100}
+              placeholder={form.emailPlaceholder}
+              className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3">
-          <label
-            htmlFor="contact-email"
-            className="text-balance font-semibold text-md"
-          >
-            {form.emailLabel}
-          </label>
-          <input
-            type="email"
-            id="contact-email"
-            name="email"
-            required
-            maxLength={100}
-            placeholder={form.emailPlaceholder}
-            className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
+        <div className="flex min-w-0 flex-col gap-2">
           <label
             htmlFor="contact-subject"
             className="text-balance font-semibold text-md"
@@ -251,7 +253,7 @@ const Contact = () => {
           )}
         </div>
 
-        <div className="flex flex-1 flex-col gap-3 min-h-0">
+        <div className="flex min-w-0 flex-col gap-2">
           <div className="flex items-center justify-between">
             <label
               htmlFor="contact-message"
@@ -276,16 +278,29 @@ const Contact = () => {
             maxLength={250}
             onChange={handleMessageChange}
             placeholder={contact.form.messagePlaceholder}
-            className="w-full min-h-44 flex-1 resize-none rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+            rows={5}
+            className="w-full min-h-40 resize-y rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
         </div>
         <div className="flex flex-col gap-3">
+          <p className="text-sm leading-6 text-muted">
+            {form.privacyNote}{" "}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-ink underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            >
+              How your message is handled
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
           <button
             type="submit"
             disabled={submitState === "sending"}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100"
+            className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
           >
-            {submitState === "sending" ? "Sending..." : "Send"}
+            {submitState === "sending" ? "Sending..." : "Send Message"}
           </button>
 
           {submitState !== "idle" && (
@@ -300,16 +315,6 @@ const Contact = () => {
                   : "Sending your message..."}
             </p>
           )}
-          {/* Privacy note under the send button */}
-          <p className="flex items-center justify-center gap-1.5 text-center text-xs text-subtle">
-            <Lock
-              size={13}
-              strokeWidth={2}
-              aria-hidden="true"
-              className="shrink-0"
-            />
-            {form.privacyNote}
-          </p>
         </div>
       </form>
     </section>
