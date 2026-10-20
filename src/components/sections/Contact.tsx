@@ -1,4 +1,4 @@
-import { Copy, Mail, Check } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import clsx from "clsx";
 
 import { site, socialLinks } from "../../data/site";
@@ -103,60 +103,51 @@ const Contact = () => {
       id="contact"
       className="relative grid min-w-0 grid-cols-1 gap-8 px-0 py-10 sm:px-4 md:px-10 md:py-14 xl:grid-cols-2 xl:gap-12"
     >
-      <div className="flex min-w-0 flex-col justify-center">
-        <h2 className="mt-3 max-w-xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
+      <div className="flex min-w-0 flex-col items-start self-start">
+        <h2 className="max-w-lg text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
           {contact.title}
         </h2>
 
-        <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-xl md:leading-8">
+        <p className="mt-5 max-w-md text-base leading-7 text-muted md:text-lg md:leading-8">
           {contact.description}
         </p>
 
-        {/* Contact Info Boxes */}
-        <div className="mt-8 flex flex-col gap-4 max-w-xl">
-          {/* Email Box */}
-          <div className="group relative overflow-hidden rounded-3xl border border-border bg-white p-6 shadow-soft">
-            <div className="relative flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black text-white">
-                  <Mail size={22} strokeWidth={1.9} />
-                </div>
-                <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
-                    Email Address
-                  </span>
-                  <p className="text-sm font-medium text-ink">{contact.email}</p>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleCopy}
-                disabled={copyState === "copying"}
-                aria-busy={copyState === "copying"}
-                className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-full bg-black px-4 py-2 text-xs font-semibold text-white"
-              >
-                {copyState === "copied" ? (
-                  <Check size={13} strokeWidth={2.2} aria-hidden="true" />
-                ) : (
-                  <Copy size={13} strokeWidth={2.2} aria-hidden="true" />
-                )}
-                <span role="status" lang={copyState === "copied" ? "tr" : undefined}>
-                  {copyState === "copied"
-                    ? "Kopyalandı"
-                    : copyState === "copying"
-                      ? "Copying..."
-                      : "Copy Email"}
-                </span>
-              </button>
-            </div>
-            {copyState === "error" && (
-              <p role="alert" className="mt-2 text-sm text-red-600">
-                Could not copy. Select the email address above or open it in your email app.
-              </p>
-            )}
+        <div className="mt-8 w-full max-w-md border-t border-border pt-6">
+          <p className="text-sm text-muted">Email</p>
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a
+              href={`mailto:${contact.email}`}
+              className="min-w-0 select-text break-all text-base font-medium text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:text-lg"
+            >
+              {contact.email}
+            </a>
+            <button
+              type="button"
+              onClick={handleCopy}
+              disabled={copyState === "copying"}
+              aria-busy={copyState === "copying"}
+              className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-border px-3 text-sm font-medium text-muted transition-colors hover:border-border-strong hover:bg-white hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-60"
+            >
+              {copyState === "copied" ? (
+                <Check size={16} strokeWidth={1.75} aria-hidden="true" />
+              ) : (
+                <Copy size={16} strokeWidth={1.75} aria-hidden="true" />
+              )}
+              <span role="status" lang={copyState === "copied" ? "tr" : undefined}>
+                {copyState === "copied"
+                  ? "Kopyalandı"
+                  : copyState === "copying"
+                    ? "Copying..."
+                    : "Copy Email"}
+              </span>
+            </button>
           </div>
-          <div className="flex flex-wrap gap-3">
+          {copyState === "error" && (
+            <p role="alert" className="mt-2 text-sm text-red-600">
+              Could not copy. Select the email address above or open it in your email app.
+            </p>
+          )}
+          <div className="mt-6 flex flex-wrap gap-3">
             {socialLinks.map((item) => {
               const Icon = item.icon;
 
@@ -167,9 +158,10 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.name}
-                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-black text-white transition-colors hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  title={item.name}
+                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:border-border-strong hover:bg-white hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
-                  <Icon size={22} aria-hidden="true" />
+                  <Icon size={20} aria-hidden="true" />
                 </a>
               );
             })}
@@ -267,7 +259,7 @@ const Contact = () => {
                 "text-subtle": message.length < 250,
               })}
             >
-              {message.length} / 250 karakter
+              {message.length} / 250 characters
             </span>
           </div>
           <textarea
@@ -275,7 +267,7 @@ const Contact = () => {
             name="message"
             value={message}
             required
-            maxLength={250}
+            maxLength={1000}
             onChange={handleMessageChange}
             placeholder={contact.form.messagePlaceholder}
             rows={5}
@@ -291,7 +283,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="font-medium text-ink underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
             >
-              How your message is handled
+              Contact privacy notice
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </p>

@@ -3,7 +3,7 @@ import { site } from "../../data/site";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-white px-6 py-6 md:px-10 md:py-8">
+    <footer className="w-full px-6 py-6 md:px-10 md:py-8">
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-x-8">
         <div className="flex items-center gap-3">
           <img src={Logo} alt="" width={32} height={32} className="shrink-0" />

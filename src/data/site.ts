@@ -95,7 +95,7 @@ export const site = {
       submittingLabel: "Sending...",
       successMessage: "Your message has been sent.",
       errorMessage: "Something went wrong. Please try again.",
-      privacyNote: "I use Supabase to store your message and Resend to send me an email notification.",
+      privacyNote: "Your details are used to respond to your enquiry.",
     },
   },
 };

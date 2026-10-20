@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { projects } from "../../data/projects";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
+import Footer from "../sections/Footer";
 
 const Details = () => {
   const { slug } = useParams();
@@ -84,6 +85,8 @@ const Details = () => {
           ))}
         </section>
       </article>
+
+      <Footer />
     </main>
   );
 };

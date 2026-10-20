@@ -61,7 +61,7 @@ export default {
       );
     }
 
-    if (cleanMessage.length > 250) {
+    if (cleanMessage.length > 1000) {
       return Response.json(
         { error: "Message cannot exceed 250 characters." },
         { status: 400 },

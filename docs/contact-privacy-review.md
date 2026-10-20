@@ -1,8 +1,10 @@
 # Contact privacy implementation status
 
-This is an implementation record, not a finalized KVKK notice or a compliance
-certification. The `/privacy` page describes the current data flow and explicitly
-identifies the unfinished legal and retention work.
+This is an implementation record, not a compliance certification. The Turkish
+`/privacy` page now covers controller identity, collection, purposes and specific
+processing grounds, actual recipients, retention, rights, and applications. It
+still identifies the unfinished international-transfer and retention work;
+expanding the text does not complete those operational requirements.
 
 ## Confirmed facts
 
@@ -14,6 +16,10 @@ identifies the unfinished legal and retention work.
   (Ireland), `eu-west-1`.
 - The owner confirms that Resend email notifications are active. The function
   sends the submitted details to the owner's Gmail mailbox.
+- On 20 October 2026, the owner confirmed that no KVKK international-transfer
+  safeguard agreement has been arranged with Supabase, Resend, or Google. No
+  alternative applicable Article 9 mechanism has been verified. Do not describe
+  provider GDPR terms as an executed Turkish KVKK standard contract.
 - The response target is 24 hours. This is a target, not a guaranteed deadline.
 - A second dashboard screenshot confirms that `contact_messages.created_at` is
   `timestamp with time zone`. There is no reply/closure timestamp in that result.
@@ -21,6 +27,26 @@ identifies the unfinished legal and retention work.
   from the reply date. SQL for the database cleanup is prepared; deployment and
   actual scheduled execution have not been verified. Email copies require a
   separate deletion process.
+- The latest SQL Editor screenshot displays the schedule query and "Click Run
+  to execute your query", with no execution result. It does not establish that
+  the job exists, is active, or has run successfully.
+
+## Processing grounds described in the notice
+
+- General correspondence and necessary email-based abuse prevention: Article
+  5(2)(f), limited by the necessity and fundamental-rights conditions. The
+  controller still needs to document the actual legitimate-interest assessment;
+  adding this paragraph is not evidence that the assessment has been completed.
+- Enquiries directly necessary to establish or perform a contract to which the
+  sender is a party: Article 5(2)(c). This is conditional and does not classify
+  every enquiry or job opportunity as contractual processing.
+- Handling data-subject applications under Article 13: Article 5(2)(ç), legal
+  obligation. The notice describes email applications from an address already
+  notified and registered, with the applicable formal requirements linked.
+
+These processing grounds do not establish an Article 9 international-transfer
+mechanism. The page does not treat reading the notice or submitting the form as
+consent. No consent checkbox or new transfer behavior was introduced.
 
 ## Database retention setup
 
@@ -63,10 +89,9 @@ identifies the unfinished legal and retention work.
 
 ## Before finalizing the notice
 
-1. Determine and document the specific processing ground for each purpose under
-   Article 5 of KVKK. Contract-related enquiries, general correspondence, and
-   abuse prevention should be assessed separately. Do not substitute a generic
-   mandatory consent checkbox for this assessment.
+1. Validate and document the processing grounds above against actual practice,
+   including necessity, proportionality, and the legitimate-interest balance.
+   Do not substitute a generic mandatory consent checkbox for this assessment.
 2. Verify the applicable Article 9 mechanism for the actual international
    transfers to Supabase, Resend, the mailbox provider, and any relevant hosting
    or logging providers. An EU database region or EU contractual clauses do not
@@ -75,16 +100,23 @@ identifies the unfinished legal and retention work.
    above. `supabase/queries/contact_retention_preflight.sql` remains available
    for read-only schema inspection if the table changes.
 4. Apply a matching deletion process to Gmail messages, replies, Resend records,
-   relevant logs, and backups, accounting for provider retention and any
-   applicable legal preservation duties. Verify what each deletion actually
-   removes before promising a deadline.
+   rate-limit records, relevant logs, and backups, accounting for provider
+   retention and any applicable legal preservation duties. The message cleanup
+   only touches `public.contact_messages`; it does not cover email-based
+   rate-limit storage. Verify what each deletion actually removes before
+   promising a deadline.
 5. Confirm the data-subject request process, provider access controls, and actual
    hosting/logging practices. Replace the page's provisional status with the
    completed, reviewed notice only when these facts and arrangements are ready.
 
-## Sources reviewed on 19 October 2026
+## Sources reviewed on 19–20 October 2026
 
 - [KVKK disclosure requirements](https://www.kvkk.gov.tr/Icerik/2033/Aydinlatma-Yukumlulugu-)
+- [Disclosure procedure and required notice content](https://www.kvkk.gov.tr/Icerik/4132/aydinlatma-yukumlulugunun-yerine-getirilmesinde-uyulacak-usul-ve-esaslar-hakkinda-teblig)
+- [Article 5 processing grounds](https://www.kvkk.gov.tr/Icerik/2050/Kisisel-Veriler)
+- [Data-subject rights](https://www.kvkk.gov.tr/Icerik/2036/Ilgili-Kisinin-Haklari)
+- [Application procedure](https://www.kvkk.gov.tr/Icerik/2062/Basvuru-Hakki)
+- [Current international-transfer requirements](https://www.kvkk.gov.tr/Icerik/2053/Yurtdisina-Aktarim)
 - [KVKK distinction between disclosure and consent, decision 2026/347](https://www.kvkk.gov.tr/Icerik/8710/veri-sorumlulari-tarafindan-acik-riza-ve-aydinlatma-metinlerinin-ayri-ayri-duzenlenmesi-gerektigi-hakkinda-kisisel-verileri-koruma-kurulunun-18-02-2026-tarihli-ve-2026-347-sayili-ilke-kararina-iliskin-kamuoyu-duyurusu)
 - [KVKK international transfer guide](https://www.kvkk.gov.tr/Icerik/8143/Kisisel-Verilerin-Yurt-Disina-Aktarilmasi-Rehberi)
 - [KVKK deletion guidance](https://www.kvkk.gov.tr/Icerik/2038/kisisel-verilerin-silinmesi-yok-edilmesi-veya-anonim-hale-getirilmesi)
