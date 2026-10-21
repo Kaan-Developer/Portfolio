@@ -25,7 +25,7 @@ const Contact = () => {
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
-    if (text.length <= 250) {
+    if (text.length <= 1000) {
       setMessage(text);
     } else {
       setMessage(text.slice(0, 250));
@@ -113,8 +113,8 @@ const Contact = () => {
         </p>
 
         <div className="mt-8 w-full max-w-md border-t border-border pt-6">
-          <p className="text-sm text-muted">Email</p>
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="text-sm text-muted">Email:</p>
             <a
               href={`mailto:${contact.email}`}
               className="min-w-0 select-text break-all text-base font-medium text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:text-lg"
@@ -126,7 +126,7 @@ const Contact = () => {
               onClick={handleCopy}
               disabled={copyState === "copying"}
               aria-busy={copyState === "copying"}
-              className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-lg border border-border px-3 text-sm font-medium text-muted transition-colors hover:border-border-strong hover:bg-white hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-60"
+              className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-full px-3 text-sm font-medium text-white transition-colors bg-black text-white hover:bg-ink"
             >
               {copyState === "copied" ? (
                 <Check size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -147,7 +147,7 @@ const Contact = () => {
               Could not copy. Select the email address above or open it in your email app.
             </p>
           )}
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-4">
             {socialLinks.map((item) => {
               const Icon = item.icon;
 
@@ -159,7 +159,7 @@ const Contact = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border text-muted transition-colors hover:border-border-strong hover:bg-white hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-black text-white"
                 >
                   <Icon size={20} aria-hidden="true" />
                 </a>
@@ -259,7 +259,7 @@ const Contact = () => {
                 "text-subtle": message.length < 250,
               })}
             >
-              {message.length} / 250 characters
+              {message.length} / 1000 characters
             </span>
           </div>
           <textarea

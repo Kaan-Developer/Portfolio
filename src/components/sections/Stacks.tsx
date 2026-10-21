@@ -10,8 +10,8 @@ const Stacks = () => {
 
   return (
     <div className="w-full max-w-xl">
-      <h3 className="mb-3 text-3xl font-semibold leading-[0.95] tracking-tight text-balance md:text-5xl">
-        What I work with
+      <h3 className="mb-3 text-3xl font-bold leading-[0.95] tracking-tight text-balance md:text-5xl">
+        My Skills
       </h3>
 
       {groups.map((group) => (

@@ -40,13 +40,6 @@ export default {
       );
     }
 
-    if (!cleanSubject || cleanSubject.length > 100) {
-      return Response.json(
-        { error: "Subject is required and must be 100 characters or less." },
-        { status: 400 },
-      );
-    }
-
     if (subject === "other" && (!otherSubject || String(otherSubject).trim().length > 100)) {
       return Response.json(
         { error: "Please specify the subject (100 characters or less)." },

@@ -1,22 +1,26 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AnaPage from "./pages/AnaPage";
-import NotFound from "./components/feedback/NotFound";
-import Details from "./components/ui/Details";
+import Dashboard from "./pages/Dashboard";
 import PrivacyPage from "./pages/PrivacyPage";
+import Projects from "./components/sections/Projects";
+import Details from "./components/ui/Details";
+import NotFound from "./components/feedback/NotFound";
 
-
-const App = () => {
-  return (
-    <BrowserRouter>
+const App = () => (
+  <BrowserRouter>
     <Routes>
-      <Route path="/" element={<AnaPage />}></Route>
-      <Route path="*" element={<NotFound />}></Route>
-      <Route path="/projects/:slug" element={<Details />}></Route>
-      <Route path="/privacy" element={<PrivacyPage />}></Route>
+      <Route path="/" element={<AnaPage />} />
+
+      <Route element={<Dashboard />}>
+        <Route path="/dashboard" element={<Projects />} />
+        <Route path="/projects/:slug" element={<Details />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
-    </BrowserRouter>
-  );
-};
+  </BrowserRouter>
+);
 
 export default App;

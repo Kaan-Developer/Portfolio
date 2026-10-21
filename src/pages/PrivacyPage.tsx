@@ -1,18 +1,10 @@
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
 import { site } from "../data/site";
 import Footer from "../components/sections/Footer";
 
 const PrivacyPage = () => (
   <main className="min-h-screen bg-bg px-6 py-8 text-ink md:px-10 md:py-12">
     <article lang="tr" className="mx-auto max-w-2xl">
-      <Link
-        to="/#contact"
-        aria-label="İletişime dön"
-        className="inline-flex fixed top-8 left-6 z-50 size-12 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black md:left-10"
-      >
-        <ArrowLeft size={24} strokeWidth={1.75} aria-hidden="true" />
-      </Link>
 
       <header className="mt-20 border-b border-border pb-8">
         <p className="text-sm font-medium text-muted">{site.name}</p>
@@ -196,7 +188,6 @@ const PrivacyPage = () => (
         </section>
       </div>
     </article>
-
     <Footer />
   </main>
 );

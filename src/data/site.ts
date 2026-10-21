@@ -81,7 +81,7 @@ export const site = {
       namePlaceholder: "Your name",
       emailLabel: "Email",
       emailPlaceholder: "you@example.com",
-      subjectLabel: "Subject",
+      subjectLabel: "Subject(Optional)",
       subjectPlaceholder: "Select a subject",
       subjectOptions: [
         { label: "Project Inquiry", value: "project" },

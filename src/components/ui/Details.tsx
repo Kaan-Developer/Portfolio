@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { projects } from "../../data/projects";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
@@ -15,13 +15,6 @@ const Details = () => {
 
   return (
     <main className="min-h-screen relative bg-bg px-6 py-8 md:px-10">
-      <Link
-        to="/#projects"
-        aria-label="Projelere dön."
-        className="inline-flex fixed top-8 left-6 z-50 size-12 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black md:left-10"
-      >
-        <ArrowLeft size={24} strokeWidth={1.75} aria-hidden="true" />
-      </Link>
 
       <article className="mx-auto mt-10 max-w-4xl">
         <h1 className="text-4xl font-bold">{project.title}</h1>
