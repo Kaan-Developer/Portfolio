@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import kaanLogo from "../../assets/images/Logo.svg";
 import ContactButton from "./ContactButton";
+import LogoMark from "./LogoMark";
 import Ul from "./Ul";
 
 import { useMenuStore } from "../../store/menu";
@@ -65,13 +65,9 @@ const { isOpen, toggle } = useMenuStore();
   <a
     href="#home"
     aria-label="Kaan - Home"
-    className="select-none shrink-0 rounded-full bg-white p-2.5 shadow-soft"
+    className="select-none shrink-0 text-black transition-opacity hover:opacity-80"
   >
-    <img
-      src={kaanLogo}
-      alt=""
-      className="h-11 w-11 md:h-12 md:w-12"
-    />
+    <LogoMark className="h-9 w-auto" />
   </a>
 
   {/* Sadece linkler */}

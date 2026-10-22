@@ -2,12 +2,18 @@ import { site } from "../../data/site";
 import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
+import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 import Button from "../ui/Button";
 
-const Projects = () => {
+interface projectBtnType {
+  hideDetails?: boolean;
+}
+
+const Projects = ({ hideDetails = false}: projectBtnType) => {
   const { title, description } = site.projectsSection;
 
   return (
@@ -25,7 +31,7 @@ const Projects = () => {
         {projects.map((project) => (
           <article
             key={project.title}
-            className="grid grid-cols-1 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
+            className="grid grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none"
           >
             <img
               src={project.image}
@@ -81,10 +87,11 @@ const Projects = () => {
                   </Button>
                 )}
 
-                <Link
-                  to={`/dashboard`}
+                {!hideDetails && (
+                                                    <Link
+                  to={`/projects/${project.slug}`}
                   aria-label={`View details for ${project.title}`}
-                  className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-full border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
+                  className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-md border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
                 >
                   View details
                   <ArrowRight
@@ -94,6 +101,7 @@ const Projects = () => {
                     className="shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none"
                   />
                 </Link>
+                )}
               </div>
             </div>
           </article>

@@ -28,8 +28,7 @@ export const site = {
   name: "Kaan Hamitler",
   role: "Frontend Developer",
 
-  littleDesc:
-    "I build responsive web interfaces with React and TypeScript",
+  littleDesc: "I build responsive web interfaces with React and TypeScript",
 
   links: {
     github: "https://github.com/Kaan-Developer",
@@ -37,7 +36,7 @@ export const site = {
 
   // Navbar links
   bubbles: [
-    {label: "Home", target: "home"},
+    { label: "Home", target: "home" },
     { label: "Projects", target: "projects" },
     { label: "About", target: "about" },
   ],
@@ -61,8 +60,10 @@ export const site = {
   about: [
     {
       hi: "About me",
-      currently: "I’m learning TypeScript and improving my responsive design skills.",
-      description: "I’ve been learning web development for the past year and a half. I started with HTML and CSS, then moved on to JavaScript, learning through practice and building projects. Today, I build interfaces with React and Tailwind CSS, and I’m learning TypeScript to use in my React projects.I use Git and GitHub for version control, Figma for interface design, and Vite for development and builds. My current focus is strengthening my JavaScript and React foundations while gaining more experience with TypeScript.",
+      currently:
+        "I’m learning TypeScript and improving my responsive design skills.",
+      description:
+        "I’ve been learning web development for the past year and a half. I started with HTML and CSS, then moved on to JavaScript, learning through practice and building projects. Today, I build interfaces with React and Tailwind CSS, and I’m learning TypeScript to use in my React projects.I use Git and GitHub for version control, Figma for interface design, and Vite for development and builds. My current focus is strengthening my JavaScript and React foundations while gaining more experience with TypeScript.",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },

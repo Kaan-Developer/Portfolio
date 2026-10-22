@@ -21,7 +21,7 @@ const ProfileSummary = () => {
               key={item.label}
               className="flex min-w-0 items-center gap-3 py-4 md:flex-1 md:justify-center md:px-4 md:py-0"
             >
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-white">
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-bg text-ink">
                 <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
 
                 {item.pulse && (

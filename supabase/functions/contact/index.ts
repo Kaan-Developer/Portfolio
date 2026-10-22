@@ -40,13 +40,6 @@ export default {
       );
     }
 
-    if (subject === "other" && (!otherSubject || String(otherSubject).trim().length > 100)) {
-      return Response.json(
-        { error: "Please specify the subject (100 characters or less)." },
-        { status: 400 },
-      );
-    }
-
     if (!cleanMessage) {
       return Response.json(
         { error: "Message cannot be empty." },

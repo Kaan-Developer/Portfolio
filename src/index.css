@@ -29,18 +29,12 @@
      TYPOGRAPHY
      ========================= */
 
-  --font-sans:
-    "Instrument Sans Variable",
-    ui-sans-serif,
-    system-ui,
-    sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
   --font-display:
-    "Bricolage Grotesque Variable",
-    ui-sans-serif,
-    system-ui,
-    sans-serif;
+    "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
 
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   /* =========================
      RADIUS
      ========================= */
@@ -56,17 +50,13 @@
      ========================= */
 
   --shadow-soft:
-    0 4px 12px rgba(17, 17, 17, 0.04),
-    0 1px 3px rgba(17, 17, 17, 0.06);
+    0 4px 12px rgba(17, 17, 17, 0.04), 0 1px 3px rgba(17, 17, 17, 0.06);
 
   --shadow-medium:
-    0 10px 30px rgba(17, 17, 17, 0.07),
-    0 2px 8px rgba(17, 17, 17, 0.04);
+    0 10px 30px rgba(17, 17, 17, 0.07), 0 2px 8px rgba(17, 17, 17, 0.04);
 
-  --shadow-large:
-    0 20px 50px rgba(17, 17, 17, 0.08);
+  --shadow-large: 0 20px 50px rgba(17, 17, 17, 0.08);
 }
-
 
 /* =========================
    BASE
@@ -174,7 +164,6 @@
 }
 */
 
-
 /* =========================
    TYPOGRAPHY
    ========================= */
@@ -197,7 +186,6 @@
     text-wrap: pretty;
   }
 }
-
 
 /* =========================
    SCROLLBAR
@@ -227,7 +215,6 @@
   }
 }
 
-
 /* =========================
    LOADING
    ========================= */
@@ -245,7 +232,6 @@
 .animate-loading {
   animation: loading 1.2s ease-in-out infinite;
 }
-
 
 /* =========================
    SUBTLE MOTION
@@ -283,7 +269,6 @@
   transform-origin: top center;
   animation: select-pop 0.18s ease-out both;
 }
-
 
 /* =========================
    REDUCED MOTION

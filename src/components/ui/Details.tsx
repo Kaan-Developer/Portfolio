@@ -4,9 +4,17 @@ import { projects } from "../../data/projects";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
 import Footer from "../sections/Footer";
+import { useLayoutEffect } from "react";
 
 const Details = () => {
   const { slug } = useParams();
+  useLayoutEffect(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant",
+  });
+}, [slug]);
   const project = projects.find((item) => item.slug === slug);
 
   if (!project) {

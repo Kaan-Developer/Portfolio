@@ -73,8 +73,15 @@ const Dashboard = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-black bg-black text-white transition-colors duration-150 hover:border-ink hover:bg-ink active:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black motion-reduce:transition-none"
+                  className="inline-flex size-10 shrink-0 items-center
+                   justify-center rounded-lg border border-neutral-200
+                    bg-neutral-100 text-ink transition-colors duration-150
+                     hover:bg-neutral-200 active:bg-neutral-300
+                      focus-visible:outline-2 focus-visible:outline-offset-2
+                       focus-visible:outline-primary motion-reduce:transition-none
+                       "
                 >
+
                   <Icon size={20} aria-hidden="true" />
                 </a>
               );
@@ -98,11 +105,11 @@ const Dashboard = () => {
         <Link
   to="/"
   className="group sticky ml-6 mt-6 inline-flex h-11 items-center gap-2
-    rounded-full border border-black bg-black px-4
-    text-sm font-medium text-white
-    transition-colors hover:border-ink hover:bg-ink
+    rounded-full border border-border bg-white px-4
+    text-sm font-medium text-ink
+    transition-colors hover:bg-neutral-100
     focus-visible:outline-2 focus-visible:outline-offset-4
-    focus-visible:outline-black motion-reduce:transition-none"
+    focus-visible:outline-primary motion-reduce:transition-none"
 >
   <ArrowLeft
     size={16}

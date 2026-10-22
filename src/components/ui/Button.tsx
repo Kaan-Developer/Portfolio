@@ -39,7 +39,7 @@ const Button = ({
       target={target}
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
       className={clsx(
-        "group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap",
+        "group inline-flex h-12 items-center justify-center gap-2 rounded-md px-7 cursor-pointer whitespace-nowrap",
         "text-sm font-medium tracking-tight",
         "transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out",
         "active:scale-[0.98]",

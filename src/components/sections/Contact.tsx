@@ -66,9 +66,6 @@ const Contact = () => {
       name.length > 50 ||
       !email ||
       email.length > 100 ||
-      !subject ||
-      subject.length > 100 ||
-      (subject === "other" && (!otherSubject || otherSubject.length > 100)) ||
       !messageText ||
       messageText.length > 250
     ) {
@@ -126,7 +123,7 @@ const Contact = () => {
               onClick={handleCopy}
               disabled={copyState === "copying"}
               aria-busy={copyState === "copying"}
-              className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-full px-3 text-sm font-medium text-white transition-colors bg-black text-white hover:bg-ink"
+              className="inline-flex min-h-11 shrink-0 select-none items-center justify-center gap-2 rounded-md px-3 text-sm font-medium text-white transition-colors bg-black text-white hover:bg-ink"
             >
               {copyState === "copied" ? (
                 <Check size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -290,7 +287,7 @@ const Contact = () => {
           <button
             type="submit"
             disabled={submitState === "sending"}
-            className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
+            className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
           >
             {submitState === "sending" ? "Sending..." : "Send Message"}
           </button>

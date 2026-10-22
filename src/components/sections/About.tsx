@@ -30,23 +30,6 @@ const About = () => {
           <Button arrow link="#projects" target="" variant="blue">
             Projects
           </Button>
-          <button
-            type="button"
-            aria-expanded={showStacks}
-            aria-controls="about-stacks"
-            className="hidden lg:flex group h-12 items-center justify-center gap-2 rounded-full px-7 cursor-pointer whitespace-nowrap text-sm font-medium tracking-tight transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 bg-black text-white hover:bg-ink"
-            onClick={() => setShowStacks((previous) => !previous)}
-          >
-            Stacks
-            <ChevronRight
-              size={18}
-              aria-hidden="true"
-              className={clsx(
-                "transition-transform duration-200 motion-reduce:transition-none",
-                { "rotate-90": showStacks },
-              )}
-            />
-          </button>
 
           <div className="flex lg:hidden">
             <Button arrow link={site.links.github} target="_blank">
@@ -76,10 +59,7 @@ const About = () => {
             id="about-stacks"
             className={clsx(
               "col-start-1 row-start-1 flex min-w-0 items-start gap-3",
-              { "invisible pointer-events-none absolute inset-0": !showStacks },
             )}
-            aria-hidden={!showStacks}
-            inert={!showStacks}
           >
             <Stacks />
           </div>

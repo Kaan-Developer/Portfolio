@@ -13,7 +13,6 @@ const App = () => (
       <Route path="/" element={<AnaPage />} />
 
       <Route element={<Dashboard />}>
-        <Route path="/dashboard" element={<Projects />} />
         <Route path="/projects/:slug" element={<Details />} />
         <Route path="/privacy" element={<PrivacyPage />} />
       </Route>

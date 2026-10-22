@@ -10,29 +10,28 @@ const Hero = () => {
     >
       <Pattern />
       <div className="relative z-10 flex flex-col gap-4">
-        <div>
-                  <span className="text-2xl lg:text-5xl text-primary-soft">Hi, I'm</span>
-          <h1 className="text-balance flex flex-col text-5xl lg:text-8xl font-black leading-[0.95] tracking-[-0.05em] tracking-tight">{site.name}</h1>
+        <div className="flex flex-col gap-3">
+          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+  {site.name}
+  <span className="block text-muted">{site.role}</span>
+</h1>
+
+<p className="max-w-md text-base text-muted md:text-lg">
+  {site.littleDesc}
+</p>
         </div>
-
-
-        <p className="text-md md:text-lg text-muted max-w-md">
-          {site.littleDesc}
-        </p>
 
         <div className="flex gap-2">
-          <Button arrow link="#projects" variant="blue" >
-            Projects
+          <Button arrow link="#projects" variant="primary">
+            View projects
           </Button>
           <Button arrow link="#contact" variant="outline">
-            Contact me
+            Get in touch
           </Button>
         </div>
       </div>
 
-      <div className="relative z-10">
-
-      </div>
+      <div className="relative z-10"></div>
     </section>
   );
 };
