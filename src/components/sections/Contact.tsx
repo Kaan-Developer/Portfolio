@@ -159,7 +159,7 @@ const Contact = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-black text-white"
+                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-black bg-black text-white transition-colors duration-150 hover:border-ink hover:bg-ink active:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black motion-reduce:transition-none"
                 >
                   <Icon size={20} aria-hidden="true" />
                 </a>
