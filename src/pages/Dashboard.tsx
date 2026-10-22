@@ -2,12 +2,16 @@ import Logo from "../assets/images/Logo.svg";
 import { site, socialLinks } from "../data/site";
 import Details from "../components/ui/Details";
 import PrivacyPage from "./PrivacyPage";
+import { ArrowUpRight } from "lucide-react";
 
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Navbar from "../components/ui/Navbar";
 import { projects } from "../data/projects";
 
 import { ArrowLeft } from "lucide-react";
+
+const navigationLinkClassName =
+  "flex min-h-11 w-full items-center rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:bg-neutral-100 hover:text-ink active:bg-neutral-200 aria-[current=page]:bg-neutral-200 aria-[current=page]:font-semibold aria-[current=page]:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none";
 
 const Dashboard = () => {
   return (
@@ -30,29 +34,38 @@ const Dashboard = () => {
           aria-label="Portfolio navigation"
           className="min-h-0 overflow-y-auto py-6"
         >
-          <ul className="space-y-3 gap-4">
-            <li>
-              <Link to="/dashboard">All projects</Link>
+          <ul className="space-y-1">
+            <li className="font-medium text-subtle">
+              All Project
             </li>
 
             {projects.map((project) => (
               <li key={project.slug}>
-                <Link to={`/projects/${project.slug}`}>{project.title}</Link>
+                <NavLink
+                  to={`/projects/${project.slug}`}
+                  end
+                  className={navigationLinkClassName}
+                >
+                  {project.title}
+                </NavLink>
               </li>
             ))}
 
-            <Link to="/privacy" className="border-t pt-1 border-border text-sm">
-              Contact privacy notice
-            </Link>
+            <li className="border-t border-border pt-3">
+              <NavLink to="/privacy" end className={navigationLinkClassName}>
+                Contact privacy notice
+              </NavLink>
+            </li>
           </ul>
 
 
         </nav>
-        <div className="mt-auto flex shrink-0 flex-wrap gap-2 pt-4">
-          {socialLinks.map((item) => {
-            const Icon = item.icon;
+        <div className="mt-auto shrink-0 space-y-4 pt-4">
+          <div className="flex flex-wrap gap-2">
+            {socialLinks.map((item) => {
+              const Icon = item.icon;
 
-            return (
+              return (
                 <a
                   key={item.name}
                   href={item.href}
@@ -60,24 +73,44 @@ const Dashboard = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-black text-white"
+                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-100 text-ink transition-colors duration-150 hover:bg-neutral-200 active:bg-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
                 >
-                <Icon
-                  size={20}
-                  aria-hidden="true" />
-                  </a>
-            );
-          })}
-              </div>
+                  <Icon size={20} aria-hidden="true" />
+                </a>
+              );
+            })}
+          </div>
+          <a
+            href="/#contact"
+            className="group inline-flex h-12 w-full items-center justify-between gap-3 rounded-xl bg-black px-4 text-sm font-medium text-white transition-colors duration-200 hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none"
+          >
+            <span>Let's talk</span>
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.75}
+              aria-hidden="true"
+              className="transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5 motion-reduce:transition-none"
+            />
+          </a>
+        </div>
       </aside>
       <div className="min-w-0">
-                          <Link
-        to="/#projects"
-        aria-label="Projelere dön."
-        className="inline-flex sticky top-6 ml-6 mt-6 z-50 size-12 items-center justify-center rounded-full bg-white text-black shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-      >
-        <ArrowLeft size={24} strokeWidth={1.75} aria-hidden="true" />
-      </Link>
+        <Link
+  to="/"
+  className="group sticky ml-6 mt-6 inline-flex h-11 items-center gap-2
+    rounded-full border border-border bg-white px-4
+    text-sm font-medium text-ink
+    transition-colors hover:bg-neutral-100
+    focus-visible:outline-2 focus-visible:outline-offset-4
+    focus-visible:outline-primary motion-reduce:transition-none"
+>
+  <ArrowLeft
+    size={16}
+    strokeWidth={1.75}
+    aria-hidden="true"
+  />
+    <span>Back to portfolio</span>
+</Link>
         <Outlet />
       </div>
     </div>
