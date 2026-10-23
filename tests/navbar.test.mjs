@@ -9,14 +9,14 @@ const { outputText } = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
 });
 
-function mountNavbar() {
-  let hidden = false;
+function mountNavbar(initialScrollY = 0) {
+  let scrolled = false;
   let menuOpen = false;
   let dependencies;
   let cleanup;
   let onScroll;
   const window = {
-    scrollY: 0,
+    scrollY: initialScrollY,
     addEventListener: (_, handler) => { onScroll = handler; },
     removeEventListener: () => { onScroll = undefined; },
   };
@@ -26,7 +26,7 @@ function mountNavbar() {
     window,
     require: (name) => {
       if (name === "react") return {
-        useState: () => [hidden, (value) => { hidden = value; }],
+        useState: () => [scrolled, (value) => { scrolled = value; }],
         useEffect: (effect, nextDependencies) => {
           if (!dependencies || nextDependencies.some((value, index) => value !== dependencies[index])) {
             cleanup?.();
@@ -59,6 +59,7 @@ function mountNavbar() {
     openMenu() { findElement(render(), (node) => node.props?.["aria-label"] === "Open menu").props.onClick(); render(); },
     closeMenu() { findElement(render(), (node) => node.props?.["aria-label"] === "Close menu").props.onClick(); render(); },
     mobileMenu() { return findElement(render(), (node) => node.props?.id === "mobile-menu"); },
+    surface() { return findElement(render(), (node) => node.type === "div" && !node.props?.id && node.props?.["aria-hidden"] === true); },
     backdrop,
     clickOutsideMenu() { backdrop().props.onClick(); render(); },
     isHidden() { return findElement(render(), (node) => node.type === "header").props.className.includes("-translate-y-["); },
@@ -66,15 +67,28 @@ function mountNavbar() {
   };
 }
 
-test("navbar hides down, reveals up and stays visible near the top", () => {
+test("navbar surface appears after one pixel and only clears at the top", () => {
   const navbar = mountNavbar();
+  assert.match(navbar.surface()?.props.className ?? "", /border-transparent/);
+  navbar.scroll(1);
+  assert.match(navbar.surface().props.className, /border-border/);
+  assert.match(navbar.surface().props.className, /backdrop-blur-md/);
+  assert.match(navbar.surface().props.className, /bg-bg\/80/);
   navbar.scroll(100);
-  assert.equal(navbar.isHidden(), true);
-  navbar.scroll(92);
+  navbar.scroll(1);
+  assert.match(navbar.surface().props.className, /border-border/);
   assert.equal(navbar.isHidden(), false);
-  navbar.scroll(80);
+  navbar.scroll(0);
+  assert.match(navbar.surface().props.className, /border-transparent/);
+  assert.doesNotMatch(navbar.surface().props.className, /backdrop-blur-md/);
   assert.equal(navbar.isHidden(), false);
   assert.equal(navbar.unmount(), undefined);
+});
+
+test("navbar initializes its surface when the page is already scrolled", () => {
+  const navbar = mountNavbar(120);
+  assert.match(navbar.surface()?.props.className ?? "", /border-border/);
+  assert.equal(navbar.isHidden(), false);
 });
 
 test("mobile panel stays mounted for opening and closing transitions", () => {
@@ -98,6 +112,15 @@ test("an open mobile menu remains visible while scrolling", () => {
   assert.equal(navbar.isHidden(), false);
   navbar.scroll(200);
   assert.equal(navbar.isHidden(), false);
+});
+
+test("opening and closing the mobile menu does not clear the scrolled surface", () => {
+  const navbar = mountNavbar();
+  navbar.scroll(1);
+  navbar.openMenu();
+  assert.match(navbar.surface()?.props.className ?? "", /border-border/);
+  navbar.closeMenu();
+  assert.match(navbar.surface().props.className, /border-border/);
 });
 
 test("the backdrop only intercepts clicks while the mobile menu is open", () => {

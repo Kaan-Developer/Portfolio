@@ -9,68 +9,57 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import Button from "./Button";
 
 export const Navbar = () => {
 
-const { isOpen, toggle } = useMenuStore();
-
-  const [isHidden, setIsHidden] = useState(false);
+  const { isOpen, toggle } = useMenuStore();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleMenuToggle = () => {
-    setIsHidden(false);
     toggle();
   };
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const difference = currentScrollY - lastScrollY;
-
-      if (isOpen || currentScrollY <= 80) {
-        setIsHidden(false);
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      if (Math.abs(difference) < 8) return;
-
-      setIsHidden(difference > 0);
-      lastScrollY = currentScrollY;
+      setIsScrolled(window.scrollY > 0);
     };
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isOpen]);
+  }, []);
 
   return (
     <>
     <header
   className={`
-    fixed top-5 md:top-6 left-1/2 z-50
-    flex w-full max-w-[1400px] -translate-x-1/2 items-center justify-between
-    px-6 sm:px-8 lg:px-12
-    transition-transform duration-300 ease-in-out
-    motion-reduce:transition-none
-    ${isHidden && !isOpen ? "-translate-y-[calc(100%+1.5rem)]" : "translate-y-0"}
+    fixed top-5 md:top-6 left-1/2 z-50 isolate
+    flex h-20 w-[calc(100%-3rem)] max-w-[1400px] -translate-x-1/2 items-center justify-between
+    rounded-2xl px-4 sm:px-6 lg:px-8
   `}
 >
-  {/* Logo */}
+  <div
+    aria-hidden={true}
+    className={`pointer-events-none absolute inset-0 -z-10 rounded-2xl border
+      transition-[background-color,border-color,box-shadow] duration-200
+      motion-reduce:transition-none ${
+        isScrolled
+          ? "border-border bg-bg/95 supports-[backdrop-filter]:bg-bg/80 backdrop-blur-md shadow-soft"
+          : "border-transparent bg-transparent"
+      }`}
+  />
   <a
     href="#home"
     aria-label="Kaan - Home"
-    className="select-none shrink-0 text-black transition-opacity hover:opacity-80"
+    className="flex select-none shrink-0 text-black transition-opacity hover:opacity-80"
   >
     <LogoMark className="h-9 w-auto" />
   </a>
 
-  {/* Sadece linkler */}
   <div className="hidden lg:flex items-center">
     <Ul />
   </div>
@@ -99,7 +88,7 @@ const { isOpen, toggle } = useMenuStore();
     id="mobile-menu"
     aria-hidden={!isOpen}
     inert={!isOpen}
-    className={`absolute top-20 right-6 left-6 flex flex-col gap-4 rounded-3xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5 transition-[opacity,translate,visibility] duration-200 ease-out motion-reduce:transition-none ${
+    className={`absolute top-[calc(100%+0.75rem)] right-0 left-0 flex flex-col gap-4 rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5 transition-[opacity,translate,visibility] duration-200 ease-out motion-reduce:transition-none ${
       isOpen
         ? "visible opacity-100 translate-y-0"
         : "invisible opacity-0 -translate-y-2 pointer-events-none"
@@ -111,7 +100,6 @@ const { isOpen, toggle } = useMenuStore();
           <ContactButton mobile />
         </div>
 
-    {/* Kapat */}
     <button
       type="button"
       aria-label="Close menu"
@@ -127,7 +115,7 @@ const { isOpen, toggle } = useMenuStore();
   </div>
 
   <div className="hidden lg:flex">
-    <ContactButton />
+    <Button arrow link="#contact" variant="primary">Let's talk</Button>
   </div>
 </header>
 
