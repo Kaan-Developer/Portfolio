@@ -7,7 +7,6 @@ import Stacks from "./Stacks";
 
 const About = () => {
   const site = useSite();
-  const [showStacks] = useState(false);
 
   const about = site.about[0];
 
@@ -46,12 +45,8 @@ const About = () => {
           <div
             className={clsx(
               "col-start-1 row-start-1 aspect-square max-h-[480px] w-full bg-bg",
-              {
-                "invisible pointer-events-none absolute inset-0": showStacks,
-              },
+                "invisible pointer-events-none absolute inset-0"
             )}
-            aria-hidden={showStacks}
-            inert={showStacks}
           >
           </div>
           <div

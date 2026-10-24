@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ContactButton from "./ContactButton";
 import LogoMark from "./LogoMark";
 import Ul from "./Ul";
-import { useLanguageStore } from "../../store/language";
 import { useSite } from "../../hooks/useSite";
+import Language from "./Language";
 
 import { useMenuStore } from "../../store/menu";
 
@@ -15,7 +15,6 @@ import Button from "./Button";
 
 export const Navbar = () => {
   const site = useSite();
-  const { lang, setLang }= useLanguageStore();
 
   const { isOpen, toggle } = useMenuStore();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -118,23 +117,8 @@ export const Navbar = () => {
     </button>
   </div>
 
-  <div className="hidden lg:flex gap-4">
-    <div className="flex items-center gap-3">
-    <div role="group" aria-label="Language" className="flex items-center rounded-md border border-border bg-white p-1 text-sm font-semibold">
-      {(["tr", "en"] as const).map((code) => (
-        <button key={code}
-        type="button"
-        onClick={() => setLang(code)}
-        aria-pressed={lang === code}
-        className={`rounded-md px-3 py-1.5 transition-colors duration-200 ${
-          lang === code ? "bg-black text-white" : "text-muted hover:text-black"
-        }`}
-        >
-          {code.toUpperCase()}
-        </button>
-      ))}
-    </div>
-  </div>
+  <div className="flex gap-4">
+    <Language />
     <Button arrow link="#contact" variant="primary">{site.buttons.letsContactBtn}</Button>
   </div>
 </header>

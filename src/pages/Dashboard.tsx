@@ -2,6 +2,7 @@ import Logo from "../assets/images/Logo.svg";
 import { socialLinks } from "../data/socialLinks";
 import { useSite } from "../hooks/useSite";
 import Button from "../components/ui/Button";
+import Language from "../components/ui/Language";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { projects } from "../data/projects";
@@ -35,7 +36,7 @@ const Dashboard = () => {
         >
           <ul className="space-y-1">
             <li className="font-medium text-subtle">
-              All Projects
+              {site.dashbord.allProjects}
             </li>
 
             {projects.map((project) => (
@@ -52,7 +53,7 @@ const Dashboard = () => {
 
             <li className="border-t border-border pt-3">
               <NavLink to="/privacy" end className={navigationLinkClassName}>
-                Contact privacy notice
+              {site.dashbord.privacyNote}
               </NavLink>
             </li>
           </ul>
@@ -86,14 +87,15 @@ const Dashboard = () => {
               );
             })}
           </div>
-          <Button arrow variant="primary" link="/#contact">Let's Talk</Button>
+          <Button arrow variant="primary" link="/#contact">{site.buttons.letsContactBtn}</Button>
 
         </div>
       </aside>
       <div className="min-w-0">
-        <Link
+        <div className="sticky top-0 z-20 flex items-center justify-between bg-bg mx-4">
+          <Link
   to="/"
-  className="group sticky ml-6 mt-6 inline-flex h-11 items-center gap-2
+  className="group ml-6 mt-6 inline-flex h-11 items-center gap-2
     rounded-full border border-border bg-white px-4
     text-sm font-medium text-ink
     transition-colors hover:bg-neutral-100
@@ -105,8 +107,11 @@ const Dashboard = () => {
     strokeWidth={1.75}
     aria-hidden="true"
   />
-    <span>Back to portfolio</span>
+    <span>{site.dashbord.backto}</span>
 </Link>
+
+<Language />
+        </div>
         <Outlet />
       </div>
     </div>

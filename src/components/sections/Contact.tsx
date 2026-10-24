@@ -1,4 +1,4 @@
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Send } from "lucide-react";
 import clsx from "clsx";
 
 import { socialLinks } from "../../data/socialLinks";
@@ -69,7 +69,7 @@ const Contact = () => {
       !email ||
       email.length > 100 ||
       !messageText ||
-      messageText.length > 250
+      messageText.length > 1000
     ) {
       setSubmitState("error");
       return;
@@ -216,18 +216,18 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-2">
-          <label
-            htmlFor="contact-subject"
-            className="text-balance font-semibold text-md"
-          >
+        <fieldset className="min-w-0">
+          <legend className="mb-2 text-xs font-medium text-black">
             {form.subjectLabel}
-          </label>
+            <span className="ml-1.5 font-normal text-muted">
+              {form.subjectOptionalLabel}
+            </span>
+          </legend>
           <Select
             id="contact-subject"
             name="subject"
-            placeholder={form.subjectPlaceholder}
             options={form.subjectOptions}
+            value={selectedSubject}
             onChange={setSelectedSubject}
           />
           {selectedSubject === "other" && (
@@ -242,11 +242,11 @@ const Contact = () => {
                 required
                 maxLength={100}
                 placeholder="Please specify"
-                className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
+                className="mt-3 w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
               />
             </>
           )}
-        </div>
+        </fieldset>
 
         <div className="flex min-w-0 flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -258,8 +258,8 @@ const Contact = () => {
             </label>
             <span
               className={clsx("text-xs", {
-                "font-semibold text-red-600": message.length >= 250,
-                "text-subtle": message.length < 250,
+                "font-semibold text-red-600": message.length >= 1000,
+                "text-subtle": message.length < 1000,
               })}
             >
               {message.length} / 1000 characters
@@ -277,10 +277,12 @@ const Contact = () => {
             className="w-full min-h-40 resize-y rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
         </div>
-        <div className="flex flex-col gap-3">
-          <p className="text-sm leading-6 text-muted">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex flex-col gap-2 w-full">
+                        <p className="text-sm leading-6 text-muted">
             {form.privacyNote}{" "}
-            <a
+          </p>
+                      <a
               href="/privacy"
               target="_blank"
               rel="noopener noreferrer"
@@ -289,28 +291,17 @@ const Contact = () => {
               {form.privacyTitle}
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
-          </p>
-          <button
+                      </div>
+
+                    <button
             type="submit"
             disabled={submitState === "sending"}
             className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
           >
             {submitState === "sending" ? form.submittingLabel : form.submitLabel}
+            <Send size={16} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
           </button>
-
-          {submitState !== "idle" && (
-            <p
-              role={submitState === "error" ? "alert" : "status"}
-              className={`text-center text-sm ${submitState === "error" ? "text-red-600" : "text-subtle"}`}
-            >
-              {submitState === "success"
-                ? form.successMessage
-                : submitState === "error"
-                  ? form.errorMessage
-                  : "Sending your message..."}
-            </p>
-          )}
-        </div>
+          </div>
       </form>
     </section>
   );

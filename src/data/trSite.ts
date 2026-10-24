@@ -28,10 +28,10 @@ export const trSite: typeof enSite = {
     sendBtn: "Mesaj gönder",
   },
 
-    dashbord: {
-    allProjects: "All Projects",
-    privacyNote: "Contact privacy notice",
-    backto: "Back to portfolio.",
+  dashbord: {
+    allProjects: "Tüm Projeler",
+    privacyNote: "İletişim Aydınlatma Metni",
+    backto: "Portfolyoya dön.",
   },
 
   projectsSection: {
@@ -40,7 +40,7 @@ export const trSite: typeof enSite = {
   },
 
   footer: {
-    Allrightsreserved: "Tüm hakları saklıdır."
+    Allrightsreserved: "Tüm hakları saklıdır.",
   },
 
   about: [
@@ -72,7 +72,8 @@ export const trSite: typeof enSite = {
       namePlaceholder: "Adınız",
       emailLabel: "E-posta",
       emailPlaceholder: "you@example.com",
-      subjectLabel: "Konu (isteğe bağlı)",
+      subjectLabel: "Konu",
+      subjectOptionalLabel: "İsteğe bağlı",
       subjectPlaceholder: "Bir konu seçin",
       subjectOptions: [
         { label: "Proje Talebi", value: "project" },
