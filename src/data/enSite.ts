@@ -14,6 +14,27 @@ export const enSite = {
     { label: "About", target: "about" },
   ],
 
+  buttons: {
+    projectBtn: "View projects",
+    letsContactBtn: "Let's talk",
+    contactBtn: "Get in touch",
+    viewDetailsBtn: "View details",
+    copyEmailBtn: "Copy Email",
+    copyLoading: "Copyin...",
+    succesCopy: "Copied",
+    sendBtn: "Send message",
+  },
+
+  dashbord: {
+    allProjects: "All Projects",
+    privacyNote: "Contact privacy notice",
+    backto: "Back to portfolio.",
+  },
+
+    footer: {
+    Allrightsreserved: "All rights reserved."
+  },
+
   projectsSection: {
     title: "Things I've built",
     description: "Frontend projects with source code and development notes.",
@@ -30,6 +51,12 @@ export const enSite = {
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },
   ],
+
+  skills: {
+    title: "My Skills",
+    technologies: "Technologies",
+    tools: "Tools",
+  },
 
   contact: {
     email: "kaandeveloperr07@gmail.com",
@@ -55,8 +82,10 @@ export const enSite = {
       submitLabel: "Send message",
       submittingLabel: "Sending…",
       successMessage: "Message saved. Thank you.",
-      errorMessage: "Message could not be sent. Check the fields and try again.",
+      errorMessage:
+        "Message could not be sent. Check the fields and try again.",
       privacyNote: "Your details are used to respond to your enquiry.",
+      privacyTitle: "Contact privacy notice",
     },
   },
 };

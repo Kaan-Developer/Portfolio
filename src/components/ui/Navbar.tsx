@@ -3,6 +3,7 @@ import ContactButton from "./ContactButton";
 import LogoMark from "./LogoMark";
 import Ul from "./Ul";
 import { useLanguageStore } from "../../store/language";
+import { useSite } from "../../hooks/useSite";
 
 import { useMenuStore } from "../../store/menu";
 
@@ -13,6 +14,7 @@ import {
 import Button from "./Button";
 
 export const Navbar = () => {
+  const site = useSite();
   const { lang, setLang }= useLanguageStore();
 
   const { isOpen, toggle } = useMenuStore();
@@ -133,7 +135,7 @@ export const Navbar = () => {
       ))}
     </div>
   </div>
-    <Button arrow link="#contact" variant="primary">Let's talk</Button>
+    <Button arrow link="#contact" variant="primary">{site.buttons.letsContactBtn}</Button>
   </div>
 </header>
 

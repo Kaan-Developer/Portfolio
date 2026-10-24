@@ -5,14 +5,14 @@ const Stacks = () => {
   const site = useSite();
   const about = site.about[0];
   const groups = [
-    { title: "Technologies", items: about.tech },
-    { title: "Tools", items: about.tools },
+    { title: site.skills.technologies, items: about.tech },
+    { title: site.skills.tools, items: about.tools },
   ];
 
   return (
     <div className="w-full max-w-xl">
       <h3 className="mb-3 text-3xl font-bold leading-[0.95] tracking-tight text-balance md:text-5xl">
-        My Skills
+        {site.skills.title}
       </h3>
 
       {groups.map((group) => (

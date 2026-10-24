@@ -24,10 +24,10 @@ const Hero = () => {
 
         <div className="flex gap-2">
           <Button arrow link="#projects" variant="primary">
-            View projects
+            {site.buttons.projectBtn}
           </Button>
           <Button arrow link="#contact" variant="outline">
-            Get in touch
+            {site.buttons.contactBtn}
           </Button>
         </div>
       </div>

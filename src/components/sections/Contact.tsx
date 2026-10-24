@@ -133,11 +133,10 @@ const Contact = () => {
                 <Copy size={16} strokeWidth={1.75} aria-hidden="true" />
               )}
               <span role="status" lang={copyState === "copied" ? "tr" : undefined}>
-                {copyState === "copied"
-                  ? "Kopyalandı"
+                {copyState === "copied" ? site.buttons.succesCopy
                   : copyState === "copying"
-                    ? "Copying..."
-                    : "Copy Email"}
+                    ? site.buttons.copyLoading
+                    : site.buttons.copyEmailBtn}
               </span>
             </button>
           </div>
@@ -158,7 +157,12 @@ const Contact = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-black bg-black text-white transition-colors duration-150 hover:border-ink hover:bg-ink active:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black motion-reduce:transition-none"
+                  className="inline-flex size-10 shrink-0 items-center
+                   justify-center rounded-lg border border-neutral-200
+                    bg-neutral-100 text-ink transition-colors duration-150
+                     hover:bg-neutral-200 active:bg-neutral-300
+                      focus-visible:outline-2 focus-visible:outline-offset-2
+                       focus-visible:outline-primary motion-reduce:transition-none"
                 >
                   <Icon size={20} aria-hidden="true" />
                 </a>
@@ -282,7 +286,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="font-medium text-ink underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
             >
-              Contact privacy notice
+              {form.privacyTitle}
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </p>

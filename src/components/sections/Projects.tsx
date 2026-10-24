@@ -93,7 +93,7 @@ const Projects = ({ hideDetails = false}: projectBtnType) => {
                   aria-label={`View details for ${project.title}`}
                   className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-md border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
                 >
-                  View details
+                  {site.buttons.viewDetailsBtn}
                   <ArrowRight
                     size={18}
                     strokeWidth={1.75}

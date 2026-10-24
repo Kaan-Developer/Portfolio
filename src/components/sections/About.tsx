@@ -27,6 +27,7 @@ const About = () => {
         </p>
 
         <p className="text-muted max-w-md">{about.description2}</p>
+        
 
         <div className="mt-8 flex flex-wrap gap-3">
           <div className="flex lg:hidden">

@@ -4,7 +4,8 @@ export const trSite: typeof enSite = {
   name: "Kaan Hamitler",
   role: "Frontend Geliştirici",
 
-  littleDesc: "React ve Tailwind CSS ile responsive web arayüzleri geliştiriyorum.",
+  littleDesc:
+    "React ve Tailwind CSS ile responsive web arayüzleri geliştiriyorum.",
 
   links: {
     github: "https://github.com/Kaan-Developer",
@@ -16,9 +17,30 @@ export const trSite: typeof enSite = {
     { label: "Hakkımda", target: "about" },
   ],
 
+  buttons: {
+    projectBtn: "Projeleri gör",
+    letsContactBtn: "Konuşalım",
+    contactBtn: "İletişime geç",
+    viewDetailsBtn: "Detayları gör",
+    copyEmailBtn: "E-posta adresini kopyala",
+    copyLoading: "Kopyalanıyor...",
+    succesCopy: "Kopyalandı",
+    sendBtn: "Mesaj gönder",
+  },
+
+    dashbord: {
+    allProjects: "All Projects",
+    privacyNote: "Contact privacy notice",
+    backto: "Back to portfolio.",
+  },
+
   projectsSection: {
     title: "Geliştirdiklerim",
     description: "Kaynak kodu ve geliştirme notlarıyla frontend projeleri.",
+  },
+
+  footer: {
+    Allrightsreserved: "Tüm hakları saklıdır."
   },
 
   about: [
@@ -32,6 +54,12 @@ export const trSite: typeof enSite = {
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },
   ],
+
+  skills: {
+    title: "Yeteneklerim",
+    technologies: "Teknolojiler",
+    tools: "Araçlar",
+  },
 
   contact: {
     email: "kaandeveloperr07@gmail.com",
@@ -57,8 +85,11 @@ export const trSite: typeof enSite = {
       submitLabel: "Mesaj gönder",
       submittingLabel: "Gönderiliyor…",
       successMessage: "Mesaj kaydedildi. Teşekkürler.",
-      errorMessage: "Mesaj gönderilemedi. Alanları kontrol edip tekrar deneyin.",
-      privacyNote: "Bilgileriniz yalnızca talebinize yanıt vermek için kullanılır.",
+      errorMessage:
+        "Mesaj gönderilemedi. Alanları kontrol edip tekrar deneyin.",
+      privacyNote:
+        "Bilgileriniz yalnızca talebinize yanıt vermek için kullanılır.",
+      privacyTitle: "İletişim gizlilik bildirimi",
     },
   },
 };

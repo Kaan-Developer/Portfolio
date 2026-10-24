@@ -42,7 +42,7 @@ const Footer = () => {
 
       <div className="mt-4 flex flex-col items-start border-t border-border justify-between gap-4 text-sm leading-6 text-muted md:flex-row md:gap-8">
         <p className="shrink-0 md:pt-2.5 text-base">
-          © {new Date().getFullYear()} {site.name}. All rights reserved.
+          © {new Date().getFullYear()} {site.name}. {site.footer.Allrightsreserved}
         </p>
       </div>
 
