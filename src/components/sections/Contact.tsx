@@ -1,4 +1,4 @@
-import { Copy, Check, Send } from "lucide-react";
+import { ArrowUpRight, Copy, Check, Send } from "lucide-react";
 import clsx from "clsx";
 
 import { socialLinks } from "../../data/socialLinks";
@@ -145,7 +145,7 @@ const Contact = () => {
               Could not copy. Select the email address above or open it in your email app.
             </p>
           )}
-          <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-4">
+          <div className="mt-6 divide-y divide-border border-y border-border">
             {socialLinks.map((item) => {
               const Icon = item.icon;
 
@@ -155,16 +155,20 @@ const Contact = () => {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={item.name}
-                  title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center
-                   justify-center rounded-lg border border-neutral-200
-                    bg-neutral-100 text-ink transition-colors duration-150
-                     hover:bg-neutral-200 active:bg-neutral-300
-                      focus-visible:outline-2 focus-visible:outline-offset-2
-                       focus-visible:outline-primary motion-reduce:transition-none"
+                  className="group flex w-full min-w-0 items-center gap-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
-                  <Icon size={20} aria-hidden="true" />
+                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-white text-black transition-colors group-hover:border-primary/50 motion-reduce:transition-none">
+                    <Icon size={22} aria-hidden="true" />
+                  </span>
+                  <span className="flex min-w-0 flex-1 flex-col">
+                    <span className="text-lg font-medium text-black underline underline-offset-2 group-hover:text-primary">
+                      {item.name}
+                    </span>
+                    <span className="break-all text-sm text-muted underline underline-offset-2">
+                      {item.username}
+                    </span>
+                  </span>
+                  <ArrowUpRight size={18} strokeWidth={1.75} className="shrink-0 text-muted" aria-hidden="true" />
                 </a>
               );
             })}

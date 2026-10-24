@@ -16,7 +16,7 @@ export const socialLinks: SocialLink[] = [
     icon: FaGithub,
   },
   {
-    name: "X (Twitter)",
+    name: "X",
     username: "@KHamitler78641",
     href: "https://x.com/KHamitler78641",
     icon: FaXTwitter,
