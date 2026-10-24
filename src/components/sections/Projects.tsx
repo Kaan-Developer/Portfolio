@@ -1,5 +1,4 @@
 import { useSite } from "../../hooks/useSite";
-import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
 
@@ -14,6 +13,7 @@ interface projectBtnType {
 
 const Projects = ({ hideDetails = false}: projectBtnType) => {
   const site = useSite();
+  const projects = site.projects;
   const { title, description } = site.projectsSection;
 
   return (

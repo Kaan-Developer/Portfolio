@@ -1,3 +1,6 @@
+import { projects } from "./projects";
+import { enPrivacy } from "./enPrivacy";
+
 export const enSite = {
   name: "Kaan Hamitler",
   role: "Frontend Developer",
@@ -13,6 +16,19 @@ export const enSite = {
     { label: "Projects", target: "projects" },
     { label: "About", target: "about" },
   ],
+
+  projects,
+
+  projectDetails: {
+    problem: "The problem",
+    contribution: "What I built",
+    decisions: "Technical decisions",
+    outcome: "Result",
+    blogs: "Development notes",
+    imageAlt: "project preview",
+  },
+
+  privacy: enPrivacy,
 
   buttons: {
     projectBtn: "View projects",

@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import { projects } from "../../data/projects";
+import { useSite } from "../../hooks/useSite";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
 import Footer from "../sections/Footer";
 import { useLayoutEffect } from "react";
 
 const Details = () => {
+  const { projects, projectDetails } = useSite();
   const { slug } = useParams();
   useLayoutEffect(() => {
   window.scrollTo({
@@ -29,7 +30,7 @@ const Details = () => {
         {project.image && (
           <img
             src={project.image}
-            alt={`${project.title} proje görünümü.`}
+            alt={`${project.title} ${projectDetails.imageAlt}`}
             className="mt-8 w-full rounded-2xl"
           />
         )}
@@ -53,27 +54,31 @@ const Details = () => {
         </ul>
 
         <section className="mt-10">
-          <h2 className="text-2xl font-semibold">The Problem</h2>
+          <h2 className="text-2xl font-semibold">{projectDetails.problem}</h2>
           <p className="mt-3 leading-7">{project.caseStudy.problem}</p>
         </section>
 
         <div className="mt-10">
-          <h2 className="text-2xl font-semibold">What I build</h2>
+          <h2 className="text-2xl font-semibold">{projectDetails.contribution}</h2>
           <p className="mt-3 leading-7">{project.caseStudy.contribution}</p>
         </div>
 
         <div className="mt-10">
-          <h2 className="text-2xl font-semibold">Technical decisions</h2>
-          <p className="mt-3 leading-7">{project.caseStudy.decisions}</p>
+          <h2 className="text-2xl font-semibold">{projectDetails.decisions}</h2>
+          <ul className="mt-3 list-disc space-y-3 pl-5 leading-7">
+            {project.caseStudy.decisions.map((decision) => (
+              <li key={decision}>{decision}</li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-10">
-          <h2 className="text-2xl font-semibold">Result</h2>
+          <h2 className="text-2xl font-semibold">{projectDetails.outcome}</h2>
           <p className="mt-3 leading-7">{project.caseStudy.outcome}</p>
         </div>
 
         <section className="mt-10 pt-8 border-t border-border">
-          <h3 className="text-4xl font-semibold mb-4">Blogs</h3>
+          <h3 className="text-4xl font-semibold mb-4">{projectDetails.blogs}</h3>
           {project.blogs?.map((blog) => (
             <article key={blog.title} className="mb-8">
               <h3 className="text-xl font-semibold">{blog.title}</h3>

@@ -5,7 +5,6 @@ import Button from "../components/ui/Button";
 import Language from "../components/ui/Language";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { projects } from "../data/projects";
 
 import { ArrowLeft } from "lucide-react";
 
@@ -39,7 +38,7 @@ const Dashboard = () => {
               {site.dashbord.allProjects}
             </li>
 
-            {projects.map((project) => (
+            {site.projects.map((project) => (
               <li key={project.slug}>
                 <NavLink
                   to={`/projects/${project.slug}`}
@@ -96,9 +95,9 @@ const Dashboard = () => {
           <Link
   to="/"
   className="group ml-6 mt-6 inline-flex h-11 items-center gap-2
-    rounded-full border border-border bg-white px-4
-    text-sm font-medium text-ink
-    transition-colors hover:bg-neutral-100
+    rounded-full border border-black bg-black px-4
+    text-sm font-medium text-white
+    transition-colors hover:border-ink hover:bg-ink
     focus-visible:outline-2 focus-visible:outline-offset-4
     focus-visible:outline-primary motion-reduce:transition-none"
 >

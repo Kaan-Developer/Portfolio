@@ -1,4 +1,3 @@
-import Logo from "../../assets/images/Logo.svg";
 import { useSite } from "../../hooks/useSite";
 import { Link } from "react-router-dom";
 import LogoMark from "../ui/LogoMark";
