@@ -1,11 +1,9 @@
 import Logo from "../assets/images/Logo.svg";
-import { site, socialLinks } from "../data/site";
-import Details from "../components/ui/Details";
-import PrivacyPage from "./PrivacyPage";
-import { ArrowUpRight } from "lucide-react";
+import { socialLinks } from "../data/socialLinks";
+import { useSite } from "../hooks/useSite";
+import Button from "../components/ui/Button";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
-import Navbar from "../components/ui/Navbar";
 import { projects } from "../data/projects";
 
 import { ArrowLeft } from "lucide-react";
@@ -14,6 +12,7 @@ const navigationLinkClassName =
   "flex min-h-11 w-full items-center rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors duration-150 hover:bg-neutral-100 hover:text-ink active:bg-neutral-200 aria-[current=page]:bg-neutral-200 aria-[current=page]:font-semibold aria-[current=page]:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none";
 
 const Dashboard = () => {
+  const site = useSite();
   return (
     <div className="grid min-h-dvh w-full grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
       <aside className="flex flex-col border-r border-border bg-white p-4 md:sticky md:top-0 md:h-dvh md:self-start">
@@ -36,7 +35,7 @@ const Dashboard = () => {
         >
           <ul className="space-y-1">
             <li className="font-medium text-subtle">
-              All Project
+              All Projects
             </li>
 
             {projects.map((project) => (
@@ -87,18 +86,8 @@ const Dashboard = () => {
               );
             })}
           </div>
-          <a
-            href="/#contact"
-            className="group inline-flex h-12 w-full items-center justify-between gap-3 rounded-xl bg-black px-4 text-sm font-medium text-white transition-colors duration-200 hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none"
-          >
-            <span>Let's talk</span>
-            <ArrowUpRight
-              size={18}
-              strokeWidth={1.75}
-              aria-hidden="true"
-              className="transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5 motion-reduce:transition-none"
-            />
-          </a>
+          <Button arrow variant="primary" link="/#contact">Let's Talk</Button>
+
         </div>
       </aside>
       <div className="min-w-0">

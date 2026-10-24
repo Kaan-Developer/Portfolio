@@ -1,8 +1,7 @@
-import { site } from "../../data/site";
+import { useSite } from "../../hooks/useSite";
 import { projects } from "../../data/projects";
 import { techIcons } from "../../data/techIcons";
 
-import { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -14,6 +13,7 @@ interface projectBtnType {
 }
 
 const Projects = ({ hideDetails = false}: projectBtnType) => {
+  const site = useSite();
   const { title, description } = site.projectsSection;
 
   return (

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnaPage from "./pages/AnaPage";
 import Dashboard from "./pages/Dashboard";
 import PrivacyPage from "./pages/PrivacyPage";
-import Projects from "./components/sections/Projects";
 import Details from "./components/ui/Details";
 import NotFound from "./components/feedback/NotFound";
 

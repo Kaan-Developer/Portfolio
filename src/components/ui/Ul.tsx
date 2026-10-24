@@ -1,4 +1,4 @@
-import { site } from "../../data/site";
+import { useSite } from "../../hooks/useSite";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
@@ -13,9 +13,11 @@ interface UlProps {
 const Ul = ({
   mobile = false,
   inline = false,
-  links = site.bubbles,
+  links: providedLinks,
   ariaLabel,
 }: UlProps) => {
+  const site = useSite();
+  const links = providedLinks ?? site.bubbles;
       const [activeSection, setActiveSection] = useState(site.bubbles[0]?.target);
 
     useEffect(() => {
@@ -50,7 +52,7 @@ const Ul = ({
     sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
-  }, [links]);
+  }, [links, site.bubbles]);
 
     return (
         <nav

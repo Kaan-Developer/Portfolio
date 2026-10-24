@@ -1,8 +1,9 @@
-import { site } from "../../data/site";
+import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
 import Pattern from "../ui/Pattern";
 
 const Hero = () => {
+  const site = useSite();
   return (
     <section
       id="home"

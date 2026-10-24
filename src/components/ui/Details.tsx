@@ -1,4 +1,3 @@
-import { ArrowLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { projects } from "../../data/projects";
 import NotFound from "../feedback/NotFound";

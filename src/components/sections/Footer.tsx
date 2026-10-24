@@ -1,7 +1,9 @@
 import Logo from "../../assets/images/Logo.svg";
-import { site } from "../../data/site";
+import { useSite } from "../../hooks/useSite";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const site = useSite();
   return (
     <footer className="w-full px-6 py-6 md:px-10 md:py-8">
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-x-8">
@@ -17,13 +19,13 @@ const Footer = () => {
 
         <nav aria-label="Footer" className="flex flex-wrap gap-x-4">
           {site.bubbles.map((item) => (
-            <a
+            <Link
               key={item.target}
-              href={`#${item.target}`}
+              to={`/#${item.target}`}
               className="inline-flex min-h-11 items-center text-sm text-ink underline-offset-4 transition-colors hover:text-primary hover:underline"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

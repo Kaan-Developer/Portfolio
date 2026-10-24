@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import { site } from "../../data/site";
+import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
 import clsx from "clsx";
 
 import Stacks from "./Stacks";
 
 const About = () => {
-  const [showStacks, setShowStacks] = useState(false);
+  const site = useSite();
+  const [showStacks] = useState(false);
 
   const about = site.about[0];
 
@@ -22,15 +22,13 @@ const About = () => {
           {about.hi}
         </h2>
 
-        <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-xl md:leading-8">
+        <p className="mt-5 max-w-lg text-base leading-7 text-black md:text-xl md:leading-8">
           {about.description}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button arrow link="#projects" target="" variant="blue">
-            Projects
-          </Button>
+        <p className="text-muted max-w-md">{about.description2}</p>
 
+        <div className="mt-8 flex flex-wrap gap-3">
           <div className="flex lg:hidden">
             <Button arrow link={site.links.github} target="_blank">
               Github

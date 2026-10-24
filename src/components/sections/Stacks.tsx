@@ -1,7 +1,8 @@
-﻿import { site } from "../../data/site";
+﻿import { useSite } from "../../hooks/useSite";
 import { techIcons } from "../../data/techIcons";
 
 const Stacks = () => {
+  const site = useSite();
   const about = site.about[0];
   const groups = [
     { title: "Technologies", items: about.tech },
@@ -41,8 +42,6 @@ const Stacks = () => {
           </ul>
         </section>
       ))}
-
-      <p className="text-subtle text-lg lg:text-xl">{about.currently}</p>
     </div>
   );
 };

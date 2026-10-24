@@ -1,7 +1,8 @@
 import { Copy, Check } from "lucide-react";
 import clsx from "clsx";
 
-import { site, socialLinks } from "../../data/site";
+import { socialLinks } from "../../data/socialLinks";
+import { useSite } from "../../hooks/useSite";
 
 import { useEffect, useState } from "react";
 
@@ -10,6 +11,7 @@ import Select from "../ui/Select";
 import { getSupabase } from "../../lib/supabase";
 
 const Contact = () => {
+  const site = useSite();
   const { contact } = site;
   const { form } = contact;
 
@@ -98,7 +100,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative grid min-w-0 grid-cols-1 gap-8 px-0 py-10 sm:px-4 md:px-10 md:py-14 xl:grid-cols-2 xl:gap-12"
+      className="relative grid min-w-0 grid-cols-1 gap-8 px-0 py-10 mt-6 sm:px-4 md:px-10 md:py-14 xl:grid-cols-2 xl:gap-12"
     >
       <div className="flex min-w-0 flex-col items-start self-start">
         <h2 className="max-w-lg text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
@@ -289,7 +291,7 @@ const Contact = () => {
             disabled={submitState === "sending"}
             className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
           >
-            {submitState === "sending" ? "Sending..." : "Send Message"}
+            {submitState === "sending" ? form.submittingLabel : form.submitLabel}
           </button>
 
           {submitState !== "idle" && (
@@ -298,9 +300,9 @@ const Contact = () => {
               className={`text-center text-sm ${submitState === "error" ? "text-red-600" : "text-subtle"}`}
             >
               {submitState === "success"
-                ? "Message saved. Thank you."
+                ? form.successMessage
                 : submitState === "error"
-                  ? "Message could not be sent. Check the fields and try again."
+                  ? form.errorMessage
                   : "Sending your message..."}
             </p>
           )}

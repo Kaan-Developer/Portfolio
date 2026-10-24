@@ -1,8 +1,9 @@
-import { ArrowLeft } from "lucide-react";
-import { site } from "../data/site";
+import { useSite } from "../hooks/useSite";
 import Footer from "../components/sections/Footer";
 
-const PrivacyPage = () => (
+const PrivacyPage = () => {
+  const site = useSite();
+  return (
   <main className="min-h-screen bg-bg px-6 py-8 text-ink md:px-10 md:py-12">
     <article lang="tr" className="mx-auto max-w-2xl">
 
@@ -191,5 +192,6 @@ const PrivacyPage = () => (
     <Footer />
   </main>
 );
+};
 
 export default PrivacyPage;
