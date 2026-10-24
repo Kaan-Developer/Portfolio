@@ -1,6 +1,7 @@
 import Logo from "../../assets/images/Logo.svg";
 import { useSite } from "../../hooks/useSite";
 import { Link } from "react-router-dom";
+import LogoMark from "../ui/LogoMark";
 
 const Footer = () => {
   const site = useSite();
@@ -8,7 +9,7 @@ const Footer = () => {
     <footer className="w-full px-6 py-6 md:px-10 md:py-8">
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-x-8">
         <div className="flex items-center gap-3">
-          <img src={Logo} alt="" width={32} height={32} className="shrink-0" />
+          <LogoMark className="h-10 w-auto" />
           <div className="min-w-0">
             <p className="font-display text-lg font-semibold text-black">
               {site.name}

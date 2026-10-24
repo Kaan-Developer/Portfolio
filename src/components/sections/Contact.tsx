@@ -1,4 +1,4 @@
-import { Copy, Check, Send } from "lucide-react";
+import { ArrowUpRight, Copy, Check, Send } from "lucide-react";
 import clsx from "clsx";
 
 
@@ -146,7 +146,7 @@ const Contact = () => {
               Could not copy. Select the email address above or open it in your email app.
             </p>
           )}
-          <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-4">
+          <div className="mt-6 w-full divide-y divide-border border-y border-border">
             {socialLinks.map((item) => {
               const Icon = item.icon;
 
@@ -156,16 +156,23 @@ const Contact = () => {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={item.name}
+                  aria-label={`${item.name}: ${item.username}`}
                   title={item.name}
-                  className="inline-flex size-10 shrink-0 items-center
-                   justify-center rounded-lg border border-neutral-200
-                    bg-neutral-100 text-ink transition-colors duration-150
-                     hover:bg-neutral-200 active:bg-neutral-300
-                      focus-visible:outline-2 focus-visible:outline-offset-2
-                       focus-visible:outline-primary motion-reduce:transition-none"
+                  className="group flex min-h-16 w-full items-center gap-3 py-3"
                 >
-                  <Icon size={20} aria-hidden="true" />
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-white text-black">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <span className="flex min-w-0 flex-1 flex-col items-start text-primary underline underline-offset-2">
+                    <span className="text-sm font-medium">{item.name}</span>
+                    <span className="max-w-full break-all text-xs">{item.username}</span>
+                  </span>
+                  <ArrowUpRight
+                    size={16}
+                    strokeWidth={1.5}
+                    className="shrink-0 text-muted group-hover:text-primary"
+                    aria-hidden="true"
+                  />
                 </a>
               );
             })}
@@ -278,7 +285,7 @@ const Contact = () => {
             className="w-full min-h-40 resize-y rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
           ></textarea>
         </div>
-          <div className="flex flex-col lg:flex-row items-center justify-between">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
             <div className="flex flex-col gap-2 w-full">
                         <p className="text-sm leading-6 text-muted">
             {form.privacyNote}{" "}

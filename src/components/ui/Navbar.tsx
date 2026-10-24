@@ -60,7 +60,7 @@ export const Navbar = () => {
     aria-label="Kaan - Home"
     className="flex select-none shrink-0 text-black transition-opacity hover:opacity-80"
   >
-    <LogoMark className="h-9 w-auto" />
+    <LogoMark className="h-12 w-auto" />
   </a>
 
   <div className="hidden lg:flex items-center">
@@ -117,7 +117,7 @@ export const Navbar = () => {
     </button>
   </div>
 
-  <div className="flex gap-4">
+  <div className="hidden lg:flex gap-4">
     <Language />
     <Button arrow link="#contact" variant="primary">{site.buttons.letsContactBtn}</Button>
   </div>
