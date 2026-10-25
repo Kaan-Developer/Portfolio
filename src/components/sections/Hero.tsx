@@ -1,6 +1,7 @@
 import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
 import Pattern from "../ui/Pattern";
+import Reveal from "../ui/Reveal";
 
 const Hero = () => {
   const site = useSite();
@@ -12,23 +13,32 @@ const Hero = () => {
       <Pattern />
       <div className="relative z-10 flex flex-col gap-4">
         <div className="flex flex-col gap-3">
-          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+          <Reveal>
+                      <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
   {site.name}
   <span className="block text-muted">{site.role}</span>
 </h1>
+          </Reveal>
 
-<p className="max-w-md text-base text-muted md:text-lg">
+          <Reveal>
+            <p className="max-w-md text-base text-muted md:text-lg">
   {site.littleDesc}
 </p>
+          </Reveal>
         </div>
 
         <div className="flex gap-2">
-          <Button arrow link="#projects" variant="primary">
+          <Reveal>
+                      <Button arrow link="#projects" variant="primary">
             {site.buttons.projectBtn}
           </Button>
-          <Button arrow link="#contact" variant="outline">
+          </Reveal>
+
+          <Reveal>
+                      <Button arrow link="#contact" variant="outline">
             {site.buttons.contactBtn}
           </Button>
+          </Reveal>
         </div>
       </div>
 

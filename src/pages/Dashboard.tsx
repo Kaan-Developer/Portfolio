@@ -1,8 +1,9 @@
-import Logo from "../assets/images/Logo.svg";
 import { socialLinks } from "../data/socialLinks";
 import { useSite } from "../hooks/useSite";
 import Button from "../components/ui/Button";
 import Language from "../components/ui/Language";
+import ScrollToTop from "../components/ui/ScrollToTop";
+import LogoMark from "../components/ui/LogoMark";
 
 import { Link, NavLink, Outlet } from "react-router-dom";
 
@@ -15,15 +16,9 @@ const Dashboard = () => {
   const site = useSite();
   return (
     <div className="grid min-h-dvh w-full grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
-      <aside className="flex flex-col border-r border-border bg-white p-4 md:sticky md:top-0 md:h-dvh md:self-start">
+      <aside className="hidden lg:flex flex-col border-r border-border bg-white p-4 md:sticky md:top-0 md:h-dvh md:self-start">
         <div className="flex items-center gap-2 border-b border-border py-4">
-          <img
-            src={Logo}
-            alt=""
-            width={48}
-            height={48}
-            className="shrink-0 object-contain"
-          />
+          <LogoMark className="h-10 w-auto" />
           <h2 className="text-balance text-xl md:text-2xl font-semibold">
             {site.name}
           </h2>
@@ -90,29 +85,30 @@ const Dashboard = () => {
 
         </div>
       </aside>
-      <div className="min-w-0">
+       <div className="min-w-0">
         <div className="sticky top-0 z-20 flex items-center justify-between bg-bg mx-4">
           <Link
-  to="/"
-  className="group ml-6 mt-6 inline-flex h-11 items-center gap-2
-    rounded-full border border-black bg-black px-4
-    text-sm font-medium text-white
-    transition-colors hover:border-ink hover:bg-ink
-    focus-visible:outline-2 focus-visible:outline-offset-4
-    focus-visible:outline-primary motion-reduce:transition-none"
->
-  <ArrowLeft
-    size={16}
-    strokeWidth={1.75}
-    aria-hidden="true"
-  />
-    <span>{site.dashbord.backto}</span>
-</Link>
-
-<Language />
+            to="/"
+            className="group ml-6 mt-6 inline-flex h-11 items-center gap-2
+              rounded-full border border-black bg-black px-4
+              text-sm font-medium text-white
+              transition-colors hover:border-ink hover:bg-ink
+              focus-visible:outline-2 focus-visible:outline-offset-4
+              focus-visible:outline-primary motion-reduce:transition-none"
+          >
+            <ArrowLeft
+              size={16}
+              strokeWidth={1.75}
+              aria-hidden="true"
+            />
+            <span>{site.dashbord.backto}</span>
+          </Link>
+          <Language />
         </div>
         <Outlet />
       </div>
+      {/* 2. Buraya ekle */}
+      <ScrollToTop />
     </div>
   );
 };

@@ -14,9 +14,17 @@ const ScrollToTop = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
   return (
-    <a
-      href="#home"
+    <button
+    type="button"
+    onClick={scrollToTop}
       aria-label="Back to top"
       className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-black text-white shadow-soft transition-all duration-300 ease-out hover:bg-ink hover:scale-105 hover:shadow-medium active:scale-95 ${
         isVisible
@@ -29,7 +37,7 @@ const ScrollToTop = () => {
         strokeWidth={2.5}
         className="transition-transform duration-200 hover:-translate-y-0.5"
       />
-    </a>
+    </button>
   );
 };
 

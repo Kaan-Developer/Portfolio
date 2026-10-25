@@ -1,6 +1,7 @@
 import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
 import clsx from "clsx";
+import Reveal from "../ui/Reveal";
 
 import Stacks from "./Stacks";
 
@@ -16,15 +17,21 @@ const About = () => {
       px-6 py-10 md:px-12 md:py-14 lg:gap-16"
     >
       <div className="flex min-w-0 flex-col gap-3">
-        <h2 className="text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] tracking-tight md:text-6xl">
+        <Reveal>
+                  <h2 className="text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] tracking-tight md:text-6xl">
           {about.hi}
         </h2>
+        </Reveal>
 
-        <p className="mt-5 max-w-lg text-base leading-7 text-black md:text-xl md:leading-8">
+        <Reveal>
+                  <p className="mt-5 max-w-lg text-base leading-7 text-black md:text-xl md:leading-8">
           {about.description}
         </p>
+        </Reveal>
 
-        <p className="text-muted max-w-md">{about.description2}</p>
+        <Reveal>
+                  <p className="text-muted max-w-md">{about.description2}</p>
+        </Reveal>
         
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -34,7 +41,7 @@ const About = () => {
             </Button>
           </div>
         </div>
-        <div className="mt-8 border-t border-border pt-8 lg:hidden">
+                  <div className="mt-8 border-t border-border pt-8 lg:hidden">
           <Stacks />
         </div>
       </div>

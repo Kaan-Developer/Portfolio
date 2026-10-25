@@ -6,6 +6,7 @@ import Projects from "../components/sections/Projects";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/sections/Footer";
 import ScrollToTop from "../components/ui/ScrollToTop";
+import SmoothScroll from "../components/ui/SmoothScroll";
 
 import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -35,6 +36,7 @@ const AnaPage = () => {
       </main>
       <Footer />
       <ScrollToTop />
+      <SmoothScroll />
     </>
   );
 };

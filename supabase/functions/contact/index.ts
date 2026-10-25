@@ -10,108 +10,143 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#039;");
 }
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_SUBJECTS = ["project", "job", "collaboration", "other"];
+
 export default {
-  fetch: withSupabase({ auth: "publishable" }, async (req, { supabaseAdmin }) => {
-    if (req.method !== "POST") {
-      return Response.json(
-        { error: "Method not allowed." },
-        { status: 405, headers: { Allow: "POST" } },
-      );
-    }
-    const { name, email, subject, otherSubject, message } = await req.json();
+  fetch: withSupabase(
+    { auth: "publishable" },
+    async (req, { supabaseAdmin }) => {
+      if (req.method !== "POST") {
+        return Response.json(
+          { error: "Method not allowed." },
+          { status: 405, headers: { Allow: "POST" } },
+        );
+      }
 
-    const finalSubject = subject === "other" ? otherSubject : subject;
-    const cleanName = String(name ?? "").trim();
-    const cleanEmail = String(email ?? "").trim();
-    const cleanSubject = String(finalSubject ?? "").trim();
-    const cleanMessage = String(message ?? "").trim();
-
-    if (!cleanName || cleanName.length > 50) {
-      return Response.json(
-        { error: "Name is required and must be 50 characters or less." },
-        { status: 400 },
-      );
-    }
-
-    if (!cleanEmail || cleanEmail.length > 100 || !cleanEmail.includes("@")) {
-      return Response.json(
-        { error: "A valid email address is required." },
-        { status: 400 },
-      );
-    }
-
-    if (!cleanMessage) {
-      return Response.json(
-        { error: "Message cannot be empty." },
-        { status: 400 },
-      );
-    }
-
-    if (cleanMessage.length > 1000) {
-      return Response.json(
-        { error: "Message cannot exceed 250 characters." },
-        { status: 400 },
-      );
-    }
-
-    const { data: rateLimit, error: rateLimitError } =
-    await supabaseAdmin.rpc("consume_contact_request", {
-      p_email: cleanEmail,
-    }).single();
-
-    if (rateLimitError || !rateLimit) {
-  console.error("Contact rate limit failed:", rateLimitError?.code);
-
-  return Response.json(
-    { error: "Contact service is temporarily unavailable." },
-    { status: 503 },
-  );
-}
-
-if (!rateLimit.allowed) {
-  return Response.json(
-    { error: "Too many requests. Please try again later." },
-    {
-      status: 429,
-      headers: {
-        "Retry-After": String(rateLimit.retry_after),
-      },
-    },
-  );
-}
-
-    const { error } = await supabaseAdmin.from("contact_messages").insert({
-      name: cleanName,
-      email: cleanEmail,
-      subject: cleanSubject,
-      message: cleanMessage,
-    });
-
-    if (error) {
-      console.error("Contact insert failed:", error.code);
-      return Response.json(
-        { error: "Message could not be saved" },
-        { status: 500 },
-      );
-    }
-
-    let emailSent = false;
-    const resendApiKey = Deno.env.get("EMAIL_API_KEY");
-
-    if (resendApiKey) {
+      let body;
       try {
-        const escapedName = escapeHtml(cleanName);
-        const escapedEmail = escapeHtml(cleanEmail);
-        const escapedSubject = escapeHtml(cleanSubject);
-        const formattedMessage = escapeHtml(cleanMessage).replace(
-          /\r?\n/g,
-          "<br />",
-        );
-        const replySubject = encodeURIComponent(
-          `Re: ${cleanSubject || "Portfolio Message"}`,
-        );
+        body = await req.json();
+      } catch {
+        return Response.json({ error: "Invalid JSON body." }, { status: 400 });
+      }
 
-        const htmlContent = `<!DOCTYPE html>
+      const { name, email, subject, otherSubject, message, website } =
+        body ?? {};
+
+      if (website) {
+        return Response.json({ success: true, emailSent: false });
+      }
+
+      if (subject && !ALLOWED_SUBJECTS.includes(subject)) {
+        return Response.json({ error: "Invalid subject." }, { status: 400 });
+      }
+
+      const finalSubject =
+        subject === "other" ? otherSubject : subject || "General";
+      const cleanName = String(name ?? "").trim();
+      const cleanEmail = String(email ?? "").trim();
+      const cleanSubject = String(finalSubject ?? "").trim();
+      const cleanMessage = String(message ?? "").trim();
+
+      if (!cleanSubject || cleanSubject.length > 100) {
+        return Response.json(
+          { error: "Subject must be 100 characters or less." },
+          { status: 400 },
+        );
+      }
+
+      if (!cleanName || cleanName.length > 50) {
+        return Response.json(
+          { error: "Name is required and must be 50 characters or less." },
+          { status: 400 },
+        );
+      }
+
+      if (
+        !cleanEmail ||
+        cleanEmail.length > 100 ||
+        !EMAIL_PATTERN.test(cleanEmail)
+      ) {
+        return Response.json(
+          { error: "A valid email address is required." },
+          { status: 400 },
+        );
+      }
+
+      if (!cleanMessage) {
+        return Response.json(
+          { error: "Message cannot be empty." },
+          { status: 400 },
+        );
+      }
+
+      if (cleanMessage.length > 1000) {
+        return Response.json(
+          { error: "Message cannot exceed 1000 characters." },
+          { status: 400 },
+        );
+      }
+
+      const { data: rateLimit, error: rateLimitError } = await supabaseAdmin
+        .rpc("consume_contact_request", {
+          p_email: cleanEmail,
+        })
+        .single();
+
+      if (rateLimitError || !rateLimit) {
+        console.error("Contact rate limit failed:", rateLimitError?.code);
+
+        return Response.json(
+          { error: "Contact service is temporarily unavailable." },
+          { status: 503 },
+        );
+      }
+
+      if (!rateLimit.allowed) {
+        return Response.json(
+          { error: "Too many requests. Please try again later." },
+          {
+            status: 429,
+            headers: {
+              "Retry-After": String(rateLimit.retry_after),
+            },
+          },
+        );
+      }
+
+      const { error } = await supabaseAdmin.from("contact_messages").insert({
+        name: cleanName,
+        email: cleanEmail,
+        subject: cleanSubject,
+        message: cleanMessage,
+      });
+
+      if (error) {
+        console.error("Contact insert failed:", error.code);
+        return Response.json(
+          { error: "Message could not be saved" },
+          { status: 500 },
+        );
+      }
+
+      let emailSent = false;
+      const resendApiKey = Deno.env.get("EMAIL_API_KEY");
+
+      if (resendApiKey) {
+        try {
+          const escapedName = escapeHtml(cleanName);
+          const escapedEmail = escapeHtml(cleanEmail);
+          const escapedSubject = escapeHtml(cleanSubject);
+          const formattedMessage = escapeHtml(cleanMessage).replace(
+            /\r?\n/g,
+            "<br />",
+          );
+          const replySubject = encodeURIComponent(
+            `Re: ${cleanSubject || "Portfolio Message"}`,
+          );
+
+          const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -251,38 +286,39 @@ if (!rateLimit.allowed) {
 </body>
 </html>`;
 
-        const resendResponse = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${resendApiKey}`,
-          },
-          body: JSON.stringify({
-            from: "Portfolio <onboarding@resend.dev>",
-            to: ["kaandeveloperr07@gmail.com"],
-            reply_to: cleanEmail,
-            subject: "New Message from your Portfolio",
-            text: [
-              `Name: ${cleanName}`,
-              `Email: ${cleanEmail}`,
-              `Subject: ${cleanSubject}`,
-              "",
-              cleanMessage,
-            ].join("\n"),
-            html: htmlContent,
-          }),
-        });
+          const resendResponse = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${resendApiKey}`,
+            },
+            body: JSON.stringify({
+              from: "Portfolio <onboarding@resend.dev>",
+              to: ["kaandeveloperr07@gmail.com"],
+              reply_to: cleanEmail,
+              subject: "New Message from your Portfolio",
+              text: [
+                `Name: ${cleanName}`,
+                `Email: ${cleanEmail}`,
+                `Subject: ${cleanSubject}`,
+                "",
+                cleanMessage,
+              ].join("\n"),
+              html: htmlContent,
+            }),
+          });
 
-        if (resendResponse.ok) {
-          emailSent = true;
-        } else {
-          console.error("Resend failed:", await resendResponse.text());
+          if (resendResponse.ok) {
+            emailSent = true;
+          } else {
+            console.error("Resend failed:", await resendResponse.text());
+          }
+        } catch (error) {
+          console.error("Resend request failed:", error);
         }
-      } catch (error) {
-        console.error("Resend request failed:", error);
       }
-    }
 
-    return Response.json({ success: true, emailSent });
-  }),
+      return Response.json({ success: true, emailSent });
+    },
+  ),
 };
