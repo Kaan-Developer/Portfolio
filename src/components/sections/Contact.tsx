@@ -266,7 +266,7 @@ const Contact = () => {
                   </form>
 
           <div className="relative w-full h-full">
-            <img src={Contactİmage} alt="" className="object-contain rounded-r-2xl" />
+            <img src={Contactİmage} alt="" className="object-contain rounded-b-2xl md:rounded-r-2xl" />
           </div>
       </div>
     </section>
