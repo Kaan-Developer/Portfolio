@@ -17,7 +17,7 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
   const { title, description } = site.projectsSection;
 
   return (
-    <section id="projects" className="px-6 py-10 md:px-10 md:py-14">
+    <section id="projects" className="py-10 md:py-14">
       <Reveal className="mb-10 max-w-xl">
         <h2 className="mt-4 text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
           {title}

@@ -89,11 +89,11 @@ export const trSite: typeof enSite = {
 
   about: [
     {
-      hi: "Hakkımda",
-      description:
-        "React ve Tailwind CSS ile responsive arayüzler geliştiriyorum. HTML, CSS ve JavaScript ile başladım, şimdi React projelerime TypeScript ekliyorum.",
-      description2:
-        "Bu portfolyoyu; navigasyonu, proje sayfaları ve iletişim formu dahil olmak üzere tasarladım ve geliştirdim. Şu anki odağım JavaScript ve React temellerimi geliştirmek.",
+      hi: "Merhaba, ben Kaan.",
+description:
+  "Web arayüzleri geliştiriyorum. React ve TypeScript öğrenirken öğrendiklerimi projelerimde uyguluyorum.",
+description2:
+  "Şu sıralar erişilebilirlik, API kullanımı ve daha iyi kullanıcı deneyimleri üzerine çalışıyorum.",
         techTitle: "Kullandığım Teknolojiler",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       tools: ["Git", "GitHub", "Figma", "Vite"],

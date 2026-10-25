@@ -13,8 +13,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="grid w-full grid-cols-1 gap-10
-      px-6 py-10 md:px-12 md:py-14 lg:gap-16"
+      className="grid w-full grid-cols-1 gap-10 py-10 md:py-14 lg:gap-16"
     >
       <div className="flex min-w-0 flex-col gap-3">
         <Reveal className="flex min-w-0 flex-col gap-3">
@@ -26,7 +25,7 @@ const About = () => {
           </p>
           <p className="text-muted max-w-md">{about.description2}</p>
 
-          <div>
+          <div className="flex flex-col mt-6 gap-4">
             <span className="text-black text-md font-semibold">
               {about.techTitle}
             </span>
@@ -42,7 +41,7 @@ const About = () => {
             </ul>
           </div>
 
-          <div className="">
+          <div className="mt-4">
               <Button arrow link={site.links.github} target="_blank">
                 Github
               </Button>

@@ -58,11 +58,12 @@ export const enSite = {
 
   about: [
     {
-      hi: "About me",
-      description:
-        "I build responsive interfaces with React and Tailwind CSS. I started with HTML, CSS and JavaScript, and I’m now adding TypeScript to my React projects.",
-      description2:
-        "I designed and built this portfolio, including its navigation, project pages and contact form. My current focus is improving my JavaScript and React foundations.",
+      hi: "Hi, I'm Kaan.",
+description:
+  "I build web interfaces and apply what I learn about React and TypeScript in my projects.",
+description2:
+  "Currently, I'm working on accessibility, using APIs, and creating better user experiences.",
+        techTitle: "Technologies I use",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },
