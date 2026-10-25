@@ -21,9 +21,6 @@ const Stacks = () => {
           key={group.title}
           className="py-7 first:border-b first:border-border first:pt-0 last:pb-0"
         >
-                      <h4 className="mb-6 text-2xl font-bold tracking-tight">
-            {group.title}
-          </h4>
 
           <ul className="grid grid-cols-2 gap-5 lg:grid-cols-3">
             {group.items.map((name) => {

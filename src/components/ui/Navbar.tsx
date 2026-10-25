@@ -37,7 +37,7 @@ export const Navbar = () => {
       <header
         className={`
     fixed top-5 md:top-6 left-1/2 z-50 isolate
-    flex h-20 w-[calc(100%-3rem)] max-w-[1400px] -translate-x-1/2 items-center justify-between
+    flex h-20 w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 items-center justify-between
     rounded-2xl px-4 sm:px-6 lg:px-8
   `}
       >

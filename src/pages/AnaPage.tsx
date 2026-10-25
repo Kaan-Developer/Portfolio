@@ -27,7 +27,7 @@ const AnaPage = () => {
 
   return (
     <>
-      <main className="bg-bg w-full px-6 md:px-12 p-6 md:p-8 gap-2">
+      <main className="bg-bg w-full mx-auto min-w-0 max-w-6xl gap-2">
         <Navbar />
         <Hero />
         <Projects />

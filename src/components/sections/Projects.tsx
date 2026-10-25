@@ -18,23 +18,23 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
 
   return (
     <section id="projects" className="px-6 py-10 md:px-10 md:py-14">
-      <div className="mb-10 max-w-xl">
+      <Reveal className="mb-10 max-w-xl">
         <h2 className="mt-4 text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
           {title}
         </h2>
         <p className="mt-5 max-w-xl text-base leading-7 text-muted md:text-xl md:leading-8">
           {description}
         </p>
-      </div>
+      </Reveal>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="flex gap-6 lg:grid-cols-2">
         {projects.map((project) => (
-          <Reveal key={project.title}>
+          <Reveal key={project.slug}>
             <article className="grid grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
               <img
                 src={project.image}
                 alt={`${project.title} preview`}
-                className="aspect-[16/10] md:h-full object-contain w-full rounded-2xl bg-muted/10 p-6 md:p-0 md:aspect-auto"
+                className="aspect-[16/10] md:h-full object-contain w-full rounded-md bg-muted/10 p-6 md:p-0 md:aspect-auto"
               />
 
               <div className="flex flex-col justify-center gap-3 pt-5 md:p-8">
@@ -42,8 +42,13 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                   <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
                     {project.title}
                   </h3>
+                </div>
 
-                  <ul className="flex flex-wrap gap-2">
+                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
+                  {project.description}
+                </p>
+
+                <ul className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => {
                       const Icon = techIcons[tech];
 
@@ -64,11 +69,6 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                       );
                     })}
                   </ul>
-                </div>
-
-                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
-                  {project.description}
-                </p>
 
                 <div className="flex items-center flex-wrap gap-3 pt-2">
                   <Button arrow link={project.github} target="_blank">
