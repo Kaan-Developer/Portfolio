@@ -76,6 +76,12 @@ blob-report/
 .serverless/
 
 # ============================================
+# Supabase (CLI-generated local state)
+# ============================================
+supabase/.temp/
+supabase/.branches/
+
+# ============================================
 # Editors and IDEs
 # ============================================
 .vscode/*
