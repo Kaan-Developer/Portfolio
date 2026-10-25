@@ -14,30 +14,22 @@ const Hero = () => {
       <div className="relative z-10 flex flex-col gap-4">
         <div className="flex flex-col gap-3">
           <Reveal>
-                      <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+                            <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
   {site.name}
   <span className="block text-muted">{site.role}</span>
 </h1>
-          </Reveal>
-
-          <Reveal>
             <p className="max-w-md text-base text-muted md:text-lg">
   {site.littleDesc}
 </p>
-          </Reveal>
-        </div>
 
-        <div className="flex gap-2">
-          <Reveal>
+<div className="flex gap-2">
                       <Button arrow link="#projects" variant="primary">
             {site.buttons.projectBtn}
           </Button>
-          </Reveal>
-
-          <Reveal>
                       <Button arrow link="#contact" variant="outline">
             {site.buttons.contactBtn}
           </Button>
+        </div>
           </Reveal>
         </div>
       </div>

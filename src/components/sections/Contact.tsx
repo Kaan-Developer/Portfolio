@@ -104,34 +104,23 @@ const Contact = () => {
       id="contact"
       className="relative grid min-w-0 grid-cols-1 gap-8 px-0 py-10 mt-6 sm:px-4 md:px-10 md:py-14 xl:grid-cols-2 xl:gap-12"
     >
-      <div className="flex min-w-0 flex-col items-start self-start relative z-10">
-        <Reveal>
+      <Reveal className="min-w-0">
                   <h2 className="max-w-lg text-balance text-4xl font-black leading-[0.95] tracking-[-0.05em] md:text-6xl">
           {contact.title}
         </h2>
-        </Reveal>
-
-        <Reveal>
                   <p className="mt-5 max-w-md text-base leading-7 text-muted md:text-lg md:leading-8">
           {contact.description}
         </p>
-        </Reveal>
 
         <div className="mt-8 w-full max-w-md border-t border-border pt-6">
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <Reveal>
                           <p className="text-sm text-muted">Email:</p>
-            </Reveal>
-
-            <Reveal>
                           <a
               href={`mailto:${contact.email}`}
               className="min-w-0 select-text break-all text-base font-medium text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:text-lg"
             >
               {contact.email}
             </a>
-            </Reveal>
-            <Reveal>
               <button
               type="button"
               onClick={handleCopy}
@@ -155,7 +144,6 @@ const Contact = () => {
                     : site.buttons.copyEmailBtn}
               </span>
             </button>
-            </Reveal>
           </div>
           {copyState === "error" && (
             <p role="alert" className="mt-2 text-sm text-red-600">
@@ -168,8 +156,8 @@ const Contact = () => {
               const Icon = item.icon;
 
               return (
-                <Reveal key={item.name}>
                   <a
+                  key={item.name}
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -193,14 +181,14 @@ const Contact = () => {
                       aria-hidden="true"
                     />
                   </a>
-                </Reveal>
               );
             })}
           </div>
         </div>
-      </div>
+      </Reveal>
 
-      <form
+      <Reveal className="min-w-0" delay={0.08}>
+        <form
         onSubmit={handleSubmit}
         className="relative z-10 flex w-full min-w-0 flex-col gap-5 self-start rounded-2xl border border-border bg-white p-5 sm:p-6 lg:p-8"
       >
@@ -214,7 +202,6 @@ const Contact = () => {
         />
 
         <div className="grid w-full min-w-0 grid-cols-1 gap-5 sm:grid-cols-2">
-          <Reveal>
             <div className="flex min-w-0 flex-col gap-2">
               <label
                 htmlFor="contact-name"
@@ -233,9 +220,8 @@ const Contact = () => {
                 className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
               />
             </div>
-          </Reveal>
 
-          <Reveal>
+
             <div className="flex min-w-0 flex-col gap-2">
               <label
                 htmlFor="contact-email"
@@ -254,10 +240,9 @@ const Contact = () => {
                 className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
               />
             </div>
-          </Reveal>
         </div>
 
-        <Reveal>
+
           <fieldset className="min-w-0">
             <legend className="text-balance font-semibold text-md mb-2">
               {form.subjectLabel}
@@ -289,9 +274,7 @@ const Contact = () => {
               </>
             )}
           </fieldset>
-        </Reveal>
 
-        <Reveal>
           <div className="flex min-w-0 flex-col gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -321,10 +304,9 @@ const Contact = () => {
               className="w-full min-h-40 resize-y rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
             ></textarea>
           </div>
-        </Reveal>
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
-          <Reveal className="w-full">
+          <div className="w-full">
             <div className="flex flex-col gap-2 w-full">
               <p className="text-sm leading-6 text-muted">{form.privacyNote} </p>
               <a
@@ -337,9 +319,9 @@ const Contact = () => {
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
-          </Reveal>
+          </div>
 
-          <Reveal className="w-full">
+          <div className="w-full">
             <button
               type="submit"
               disabled={submitState === "sending"}
@@ -355,9 +337,10 @@ const Contact = () => {
                 aria-hidden="true"
               />
             </button>
-          </Reveal>
+          </div>
         </div>
       </form>
+      </Reveal>
     </section>
   );
 };
