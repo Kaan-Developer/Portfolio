@@ -32,9 +32,9 @@ const Zoom = ({ src, alt }: ZoomProps) => {
         type="button"
         onClick={() => setPreviewOpen(true)}
         aria-label="Enlarge project image"
-        className="absolute top-3 right-3 z-10 rounded-lg
+        className="absolute bottom-3 right-3 z-10 rounded-lg
         bg-black p-2 text-white backdrop-blur-sm
-        transition-colors hover:bg-black/70"
+        transition-colors hover:bg-black/70 hover:translateX-60"
       >
         <ZoomIn size={18} strokeWidth={1.75} />
       </button>

@@ -42,7 +42,7 @@ const Details = () => {
   }
 
   return (
-    <main className="min-h-screen relative bg-bg px-6 py-8 md:px-10">
+    <main className="min-h-screen relative bg-bg px-6 pt-32 pb-8 md:px-10">
 
       <header className="fixed top-5 md:top-6 left-1/2 z-50 isolate
     flex h-20 w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 items-center justify-between
@@ -68,7 +68,7 @@ const Details = () => {
       <Language />
     </header>
 
-      <article className="mx-auto mt-10 max-w-4xl">
+      <article className="mx-auto max-w-4xl">
         <h1 className="text-4xl font-bold">{project.title}</h1>
 
         <div className="relative">

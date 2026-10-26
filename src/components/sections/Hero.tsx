@@ -25,7 +25,7 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row gap-2">
           <Button arrow link="#projects" variant="primary">
             {site.buttons.projectBtn}
           </Button>

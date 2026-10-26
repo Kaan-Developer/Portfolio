@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LogoMark from "./LogoMark";
 import Ul from "./Ul";
 import { useSite } from "../../hooks/useSite";
@@ -12,26 +12,12 @@ import Button from "./Button";
 export const Navbar = () => {
   const site = useSite();
 
-  const { isOpen, toggle, close } = useMenuStore();
+  const { isOpen, toggle } = useMenuStore();
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        close();
-        menuButtonRef.current?.focus();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, close]);
+  const handleMenuToggle = () => {
+    toggle();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +53,6 @@ export const Navbar = () => {
         />
         <a
           href="#home"
-          onClick={close}
           aria-label="Kaan - Home"
           className="flex select-none shrink-0 text-black transition-opacity hover:opacity-80"
         >
@@ -80,20 +65,19 @@ export const Navbar = () => {
 
         <div className="flex lg:hidden">
           <button
-            ref={menuButtonRef}
-            type="button"
-            aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            onClick={toggle}
-            className="flex h-12 w-12 items-center justify-center rounded-md bg-white shadow-soft"
-          >
-            {isOpen ? (
-              <X size={24} aria-hidden="true" />
-            ) : (
-              <Menu size={24} aria-hidden="true" />
-            )}
-          </button>
+  type="button"
+  aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+  aria-expanded={isOpen}
+  aria-controls="mobile-menu"
+  onClick={handleMenuToggle}
+  className="flex h-12 w-12 items-center justify-center rounded-md bg-white shadow-soft"
+>
+  {isOpen ? (
+    <X size={24} aria-hidden="true" />
+  ) : (
+    <Menu size={24} aria-hidden="true" />
+  )}
+</button>
         </div>
 
         <div
@@ -106,15 +90,17 @@ export const Navbar = () => {
               : "invisible opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
-          <Ul mobile onNavigate={close} />
+          <Ul mobile onNavigate={toggle} />
 
-          <div className="flex flex-col items-stretch gap-4">
-            <Button arrow link="#contact" variant="primary" onClick={close}>
+                    <Language />
+
+          <div className="flex items-center justify-center">
+                      <div className="flex flex-col">
+            <Button arrow link="#contact" variant="primary">
               {site.buttons.letsContactBtn}
             </Button>
-
-            <Language />
           </div>
+                    </div>
         </div>
 
         <div className="hidden lg:flex gap-4">
@@ -131,10 +117,7 @@ export const Navbar = () => {
           aria-label="Close navigation menu"
           tabIndex={-1}
           className="fixed inset-0 z-40 lg:hidden"
-          onClick={() => {
-            close();
-            menuButtonRef.current?.focus();
-          }}
+          onClick={toggle}
         />
       )}
     </>
