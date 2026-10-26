@@ -36,7 +36,7 @@ const Zoom = ({ src, alt }: ZoomProps) => {
         bg-black p-2 text-white backdrop-blur-sm
         transition-colors hover:bg-black/70 hover:translateX-60"
       >
-        <ZoomIn size={18} strokeWidth={1.75} />
+        <ZoomIn size={22} strokeWidth={1.75} />
       </button>
 
       {previewOpen &&
@@ -56,7 +56,7 @@ const Zoom = ({ src, alt }: ZoomProps) => {
               <img
                 src={src}
                 alt={alt}
-                className="max-h-[90vh] max-w-[95vw]
+                className="max-h-[80vh] max-w-[85vw]
                 rounded-xl object-contain"
               />
 

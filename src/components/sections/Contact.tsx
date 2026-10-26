@@ -145,6 +145,7 @@ const Contact = () => {
                   id="contact-name"
                   name="name"
                   autoComplete="name"
+                  placeholder={form.namePlaceholder}
                   required
                   maxLength={50}
                   className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
@@ -163,6 +164,7 @@ const Contact = () => {
                   id="contact-email"
                   name="email"
                   autoComplete="email"
+                  placeholder={form.emailPlaceholder}
                   required
                   maxLength={100}
                   className="w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
@@ -193,6 +195,7 @@ const Contact = () => {
                     type="text"
                     id="contact-other-subject"
                     name="otherSubject"
+                    placeholder={form.otherSubjectPlaceholder}
                     required
                     maxLength={100}
                     className="mt-3 w-full h-12 rounded-md border border-border bg-white p-4 text-ink outline-none transition duration-200 focus:border-primary focus:ring-4 focus:ring-primary-light"
@@ -222,6 +225,7 @@ const Contact = () => {
                 id="contact-message"
                 name="message"
                 value={message}
+                placeholder={form.messagePlaceholder}
                 required
                 maxLength={1000}
                 onChange={handleMessageChange}

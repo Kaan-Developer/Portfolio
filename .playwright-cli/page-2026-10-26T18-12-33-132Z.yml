@@ -1,0 +1,127 @@
+- generic [ref=e2]:
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - link "Kaan - Home" [ref=e5] [cursor=pointer]:
+        - /url: "#home"
+      - navigation "Primary navigation" [ref=e6]:
+        - link "Ana Sayfa" [ref=e7] [cursor=pointer]:
+          - /url: "#home"
+        - link "Projeler" [ref=e8] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Hakkımda" [ref=e9] [cursor=pointer]:
+          - /url: "#about"
+      - generic [ref=e10]:
+        - group "Language" [ref=e12]:
+          - button "TR" [pressed] [ref=e13] [cursor=pointer]
+          - button "EN" [ref=e14] [cursor=pointer]
+        - link "Konuşalım" [ref=e15] [cursor=pointer]:
+          - /url: "#contact"
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Kaan Hamitler Frontend Geliştirici" [level=1] [ref=e22]:
+          - text: Kaan Hamitler
+          - generic [ref=e23]: Frontend Geliştirici
+        - paragraph [ref=e24]: React ve Tailwind CSS ile responsive web arayüzleri geliştiriyorum.
+      - generic [ref=e25]:
+        - link "Projeleri gör" [ref=e26] [cursor=pointer]:
+          - /url: "#projects"
+        - link "İletişime geç" [ref=e30] [cursor=pointer]:
+          - /url: "#contact"
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - heading "Geliştirdiklerim" [level=2] [ref=e36]
+        - paragraph [ref=e37]: Kaynak kodu ve geliştirme notlarıyla frontend projeleri.
+      - article [ref=e40]:
+        - generic [ref=e41]:
+          - img "Portfolyo" [ref=e42]
+          - button "Enlarge project image" [ref=e43] [cursor=pointer]
+        - generic [ref=e47]:
+          - heading "Portfolyo" [level=3] [ref=e49]
+          - paragraph [ref=e50]: Çalışmalarımı tanıtmak ve benimle iletişime geçilmesini sağlamak için tasarlayıp tek başıma geliştirdiğim kişisel portfolyom.
+          - list [ref=e51]:
+            - listitem [ref=e52]: React
+            - listitem [ref=e55]: TypeScript
+            - listitem [ref=e58]: Tailwind
+            - listitem [ref=e61]: Supabase
+          - generic [ref=e64]:
+            - link "GitHub Github" [ref=e65] [cursor=pointer]:
+              - /url: https://github.com/Kaan-Developer/Portfolio
+              - generic [ref=e66]:
+                - img "GitHub" [ref=e67]
+                - generic [ref=e69]: Github
+            - link "View details for Portfolyo" [ref=e70] [cursor=pointer]:
+              - /url: /projects/portfolio
+              - text: Detayları gör
+    - generic [ref=e75]:
+      - heading "Merhaba, ben Kaan." [level=2] [ref=e76]
+      - paragraph [ref=e77]: Web arayüzleri geliştiriyorum. React ve TypeScript öğrenirken öğrendiklerimi projelerimde uyguluyorum.
+      - paragraph [ref=e78]: Şu sıralar erişilebilirlik, API kullanımı ve daha iyi kullanıcı deneyimleri üzerine çalışıyorum.
+      - generic [ref=e79]:
+        - generic [ref=e80]: Kullandığım Teknolojiler
+        - list [ref=e81]:
+          - listitem [ref=e82]: React
+          - listitem [ref=e83]: TypeScript
+          - listitem [ref=e84]: JavaScript
+          - listitem [ref=e85]: Tailwind
+          - listitem [ref=e86]: HTML
+          - listitem [ref=e87]: CSS
+      - link "Github" [ref=e89] [cursor=pointer]:
+        - /url: https://github.com/Kaan-Developer
+    - generic [ref=e96]:
+      - heading "İletişime geçin" [level=2] [ref=e97]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]: Ad
+          - textbox "Ad" [ref=e101]:
+            - /placeholder: Adınız
+        - generic [ref=e102]:
+          - generic [ref=e103]: E-posta
+          - textbox "E-posta" [ref=e104]:
+            - /placeholder: you@example.com
+      - group "Konuİsteğe bağlı" [ref=e105]:
+        - generic [ref=e107]:
+          - generic [ref=e108] [cursor=pointer]:
+            - radio "Proje Talebi" [ref=e109]
+            - generic [ref=e110]: Proje Talebi
+          - generic [ref=e111] [cursor=pointer]:
+            - radio "İş Fırsatı" [ref=e112]
+            - generic [ref=e113]: İş Fırsatı
+          - generic [ref=e114] [cursor=pointer]:
+            - radio "İş Birliği" [ref=e115]
+            - generic [ref=e116]: İş Birliği
+          - generic [ref=e117] [cursor=pointer]:
+            - radio "Diğer" [ref=e118]
+            - generic [ref=e119]: Diğer
+      - generic [ref=e120]:
+        - generic [ref=e121]:
+          - generic [ref=e122]: Mesaj
+          - generic [ref=e123]: 0 / 1000 characters
+        - textbox "Mesaj" [ref=e124]:
+          - /placeholder: Üzerinde ne çalışıyorsunuz?
+      - generic [ref=e125]:
+        - generic [ref=e126]:
+          - paragraph [ref=e127]: Bilgileriniz yalnızca talebinize yanıt vermek için kullanılır.
+          - link "İletişim gizlilik bildirimi (opens in a new tab)" [ref=e128] [cursor=pointer]:
+            - /url: /privacy
+            - text: İletişim gizlilik bildirimi
+            - generic [ref=e129]: (opens in a new tab)
+        - button "Mesaj gönder" [ref=e130] [cursor=pointer]
+  - contentinfo [ref=e134]:
+    - generic [ref=e135]:
+      - generic [ref=e137]:
+        - paragraph [ref=e138]: Kaan Hamitler
+        - paragraph [ref=e139]: Frontend Geliştirici
+      - navigation "Footer" [ref=e140]:
+        - link "Ana Sayfa" [ref=e141] [cursor=pointer]:
+          - /url: /#home
+        - link "Projeler" [ref=e142] [cursor=pointer]:
+          - /url: /#projects
+        - link "Hakkımda" [ref=e143] [cursor=pointer]:
+          - /url: /#about
+      - link "GitHub (opens in a new tab)" [ref=e144] [cursor=pointer]:
+        - /url: https://github.com/Kaan-Developer
+        - text: GitHub
+        - generic [ref=e145]: (opens in a new tab)
+    - paragraph [ref=e147]: © 2026 Kaan Hamitler. Tüm hakları saklıdır.
+    - heading [level=2] [aria-hidden] [ref=e149]: Kaan Hamitler
+  - button "Back to top"

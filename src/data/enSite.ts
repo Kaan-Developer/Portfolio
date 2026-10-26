@@ -89,6 +89,7 @@ description2:
       subjectLabel: "Subject",
       subjectOptionalLabel: "Optional",
       subjectPlaceholder: "Select a subject",
+      otherSubjectPlaceholder: "Briefly describe the subject",
       subjectOptions: [
         { label: "Project inquiry", value: "project" },
         { label: "Job opportunity", value: "job" },

@@ -78,8 +78,8 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                   </ul>
 
                 <div className="flex items-center flex-wrap gap-3 pt-2">
-                  <Button arrow link={project.github} target="_blank">
-                    GitHub
+                  <Button github link={project.github} target="_blank">
+                    Github
                   </Button>
                   {project.live && (
                     <Button

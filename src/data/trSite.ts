@@ -120,6 +120,7 @@ description2:
       subjectLabel: "Konu",
       subjectOptionalLabel: "İsteğe bağlı",
       subjectPlaceholder: "Bir konu seçin",
+      otherSubjectPlaceholder: "Konuyu kısaca belirtin",
       subjectOptions: [
         { label: "Proje Talebi", value: "project" },
         { label: "İş Fırsatı", value: "job" },
