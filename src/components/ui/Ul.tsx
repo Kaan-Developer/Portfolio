@@ -7,6 +7,7 @@ interface UlProps {
     inline?: boolean;
     links?: { label: ReactNode; target: string }[];
     ariaLabel?: string;
+    onNavigate?: () => void;
 }
 
 
@@ -15,6 +16,7 @@ const Ul = ({
   inline = false,
   links: providedLinks,
   ariaLabel,
+  onNavigate,
 }: UlProps) => {
   const site = useSite();
   const links = providedLinks ?? site.bubbles;
@@ -74,7 +76,10 @@ const Ul = ({
       <a
         key={bubble.target}
         href={`#${bubble.target}`}
-        onClick={() => setActiveSection(bubble.target)}
+        onClick={() => {
+          setActiveSection(bubble.target);
+          onNavigate?.();
+        }}
         aria-current={isActive ? "location" : undefined}
         className={
           inline
