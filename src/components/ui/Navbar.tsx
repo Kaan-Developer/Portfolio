@@ -90,14 +90,14 @@ export const Navbar = () => {
         >
           <Ul mobile />
 
+                    <Language />
+
           <div className="flex items-center justify-center">
                       <div className="flex flex-col">
             <Button arrow link="#contact" variant="primary">
               {site.buttons.letsContactBtn}
             </Button>
           </div>
-
-          <Language />
 
                     <button
             type="button"

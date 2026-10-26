@@ -1,12 +1,32 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useSite } from "../../hooks/useSite";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
 import Footer from "../sections/Footer";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import Zoom from "./Zoom";
+import LogoMark from "../ui/LogoMark";
+import Language from "./Language";
+import ScrollToTop from "./ScrollToTop";
 
 const Details = () => {
-  const { projects, projectDetails } = useSite();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  })
+
+  const { projects, projectDetails, dashbord } = useSite();
   const { slug } = useParams();
   useLayoutEffect(() => {
   window.scrollTo({
@@ -24,16 +44,41 @@ const Details = () => {
   return (
     <main className="min-h-screen relative bg-bg px-6 py-8 md:px-10">
 
+      <header className="fixed top-5 md:top-6 left-1/2 z-50 isolate
+    flex h-20 w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 items-center justify-between
+    rounded-2xl px-4 sm:px-6 lg:px-8">
+      <div
+  aria-hidden="true"
+  className={`pointer-events-none absolute inset-0 -z-10 rounded-2xl border
+    transition-[background-color,border-color,box-shadow] duration-200
+    motion-reduce:transition-none ${
+      isScrolled
+        ? "border-border bg-bg/95 supports-[backdrop-filter]:bg-bg/80 backdrop-blur-md shadow-soft"
+        : "border-transparent bg-transparent"
+    }`}
+/>
+      <Link
+        to="/"
+        className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight whitespace-nowrap text-white transition-[background-color,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:active:scale-100"
+      >
+        <ArrowLeft size={16} strokeWidth={2} aria-hidden="true" />
+        <span>{dashbord.backto}</span>
+      </Link>
+
+      <Language />
+    </header>
+
       <article className="mx-auto mt-10 max-w-4xl">
         <h1 className="text-4xl font-bold">{project.title}</h1>
 
+        <div className="relative">
+          <img src={project.image} alt={project.title} className="w-full object-contain" />
+
         {project.image && (
-          <img
-            src={project.image}
-            alt={`${project.title} ${projectDetails.imageAlt}`}
-            className="mt-8 w-full rounded-2xl"
-          />
+        <Zoom src={project.image} alt={project.title} />
+
         )}
+        </div>
 
         <ul className="mt-2 flex flex-wrap gap-2">
           {project.tech.map((tech) => {
@@ -92,6 +137,7 @@ const Details = () => {
       </article>
 
       <Footer />
+      <ScrollToTop />
     </main>
   );
 };

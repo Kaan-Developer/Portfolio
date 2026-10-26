@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative isolate grid min-h-screen grid-cols-1 items-center gap-12 overflow-hidden pt-32 pb-8 px-10 md:px-0 lg:grid-cols-2"
+      className="relative isolate grid min-h-screen grid-cols-1 items-center gap-12 overflow-hidden pt-32 pb-8 lg:grid-cols-2"
     >
       <Pattern />
 

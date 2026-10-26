@@ -4,6 +4,7 @@ import { techIcons } from "../../data/techIcons";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Reveal from "../ui/Reveal";
+import Zoom from "../ui/Zoom";
 
 import Button from "../ui/Button";
 
@@ -30,12 +31,18 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
       <div className="flex gap-6 lg:grid-cols-2">
         {projects.map((project) => (
           <Reveal key={project.slug}>
-            <article className="grid grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
-              <img
+            <article className="grid bg-white grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
+              <div className="relative">
+                              <img
                 src={project.image}
-                alt={`${project.title} preview`}
-                className="aspect-[16/10] md:h-full object-contain w-full rounded-md bg-muted/10 p-6 md:p-0 md:aspect-auto"
+                alt={project.title}
+                className="spect-[16/10] border border-border md:h-full object-contain w-full rounded-md bg-muted/10 p-6 md:p-0 md:aspect-auto"
               />
+
+              {project.image && (
+              <Zoom src={project.image} alt={project.title} />
+              )}
+              </div>
 
               <div className="flex flex-col justify-center gap-3 pt-5 md:p-8">
                 <div className="flex flex-wrap gap-2 items-center justify-between">

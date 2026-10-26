@@ -1,0 +1,82 @@
+import { ZoomIn, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+
+type ZoomProps = {
+  src: string;
+  alt: string;
+};
+
+const Zoom = ({ src, alt }: ZoomProps) => {
+  const [previewOpen, setPreviewOpen] = useState(false);
+
+  useEffect(() => {
+    if (!previewOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setPreviewOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [previewOpen]);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setPreviewOpen(true)}
+        aria-label="Enlarge project image"
+        className="absolute top-3 right-3 z-10 rounded-lg
+        bg-black p-2 text-white backdrop-blur-sm
+        transition-colors hover:bg-black/70"
+      >
+        <ZoomIn size={18} strokeWidth={1.75} />
+      </button>
+
+      {previewOpen &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex
+            items-center justify-center bg-black/85 p-4"
+            onClick={() => setPreviewOpen(false)}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${alt} preview`}
+              className="relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={src}
+                alt={alt}
+                className="max-h-[90vh] max-w-[95vw]
+                rounded-xl object-contain"
+              />
+
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setPreviewOpen(false)}
+                aria-label="Close preview"
+                className="absolute top-3 right-3 rounded-lg
+                bg-black/60 p-2 text-white
+                hover:bg-black/80"
+              >
+                <X size={20} />
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
+    </>
+  );
+};
+
+export default Zoom;
