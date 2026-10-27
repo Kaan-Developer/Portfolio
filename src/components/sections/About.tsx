@@ -3,8 +3,6 @@ import Button from "../ui/Button";
 import clsx from "clsx";
 import Reveal from "../ui/Reveal";
 
-import Stacks from "./Stacks";
-
 const About = () => {
   const site = useSite();
 
@@ -41,10 +39,16 @@ const About = () => {
             </ul>
           </div>
 
-          <div className="mt-4">
-              <Button arrow link={site.links.github} target="_blank">
-                Github
-              </Button>
+          <div className="flex flex-wrap items-center mt-4 gap-3">
+            <Button github link={site.links.github} target="_blank">
+              Github
+            </Button>
+
+            <Button
+              twitter
+              link="https://x.com/KHamitler78641"
+              target="_blank"
+            ></Button>
           </div>
         </Reveal>
         <div className="mt-8 border-t border-border pt-8 lg:hidden"></div>

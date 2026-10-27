@@ -5,8 +5,6 @@ import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
 import Footer from "../sections/Footer";
 import { useEffect, useLayoutEffect, useState } from "react";
-import Zoom from "./Zoom";
-import LogoMark from "../ui/LogoMark";
 import Language from "./Language";
 import ScrollToTop from "./ScrollToTop";
 import Button from "./Button";

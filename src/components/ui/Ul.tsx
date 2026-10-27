@@ -58,7 +58,7 @@ const Ul = ({
 
     return (
         <nav
-  aria-label={ariaLabel ?? (mobile ? "Mobile navigation" : "Primary navigation")}
+  aria-label={ariaLabel ?? (mobile ? site.accessibility.mobileNavigation : site.accessibility.primaryNavigation)}
   className={
     inline
       ? mobile

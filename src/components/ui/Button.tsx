@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import clsx from "clsx";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 
 
 interface Props extends ComponentPropsWithoutRef<"a"> {
@@ -9,6 +10,7 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
   arrow?: boolean;
   arrowDirection?: "up-right" | "right";
   github?: boolean;
+  twitter?: boolean;
   iconSize?: number;
   children?: ReactNode;
   link: string;
@@ -30,6 +32,7 @@ const Button = ({
   arrow = false,
   arrowDirection = "up-right",
   github = false,
+  twitter = false,
   iconSize = 18,
   className,
   children,
@@ -81,6 +84,13 @@ const Button = ({
             className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           />
         ))}
+
+        {twitter && (
+          <span className="inline-flex items-center gap-2 text-sm font-semibold leading-none">
+            <FaXTwitter size={20} aria-hidden="true" />
+            Twitter
+          </span>
+        )}
     </a>
   );
 };

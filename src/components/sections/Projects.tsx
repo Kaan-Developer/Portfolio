@@ -1,5 +1,6 @@
 import { useSite } from "../../hooks/useSite";
 import { techIcons } from "../../data/techIcons";
+import { useEffect, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -17,6 +18,112 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
   const projects = site.projects;
   const { title, description } = site.projectsSection;
 
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+  const slider = sliderRef.current;
+  if (!slider) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  let drag: {
+    id: number;
+    x: number;
+    left: number;
+    moved: boolean;
+  } | null = null;
+
+  const handleDown = (event: PointerEvent) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if (slider.scrollWidth <= slider.clientWidth) return;
+
+    if (
+      event.target instanceof Element &&
+      event.target.closest("a, button, input, textarea, select")
+    ) return;
+
+    const contentBottom =
+      slider.getBoundingClientRect().top +
+      slider.clientTop +
+      slider.clientHeight;
+
+    if (event.clientY >= contentBottom) return;
+
+    slider.scrollTo({
+      left: slider.scrollLeft,
+      behavior: "instant",
+    });
+
+    drag = {
+      id: event.pointerId,
+      x: event.clientX,
+      left: slider.scrollLeft,
+      moved: false,
+    };
+
+    event.preventDefault();
+    slider.setPointerCapture(event.pointerId);
+    slider.dataset.dragging = "true";
+  };
+
+  const handleMove = (event: PointerEvent) => {
+    if (!drag || event.pointerId !== drag.id) return;
+
+    const distance = event.clientX - drag.x;
+    if (!drag.moved && Math.abs(distance) < 5) return;
+
+    drag.moved = true;
+
+    slider.scrollTo({
+      left: drag.left - distance,
+      behavior: "instant",
+    });
+  };
+
+  const handleEnd = (event: PointerEvent) => {
+    if (!drag || event.pointerId !== drag.id) return;
+
+    const shouldSnap = drag.moved && event.type === "pointerup";
+
+    drag = null;
+    delete slider.dataset.dragging;
+
+    if (slider.hasPointerCapture(event.pointerId)) {
+      slider.releasePointerCapture(event.pointerId);
+    }
+
+    const card = slider.firstElementChild;
+    if (!shouldSnap || !(card instanceof HTMLElement)) return;
+
+    const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
+    const step = card.getBoundingClientRect().width + gap;
+
+    if (step <= 0) return;
+
+    slider.scrollTo({
+      left: Math.round(slider.scrollLeft / step) * step,
+      behavior: reduceMotion.matches ? "instant" : "smooth",
+    });
+  };
+
+  slider.addEventListener("pointerdown", handleDown);
+  slider.addEventListener("pointermove", handleMove);
+  slider.addEventListener("pointerup", handleEnd);
+  slider.addEventListener("pointercancel", handleEnd);
+  slider.addEventListener("lostpointercapture", handleEnd);
+
+  return () => {
+    slider.removeEventListener("pointerdown", handleDown);
+    slider.removeEventListener("pointermove", handleMove);
+    slider.removeEventListener("pointerup", handleEnd);
+    slider.removeEventListener("pointercancel", handleEnd);
+    slider.removeEventListener("lostpointercapture", handleEnd);
+    delete slider.dataset.dragging;
+  };
+}, []);
+
   return (
     <section id="projects" className="py-10 md:py-14">
       <Reveal className="mb-10 max-w-xl">
@@ -28,15 +135,26 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
         </p>
       </Reveal>
 
-      <div className="flex gap-6 lg:grid-cols-2">
+<div
+  ref={sliderRef}
+  className="flex cursor-grab gap-4 overflow-x-auto py-3 data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none md:gap-6"
+  data-lenis-prevent
+  role="region"
+  aria-label={title}
+  tabIndex={0}
+>
         {projects.map((project) => (
-          <Reveal key={project.slug}>
-            <article className="grid bg-white grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
-              <div className="relative">
-                              <img
+          <Reveal
+            key={project.slug}
+            className={`min-w-0 shrink-0 ${projects.length > 1 ? "w-[84%] md:w-[90%]" : "w-full"}`}
+          >
+            <article className="grid h-full bg-white grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
+              <div className="relative self-center">
+                <img
+                draggable={false}
                 src={project.image}
                 alt={project.title}
-                className="spect-[16/10] border border-border md:h-full object-contain w-full rounded-md bg-muted/10 p-6 md:p-0 md:aspect-auto"
+                className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain"
               />
 
               {project.image && (
@@ -88,14 +206,14 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                       target="_blank"
                       variant="outline"
                     >
-                      Live demo
+                      {site.buttons.liveDemoBtn}
                     </Button>
                   )}
 
                   {!hideDetails && (
                     <Link
                       to={`/projects/${project.slug}`}
-                      aria-label={`View details for ${project.title}`}
+                      aria-label={`${site.buttons.viewDetailsBtn}: ${project.title}`}
                       className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-md border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
                     >
                       {site.buttons.viewDetailsBtn}

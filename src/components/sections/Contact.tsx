@@ -189,7 +189,7 @@ const Contact = () => {
               {selectedSubject === "other" && (
                 <>
                   <label htmlFor="contact-other-subject" className="sr-only">
-                    Other subject
+                    {form.otherSubjectLabel}
                   </label>
                   <input
                     type="text"
@@ -218,7 +218,7 @@ const Contact = () => {
                     "text-subtle": message.length < 1000,
                   })}
                 >
-                  {message.length} / 1000 characters
+                  {message.length} / 1000 {form.characters}
                 </span>
               </div>
               <textarea
@@ -246,7 +246,7 @@ const Contact = () => {
                   className="font-medium text-sm text-ink underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
                   {form.privacyTitle}
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only"> {site.accessibility.opensInNewTab}</span>
                 </a>
               </div>
 

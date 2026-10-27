@@ -53,7 +53,7 @@ export const Navbar = () => {
         />
         <a
           href="#home"
-          aria-label="Kaan - Home"
+          aria-label={site.accessibility.home}
           className="flex select-none shrink-0 text-black transition-opacity hover:opacity-80"
         >
           <LogoMark className="h-12 w-auto" />
@@ -66,7 +66,7 @@ export const Navbar = () => {
         <div className="flex lg:hidden">
           <button
   type="button"
-  aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+  aria-label={isOpen ? site.accessibility.closeMenu : site.accessibility.openMenu}
   aria-expanded={isOpen}
   aria-controls="mobile-menu"
   onClick={handleMenuToggle}
@@ -94,7 +94,7 @@ export const Navbar = () => {
 
                     <Language />
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-start justify-start">
                       <div className="flex flex-col">
             <Button arrow link="#contact" variant="primary">
               {site.buttons.letsContactBtn}
@@ -114,7 +114,7 @@ export const Navbar = () => {
       {isOpen && (
         <button
           type="button"
-          aria-label="Close navigation menu"
+          aria-label={site.accessibility.closeMenu}
           tabIndex={-1}
           className="fixed inset-0 z-40 lg:hidden"
           onClick={toggle}

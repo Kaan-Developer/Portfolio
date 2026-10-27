@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <nav aria-label="Footer" className="flex flex-wrap gap-x-4">
+        <nav aria-label={site.accessibility.footerNavigation} className="flex flex-wrap gap-x-4">
           {site.bubbles.map((item) => (
             <Link
               key={item.target}
@@ -36,7 +36,7 @@ const Footer = () => {
           className="inline-flex min-h-11 w-fit items-center text-sm text-ink underline-offset-4 transition-colors hover:text-primary hover:underline"
         >
           GitHub
-          <span className="sr-only"> (opens in a new tab)</span>
+          <span className="sr-only"> {site.accessibility.opensInNewTab}</span>
         </a>
       </div>
 

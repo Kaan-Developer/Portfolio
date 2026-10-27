@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { useSite } from "../../hooks/useSite";
 
 const ScrollToTop = () => {
+  const site = useSite();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const ScrollToTop = () => {
     <button
     type="button"
     onClick={scrollToTop}
-      aria-label="Back to top"
+      aria-label={site.accessibility.backToTop}
       className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-black text-white shadow-soft transition-all duration-300 ease-out hover:bg-ink hover:scale-105 hover:shadow-medium active:scale-95 ${
         isVisible
           ? "opacity-100 translate-y-0 pointer-events-auto"

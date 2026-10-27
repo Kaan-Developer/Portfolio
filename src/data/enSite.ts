@@ -20,21 +20,44 @@ export const enSite = {
   projects,
 
   projectDetails: {
-    problem: "The problem",
-    contribution: "What I built",
-    decisions: "Technical decisions",
-    outcome: "Result",
-    blogs: "Development notes",
-    imageAlt: "project preview",
-  },
+  problem: "The problem",
+  contribution: "What I built",
+  decisions: "Technical decisions",
+  outcome: "Result",
+  blogs: "Development notes",
+  imageAlt: "project preview",
+},
 
   privacy: enPrivacy,
+
+  accessibility: {
+    home: "Kaan - Home",
+    openMenu: "Open navigation menu",
+    closeMenu: "Close navigation menu",
+    primaryNavigation: "Primary navigation",
+    mobileNavigation: "Mobile navigation",
+    contactNavigation: "Contact navigation",
+    footerNavigation: "Footer navigation",
+    language: "Language",
+    opensInNewTab: "(opens in a new tab)",
+    backToTop: "Back to top",
+    enlargeImage: "Enlarge project image",
+    imagePreview: "Image preview",
+    closePreview: "Close preview",
+  },
+
+  notFound: {
+    title: "Page not found",
+    description: "The page you’re looking for doesn’t exist.",
+    backToHome: "Back to home",
+  },
 
   buttons: {
     projectBtn: "View projects",
     letsContactBtn: "Let's talk",
     contactBtn: "Get in touch",
     viewDetailsBtn: "View details",
+    liveDemoBtn: "Live demo",
     copyEmailBtn: "Copy Email",
     copyLoading: "Copyin...",
     succesCopy: "Copied",
@@ -90,6 +113,8 @@ description2:
       subjectOptionalLabel: "Optional",
       subjectPlaceholder: "Select a subject",
       otherSubjectPlaceholder: "Briefly describe the subject",
+      otherSubjectLabel: "Other subject",
+      characters: "characters",
       subjectOptions: [
         { label: "Project inquiry", value: "project" },
         { label: "Job opportunity", value: "job" },

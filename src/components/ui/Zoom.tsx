@@ -1,6 +1,7 @@
 import { ZoomIn, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useSite } from "../../hooks/useSite";
 
 type ZoomProps = {
   src: string;
@@ -8,6 +9,7 @@ type ZoomProps = {
 };
 
 const Zoom = ({ src, alt }: ZoomProps) => {
+  const site = useSite();
   const [previewOpen, setPreviewOpen] = useState(false);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const Zoom = ({ src, alt }: ZoomProps) => {
       <button
         type="button"
         onClick={() => setPreviewOpen(true)}
-        aria-label="Enlarge project image"
+        aria-label={site.accessibility.enlargeImage}
         className="absolute bottom-3 right-3 z-10 rounded-lg
         bg-black p-2 text-white backdrop-blur-sm
         transition-colors hover:bg-black/70 hover:translateX-60"
@@ -49,7 +51,7 @@ const Zoom = ({ src, alt }: ZoomProps) => {
             <div
               role="dialog"
               aria-modal="true"
-              aria-label={`${alt} preview`}
+              aria-label={`${alt} — ${site.accessibility.imagePreview}`}
               className="relative"
               onClick={(e) => e.stopPropagation()}
             >
@@ -64,7 +66,7 @@ const Zoom = ({ src, alt }: ZoomProps) => {
                 type="button"
                 autoFocus
                 onClick={() => setPreviewOpen(false)}
-                aria-label="Close preview"
+                aria-label={site.accessibility.closePreview}
                 className="absolute top-3 right-3 rounded-lg
                 bg-black/60 p-2 text-white
                 hover:bg-black/80"

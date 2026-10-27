@@ -1,13 +1,15 @@
 import { useLanguageStore } from "../../store/language";
+import { useSite } from "../../hooks/useSite";
 
 const Language = () => {
   const { lang, setLang } = useLanguageStore();
+  const site = useSite();
 
   return (
     <div className="flex items-center gap-3">
       <div
         role="group"
-        aria-label="Language"
+        aria-label={site.accessibility.language}
         className="flex items-center rounded-md border border-border bg-white p-1 text-sm font-semibold"
       >
         {(["tr", "en"] as const).map((code) => (

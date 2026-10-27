@@ -2,6 +2,7 @@ import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
 import Pattern from "../ui/Pattern";
 import Reveal from "../ui/Reveal";
+import Heroİmage from "../../assets/images/portfolioHero.png";
 
 const Hero = () => {
   const site = useSite();
@@ -36,7 +37,9 @@ const Hero = () => {
         </div>
       </Reveal>
 
-      <div className="relative z-10"></div>
+      <div className="relative z-10 bg-muted w-full rounded-md">
+        <img src={Heroİmage} alt="" className="object-contain w-full h-full" />
+      </div>
     </section>
   );
 };
