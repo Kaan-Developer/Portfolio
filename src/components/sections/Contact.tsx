@@ -1,14 +1,12 @@
-import { ArrowUpRight, ArrowRight, Copy, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import clsx from "clsx";
-import Reveal from "../ui/Reveal";
-import Contactİmage from "../../assets/images/Contactİmage.png";
 
-import { socialLinks } from "../../data/socialLinks";
 import { useSite } from "../../hooks/useSite";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Select from "../ui/Select";
+import SocialMedia from "../ui/SocialMedia";
 
 import { getSupabase } from "../../lib/supabase";
 
@@ -17,9 +15,6 @@ const Contact = () => {
   const { contact } = site;
   const { form } = contact;
 
-  const [copyState, setCopyState] = useState<
-    "idle" | "copying" | "copied" | "error"
-  >("idle");
   const [message, setMessage] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [submitState, setSubmitState] = useState<
@@ -32,24 +27,6 @@ const Contact = () => {
       setMessage(text);
     } else {
       setMessage(text.slice(0, 1000));
-    }
-  };
-
-  useEffect(() => {
-    if (copyState !== "copied") return;
-
-    const timeout = setTimeout(() => setCopyState("idle"), 2000);
-    return () => clearTimeout(timeout);
-  }, [copyState]);
-
-  const handleCopy = async () => {
-    setCopyState("copying");
-
-    try {
-      await navigator.clipboard.writeText(contact.email);
-      setCopyState("copied");
-    } catch {
-      setCopyState("error");
     }
   };
 
@@ -108,20 +85,20 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="mt-6"
-    >
-      <div className="w-full max-w-4xl mx-auto rounded-2xl border border-border bg-white">
+    <section id="contact" className="mt-6">
+      <div className="grid grid-cols-1 gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[1fr_3fr] lg:px-8 lg:py-14">
+        <div className="min-w-0">
+          <h2 className="mb-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-black">
+            {contact.title}
+          </h2>
+          <p>{contact.description}</p>
+          <SocialMedia />
+        </div>
         <form
           onSubmit={handleSubmit}
-          className="relative w-full min-w-0 gap-8 px-5 py-6 sm:px-6 lg:px-8 lg:py-14"
+          className="w-full min-w-0 gap-8 border-t border-border pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
         >
           <div className="flex min-w-0 flex-col gap-5">
-
-            <h2 className="mb-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-black">
-              {contact.title}
-            </h2>
 
             <input
               type="text"
@@ -246,7 +223,10 @@ const Contact = () => {
                   className="font-medium text-sm text-ink underline underline-offset-4 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
                   {form.privacyTitle}
-                  <span className="sr-only"> {site.accessibility.opensInNewTab}</span>
+                  <span className="sr-only">
+                    {" "}
+                    {site.accessibility.opensInNewTab}
+                  </span>
                 </a>
               </div>
 
@@ -267,7 +247,7 @@ const Contact = () => {
               </button>
             </div>
           </div>
-                  </form>
+        </form>
       </div>
     </section>
   );
