@@ -46,19 +46,6 @@ const Footer = () => {
         </p>
       </div>
 
-       <div className="mx-auto max-w-7xl overflow-hidden px-5 sm:px-8">
-        <h2
-          aria-hidden="true"
-          className="translate-y-[25%] select-none whitespace-nowrap text-center text-[clamp(3.5rem,10vw,11rem)] leading-none font-black tracking-[-0.06em]"
-          style={{
-            WebkitTextStroke: "1px rgba(148,163,184,0.35)",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          Kaan Hamitler
-        </h2>
-      </div>
-
       <div className="border-t border-white/20" />
     </footer>
   );

@@ -25,7 +25,7 @@ const Details = () => {
     };
   });
 
-  const { projects, projectDetails, dashbord } = useSite();
+  const { projects, projectDetails, dashbord, accessibility } = useSite();
   const { slug } = useParams();
   useLayoutEffect(() => {
     window.scrollTo({
@@ -59,16 +59,24 @@ const Details = () => {
         />
         <Link
           to="/"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight whitespace-nowrap text-white transition-[background-color,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:active:scale-100"
+          className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-black px-4 md:px-7 text-sm font-medium tracking-tight whitespace-nowrap text-white transition-[background-color,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:active:scale-100"
         >
           <ArrowLeft size={16} strokeWidth={2} aria-hidden="true" />
-          <span>{dashbord.backto}</span>
+          <span className="hidden md:flex">{dashbord.backto}</span>
         </Link>
 
         <div className="flex items-center gap-2">
           <Language />
 
-          <Button github target="_blank" iconSize={20} link="https://github.com/Kaan-Developer">Github</Button>
+          <Button
+            github
+            target="_blank"
+            iconSize={20}
+            aria-label={`GitHub ${accessibility.opensInNewTab}`}
+            link="https://github.com/Kaan-Developer"
+          >
+            <span className="hidden md:ml-2 md:inline">GitHub</span>
+          </Button>
         </div>
       </header>
 

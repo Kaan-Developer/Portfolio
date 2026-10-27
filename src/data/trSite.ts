@@ -25,28 +25,28 @@ export const trSite: typeof enSite = {
       image: portfolioHero,
       slug: "portfolio",
       description:
-        "Çalışmalarımı tanıtmak ve benimle iletişime geçilmesini sağlamak için tasarlayıp tek başıma geliştirdiğim kişisel portfolyom.",
+        "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
       tech: ["React", "TypeScript", "Tailwind", "Supabase"],
       github: "https://github.com/Kaan-Developer/Portfolio",
       caseStudy: {
         problem:
-          "Ziyaretçilerin beni tanıyabileceği, projelerimi ve becerilerimi görebileceği ve benimle iletişime geçebileceği kişisel bir web sitesine ihtiyacım vardı.",
+          "Frontend çalışmalarımı sunabileceğim ve iletişim taleplerini alabileceğim tek bir yere ihtiyacım vardı.",
         contribution:
-          "Bu web sitesini tek başıma tasarlayıp geliştirdim. Farklı ekran boyutlarına uyum sağlayan React arayüzünü, gezinme menüsünü, proje detay sayfalarını ve iletişim formunu hazırladım. Mesajları kaydeden ve gerekli yapılandırma yapıldığında Resend üzerinden e-posta bildirimi gönderen Supabase sunucu fonksiyonunu da geliştirdim.",
+          "Arayüz tasarımını, responsive düzenleri, gezinmeyi, proje sayfalarını ve iletişim formunun sunucu fonksiyonunu geliştirdim.",
         decisions: [
-          "Metinleri sayfa bileşenlerine dokunmadan güncelleyebilmek için site ve proje içeriklerini TypeScript veri dosyalarında tutuyorum.",
-          "Ana sayfada bölüm bağlantıları, proje detay sayfalarında ise React Router kullanıyorum. Böylece her projeye doğrudan bir adres üzerinden erişilebiliyor.",
-          "Farklı ekran boyutlarına uyum sağlayan düzenler ve site genelinde ortak stiller oluşturmak için Tailwind CSS kullanıyorum.",
-          "İletişim formundan gelen verileri, istekleri doğrulayıp mesajları kaydeden bir Supabase sunucu fonksiyonuna gönderiyorum. E-posta bildirimleri, API anahtarı tanımlandığında Resend üzerinden gönderiliyor; bu anahtar tarayıcı kodunda yer almıyor.",
+          "Proje kartları ve detay sayfaları aynı veriyi kullanıyor; açıklama ve bağlantılar tek yerden güncelleniyor. Türkçe ve İngilizce içerikler ayrı dosyalarda tutuluyor.",
+          "Ana sayfada bölüm bağlantıları, proje detaylarında React Router kullanıyorum. Böylece ana sayfadaki gezinme sade kalırken detaylar doğrudan bir bağlantıyla paylaşılabiliyor.",
+          "İletişim fonksiyonu isteği doğrulayıp mesajı kaydettikten sonra Resend bildirimini deniyor. Bildirim başarısız olursa veritabanı kaydı korunuyor; e-posta tesliminin ayrıca izlenmesi gerekiyor.",
+          "Tarayıcıda Supabase'in publishable anahtarı kullanılıyor. Veritabanına yazma işlemi ve Resend anahtarı sunucu fonksiyonunda kalıyor.",
         ],
         outcome:
-          "Site; kendimi tanıttığım bölümü, becerilerimi ve proje bağlantılarımı bir araya getiriyor. Her proje için ayrı bir detay sayfası bulunuyor. İletişim formu, veri doğrulaması ve mesajları kaydetmek için Supabase entegrasyonu içeriyor.",
+          "Portfolyo; Türkçe ve İngilizce içerik, doğrudan açılabilen proje sayfaları ve e-posta bildirimi başarısız olsa da mesajı saklayabilen bir iletişim akışı içeriyor.",
       },
       blogs: [
         {
-          title: "Portfolyomu geliştirirken",
+          title: "Proje içeriği",
           content:
-            "Bu portfolyoyu React, TypeScript, Vite ve Tailwind CSS kullanarak kendim tasarlayıp geliştirdim. Ana sayfada kendimi tanıtıyor, projelerimi ve becerilerimi paylaşıyorum. Sayfada bir iletişim formu da bulunuyor.\n\nProje içerikleri TypeScript veri dosyalarında tutuluyor. Proje kartları ve detay sayfaları aynı veriyi kullandığı için bir projenin açıklamasını, kullandığı teknolojileri ve geliştirme notlarını tek bir yerden güncelleyebiliyorum. React Router, her projenin adres tanımlayıcısını kullanarak ilgili detay sayfasını açıyor.\n\nİletişim formu, gönderilen verileri bir Supabase sunucu fonksiyonuna iletiyor. Bu fonksiyon verileri doğruluyor, gönderim sıklığı sınırlarını kontrol ediyor ve kabul edilen mesajları veritabanına kaydediyor. API anahtarı tanımlanmışsa Resend üzerinden e-posta bildirimi göndermeyi de deniyor.",
+            "Proje kartları ve detay sayfaları, seçili dilin proje verisini kullanıyor. Başlık veya bağlantı bu veride değiştirildiğinde iki görünüm de güncelleniyor.\n\nOrtak Project tipi her kaydın yapısını denetlerken metinler veri dosyalarında tutuluyor. Böylece metin değişiklikleri için render bileşenlerini düzenlemek gerekmiyor. Çeviriler ayrı dosyalarda olduğundan slug ve bağlantıları eşleşmiş tutmak gerekiyor.",
         },
       ],
     },
@@ -55,28 +55,28 @@ export const trSite: typeof enSite = {
       image: portfolioHero,
       slug: "portfolio-2",
       description:
-        "Çalışmalarımı tanıtmak ve benimle iletişime geçilmesini sağlamak için tasarlayıp tek başıma geliştirdiğim kişisel portfolyom.",
+        "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
       tech: ["React", "TypeScript", "Tailwind", "Supabase"],
       github: "https://github.com/Kaan-Developer/Portfolio",
       caseStudy: {
         problem:
-          "Ziyaretçilerin beni tanıyabileceği, projelerimi ve becerilerimi görebileceği ve benimle iletişime geçebileceği kişisel bir web sitesine ihtiyacım vardı.",
+          "Frontend çalışmalarımı sunabileceğim ve iletişim taleplerini alabileceğim tek bir yere ihtiyacım vardı.",
         contribution:
-          "Bu web sitesini tek başıma tasarlayıp geliştirdim. Farklı ekran boyutlarına uyum sağlayan React arayüzünü, gezinme menüsünü, proje detay sayfalarını ve iletişim formunu hazırladım. Mesajları kaydeden ve gerekli yapılandırma yapıldığında Resend üzerinden e-posta bildirimi gönderen Supabase sunucu fonksiyonunu da geliştirdim.",
+          "Arayüz tasarımını, responsive düzenleri, gezinmeyi, proje sayfalarını ve iletişim formunun sunucu fonksiyonunu geliştirdim.",
         decisions: [
-          "Metinleri sayfa bileşenlerine dokunmadan güncelleyebilmek için site ve proje içeriklerini TypeScript veri dosyalarında tutuyorum.",
-          "Ana sayfada bölüm bağlantıları, proje detay sayfalarında ise React Router kullanıyorum. Böylece her projeye doğrudan bir adres üzerinden erişilebiliyor.",
-          "Farklı ekran boyutlarına uyum sağlayan düzenler ve site genelinde ortak stiller oluşturmak için Tailwind CSS kullanıyorum.",
-          "İletişim formundan gelen verileri, istekleri doğrulayıp mesajları kaydeden bir Supabase sunucu fonksiyonuna gönderiyorum. E-posta bildirimleri, API anahtarı tanımlandığında Resend üzerinden gönderiliyor; bu anahtar tarayıcı kodunda yer almıyor.",
+          "Proje kartları ve detay sayfaları aynı veriyi kullanıyor; açıklama ve bağlantılar tek yerden güncelleniyor. Türkçe ve İngilizce içerikler ayrı dosyalarda tutuluyor.",
+          "Ana sayfada bölüm bağlantıları, proje detaylarında React Router kullanıyorum. Böylece ana sayfadaki gezinme sade kalırken detaylar doğrudan bir bağlantıyla paylaşılabiliyor.",
+          "İletişim fonksiyonu isteği doğrulayıp mesajı kaydettikten sonra Resend bildirimini deniyor. Bildirim başarısız olursa veritabanı kaydı korunuyor; e-posta tesliminin ayrıca izlenmesi gerekiyor.",
+          "Tarayıcıda Supabase'in publishable anahtarı kullanılıyor. Veritabanına yazma işlemi ve Resend anahtarı sunucu fonksiyonunda kalıyor.",
         ],
         outcome:
-          "Site; kendimi tanıttığım bölümü, becerilerimi ve proje bağlantılarımı bir araya getiriyor. Her proje için ayrı bir detay sayfası bulunuyor. İletişim formu, veri doğrulaması ve mesajları kaydetmek için Supabase entegrasyonu içeriyor.",
+          "Portfolyo; Türkçe ve İngilizce içerik, doğrudan açılabilen proje sayfaları ve e-posta bildirimi başarısız olsa da mesajı saklayabilen bir iletişim akışı içeriyor.",
       },
       blogs: [
         {
-          title: "Portfolyomu geliştirirken",
+          title: "Proje içeriği",
           content:
-            "Bu portfolyoyu React, TypeScript, Vite ve Tailwind CSS kullanarak kendim tasarlayıp geliştirdim. Ana sayfada kendimi tanıtıyor, projelerimi ve becerilerimi paylaşıyorum. Sayfada bir iletişim formu da bulunuyor.\n\nProje içerikleri TypeScript veri dosyalarında tutuluyor. Proje kartları ve detay sayfaları aynı veriyi kullandığı için bir projenin açıklamasını, kullandığı teknolojileri ve geliştirme notlarını tek bir yerden güncelleyebiliyorum. React Router, her projenin adres tanımlayıcısını kullanarak ilgili detay sayfasını açıyor.\n\nİletişim formu, gönderilen verileri bir Supabase sunucu fonksiyonuna iletiyor. Bu fonksiyon verileri doğruluyor, gönderim sıklığı sınırlarını kontrol ediyor ve kabul edilen mesajları veritabanına kaydediyor. API anahtarı tanımlanmışsa Resend üzerinden e-posta bildirimi göndermeyi de deniyor.",
+            "Proje kartları ve detay sayfaları, seçili dilin proje verisini kullanıyor. Başlık veya bağlantı bu veride değiştirildiğinde iki görünüm de güncelleniyor.\n\nOrtak Project tipi her kaydın yapısını denetlerken metinler veri dosyalarında tutuluyor. Böylece metin değişiklikleri için render bileşenlerini düzenlemek gerekmiyor. Çeviriler ayrı dosyalarda olduğundan slug ve bağlantıları eşleşmiş tutmak gerekiyor.",
         },
       ],
     },

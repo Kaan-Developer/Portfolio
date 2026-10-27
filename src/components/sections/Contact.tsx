@@ -110,9 +110,9 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="mt-6 w-full rounded-2xl border border-border bg-white"
+      className="mt-6"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full max-w-4xl mx-auto rounded-2xl border border-border bg-white">
         <form
           onSubmit={handleSubmit}
           className="relative w-full min-w-0 gap-8 px-5 py-6 sm:px-6 lg:px-8 lg:py-14"
@@ -268,10 +268,6 @@ const Contact = () => {
             </div>
           </div>
                   </form>
-
-          <div className="relative w-full h-full">
-            <img src={Contactİmage} alt="" className="object-contain rounded-b-2xl md:rounded-r-2xl" />
-          </div>
       </div>
     </section>
   );

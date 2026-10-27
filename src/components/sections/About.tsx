@@ -48,6 +48,7 @@ const About = () => {
               twitter
               link="https://x.com/KHamitler78641"
               target="_blank"
+              className="gap-2"
             ></Button>
           </div>
         </Reveal>

@@ -10,18 +10,18 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative isolate grid min-h-screen grid-cols-1 items-center gap-12 overflow-hidden pt-32 pb-8 lg:grid-cols-2"
+      className="relative min-h-screen items-center gap-12 overflow-hidden pt-32 mt-24 pb-8"
     >
       <Pattern />
 
-      <Reveal className="relative z-10 flex flex-col gap-4">
+      <Reveal className="relative z-10 flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col gap-3">
-          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+          <h1 className="text-5xl text-center font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
             {site.name}
             <span className="block text-muted">{site.role}</span>
           </h1>
 
-          <p className="max-w-md text-base text-muted md:text-lg">
+          <p className="text-base text-muted md:text-lg text-center">
             {site.littleDesc}
           </p>
         </div>
@@ -36,10 +36,6 @@ const Hero = () => {
           </Button>
         </div>
       </Reveal>
-
-      <div className="relative z-10 bg-muted w-full rounded-md">
-        <img src={Heroİmage} alt="" className="object-contain w-full h-full" />
-      </div>
     </section>
   );
 };

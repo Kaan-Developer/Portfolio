@@ -137,7 +137,7 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
 
 <div
   ref={sliderRef}
-  className="flex cursor-grab gap-4 overflow-x-auto py-3 data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none md:gap-6"
+  className="lg:flex cursor-grab gap-4 lg:overflow-x-auto lg:py-3 data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none md:gap-6"
   data-lenis-prevent
   role="region"
   aria-label={title}
