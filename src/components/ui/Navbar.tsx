@@ -7,10 +7,11 @@ import Language from "./Language";
 import { useMenuStore } from "../../store/menu";
 
 import { Menu, X } from "lucide-react";
-import Button from "./Button";
+import { motion, useReducedMotion } from "motion/react";
 
 export const Navbar = () => {
   const site = useSite();
+  const reduce = useReducedMotion();
 
   const { isOpen, toggle } = useMenuStore();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,13 +35,20 @@ export const Navbar = () => {
 
   return (
     <>
-      <header
-        className={`
+    <motion.header
+  initial={reduce ? false : { opacity: 0, y: -18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: reduce ? 0 : 0.6,
+    delay: reduce ? 0 : 0.2,
+  }}
+  className="
     fixed top-5 md:top-6 left-1/2 z-50 isolate
-    flex h-20 w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 items-center justify-between
+    flex h-20 w-[calc(100%-3rem)] max-w-6xl
+    -translate-x-1/2 items-center justify-between
     rounded-2xl px-4 sm:px-6 lg:px-8
-  `}
-      >
+  "
+>
         <div
           aria-hidden={true}
           className={`pointer-events-none absolute inset-0 -z-10 rounded-2xl border
@@ -54,14 +62,11 @@ export const Navbar = () => {
         <a
           href="#home"
           aria-label={site.accessibility.home}
-          className="flex select-none shrink-0 text-black transition-opacity hover:opacity-80"
+          className="flex items-center gap-2 select-none shrink-0 text-black transition-opacity hover:opacity-80"
         >
           <LogoMark className="h-12 w-auto" />
+          <span className="text-2xl md:text-3xl font-medium">{site.name}</span>
         </a>
-
-        <div className="hidden lg:flex items-center">
-          <Ul />
-        </div>
 
         <div className="flex lg:hidden">
           <button
@@ -84,7 +89,7 @@ export const Navbar = () => {
           id="mobile-menu"
           aria-hidden={!isOpen}
           inert={!isOpen}
-          className={`absolute top-[calc(100%+0.75rem)] right-0 left-0 flex flex-col gap-4 rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5 transition-[opacity,translate,visibility] duration-200 ease-out motion-reduce:transition-none ${
+          className={`absolute top-[calc(100%+0.75rem)] right-0 left-0 flex flex-col gap-4 rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-medium lg:hidden border border-black/5 transition-[opacity,translate,visibility] duration-200 ease-out motion-reduce:transition-none lg:hidden ${
             isOpen
               ? "visible opacity-100 translate-y-0"
               : "invisible opacity-0 -translate-y-2 pointer-events-none"
@@ -94,22 +99,13 @@ export const Navbar = () => {
 
                     <Language />
 
-          <div className="flex items-start justify-start">
-                      <div className="flex flex-col">
-            <Button arrow link="#contact" variant="primary">
-              {site.buttons.letsContactBtn}
-            </Button>
-          </div>
-                    </div>
         </div>
 
-        <div className="hidden lg:flex gap-4">
+        <div className="hidden lg:flex items-center gap-4">
+          <Ul />
           <Language />
-          <Button arrow link="#contact" variant="primary">
-            {site.buttons.letsContactBtn}
-          </Button>
         </div>
-      </header>
+      </motion.header>
 
       {isOpen && (
         <button

@@ -1,6 +1,7 @@
 import { useSite } from "../../hooks/useSite";
 import { Link } from "react-router-dom";
 import LogoMark from "../ui/LogoMark";
+import SocialMedia from "../ui/SocialMedia";
 
 const Footer = () => {
   const site = useSite();
@@ -29,15 +30,8 @@ const Footer = () => {
           ))}
         </nav>
 
-        <a
-          href={site.links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 w-fit items-center text-sm text-ink underline-offset-4 transition-colors hover:text-primary hover:underline"
-        >
-          GitHub
-          <span className="sr-only"> {site.accessibility.opensInNewTab}</span>
-        </a>
+        <SocialMedia />
+
       </div>
 
       <div className="mt-4 flex flex-col items-start border-t border-border justify-between gap-4 text-sm leading-6 text-muted md:flex-row md:gap-8">

@@ -1,32 +1,68 @@
+import { motion, useReducedMotion } from "motion/react";
+import type { Variants } from "motion/react";
+
 import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
-import Pattern from "../ui/Pattern";
-import Reveal from "../ui/Reveal";
-import Heroİmage from "../../assets/images/portfolioHero.png";
+
+const content: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 36 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 const Hero = () => {
   const site = useSite();
+  const reduce = useReducedMotion();
 
   return (
     <section
       id="home"
-      className="grid w-full grid-cols-1 items-center lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] relative min-h-screen gap-10 lg:gap-12 overflow-hidden"
+      className="flex relative mt-24 mb-20 grid w-full items-center gap-10 overflow-hidden py-30 lg:gap-12"
     >
-      <Pattern />
+      <motion.div
+        variants={content}
+        initial={reduce ? false : "hidden"}
+        animate="visible"
+        className="relative z-10 flex flex-col items-center justify-center gap-4"
+      >
+        <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+          <span className="block overflow-hidden pb-2 text-center">
+            <motion.span variants={item} className="block">
+              {site.name}
+            </motion.span>
+          </span>
 
-      <Reveal className="relative z-10 flex flex-col items-start justify-center gap-4">
-        <div className="flex flex-col gap-3">
-          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
-            {site.name}
-            <p className="mt-3 text-4xl font-medium text-primary lg:text-6xl">{site.role}</p>
-          </h1>
+          <span className="mt-1 block overflow-hidden pb-2 text-4xl font-medium text-primary lg:text-6xl">
+            <motion.span variants={item} className="block">
+              {site.role}
+            </motion.span>
+          </span>
+        </h1>
 
-          <p className="text-base text-muted md:text-lg">
-            {site.littleDesc}
-          </p>
-        </div>
+        <motion.p
+          variants={item}
+          className="text-base text-muted md:text-lg"
+        >
+          {site.littleDesc}
+        </motion.p>
 
-        <div className="flex flex-row md:flex-row gap-2">
+        <motion.div variants={item} className="flex flex-wrap gap-2">
           <Button arrow link="#projects" variant="blue">
             {site.buttons.projectBtn}
           </Button>
@@ -34,49 +70,20 @@ const Hero = () => {
           <Button arrow link="#contact" variant="outline">
             {site.buttons.contactBtn}
           </Button>
-        </div>
-      </Reveal>
+        </motion.div>
+      </motion.div>
 
-      <div className="relative z-10">
-        <figure
-  className="
-    min-w-0 w-full overflow-hidden
-    rounded-2xl border border-[#c7c9cc]
-    bg-[#dee1e6] shadow-medium
-  "
->
-  {/* Dekoratif tarayıcı çubuğu */}
-  <div
-    aria-hidden="true"
-    className="
-      flex items-center gap-4
-      border-b border-[#c7c9cc] px-4 py-3
-    "
-  >
-    <div className="flex shrink-0 gap-1.5">
-      <span className="size-2 rounded-full bg-[#ff5f57]" />
-      <span className="size-2 rounded-full bg-[#febc2e]" />
-      <span className="size-2 rounded-full bg-[#28c840]" />
-    </div>
-
-    <span
-      className="
-        min-w-0 flex-1 truncate rounded-md
-        bg-white px-3 py-1 text-center text-xs text-muted
-      "
-    >
-      Proje önizlemesi
-    </span>
-  </div>
-
-  {/* Gerçek projenin ekran görüntüsü */}
-  <img
-    src={Heroİmage}
-    alt="Öne çıkan projenin masaüstü arayüzü"
-    className="aspect-[16/10] w-full bg-bg object-contain object-top"
-  />
-</figure>
-      </div>
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 48, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{
+          duration: reduce ? 0 : 0.9,
+          delay: reduce ? 0 : 0.35,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="relative z-10"
+      >
+      </motion.div>
     </section>
   );
 };

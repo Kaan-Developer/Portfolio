@@ -75,7 +75,7 @@ export const enSite = {
   },
 
   projectsSection: {
-    title: "Things I've built",
+    title: "Selected Projects",
     description: "Frontend projects with source code and development notes.",
   },
 

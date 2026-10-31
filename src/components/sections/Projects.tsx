@@ -28,35 +28,24 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
         </p>
       </Reveal>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {projects.slice(0,3).map((project, index) => {
-          const isFeatured = index === 0;
+      <div className="grid grid-cols-1 gap-6">
+        {projects.map((project, index) => {
 
           return (
             <Reveal
               key={project.slug}
-              className={`min-w-0 w-full ${isFeatured ? "lg:col-span-2" : ""}`}
+              delay={index * 0.08}
+              className="min-w-0 w-full"
             >
-              <article className={`grid h-full rounded-2xl
-                bg-white p-3 shadow-soft ${
-                  isFeatured ? "lg:grid-cols-2" : ""
-                }`}>
-                <div className="relative self-center">
-                  <img
-                    draggable={false}
-                    src={project.image}
-                    alt={project.title}
-                    className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain"
-                  />
+              <article
+  className="group grid h-full rounded-2xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5
+    bg-white p-3 shadow-soft lg:grid-cols-2"
+>
 
-                  {project.image && (
-                    <Zoom src={project.image} alt={project.title} />
-                  )}
-                </div>
+                <div
+                  className="flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 lg:p-8"
 
-                <div className={`flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 ${
-                  isFeatured ? "lg:p-8" : ""
-                }`}>
+                >
                   <div className="flex flex-wrap gap-2 items-center justify-between">
                     <h3 className="text-balance text-2xl lg:text-4xl font-bold tracking-tight">
                       {project.title}
@@ -95,7 +84,7 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                         arrow
                         link={project.live}
                         target="_blank"
-                        variant="outline"
+                        variant="blue"
                       >
                         {site.buttons.liveDemoBtn}
                       </Button>
@@ -125,6 +114,20 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                       className="!gap-0"
                     ></Button>
                   </div>
+                </div>
+
+                  <div className="relative self-center overflow-hidden rounded-md">
+
+                  {project.image && (
+                    <Zoom src={project.image} alt={project.title} />
+                  )}
+
+                                    <img
+                    draggable={false}
+                    src={project.image}
+                    alt={project.title}
+                    className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.025]"
+                  />
                 </div>
               </article>
             </Reveal>

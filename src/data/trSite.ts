@@ -136,7 +136,7 @@ export const trSite: typeof enSite = {
   },
 
   projectsSection: {
-    title: "Geliştirdiklerim",
+    title: "Seçili Projeler",
     description: "Kaynak kodu ve geliştirme notlarıyla frontend projeleri.",
   },
 

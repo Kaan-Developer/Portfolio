@@ -1,4 +1,3 @@
-// src/components/ui/Reveal.tsx
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
@@ -8,26 +7,19 @@ type RevealProps = {
   className?: string;
 };
 
-const Reveal = ({
-  children,
-  delay = 0,
-  className,
-}: RevealProps) => {
+const Reveal = ({ children, delay = 0, className }: RevealProps) => {
   const reduce = useReducedMotion();
 
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0, y: 16 }}
+      initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{
-        once: true,
-        margin: "0px 0px -40px 0px",
-      }}
+      viewport={{ once: true, amount: 0.12 }}
       transition={{
-        duration: reduce ? 0 : 0.45,
-        ease: [0.22, 1, 0.36, 1],
+        duration: reduce ? 0 : 0.7,
         delay: reduce ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
       }}
     >
       {children}
