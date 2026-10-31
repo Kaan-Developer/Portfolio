@@ -10,24 +10,24 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen items-center gap-12 overflow-hidden pt-32 mt-24 pb-8"
+      className="grid w-full grid-cols-1 items-center lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] relative min-h-screen gap-10 lg:gap-12 overflow-hidden"
     >
       <Pattern />
 
-      <Reveal className="relative z-10 flex flex-col items-center justify-center gap-4">
+      <Reveal className="relative z-10 flex flex-col items-start justify-center gap-4">
         <div className="flex flex-col gap-3">
-          <h1 className="text-5xl text-center font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
+          <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
             {site.name}
-            <span className="block text-muted">{site.role}</span>
+            <p className="mt-3 text-4xl font-medium text-primary lg:text-6xl">{site.role}</p>
           </h1>
 
-          <p className="text-base text-muted md:text-lg text-center">
+          <p className="text-base text-muted md:text-lg">
             {site.littleDesc}
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-2">
-          <Button arrow link="#projects" variant="primary">
+        <div className="flex flex-row md:flex-row gap-2">
+          <Button arrow link="#projects" variant="blue">
             {site.buttons.projectBtn}
           </Button>
 
@@ -36,6 +36,47 @@ const Hero = () => {
           </Button>
         </div>
       </Reveal>
+
+      <div>
+        <figure
+  className="
+    min-w-0 w-full overflow-hidden
+    rounded-2xl border border-border
+    bg-white shadow-medium
+  "
+>
+  {/* Dekoratif tarayıcı çubuğu */}
+  <div
+    aria-hidden="true"
+    className="
+      flex items-center gap-4
+      border-b border-border px-4 py-3
+    "
+  >
+    <div className="flex shrink-0 gap-1.5">
+      <span className="size-2 rounded-full bg-border-strong" />
+      <span className="size-2 rounded-full bg-border-strong" />
+      <span className="size-2 rounded-full bg-border-strong" />
+    </div>
+
+    <span
+      className="
+        min-w-0 flex-1 truncate rounded-md
+        bg-bg px-3 py-1 text-center text-xs text-muted
+      "
+    >
+      Proje önizlemesi
+    </span>
+  </div>
+
+  {/* Gerçek projenin ekran görüntüsü */}
+  <img
+    src={Heroİmage}
+    alt="Öne çıkan projenin masaüstü arayüzü"
+    className="aspect-[16/10] w-full object-contain object-top"
+  />
+</figure>
+      </div>
     </section>
   );
 };

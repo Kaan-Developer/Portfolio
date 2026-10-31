@@ -6,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 
 interface Props extends ComponentPropsWithoutRef<"a"> {
-  variant?: "primary" | "blue" | "secondary" | "outline";
+  variant?: "primary" | "blue" | "outline";
   arrow?: boolean;
   arrowDirection?: "up-right" | "right";
   github?: boolean;
@@ -19,12 +19,14 @@ interface Props extends ComponentPropsWithoutRef<"a"> {
 }
 
 const variants = {
-  primary: "bg-black text-white hover:bg-ink",
-  blue: "bg-primary-soft text-white hover:bg-primary-soft-hover hover:text-white",
-  secondary:
-    "border border-primary/20 bg-primary-light shadow-soft hover:border-primary/40 hover:bg-primary-light/60",
+  primary:
+    "bg-black text-white hover:bg-black/85",
+
+  blue:
+    "bg-primary text-white hover:bg-primary-strong",
+
   outline:
-    "border border-black/15 bg-transparent text-black hover:border-black/30 hover:bg-black hover:text-white",
+    "border border-border bg-white text-black hover:bg-bg",
 };
 
 const Button = ({

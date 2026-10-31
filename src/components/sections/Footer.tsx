@@ -5,7 +5,7 @@ import LogoMark from "../ui/LogoMark";
 const Footer = () => {
   const site = useSite();
   return (
-    <footer className="relative max-w-6xl w-full mx-auto py-6 px-10 md:px-0 md:py-8">
+    <footer className="relative max-w-6xl w-full mx-auto py-6 px-10 lg:px-0 md:py-8">
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center md:gap-x-8">
         <div className="flex items-center gap-3">
           <LogoMark className="h-10 w-auto" />

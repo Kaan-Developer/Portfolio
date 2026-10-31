@@ -39,7 +39,7 @@ const About = () => {
             </ul>
           </div>
 
-          <div className="flex flex-wrap items-center mt-4 gap-3">
+{/*           <div className="flex flex-wrap items-center mt-4 gap-3">
             <Button github link={site.links.github} target="_blank">
               Github
             </Button>
@@ -50,7 +50,7 @@ const About = () => {
               target="_blank"
               className="gap-2"
             ></Button>
-          </div>
+          </div> */}
         </Reveal>
         <div className="mt-8 border-t border-border pt-8 lg:hidden"></div>
       </div>

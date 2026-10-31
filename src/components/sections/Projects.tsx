@@ -1,6 +1,5 @@
 import { useSite } from "../../hooks/useSite";
 import { techIcons } from "../../data/techIcons";
-import { useEffect, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -18,112 +17,6 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
   const projects = site.projects;
   const { title, description } = site.projectsSection;
 
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-  const slider = sliderRef.current;
-  if (!slider) return;
-
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  );
-
-  let drag: {
-    id: number;
-    x: number;
-    left: number;
-    moved: boolean;
-  } | null = null;
-
-  const handleDown = (event: PointerEvent) => {
-    if (event.pointerType !== "mouse" || event.button !== 0) return;
-    if (slider.scrollWidth <= slider.clientWidth) return;
-
-    if (
-      event.target instanceof Element &&
-      event.target.closest("a, button, input, textarea, select")
-    ) return;
-
-    const contentBottom =
-      slider.getBoundingClientRect().top +
-      slider.clientTop +
-      slider.clientHeight;
-
-    if (event.clientY >= contentBottom) return;
-
-    slider.scrollTo({
-      left: slider.scrollLeft,
-      behavior: "instant",
-    });
-
-    drag = {
-      id: event.pointerId,
-      x: event.clientX,
-      left: slider.scrollLeft,
-      moved: false,
-    };
-
-    event.preventDefault();
-    slider.setPointerCapture(event.pointerId);
-    slider.dataset.dragging = "true";
-  };
-
-  const handleMove = (event: PointerEvent) => {
-    if (!drag || event.pointerId !== drag.id) return;
-
-    const distance = event.clientX - drag.x;
-    if (!drag.moved && Math.abs(distance) < 5) return;
-
-    drag.moved = true;
-
-    slider.scrollTo({
-      left: drag.left - distance,
-      behavior: "instant",
-    });
-  };
-
-  const handleEnd = (event: PointerEvent) => {
-    if (!drag || event.pointerId !== drag.id) return;
-
-    const shouldSnap = drag.moved && event.type === "pointerup";
-
-    drag = null;
-    delete slider.dataset.dragging;
-
-    if (slider.hasPointerCapture(event.pointerId)) {
-      slider.releasePointerCapture(event.pointerId);
-    }
-
-    const card = slider.firstElementChild;
-    if (!shouldSnap || !(card instanceof HTMLElement)) return;
-
-    const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
-    const step = card.getBoundingClientRect().width + gap;
-
-    if (step <= 0) return;
-
-    slider.scrollTo({
-      left: Math.round(slider.scrollLeft / step) * step,
-      behavior: reduceMotion.matches ? "instant" : "smooth",
-    });
-  };
-
-  slider.addEventListener("pointerdown", handleDown);
-  slider.addEventListener("pointermove", handleMove);
-  slider.addEventListener("pointerup", handleEnd);
-  slider.addEventListener("pointercancel", handleEnd);
-  slider.addEventListener("lostpointercapture", handleEnd);
-
-  return () => {
-    slider.removeEventListener("pointerdown", handleDown);
-    slider.removeEventListener("pointermove", handleMove);
-    slider.removeEventListener("pointerup", handleEnd);
-    slider.removeEventListener("pointercancel", handleEnd);
-    slider.removeEventListener("lostpointercapture", handleEnd);
-    delete slider.dataset.dragging;
-  };
-}, []);
-
   return (
     <section id="projects" className="py-10 md:py-14">
       <Reveal className="mb-10 max-w-xl">
@@ -135,45 +28,46 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
         </p>
       </Reveal>
 
-<div
-  ref={sliderRef}
-  className="lg:flex cursor-grab gap-4 lg:overflow-x-auto lg:py-3 data-[dragging=true]:cursor-grabbing data-[dragging=true]:select-none md:gap-6"
-  data-lenis-prevent
-  role="region"
-  aria-label={title}
-  tabIndex={0}
->
-        {projects.map((project) => (
-          <Reveal
-            key={project.slug}
-            className={`min-w-0 shrink-0 ${projects.length > 1 ? "w-[84%] md:w-[90%]" : "w-full"}`}
-          >
-            <article className="grid h-full bg-white grid-cols-1 md:grid-cols-2 rounded-3xl p-3 shadow-soft transition-shadow duration-200 hover:shadow-medium motion-reduce:transition-none">
-              <div className="relative self-center">
-                <img
-                draggable={false}
-                src={project.image}
-                alt={project.title}
-                className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain"
-              />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {projects.slice(0,3).map((project, index) => {
+          const isFeatured = index === 0;
 
-              {project.image && (
-              <Zoom src={project.image} alt={project.title} />
-              )}
-              </div>
+          return (
+            <Reveal
+              key={project.slug}
+              className={`min-w-0 w-full ${isFeatured ? "lg:col-span-2" : ""}`}
+            >
+              <article className={`grid h-full rounded-2xl
+                bg-white p-3 shadow-soft ${
+                  isFeatured ? "lg:grid-cols-2" : ""
+                }`}>
+                <div className="relative self-center">
+                  <img
+                    draggable={false}
+                    src={project.image}
+                    alt={project.title}
+                    className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain"
+                  />
 
-              <div className="flex flex-col justify-center gap-3 pt-5 md:p-8">
-                <div className="flex flex-wrap gap-2 items-center justify-between">
-                  <h3 className="text-balance text-2xl font-bold tracking-tight lg:text-4xl">
-                    {project.title}
-                  </h3>
+                  {project.image && (
+                    <Zoom src={project.image} alt={project.title} />
+                  )}
                 </div>
 
-                <p className="max-w-md text-lg leading-7 text-muted lg:text-xl">
-                  {project.description}
-                </p>
+                <div className={`flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 ${
+                  isFeatured ? "lg:p-8" : ""
+                }`}>
+                  <div className="flex flex-wrap gap-2 items-center justify-between">
+                    <h3 className="text-balance text-2xl lg:text-4xl font-bold tracking-tight">
+                      {project.title}
+                    </h3>
+                  </div>
 
-                <ul className="flex flex-wrap gap-2">
+                  <p className="max-w-md text-base leading-7 text-muted lg:text-xl">
+                    {project.description}
+                  </p>
+
+                  <ul className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => {
                       const Icon = techIcons[tech];
 
@@ -195,41 +89,47 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                     })}
                   </ul>
 
-                <div className="flex items-center flex-wrap gap-3 pt-2">
-                  <Button github link={project.github} target="_blank">
-                    Github
-                  </Button>
-                  {project.live && (
-                    <Button
-                      arrow
-                      link={project.live}
-                      target="_blank"
-                      variant="outline"
-                    >
-                      {site.buttons.liveDemoBtn}
-                    </Button>
-                  )}
+                  <div className="flex items-center flex-wrap gap-3 pt-2">
+                    {project.live && (
+                      <Button
+                        arrow
+                        link={project.live}
+                        target="_blank"
+                        variant="outline"
+                      >
+                        {site.buttons.liveDemoBtn}
+                      </Button>
+                    )}
 
-                  {!hideDetails && (
-                    <Link
-                      to={`/projects/${project.slug}`}
-                      aria-label={`${site.buttons.viewDetailsBtn}: ${project.title}`}
-                      className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-md border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
-                    >
-                      {site.buttons.viewDetailsBtn}
-                      <ArrowRight
-                        size={18}
-                        strokeWidth={1.75}
-                        aria-hidden="true"
-                        className="shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none"
-                      />
-                    </Link>
-                  )}
+                    {!hideDetails && (
+                      <Link
+                        to={`/projects/${project.slug}`}
+                        aria-label={`${site.buttons.viewDetailsBtn}: ${project.title}`}
+                        className="group inline-flex h-12 w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-md border border-border-strong bg-white px-5 text-sm font-medium tracking-tight text-ink transition-[background-color,border-color,color] duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none sm:w-auto"
+                      >
+                        {site.buttons.viewDetailsBtn}
+                        <ArrowRight
+                          size={18}
+                          strokeWidth={1.75}
+                          aria-hidden="true"
+                          className="shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none"
+                        />
+                      </Link>
+                    )}
+
+                    <Button
+                      github
+                      link={project.github}
+                      target="_blank"
+                      variant="primary"
+                      className="!gap-0"
+                    ></Button>
+                  </div>
                 </div>
-              </div>
-            </article>
-          </Reveal>
-        ))}
+              </article>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
