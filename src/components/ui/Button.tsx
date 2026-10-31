@@ -62,7 +62,7 @@ const Button = ({
       {...props}
     >
       {github ? (
-        <span className="inline-flex items-center gap-2 text-sm font-semibold leading-none">
+        <span className="inline-flex items-center text-sm font-semibold leading-none">
           <SiGithub size={iconSize} className="shrink-0" aria-hidden="true" />
           <span>{children}</span>
         </span>

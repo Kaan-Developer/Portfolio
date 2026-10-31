@@ -37,12 +37,12 @@ const Hero = () => {
         </div>
       </Reveal>
 
-      <div>
+      <div className="relative z-10">
         <figure
   className="
     min-w-0 w-full overflow-hidden
-    rounded-2xl border border-border
-    bg-white shadow-medium
+    rounded-2xl border border-[#c7c9cc]
+    bg-[#dee1e6] shadow-medium
   "
 >
   {/* Dekoratif tarayıcı çubuğu */}
@@ -50,19 +50,19 @@ const Hero = () => {
     aria-hidden="true"
     className="
       flex items-center gap-4
-      border-b border-border px-4 py-3
+      border-b border-[#c7c9cc] px-4 py-3
     "
   >
     <div className="flex shrink-0 gap-1.5">
-      <span className="size-2 rounded-full bg-border-strong" />
-      <span className="size-2 rounded-full bg-border-strong" />
-      <span className="size-2 rounded-full bg-border-strong" />
+      <span className="size-2 rounded-full bg-[#ff5f57]" />
+      <span className="size-2 rounded-full bg-[#febc2e]" />
+      <span className="size-2 rounded-full bg-[#28c840]" />
     </div>
 
     <span
       className="
         min-w-0 flex-1 truncate rounded-md
-        bg-bg px-3 py-1 text-center text-xs text-muted
+        bg-white px-3 py-1 text-center text-xs text-muted
       "
     >
       Proje önizlemesi
@@ -73,7 +73,7 @@ const Hero = () => {
   <img
     src={Heroİmage}
     alt="Öne çıkan projenin masaüstü arayüzü"
-    className="aspect-[16/10] w-full object-contain object-top"
+    className="aspect-[16/10] w-full bg-bg object-contain object-top"
   />
 </figure>
       </div>

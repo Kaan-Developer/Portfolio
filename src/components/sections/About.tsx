@@ -1,5 +1,4 @@
 import { useSite } from "../../hooks/useSite";
-import Button from "../ui/Button";
 import clsx from "clsx";
 import Reveal from "../ui/Reveal";
 

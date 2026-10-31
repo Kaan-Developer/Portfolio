@@ -28,6 +28,7 @@ export const trSite: typeof enSite = {
         "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
       tech: ["React", "TypeScript", "Tailwind", "Supabase"],
       github: "https://github.com/Kaan-Developer/Portfolio",
+      live: "http://localhost:5173",
       caseStudy: {
         problem:
           "Frontend çalışmalarımı sunabileceğim ve iletişim taleplerini alabileceğim tek bir yere ihtiyacım vardı.",
@@ -58,6 +59,7 @@ export const trSite: typeof enSite = {
         "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
       tech: ["React", "TypeScript", "Tailwind", "Supabase"],
       github: "https://github.com/Kaan-Developer/Portfolio",
+      live: "http://localhost:5173",
       caseStudy: {
         problem:
           "Frontend çalışmalarımı sunabileceğim ve iletişim taleplerini alabileceğim tek bir yere ihtiyacım vardı.",
