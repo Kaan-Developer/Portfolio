@@ -66,7 +66,7 @@ const Ul = ({
         : "flex flex-wrap justify-center rounded-md items-center gap-1 border border-black/5 bg-white/80 p-1.5 shadow-soft backdrop-blur-md"
       : mobile
         ? "flex flex-col items-start gap-3"
-        : "absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-8"
+        : "flex items-center gap-8"
   }
 >
   {links.map((bubble) => {

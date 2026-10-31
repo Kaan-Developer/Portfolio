@@ -36,20 +36,19 @@ const About = () => {
                 </li>
               ))}
             </ul>
+
+            <span className="text-black text-md font-semibold">{about.toolTitle}</span>
+                        <ul className="flex flex-wrap gap-3">
+              {about.tools.map((tool) => (
+                <li
+                  key={tool}
+                  className="inline-flex items-center rounded-md border border-border bg-black/[0.03] px-4 py-2 text-sm font-medium text-ink"
+                >
+                  {tool}
+                </li> 
+              ))}
+            </ul>
           </div>
-
-{/*           <div className="flex flex-wrap items-center mt-4 gap-3">
-            <Button github link={site.links.github} target="_blank">
-              Github
-            </Button>
-
-            <Button
-              twitter
-              link="https://x.com/KHamitler78641"
-              target="_blank"
-              className="gap-2"
-            ></Button>
-          </div> */}
         </Reveal>
         <div className="mt-8 border-t border-border pt-8 lg:hidden"></div>
       </div>

@@ -15,6 +15,7 @@ export const enSite = {
     { label: "Home", target: "home" },
     { label: "Projects", target: "projects" },
     { label: "About", target: "about" },
+    { label: "Contact", target: "contact" },
   ],
 
   projects,
@@ -87,6 +88,7 @@ description:
 description2:
   "Currently, I'm working on accessibility, using APIs, and creating better user experiences.",
         techTitle: "Technologies I use",
+      toolTitle: "Tools I use",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },

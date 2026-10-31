@@ -101,10 +101,16 @@ export const Navbar = () => {
 
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
-          <Ul />
-          <Language />
-        </div>
+<div className="hidden items-center gap-4 lg:flex">
+  <Ul />
+
+  <span
+    aria-hidden="true"
+    className="h-6 shrink-0 border-l border-border-strong"
+  />
+
+  <Language />
+</div>
       </motion.header>
 
       {isOpen && (

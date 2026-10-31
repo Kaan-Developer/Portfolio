@@ -112,6 +112,7 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                       target="_blank"
                       variant="primary"
                       className="!gap-0"
+                      iconSize={20}
                     ></Button>
                   </div>
                 </div>

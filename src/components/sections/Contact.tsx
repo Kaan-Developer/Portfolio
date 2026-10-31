@@ -233,7 +233,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={submitState === "sending"}
-                className="group inline-flex h-12 w-full lg:max-w-50 cursor-pointer items-center justify-center gap-2 rounded-md bg-black px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
+                className="group inline-flex h-12 w-full lg:max-w-50 cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-7 text-sm font-medium tracking-tight text-white transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary active:scale-[0.98] disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none motion-reduce:active:scale-100"
               >
                 {submitState === "sending"
                   ? form.submittingLabel

@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import clsx from "clsx";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -8,7 +8,7 @@ import { FaXTwitter } from "react-icons/fa6";
 interface Props extends ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "blue" | "outline";
   arrow?: boolean;
-  arrowDirection?: "up-right" | "right";
+  arrowDirection?: "down" | "right" | "up-right";
   github?: boolean;
   twitter?: boolean;
   iconSize?: number;
@@ -70,22 +70,30 @@ const Button = ({
         children
       )}
 
-      {arrow &&
-        (arrowDirection === "right" ? (
-          <ArrowRight
-            size={16}
-            strokeWidth={2}
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-1"
-          />
-        ) : (
-          <ArrowUpRight
-            size={16}
-            strokeWidth={2}
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        ))}
+      {arrow && (
+  arrowDirection === "down" ? (
+    <ArrowDown
+      size={16}
+      strokeWidth={2}
+      aria-hidden="true"
+      className="transition-transform duration-200 group-hover:translate-y-1"
+    />
+  ) : arrowDirection === "right" ? (
+    <ArrowRight
+      size={16}
+      strokeWidth={2}
+      aria-hidden="true"
+      className="transition-transform duration-200 group-hover:translate-x-1"
+    />
+  ) : (
+    <ArrowUpRight
+      size={16}
+      strokeWidth={2}
+      aria-hidden="true"
+      className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+    />
+  )
+)}
 
         {twitter && (
           <span className="inline-flex items-center gap-2 text-sm font-semibold leading-none">

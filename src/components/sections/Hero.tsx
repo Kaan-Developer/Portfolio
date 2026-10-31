@@ -33,16 +33,16 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="flex relative mt-24 mb-20 grid w-full items-center gap-10 overflow-hidden py-30 lg:gap-12"
+      className="relative mt-24 mb-20 grid w-full grid-cols-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,3fr)] items-center gap-10 overflow-hidden py-30 lg:gap-12"
     >
       <motion.div
         variants={content}
         initial={reduce ? false : "hidden"}
         animate="visible"
-        className="relative z-10 flex flex-col items-center justify-center gap-4"
+        className="relative z-10 flex min-w-0 flex-col justify-center gap-4"
       >
-        <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-7xl">
-          <span className="block overflow-hidden pb-2 text-center">
+        <h1 className="font-semibold leading-[1.02] tracking-[-0.03em] text-black lg:text-8xl">
+          <span className="block overflow-hidden pb-2 text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.05em] md:text-7xl lg:Text-8xl">
             <motion.span variants={item} className="block">
               {site.name}
             </motion.span>
@@ -63,11 +63,11 @@ const Hero = () => {
         </motion.p>
 
         <motion.div variants={item} className="flex flex-wrap gap-2">
-          <Button arrow link="#projects" variant="blue">
+          <Button arrow arrowDirection="down" link="#projects" variant="blue">
             {site.buttons.projectBtn}
           </Button>
 
-          <Button arrow link="#contact" variant="outline">
+          <Button arrow arrowDirection="down" link="#contact" variant="outline">
             {site.buttons.contactBtn}
           </Button>
         </motion.div>
@@ -81,8 +81,12 @@ const Hero = () => {
           delay: reduce ? 0 : 0.35,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className="relative z-10"
+        className="relative z-10 min-w-0"
       >
+        <div
+          aria-hidden="true"
+          className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-bg"
+        />
       </motion.div>
     </section>
   );

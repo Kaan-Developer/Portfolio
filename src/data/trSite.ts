@@ -17,6 +17,7 @@ export const trSite: typeof enSite = {
     { label: "Ana Sayfa", target: "home" },
     { label: "Projeler", target: "projects" },
     { label: "Hakkımda", target: "about" },
+    { label: "İletişim", target: "contact" },
   ],
 
   projects: [
@@ -24,37 +25,6 @@ export const trSite: typeof enSite = {
       title: "Portfolyo",
       image: portfolioHero,
       slug: "portfolio",
-      description:
-        "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
-      tech: ["React", "TypeScript", "Tailwind", "Supabase"],
-      github: "https://github.com/Kaan-Developer/Portfolio",
-      live: "http://localhost:5173",
-      caseStudy: {
-        problem:
-          "Frontend çalışmalarımı sunabileceğim ve iletişim taleplerini alabileceğim tek bir yere ihtiyacım vardı.",
-        contribution:
-          "Arayüz tasarımını, responsive düzenleri, gezinmeyi, proje sayfalarını ve iletişim formunun sunucu fonksiyonunu geliştirdim.",
-        decisions: [
-          "Proje kartları ve detay sayfaları aynı veriyi kullanıyor; açıklama ve bağlantılar tek yerden güncelleniyor. Türkçe ve İngilizce içerikler ayrı dosyalarda tutuluyor.",
-          "Ana sayfada bölüm bağlantıları, proje detaylarında React Router kullanıyorum. Böylece ana sayfadaki gezinme sade kalırken detaylar doğrudan bir bağlantıyla paylaşılabiliyor.",
-          "İletişim fonksiyonu isteği doğrulayıp mesajı kaydettikten sonra Resend bildirimini deniyor. Bildirim başarısız olursa veritabanı kaydı korunuyor; e-posta tesliminin ayrıca izlenmesi gerekiyor.",
-          "Tarayıcıda Supabase'in publishable anahtarı kullanılıyor. Veritabanına yazma işlemi ve Resend anahtarı sunucu fonksiyonunda kalıyor.",
-        ],
-        outcome:
-          "Portfolyo; Türkçe ve İngilizce içerik, doğrudan açılabilen proje sayfaları ve e-posta bildirimi başarısız olsa da mesajı saklayabilen bir iletişim akışı içeriyor.",
-      },
-      blogs: [
-        {
-          title: "Proje içeriği",
-          content:
-            "Proje kartları ve detay sayfaları, seçili dilin proje verisini kullanıyor. Başlık veya bağlantı bu veride değiştirildiğinde iki görünüm de güncelleniyor.\n\nOrtak Project tipi her kaydın yapısını denetlerken metinler veri dosyalarında tutuluyor. Böylece metin değişiklikleri için render bileşenlerini düzenlemek gerekmiyor. Çeviriler ayrı dosyalarda olduğundan slug ve bağlantıları eşleşmiş tutmak gerekiyor.",
-        },
-      ],
-    },
-    {
-      title: "Portfolyo",
-      image: portfolioHero,
-      slug: "portfolio-2",
       description:
         "Proje notları ve Supabase iletişim formu içeren, Türkçe ve İngilizce React portfolyosu.",
       tech: ["React", "TypeScript", "Tailwind", "Supabase"],
@@ -152,6 +122,7 @@ export const trSite: typeof enSite = {
       description2:
         "Şu sıralar erişilebilirlik, API kullanımı ve daha iyi kullanıcı deneyimleri üzerine çalışıyorum.",
       techTitle: "Kullandığım Teknolojiler",
+      toolTitle: "Kullandığım araçlar",
       tech: ["React", "TypeScript", "JavaScript", "Tailwind", "HTML", "CSS"],
       tools: ["Git", "GitHub", "Figma", "Vite"],
     },
