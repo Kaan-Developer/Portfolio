@@ -82,7 +82,7 @@ export const enSite = {
 
   about: [
     {
-      hi: "Hi, I'm Kaan.",
+      hi: "Hi, I'm Kaan Hamitler.",
 description:
   "I build web interfaces and apply what I learn about React and TypeScript in my projects.",
 description2:

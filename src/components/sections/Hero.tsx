@@ -3,6 +3,7 @@ import type { Variants } from "motion/react";
 
 import { useSite } from "../../hooks/useSite";
 import Button from "../ui/Button";
+import heroİmage from "../../assets/images/portfolioHero.png"
 
 const content: Variants = {
   hidden: {},
@@ -33,7 +34,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative mt-24 mb-20 grid w-full grid-cols-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,3fr)] items-center gap-10 overflow-hidden py-30 lg:gap-12"
+      className="relative mt-30 py-20 pt-40 mb-20 grid w-full grid-cols-1 lg:grid-cols-[minmax(0,3fr)_minmax(0,3fr)] items-center gap-10 overflow-hidden lg:gap-12"
     >
       <motion.div
         variants={content}
@@ -86,7 +87,9 @@ const Hero = () => {
         <div
           aria-hidden="true"
           className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-bg"
-        />
+        >
+        <img src={heroİmage} alt="" className="object-contain w-full h-full" />
+        </div>
       </motion.div>
     </section>
   );

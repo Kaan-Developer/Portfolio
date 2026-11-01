@@ -21,6 +21,10 @@
   --color-primary-soft-hover: #1d4ed8;
   --color-primary-light: #eff6ff;
 
+  /* Camgöbeği (Cyan) accent */
+  --color-cyan: #0891b2;
+  --color-cyan-hover: #0e7490;
+
   /* Borders */
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;

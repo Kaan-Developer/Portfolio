@@ -86,17 +86,10 @@ const Contact = () => {
 
   return (
     <section id="contact" className="mt-6">
-      <div className="grid grid-cols-1 gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[1fr_3fr] lg:px-8 lg:py-14">
-        <div className="min-w-0">
-          <h2 className="mb-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-black">
-            {contact.title}
-          </h2>
-          <p>{contact.description}</p>
-          <SocialMedia />
-        </div>
+      <div className="grid grid-cols-1 gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[3fr_1fr] lg:px-8 lg:py-14">
         <form
           onSubmit={handleSubmit}
-          className="w-full min-w-0 gap-8 border-t border-border pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
+          className="w-full min-w-0 gap-8 lg:pt-0 lg:pl-8"
         >
           <div className="flex min-w-0 flex-col gap-5">
 
@@ -248,6 +241,14 @@ const Contact = () => {
             </div>
           </div>
         </form>
+
+        <div className="min-w-0 p-6 lg:p-8 bg-primary/60 self-start text-white rounded-2xl shadow-soft">
+          <h2 className="mb-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-white">
+            {contact.title}
+          </h2>
+          <p className="text-cyan-50/90 leading-relaxed">{contact.description}</p>
+          <SocialMedia />
+        </div>
       </div>
     </section>
   );

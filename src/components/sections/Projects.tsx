@@ -29,7 +29,8 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
       </Reveal>
 
       <div className="grid grid-cols-1 gap-6">
-        {projects.map((project, index) => {
+        {projects.slice(0, 3).map((project, index) => {
+          const isThird = index === 2;
 
           return (
             <Reveal
@@ -38,14 +39,10 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
               className="min-w-0 w-full"
             >
               <article
-  className="group grid h-full rounded-2xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5
-    bg-white p-3 shadow-soft lg:grid-cols-2"
->
-
-                <div
-                  className="flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 lg:p-8"
-
-                >
+                className="group grid h-full rounded-2xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5
+    bg-white p-3 shadow-soft relative overflow-hidden lg:grid-cols-2"
+              >
+                <div className="flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 lg:p-8">
                   <div className="flex flex-wrap gap-2 items-center justify-between">
                     <h3 className="text-balance text-2xl lg:text-4xl font-bold tracking-tight">
                       {project.title}
@@ -117,19 +114,34 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                   </div>
                 </div>
 
-                  <div className="relative self-center overflow-hidden rounded-md">
-
+                <div className="relative self-center overflow-hidden rounded-md">
                   {project.image && (
                     <Zoom src={project.image} alt={project.title} />
                   )}
 
-                                    <img
+                  <img
                     draggable={false}
                     src={project.image}
                     alt={project.title}
                     className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.025]"
                   />
                 </div>
+
+                {index === 2 && (
+  <div className="absolute inset-x-0 bottom-0 z-10 flex h-1/2 items-end justify-center pb-6">
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 bg-bg/90 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_65%)]"
+    />
+
+    <div className="relative z-10">
+      <Link to={`/allProjects/${project.slug}`}>
+      <Button variant="primary" link="" arrow>View More</Button>
+
+      </Link>
+    </div>
+  </div>
+)}
               </article>
             </Reveal>
           );
