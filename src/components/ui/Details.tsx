@@ -1,31 +1,13 @@
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { useSite } from "../../hooks/useSite";
 import NotFound from "../feedback/NotFound";
 import { techIcons } from "../../data/techIcons";
 import Footer from "../sections/Footer";
-import { useEffect, useLayoutEffect, useState } from "react";
-import Language from "./Language";
+import { useLayoutEffect } from "react";
 import ScrollToTop from "./ScrollToTop";
-import Button from "./Button";
 
 const Details = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
-  const { projects, projectDetails, dashbord, accessibility } = useSite();
+  const { projects, projectDetails } = useSite();
   const { slug } = useParams();
   useLayoutEffect(() => {
     window.scrollTo({
@@ -42,44 +24,6 @@ const Details = () => {
 
   return (
     <main className="min-h-screen relative bg-bg px-6 py-8 md:px-10">
-      <header
-        className="fixed top-5 md:top-6 left-1/2 z-50 isolate
-    flex h-20 w-[calc(100%-3rem)] max-w-6xl -translate-x-1/2 items-center justify-between
-    rounded-2xl px-4 sm:px-6 lg:px-8"
-      >
-        <div
-          aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 -z-10 rounded-2xl border
-    transition-[background-color,border-color,box-shadow] duration-200
-    motion-reduce:transition-none ${
-      isScrolled
-        ? "border-border bg-bg/95 supports-[backdrop-filter]:bg-bg/80 backdrop-blur-md shadow-soft"
-        : "border-transparent bg-transparent"
-    }`}
-        />
-        <Link
-          to="/"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-black px-4 md:px-7 text-sm font-medium tracking-tight whitespace-nowrap text-white transition-[background-color,transform] duration-200 ease-out hover:bg-ink active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary motion-reduce:transition-none motion-reduce:active:scale-100"
-        >
-          <ArrowLeft size={16} strokeWidth={2} aria-hidden="true" />
-          <span className="hidden md:flex">{dashbord.backto}</span>
-        </Link>
-
-        <div className="flex items-center gap-2">
-          <Language />
-
-          <Button
-            github
-            target="_blank"
-            iconSize={20}
-            aria-label={`GitHub ${accessibility.opensInNewTab}`}
-            link="https://github.com/Kaan-Developer"
-          >
-            <span className="hidden md:ml-2 md:inline">GitHub</span>
-          </Button>
-        </div>
-      </header>
-
       <article className="mx-auto mt-24 max-w-4xl">
         <h1 className="text-4xl font-bold">{project.title}</h1>
 
