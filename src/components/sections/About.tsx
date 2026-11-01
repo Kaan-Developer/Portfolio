@@ -1,11 +1,13 @@
 import { useSite } from "../../hooks/useSite";
 import clsx from "clsx";
 import Reveal from "../ui/Reveal";
+import { useLanguageStore } from "../../store/language";
 
 const About = () => {
   const site = useSite();
 
   const about = site.about[0];
+  const lang = useLanguageStore((state) => state.lang);
 
   return (
     <section
@@ -14,9 +16,14 @@ const About = () => {
     >
       <div className="flex min-w-0 flex-col gap-3">
         <Reveal className="flex min-w-0 flex-col gap-3">
-          <h2 className="text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] tracking-tight md:text-6xl">
-            {about.hi}
-          </h2>
+          <h2
+  className={clsx(
+    "text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] md:text-6xl",
+    lang === "tr" && "max-w-lg",
+  )}
+>
+  {about.hi}
+</h2>
           <p className="mt-5 max-w-lg text-base leading-7 text-black md:text-xl md:leading-8">
             {about.description}
           </p>
