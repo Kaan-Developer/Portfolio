@@ -134,12 +134,16 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
       className="pointer-events-none absolute inset-0 bg-bg/90 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_65%)]"
     />
 
-    <div className="relative z-10">
-      <Link to={`/allProjects/${project.slug}`}>
-      <Button variant="primary" link="" arrow>View More</Button>
 
-      </Link>
-    </div>
+      <div className="relative z-10">
+  <Link
+    to="/projects"
+    className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-ink px-5 text-sm font-medium text-white"
+  >
+    View More
+    <ArrowRight size={18} aria-hidden="true" />
+  </Link>
+</div>
   </div>
 )}
               </article>

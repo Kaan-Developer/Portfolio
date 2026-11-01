@@ -16,7 +16,7 @@ const AllProjects = ({ hideDetails = false }: AllProjectsProps) => {
   const site = useSite();
 
   return (
-    <div className="grid grid-cols-1 gap-6">
+    <div className="gap-6 my-3 mx-auto relative max-w-6xl">
       {site.projects.map((project, index) => {
         return (
           <Reveal
