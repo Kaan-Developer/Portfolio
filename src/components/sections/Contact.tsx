@@ -86,10 +86,10 @@ const Contact = () => {
 
   return (
     <section id="contact" className="mt-6">
-      <div className="grid grid-cols-1 gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[3fr_1fr] lg:px-8 lg:py-14">
+      <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-[4fr_2fr] lg:py-14">
         <form
           onSubmit={handleSubmit}
-          className="w-full min-w-0 gap-8 lg:pt-0 lg:pl-8"
+          className="w-full min-w-0 gap-8 lg:pt-0"
         >
           <div className="flex min-w-0 flex-col gap-5">
 
