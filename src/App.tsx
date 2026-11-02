@@ -12,11 +12,11 @@ const App = () => (
     <Routes>
       <Route path="/" element={<AnaPage />} />
 
-      <Route element={<PageLayout />} >
-      </Route>
-          <Route path="/projects" element={<AllProjects />} />
+      <Route element={<PageLayout />}>
+        <Route path="/projects" element={<AllProjects />} />
         <Route path="/projects/:slug" element={<Details />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>
