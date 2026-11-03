@@ -16,7 +16,6 @@ const Talk = () => {
       <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
         {talk.description}
       </p>
-
       <div className="flex items-center gap-2 pt-4">
         <Button link="/contact" arrow>{talk.contactButton}</Button>
       </div>

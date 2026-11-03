@@ -143,9 +143,10 @@ export const trSite: typeof enSite = {
 
   contact: {
     email: "kaandeveloperr07@gmail.com",
-    title: "İletişime geçin",
+    title: "İletişime geç",
     description:
-      "Bir proje, iş fırsatı veya başka bir konu hakkında mesaj gönderin. 24 saat içinde yanıt vermeyi hedefliyorum.",
+      "Bir projen veya sorunun mu var? Bana yazabilirsin.",
+    responseTime: "24 saat içinde yanıt veriyorum.",
 
     form: {
       nameLabel: "Ad",

@@ -111,7 +111,8 @@ description2:
     email: "kaandeveloperr07@gmail.com",
     title: "Get in touch",
     description:
-      "Send a message about a project, a role, or another enquiry. I aim to reply within 24 hours.",
+      "Have a project or a question? Send me a message.",
+    responseTime: "I reply within 24 hours.",
 
     form: {
       nameLabel: "Name",

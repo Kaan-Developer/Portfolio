@@ -39,19 +39,23 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
               className="min-w-0 w-full"
             >
               <article
-                className="group grid h-full rounded-2xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5
-    bg-white p-3 shadow-soft relative overflow-hidden lg:grid-cols-2"
-              >
-                <div className="flex min-w-0 flex-col justify-center gap-3 p-3 pt-5 lg:p-8">
+  className={`group relative grid grid-cols-1 items-stretch
+    overflow-hidden rounded-2xl bg-white p-3 shadow-soft
+    transition-transform duration-300 motion-safe:hover:-translate-y-1.5 py-3 ${
+      project.image
+        ? "xl:grid-cols-2"
+        : ""
+    }`}
+>
+  <div className="flex min-w-0 flex-col justify-center gap-3 p-4 py-6 xl:p-6">
                   <div className="flex flex-wrap gap-2 items-center justify-between">
                     <h3 className="text-balance text-2xl lg:text-4xl font-bold tracking-tight">
                       {project.title}
                     </h3>
                   </div>
-
-                  <p className="max-w-md text-base leading-7 text-muted lg:text-xl">
-                    {project.description}
-                  </p>
+                  <p className="max-w-md break-words text-base leading-7 text-muted">
+  {project.description}
+</p>
 
                   <ul className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => {
@@ -116,15 +120,22 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
 
                 <div className="relative self-center overflow-hidden rounded-md">
                   {project.image && (
-                    <Zoom src={project.image} alt={project.title} />
-                  )}
+  <div
+    className="relative aspect-[4/3] min-w-0 overflow-hidden
+      rounded-md bg-muted/10 sm:aspect-[16/10]
+      xl:aspect-auto xl:min-h-[480px]"
+  >
+    <Zoom src={project.image} alt={project.title} />
 
-                  <img
-                    draggable={false}
-                    src={project.image}
-                    alt={project.title}
-                    className="aspect-[16/10] w-full rounded-md border border-border bg-muted/10 object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.025]"
-                  />
+    <img
+      draggable={false}
+      src={project.image}
+      alt={project.title}
+      className="absolute inset-0 h-full w-full rounded-md
+        border border-border object-contain"
+    />
+  </div>
+)}
                 </div>
 
                 {isThird && (

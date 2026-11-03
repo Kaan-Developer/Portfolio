@@ -85,6 +85,15 @@ const Contact = () => {
 
   return (
     <section id="contact" className="mt-6 mx-auto max-w-6xl mt-24">
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="font-display text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-black md:text-6xl lg:text-7xl">
+          {site.contact.title}
+        </h2>
+        <div className="text-muted text-center">
+                  <p>{site.contact.description}</p>
+        <p>{site.contact.responseTime}</p>
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-1 lg:py-14">
         <form
           onSubmit={handleSubmit}
