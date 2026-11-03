@@ -8,7 +8,7 @@ const Talk = () => {
     <section id="contact" aria-labelledby="talk-title" className="py-14 md:py-20">
       <h2
         id="talk-title"
-        className="max-w-5xl font-display text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-black md:text-6xl lg:text-7xl"
+        className="max-w-5xl font-display text-4xl max-w-xl font-semibold leading-[1.02] tracking-[-0.04em] text-black md:text-6xl lg:text-7xl"
       >
         {talk.title}{" "}
         <span className="text-primary">{talk.titleHighlight}</span>
@@ -18,8 +18,7 @@ const Talk = () => {
       </p>
 
       <div className="flex items-center gap-2 pt-4">
-        <Button link="/contact" arrow >{talk.emailButton}</Button>
-        <Button link="" arrow >{talk.linkedinButton}</Button>
+        <Button link="/contact" arrow>{talk.contactButton}</Button>
       </div>
     </section>
   );

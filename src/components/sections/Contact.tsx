@@ -6,7 +6,6 @@ import { useSite } from "../../hooks/useSite";
 import { useState } from "react";
 
 import Select from "../ui/Select";
-import SocialMedia from "../ui/SocialMedia";
 
 import { getSupabase } from "../../lib/supabase";
 
@@ -86,7 +85,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="mt-6 mx-auto max-w-6xl mt-24">
-      <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-[4fr_2fr] lg:py-14">
+      <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-1 lg:py-14">
         <form
           onSubmit={handleSubmit}
           className="w-full min-w-0 gap-8 lg:pt-0"
@@ -241,14 +240,6 @@ const Contact = () => {
             </div>
           </div>
         </form>
-
-        <div className="min-w-0 p-6 lg:p-8 bg-primary/60 self-start text-white rounded-2xl shadow-soft">
-          <h2 className="mb-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-white">
-            {contact.title}
-          </h2>
-          <p className="text-cyan-50/90 leading-relaxed">{contact.description}</p>
-          <SocialMedia />
-        </div>
       </div>
     </section>
   );

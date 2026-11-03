@@ -1,5 +1,4 @@
 import { useSite } from "../hooks/useSite";
-import Footer from "../components/sections/Footer";
 
 const PrivacyPage = () => {
   const site = useSite();
@@ -48,7 +47,6 @@ const PrivacyPage = () => {
           ))}
         </div>
       </article>
-      <Footer />
     </main>
   );
 };

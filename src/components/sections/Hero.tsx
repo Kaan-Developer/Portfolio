@@ -64,11 +64,11 @@ const Hero = () => {
         </motion.p>
 
         <motion.div variants={item} className="flex flex-wrap gap-2">
-          <Button arrow arrowDirection="down" link="#projects" variant="blue">
+          <Button arrow arrowDirection="down" link="#work" variant="blue">
             {site.buttons.projectBtn}
           </Button>
 
-          <Button arrow arrowDirection="down" link="#contact" variant="outline">
+          <Button arrow link="/contact" variant="outline">
             {site.buttons.contactBtn}
           </Button>
         </motion.div>

@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { socialLinks } from "../../data/socialLinks";
 import { useSite } from "../../hooks/useSite";

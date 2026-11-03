@@ -12,8 +12,7 @@ export const enSite = {
   },
 
   bubbles: [
-    { label: "Home", target: "home" },
-    { label: "Projects", target: "projects" },
+    { label: "Work", target: "work" },
     { label: "About", target: "about" },
     { label: "Contact", target: "contact" },
   ],
@@ -76,7 +75,7 @@ export const enSite = {
   },
 
   projectsSection: {
-    title: "Selected Projects",
+    title: "Selected Works",
     description: "Frontend projects with source code and development notes.",
   },
 
@@ -101,12 +100,11 @@ description2:
   },
 
   talk: {
-    title: "Got an idea? Let's bring it to",
-    titleHighlight: "life.",
+    title: "Let's talk about",
+    titleHighlight: "working together.",
     description:
-      "Every great product starts with an idea. Let's turn yours into a thoughtful digital experience that makes a real impact.",
-    emailButton: "Send an email",
-    linkedinButton: "LinkedIn",
+      "Send me a message about your frontend project or a role you'd like to discuss.",
+    contactButton: "Get in touch",
   },
 
   contact: {

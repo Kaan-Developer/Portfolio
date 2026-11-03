@@ -7,7 +7,6 @@ import { techIcons } from "../../data/techIcons";
 import Reveal from "../ui/Reveal";
 import Zoom from "../ui/Zoom";
 import Button from "../ui/Button";
-import Footer from "../sections/Footer";
 import ScrollToTop from "./ScrollToTop";
 
 interface AllProjectsProps {
@@ -141,7 +140,6 @@ const AllProjects = ({ hideDetails = false }: AllProjectsProps) => {
         </div>
       </section>
 
-      <Footer />
       <ScrollToTop />
     </main>
   );
