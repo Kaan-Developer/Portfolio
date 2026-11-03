@@ -194,6 +194,15 @@ export const trSite: typeof enSite = {
     tools: "Araçlar",
   },
 
+  talk: {
+    title: "Bir fikrin mi var? Birlikte",
+    titleHighlight: "hayata geçirelim.",
+    description:
+      "Her iyi ürün bir fikirle başlar. Senin fikrini de özenle tasarlanmış, fark yaratan bir dijital deneyime dönüştürelim.",
+    emailButton: "E-posta gönder",
+    linkedinButton: "LinkedIn",
+  },
+
   contact: {
     email: "kaandeveloperr07@gmail.com",
     title: "İletişime geçin",

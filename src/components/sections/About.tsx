@@ -17,13 +17,13 @@ const About = () => {
       <div className="flex min-w-0 flex-col gap-3">
         <Reveal className="flex min-w-0 flex-col gap-3">
           <h2
-  className={clsx(
-    "text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] md:text-6xl",
-    lang === "tr" && "max-w-lg",
-  )}
->
-  {about.hi}
-</h2>
+            className={clsx(
+              "text-4xl text-balance font-black leading-[0.95] tracking-[-0.05em] md:text-6xl",
+              lang === "tr" && "max-w-lg",
+            )}
+          >
+            {about.hi}
+          </h2>
           <p className="mt-5 max-w-lg text-base leading-7 text-black md:text-xl md:leading-8">
             {about.description}
           </p>
@@ -44,15 +44,17 @@ const About = () => {
               ))}
             </ul>
 
-            <span className="text-black text-md font-semibold">{about.toolTitle}</span>
-                        <ul className="flex flex-wrap gap-3">
+            <span className="text-black text-md font-semibold">
+              {about.toolTitle}
+            </span>
+            <ul className="flex flex-wrap gap-3">
               {about.tools.map((tool) => (
                 <li
                   key={tool}
                   className="inline-flex items-center rounded-md border border-border bg-black/[0.03] px-4 py-2 text-sm font-medium text-ink"
                 >
                   {tool}
-                </li> 
+                </li>
               ))}
             </ul>
           </div>

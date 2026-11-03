@@ -100,6 +100,15 @@ description2:
     tools: "Tools",
   },
 
+  talk: {
+    title: "Got an idea? Let's bring it to",
+    titleHighlight: "life.",
+    description:
+      "Every great product starts with an idea. Let's turn yours into a thoughtful digital experience that makes a real impact.",
+    emailButton: "Send an email",
+    linkedinButton: "LinkedIn",
+  },
+
   contact: {
     email: "kaandeveloperr07@gmail.com",
     title: "Get in touch",

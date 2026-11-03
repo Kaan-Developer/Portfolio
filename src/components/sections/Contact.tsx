@@ -85,7 +85,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="mt-6">
+    <section id="contact" className="mt-6 mx-auto max-w-6xl mt-24">
       <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-[4fr_2fr] lg:py-14">
         <form
           onSubmit={handleSubmit}

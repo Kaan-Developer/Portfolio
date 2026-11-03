@@ -6,6 +6,7 @@ import Details from "./components/ui/Details";
 import NotFound from "./components/feedback/NotFound";
 import PageLayout from "./pages/PateLayout";
 import AllProjects from "./components/ui/AllProjects";
+import Contact from "./components/sections/Contact";
 
 const App = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () => (
         <Route path="/projects" element={<AllProjects />} />
         <Route path="/projects/:slug" element={<Details />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/contact" element={<Contact />}/>
       </Route>
 
       <Route path="*" element={<NotFound />} />

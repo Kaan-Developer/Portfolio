@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { useSite } from "../hooks/useSite";
 import Language from "../components/ui/Language";
 import Button from "../components/ui/Button";
+import Footer from "../components/sections/Footer";
 
 const PageLayout = () => {
   const { dashbord, accessibility } = useSite();
@@ -74,6 +75,7 @@ const PageLayout = () => {
       </header>
 
       <Outlet />
+      <Footer />
     </div>
   );
 };

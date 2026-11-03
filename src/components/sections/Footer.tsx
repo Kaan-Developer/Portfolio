@@ -29,43 +29,17 @@ const Footer = () => {
                 </p>
               </div>
             </Link>
-
-            <a
-              href={"mailto:" + site.contact.email}
-              className="mt-4 inline-flex min-h-11 max-w-full items-center break-all text-sm text-muted underline-offset-4 hover:text-primary hover:underline"
-            >
-              {site.contact.email}
-            </a>
           </div>
-
-          <div className="flex min-w-0 flex-col items-start gap-5 md:items-end">
-            <nav aria-label={site.accessibility.footerNavigation}>
-              <ul className="flex flex-wrap gap-x-6 gap-y-1 md:justify-end">
-                {site.bubbles.map((item) => (
-                  <li key={item.target}>
-                    <Link
-                      to={"/#" + item.target}
-                      className="inline-flex min-h-11 items-center text-sm font-medium text-ink underline-offset-4 hover:text-primary hover:underline"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
               {socialLinks.map(({ name, href, icon: Icon }) => (
                 <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm font-medium text-ink transition-colors hover:border-border-strong hover:bg-bg motion-reduce:transition-none"
+                  className="inline-flex min-h-11 items-center rounded-md border border-border px-3 text-sm font-medium text-ink transition-colors hover:border-border-strong hover:bg-bg motion-reduce:transition-none"
                 >
                   <Icon size={16} aria-hidden="true" />
-                  <span>{name}</span>
-                  <ArrowUpRight size={14} aria-hidden="true" />
 
                   <span className="sr-only">
                     {" "}
@@ -74,7 +48,6 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
         </div>
 
         <div className="flex flex-col gap-1 border-t border-border py-5 text-xs leading-6 text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-6">

@@ -8,7 +8,7 @@ import Reveal from "../components/ui/Reveal";
 import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
 import Projects from "../components/sections/Projects";
-import Contact from "../components/sections/Contact";
+import Talk from "../components/sections/Talk";
 import Footer from "../components/sections/Footer";
 import ScrollToTop from "../components/ui/ScrollToTop";
 import SmoothScroll from "../components/ui/SmoothScroll";
@@ -77,7 +77,7 @@ if (!hash) {
             <About />
 
             <Reveal>
-              <Contact />
+              <Talk />
             </Reveal>
           </main>
 
