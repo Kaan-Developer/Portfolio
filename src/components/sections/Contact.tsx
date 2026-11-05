@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import { useSite } from "../../hooks/useSite";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Select from "../ui/Select";
 
@@ -84,13 +84,24 @@ const Contact = () => {
     }
   };
 
+  useEffect(() => {
+    if (submitState !== "success" && submitState !== "error") return;
+      const duration = submitState === "success" ? 5000 : 8000;
+
+      const timer = window.setTimeout(() => {
+        setSubmitState("idle");
+      }, duration);
+
+      return () => window.clearTimeout(timer);
+  }, [submitState])
+
   return (
     <>
-    <div className="flex items-center justify-center sticky">
+    <div className="pointer-events-none fixed inset-x-4 top-28 z-[60] flex justify-center">
       {submitState === "success" && (
         <div
           role="status"
-          className="flex items-center xl:max-w-lg gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">
+          className="flex items-center pointer-events-auto w-full max-w-lg gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">
             <div className="bg-muted/10 rounded-md p-2">
                             <CircleCheck size={25} className="shrink-0" aria-hidden="true" />
             </div>
@@ -105,9 +116,9 @@ const Contact = () => {
       {submitState === "error" && (
         <div
           role="alert"
-          className="flex items-center xl:max-w-lg gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800">
+          className="flex items-center pointer-events-auto w-full max-w-lg gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800">
             <div className="bg-muted/10 rounded-md p-2">
-                            <CircleCheck size={25} className="shrink-0" aria-hidden="true" />
+            <CircleAlert size={25} className="shrink-0" aria-hidden="true" />
             </div>
 
               <div>
