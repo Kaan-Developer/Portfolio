@@ -169,9 +169,10 @@ export const trSite: typeof enSite = {
       messagePlaceholder: "Üzerinde ne çalışıyorsunuz?",
       submitLabel: "Mesaj gönder",
       submittingLabel: "Gönderiliyor…",
-      successMessage: "Mesaj kaydedildi. Teşekkürler.",
-      errorMessage:
-        "Mesaj gönderilemedi. Alanları kontrol edip tekrar deneyin.",
+      successTitle: "Mesajın alındı.",
+      successMessage: "En kısa sürede dönüş yapacağım.",
+      errorTitle: "Gönderim tamamlanamadı.",
+      errorMessage: "Lütfen biraz sonra tekrar dene.",
       privacyNote:
         "Bilgileriniz yalnızca talebinize yanıt vermek için kullanılır.",
       privacyTitle: "İletişim gizlilik bildirimi",

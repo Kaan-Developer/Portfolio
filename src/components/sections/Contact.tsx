@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { CircleCheck, CircleAlert } from "lucide-react";
 import clsx from "clsx";
 
 import { useSite } from "../../hooks/useSite";
@@ -84,23 +85,52 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="mt-6 mx-auto max-w-6xl mt-24">
+    <>
+    <div className="flex items-center justify-center sticky">
+      {submitState === "success" && (
+        <div
+          role="status"
+          className="flex items-center xl:max-w-lg gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">
+            <div className="bg-muted/10 rounded-md p-2">
+                            <CircleCheck size={25} className="shrink-0" aria-hidden="true" />
+            </div>
+
+              <div>
+                <p className="font-semibold">{form.successTitle}</p>
+                <p className="mt-1 text-sm">{form.successMessage}</p>
+              </div>
+          </div>
+      )}
+
+      {submitState === "error" && (
+        <div
+          role="alert"
+          className="flex items-center xl:max-w-lg gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800">
+            <div className="bg-muted/10 rounded-md p-2">
+                            <CircleCheck size={25} className="shrink-0" aria-hidden="true" />
+            </div>
+
+              <div>
+                <p className="font-semibold">{form.errorTitle}</p>
+                <p className="mt-1 text-sm">{form.errorMessage}</p>
+              </div>
+          </div>
+      )}
+    </div>
+
+    <section id="contact" className="mt-6 mx-auto max-w-6xl">
       <div className="flex flex-col items-center justify-center">
         <h2 className="font-display text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-black md:text-6xl lg:text-7xl">
           {site.contact.title}
         </h2>
-        <div className="text-muted text-center">
-                  <p>{site.contact.description}</p>
-        <p>{site.contact.responseTime}</p>
+        <div className="text-muted text-center mt-2">
+          <p>{site.contact.description}</p>
+          <p>{site.contact.responseTime}</p>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-1 lg:py-14">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full min-w-0 gap-8 lg:pt-0"
-        >
+      <div className="grid grid-cols-1 gap-8 py-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] lg:py-14">
+        <form onSubmit={handleSubmit} className="w-full min-w-0 gap-8 lg:pt-0">
           <div className="flex min-w-0 flex-col gap-5">
-
             <input
               type="text"
               name="website"
@@ -249,8 +279,11 @@ const Contact = () => {
             </div>
           </div>
         </form>
+
+        <div>a</div>
       </div>
     </section>
+    </>
   );
 };
 

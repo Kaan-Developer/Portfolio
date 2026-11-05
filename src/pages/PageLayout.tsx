@@ -9,6 +9,7 @@ import Footer from "../components/sections/Footer";
 
 const PageLayout = () => {
   const { dashbord, accessibility } = useSite();
+  const site = useSite();
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
 
@@ -34,7 +35,7 @@ const PageLayout = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-bg">
+    <div className="relative min-h-screen bg-bg mt-24">
       <header className="fixed left-1/2 top-5 z-50 isolate flex h-20 w-[calc(100%_-_3rem)] max-w-6xl -translate-x-1/2 items-center justify-between rounded-2xl px-4 sm:px-6 md:top-6 lg:px-8">
         <div
           aria-hidden="true"
@@ -60,7 +61,8 @@ const PageLayout = () => {
         <div className="flex items-center gap-2">
           <Language />
 
-          <Button
+          {site.projectsSection && (
+            <Button
             github
             target="_blank"
             iconSize={20}
@@ -71,6 +73,7 @@ const PageLayout = () => {
               GitHub
             </span>
           </Button>
+          )}
         </div>
       </header>
 

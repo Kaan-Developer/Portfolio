@@ -59,7 +59,7 @@ const Footer = () => {
 
           <Link
             to="/privacy"
-            className="inline-flex min-h-11 items-center underline-offset-4 hover:text-primary hover:underline"
+            className="inline-flex min-h-11 items-center underline-offset-4 hover:text-primary underline"
           >
             {site.contact.form.privacyTitle}
           </Link>

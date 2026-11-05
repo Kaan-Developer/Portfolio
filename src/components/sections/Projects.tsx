@@ -39,23 +39,20 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
               className="min-w-0 w-full"
             >
               <article
-  className={`group relative grid grid-cols-1 items-stretch
-    overflow-hidden rounded-2xl bg-white p-3 shadow-soft
-    transition-transform duration-300 motion-safe:hover:-translate-y-1.5 py-3 ${
-      project.image
-        ? "xl:grid-cols-2"
-        : ""
+                className={`grid h-full grid-cols-1 rounded-2xl transition-transform duration-300 motion-safe:hover:-translate-y-1.5
+    bg-white p-3 shadow-soft relative overflow-hidden ${
+      project.image ? "xl:grid-cols-[2fr_3fr] xl:gap-4" : ""
     }`}
->
-  <div className="flex min-w-0 flex-col justify-center gap-3 p-4 py-6 xl:p-6">
+              >
+                <div className="flex min-w-0 flex-col justify-center gap-3 p-4 py-6 xl:p-6">
                   <div className="flex flex-wrap gap-2 items-center justify-between">
                     <h3 className="text-balance text-2xl lg:text-4xl font-bold tracking-tight">
                       {project.title}
                     </h3>
                   </div>
                   <p className="max-w-md break-words text-base leading-7 text-muted">
-  {project.description}
-</p>
+                    {project.description}
+                  </p>
 
                   <ul className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => {
@@ -106,36 +103,21 @@ const Projects = ({ hideDetails = false }: projectBtnType) => {
                         />
                       </Link>
                     )}
-
-                    <Button
-                      github
-                      link={project.github}
-                      target="_blank"
-                      variant="primary"
-                      className="!gap-0"
-                      iconSize={20}
-                    ></Button>
                   </div>
                 </div>
 
                 <div className="relative self-center overflow-hidden rounded-md">
                   {project.image && (
-  <div
-    className="relative aspect-[4/3] min-w-0 overflow-hidden
-      rounded-md bg-muted/10 sm:aspect-[16/10]
-      xl:aspect-auto xl:min-h-[480px]"
-  >
-    <Zoom src={project.image} alt={project.title} />
-
-    <img
-      draggable={false}
-      src={project.image}
-      alt={project.title}
-      className="absolute inset-0 h-full w-full rounded-md
-        border border-border object-contain"
-    />
-  </div>
-)}
+                    <>
+                      <Zoom src={project.image} alt={project.title} />
+                      <img
+                        draggable={false}
+                        src={project.image}
+                        alt={project.title}
+                        className="aspect- w-full rounded-md border border-border bg-muted/10 object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.01]"
+                      />
+                    </>
+                  )}
                 </div>
 
                 {isThird && (

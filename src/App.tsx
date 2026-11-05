@@ -4,7 +4,7 @@ import AnaPage from "./pages/AnaPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import Details from "./components/ui/Details";
 import NotFound from "./components/feedback/NotFound";
-import PageLayout from "./pages/PateLayout";
+import PageLayout from "./pages/PageLayout";
 import AllProjects from "./components/ui/AllProjects";
 import Contact from "./components/sections/Contact";
 

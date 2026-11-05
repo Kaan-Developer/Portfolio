@@ -135,9 +135,10 @@ description2:
       messagePlaceholder: "What are you working on?",
       submitLabel: "Send message",
       submittingLabel: "Sending…",
-      successMessage: "Message saved. Thank you.",
-      errorMessage:
-        "Message could not be sent. Check the fields and try again.",
+      successTitle: "Message received.",
+      successMessage: "I'll get back to you soon.",
+      errorTitle: "Message could not be sent.",
+      errorMessage: "Please try again shortly.",
       privacyNote: "Your details are used to respond to your enquiry.",
       privacyTitle: "Contact privacy notice",
     },
